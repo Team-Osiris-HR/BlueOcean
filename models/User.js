@@ -36,4 +36,30 @@ const userSchema = new mongoose.Schema({
     },
     message: 'Passwords do not match!',
   },
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
+  location: {
+    latitude: {
+      type: Number,
+    },
+    longitude: {
+      type: Number,
+    },
+  },
 });
+
+userSchema.pre('save', async function (next) {
+  // ONLY RUN THIS FUNCTION IF PASSWORD HAS BEEN MODIFIED
+  if (!this.isModified('password')) return next();
+
+  this.password = await bcrypt.hash(this.password, 12);
+  this.passwordConfirm = undefined;
+  next();
+};
+
