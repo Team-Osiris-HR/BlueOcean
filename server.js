@@ -11,7 +11,6 @@ const path = require("path");
 // });
 
 const app = express();
-// app.use("/", express.static(path.join(__dirname, "dist")));
 app.use(express.static("dist"));
 
 const port = process.env.PORT || 3000;
