@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema({
       type: Number,
     },
   },
+  phone: {
+    type: String,
+    validate: [validator.isMobilePhone, 'Invalid phone number!'],
+  }
 });
 
 userSchema.pre('save', async function (next) {
