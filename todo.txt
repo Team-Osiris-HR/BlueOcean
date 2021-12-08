@@ -1,1 +1,10 @@
 post category and photo fields require update
+
+
+
+
+
+
+extra extra
+
+ewlcome email usercontroller
