@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
   },
+  role: {
+    type: String,
+    required: [true, 'A role must be given!'],
+    enum: ['user', 'charity','admin'],
+    default: 'user',
+  }
   email: {
     type: String,
     required: [true, 'An email must be given!'],
