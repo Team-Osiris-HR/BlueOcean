@@ -1,4 +1,5 @@
 import React from 'react';
+import ItemPage from './itemPage.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class App extends React.Component {
     return (
       <div>
         <p>Home Page</p>
+        <ItemPage />
       </div>
     );
   }
