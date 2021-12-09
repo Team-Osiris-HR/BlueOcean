@@ -2,6 +2,7 @@ const User = require('../models/user');
 const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync.js');
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 
 const config = require('../controller.config.js');
 
@@ -9,13 +10,16 @@ const expirey = 24 * 60 * 60 * 1000
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      user: newUser,
-    },
-  });
+  if (!newUser) {
+    return next(new Error('Please provide all required fields'));
+  }
+  this.sendToken(newUser, 201, req, res);
+  // res.status(201).json({
+  //   status: 'success',
+  //   data: {
+  //     user: newUser,
+  //   },
+  // });
 });
 
 
@@ -26,7 +30,7 @@ exports.signToken = (id) => {
 };
 
 exports.sendToken = (user, statusCode, req, res) => {
-  const token = signToken(user._id);
+  const token = this.signToken(user._id);
 
   res.cookie('jwt', token, {
     expires: new Date(Date.now() + expirey),
@@ -37,7 +41,7 @@ exports.sendToken = (user, statusCode, req, res) => {
 
   res.status(statusCode).json({
     status: 'success',
-    token,
+    // token,
     data: {
       user,
     },
@@ -57,7 +61,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new Error('Incorrect name or password', 401));
   }
 
-  sendToken(user, 200, req, res);
+  this.sendToken(user, 200, req, res);
 });
 
 exports.logout = (req, res) => {
@@ -70,10 +74,7 @@ exports.logout = (req, res) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
-
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    token = req.headers.authorization.split(' ')[1];
-  } else if (req.cookies.jwt) {
+  if (req.cookies.jwt) {
     token = req.cookies.jwt;
   }
 
@@ -82,7 +83,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   const decoded = await promisify(jwt.verify)(token, config.JWT_SECRET);
-
+  // decoded = { id: 324, iat: 1598430824, expiresIn: 86400 }
   const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
@@ -166,7 +167,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // const token = signToken(user._id);
 
-  res.cookie('jwt', signToken(user._id), {
+  res.cookie('jwt', this.signToken(user._id), {
     expires: new Date(Date.now() + expirey),
     httpOnly: true,
   });
@@ -176,6 +177,28 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     token,
+    data: {
+      user,
+    },
+  });
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select('+password');
+
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new Error('Your current password is wrong'), 401);
+  }
+
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordChangedAt = Date.now();
+  await user.save();
+
+  user.password = undefined;
+
+  res.status(200).json({
+    status: 'success',
     data: {
       user,
     },
