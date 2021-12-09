@@ -66,7 +66,11 @@ const userSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-  }
+  },
+  favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 });
 
 userSchema.pre('save', async function (next) {

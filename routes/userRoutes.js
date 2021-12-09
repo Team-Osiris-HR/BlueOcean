@@ -1,4 +1,5 @@
 const authController= require('../controllers/authController.js');
+const userController= require('../controllers/userController.js');
 
 const router = require('express').Router();
 
@@ -10,9 +11,10 @@ router.use(authController.protect);
 router.patch('/updatemypassword', authController.updatePassword);
 router.get('/logout', authController.logout);
 
-router.get('/', (req, res) => {
-  console.log(req.user);
-    res.send('Hello World');
-});
+router.get('/', authController.restrictTo('admin'), userController.getAllUsers);
+
+router.get('/:id', authController.restrictTo('admin'), userController.getUser);
+router.get('myinfo', userController.getMyInfo);
+
 
 module.exports = router;
