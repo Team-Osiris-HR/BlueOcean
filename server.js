@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const config = require('./db.config.js');
 const userRouter = require('./routes/userRoutes.js');
@@ -18,6 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('dist'));
+app.use(cookieParser());
 
 app.use('/api/users', userRouter);
 

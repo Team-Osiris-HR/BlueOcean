@@ -2,6 +2,7 @@ const User = require('../models/user');
 const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync.js');
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 
 const config = require('../controller.config.js');
 
@@ -26,7 +27,7 @@ exports.signToken = (id) => {
 };
 
 exports.sendToken = (user, statusCode, req, res) => {
-  const token = signToken(user._id);
+  const token = this.signToken(user._id);
 
   res.cookie('jwt', token, {
     expires: new Date(Date.now() + expirey),
@@ -37,7 +38,7 @@ exports.sendToken = (user, statusCode, req, res) => {
 
   res.status(statusCode).json({
     status: 'success',
-    token,
+    // token,
     data: {
       user,
     },
@@ -57,7 +58,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new Error('Incorrect name or password', 401));
   }
 
-  sendToken(user, 200, req, res);
+  this.sendToken(user, 200, req, res);
 });
 
 exports.logout = (req, res) => {
@@ -70,7 +71,7 @@ exports.logout = (req, res) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
-
+  console.log(req.cookies);
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
   } else if (req.cookies.jwt) {
@@ -166,7 +167,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // const token = signToken(user._id);
 
-  res.cookie('jwt', signToken(user._id), {
+  res.cookie('jwt', this.signToken(user._id), {
     expires: new Date(Date.now() + expirey),
     httpOnly: true,
   });
