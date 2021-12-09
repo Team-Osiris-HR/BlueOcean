@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   photo: {
     type: String,
     default: 'eggplant.jpg',
-  },
+  }, 
   password: {
     type: String,
     required: [true, 'A password must be given!'],
