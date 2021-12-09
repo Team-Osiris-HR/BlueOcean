@@ -58,7 +58,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   sendToken(user, 200, req, res);
-}
+});
 
 exports.logout = (req, res) => {
   res.cookie('jwt', 'Thanks for visiting', {
@@ -95,4 +95,89 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   req.user = currentUser;
   next();
-}
+});
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(new Error('You do not have permission to perform this action'), 403);
+    }
+    next();
+  };
+};
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ name: req.body.name });
+
+  if (!user) {
+    return next(new Error('There is no user with that email address'), 404);
+  }
+
+  const resetToken = user.createPasswordResetToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  const resetURL = `${req.protocol}://${req.get('host')}/api/users/resetPassword/${resetToken}`;
+
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email.`;
+
+  // await sendEmail({
+  //   email: user.email,
+  //   subject: 'Your password reset token (valid for 10 minutes)',
+  //   message,
+  // });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'created token',
+  });
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(new Error('Token is invalid or has expired'), 400);
+  }
+
+  /*
+  axios.post(/api/resetPassword/:token, {
+    password: 'newpassword',
+    passwordConfirm: 'newpassword',
+  } ,(req, res) => {
+
+  })
+
+  */
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  await user.save();
+
+  // const token = signToken(user._id);
+
+  res.cookie('jwt', signToken(user._id), {
+    expires: new Date(Date.now() + expirey),
+    httpOnly: true,
+  });
+
+  user.password = undefined;
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+});

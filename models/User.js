@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'A role must be given!'],
     enum: ['user', 'charity','admin'],
     default: 'user',
-  }
+  },
   email: {
     type: String,
     required: [true, 'An email must be given!'],
@@ -73,7 +73,7 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();
-};
+});
 
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });

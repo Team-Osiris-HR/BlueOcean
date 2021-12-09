@@ -1,5 +1,7 @@
-const userController= require('../controllers/userController.js');
+const authController= require('../controllers/authController.js');
 
+const router = require('express').Router();
 
-app.use(authcontroller.protect);
-app.get('/', useController.getAll);
+router.post('/signup', authController.signup);
+
+module.exports = router;
