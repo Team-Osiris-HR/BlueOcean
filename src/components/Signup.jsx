@@ -17,7 +17,7 @@ class Signup extends React.Component {
             <Form.Control placeholder="First Name, Last Name" />
           </Form.Group>
 
-          <Row className="mb-3" md>
+          <Row className="mb-3" md="true">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />

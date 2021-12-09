@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: ""
+      render: "signup"
     }
 
     this.renderView = this.renderView.bind(this)
@@ -19,11 +19,29 @@ class App extends React.Component {
 
   renderView() {
     if (this.state.render === "login") {
-      return <Login />
+      return (
+        <Container>
+          <Col>
+            <Login />
+          </Col>
+        </Container>
+      )
     } else if (this.state.render === "signup") {
-      return <Signup />
+      return (
+        <Container>
+          <Col>
+            <Signup />
+          </Col>
+        </Container>
+      )
     } else if (this.state.render === 'organization') {
-      return <OrgSignup />
+      return (
+        <Container>
+          <Col>
+            <OrgSignup />
+          </Col>
+        </Container>
+      )
     } else {
       return <Header />
     }
@@ -31,11 +49,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Col>
-          {this.renderView()}
-        </Col>
-      </Container >
+      this.renderView()
     );
   }
 }
