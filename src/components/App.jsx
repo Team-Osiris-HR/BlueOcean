@@ -5,12 +5,13 @@ import Col from 'react-bootstrap/Col'
 import Login from './Login.jsx'
 import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
+import Header from './Header.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "signup"
+      render: ""
     }
 
     this.renderView = this.renderView.bind(this)
@@ -24,14 +25,14 @@ class App extends React.Component {
     } else if (this.state.render === 'organization') {
       return <OrgSignup />
     } else {
-      return (<h1>hello world</h1>)
+      return <Header />
     }
   }
 
   render() {
     return (
-      <Container className='app-container'>
-        <Col >
+      <Container>
+        <Col>
           {this.renderView()}
         </Col>
       </Container >
