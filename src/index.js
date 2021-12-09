@@ -1,3 +1,5 @@
-console.log('we made it');
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App.jsx";
 
-// render dom
+ReactDOM.render(<App />, document.getElementById("app"));
