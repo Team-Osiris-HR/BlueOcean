@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "organization"
+      render: "signup"
     }
 
     this.renderView = this.renderView.bind(this)
@@ -30,8 +30,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container className='app-container' >
-        <Col>
+      <Container className='app-container'>
+        <Col >
           {this.renderView()}
         </Col>
       </Container >
