@@ -1,4 +1,7 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class App extends React.Component {
   constructor(props) {
@@ -7,9 +10,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Home Page</p>
-      </div>
+      Container
     );
   }
 }
