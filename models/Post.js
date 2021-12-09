@@ -18,7 +18,6 @@ const postSchema = new mongoose.Schema({
     type: String,
     enum: ['new', 'fair', 'good', 'used', 'poor'],
   },
-  value: Number,
   active: Boolean,
   deliveryOptions: {
     type: String,
