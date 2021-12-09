@@ -6,11 +6,26 @@ import Col from 'react-bootstrap/Col'
 class App extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {}
+
+    this.renderView = this.renderView.bind(this)
+  }
+
+  renderView() {
+    return (
+      <Container className='app-container'>
+        <Col>
+          <div>
+            <h1>Hello world</h1>
+          </div>
+        </Col>
+      </Container >
+    )
   }
 
   render() {
     return (
-      Container
+      this.renderView()
     );
   }
 }
