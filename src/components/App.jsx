@@ -4,12 +4,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Login from './Login.jsx'
 import Signup from './Signup.jsx'
+import OrgSignup from './OrgSignup.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "signup"
+      render: "organization"
     }
 
     this.renderView = this.renderView.bind(this)
@@ -20,8 +21,10 @@ class App extends React.Component {
       return <Login />
     } else if (this.state.render === "signup") {
       return <Signup />
+    } else if (this.state.render === 'organization') {
+      return <OrgSignup />
     } else {
-      return <h1>hello world</h1>
+      return (<h1>hello world</h1>)
     }
   }
 

@@ -7,7 +7,7 @@ class Login extends React.Component {
   render() {
     return (
       <Form>
-        <h1>LOG IN PAGE</h1>
+        <h1>Login page</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
