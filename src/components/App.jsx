@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemPage from './itemPage.jsx';
+import ItemPage from './itempage/itemPage.jsx';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 

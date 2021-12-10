@@ -45,3 +45,8 @@
   border-radius: 4px;
   padding: 1%;
 }
+
+.bottombuttonscontainer {
+  display: flex;
+  justify-content: space-between;
+}
