@@ -3,10 +3,8 @@ import Feed from './Feed.jsx';
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
   }
-
 
   render() {
     return (

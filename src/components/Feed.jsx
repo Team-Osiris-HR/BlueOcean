@@ -29,12 +29,13 @@ class Feed extends React.Component {
     <div className="page">
       <Container>
         <Row>
-          <Stack direction="horizontal" gap={3}>
-            <Button className="mx-2" variant="primary" size="sm">leftButton</Button>
-            <Button className="mx-2" variant="primary" size="sm">rightButton</Button>
-          </Stack>
+          <Col className="text-center">
+            <Button variant="primary" >leftButton</Button>
+          </Col>
+          <Col className="text-center">
+            <Button variant="primary">rightButton</Button>
+          </Col>
         </Row>
-
         <Row>
           <Col></Col>
           <Col xs={10}>
