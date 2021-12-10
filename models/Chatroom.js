@@ -15,6 +15,11 @@ const chatroomSchema = new mongoose.Schema({
   roomHash: {
     type: String,
     required: true,
+  },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+    required: true,
   }
 });
 

@@ -1,4 +1,3 @@
 node_modules
-db.config.js
 *.config.js
-*.config.*
+*.config.js.*

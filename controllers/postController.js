@@ -26,3 +26,35 @@ exports.getOnePost = catchAsync(async (req, res, next) => {
     post,
   });
 });
+
+exports.updatePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    status: 'success',
+    post,
+  });
+});
+
+exports.deletePost = catchAsync(async (req, res, next) => {
+  await Post.findByIdAndDelete(req.params.id);
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
+
+exports.togglePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return next(new Error('Uh oh something went very wrong'));
+  }
+  post.active = !post.active;
+  post.save();
+  res.status(200).json({
+    status: 'success',
+    post,
+  });
+});
