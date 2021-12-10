@@ -7,13 +7,14 @@ import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
 import Feed from './Feed.jsx'
-import FeedTile from './FeedTile.jsx'
+
+
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "signup"
+      render: ""
     }
 
     this.renderView = this.renderView.bind(this)
@@ -45,15 +46,16 @@ class App extends React.Component {
         </Container>
       )
     } else {
-      return <Header />
+      return <Feed />
     }
   }
 
   render() {
     return (
-      <div>
-        <Feed/>
-      </div>
+      <React.Fragment>
+        {this.state.render === "" ? <Header /> : null}
+        {this.renderView()}
+      </React.Fragment>
     );
   }
 }
