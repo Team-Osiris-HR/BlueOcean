@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,6 +10,12 @@ import Header from './Header.jsx'
 import Feed from './Feed.jsx'
 
 
+=======
+import ItemPage from './itempage/itemPage.jsx';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+
+>>>>>>> cam
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -51,12 +58,25 @@ class App extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <React.Fragment>
         {this.state.render === "" ? <Header /> : null}
         {this.renderView()}
       </React.Fragment>
+=======
+      <Container>
+        <Col>
+          <p>Home Page</p>
+          <ItemPage />
+        </Col>
+      </Container>
+>>>>>>> cam
     );
   }
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> cam

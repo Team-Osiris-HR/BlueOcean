@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
     required: [true, 'A role must be given!'],
     enum: ['user', 'charity','admin'],
     default: 'user',
+  },
+  role: {
+    type: String,
+    required: [true, 'A role must be given!'],
+    enum: ['user', 'charity','admin'],
+    default: 'user',
   }
   email: {
     type: String,
@@ -63,6 +69,17 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     validate: [validator.isMobilePhone, 'Invalid phone number!'],
+  },
+  address: {
+    type: String,
+  },
+  favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  loggedIn: {
+    type: Boolean,
+    required: true,
   }
 });
 
@@ -73,7 +90,7 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();
-};
+});
 
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
@@ -108,6 +125,6 @@ userSchema.methods.createPasswordResetToken = function () {
   return resetToken;
 };
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+// const User = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);
+// module.exports = User;
