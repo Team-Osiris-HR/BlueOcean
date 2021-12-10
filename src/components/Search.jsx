@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form'
 import Collapse from 'react-bootstrap/Collapse'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
-import BsSearch from 'react-icons/bs'
 
 
 class Search extends React.Component {
