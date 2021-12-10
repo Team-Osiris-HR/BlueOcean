@@ -28,7 +28,7 @@ exports.updateUser = catchAsync(async (req, res) => {
     status: 'success',
     user,
   });
-};
+});
 
 exports.deleteUser = catchAsync(async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
@@ -36,14 +36,14 @@ exports.deleteUser = catchAsync(async (req, res) => {
     status: 'success',
     data: null,
   });
-}
+});
 
 exports.getMyInfo = catchAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     user: req.user,
   });
-};
+});
 
 exports.addFavorite = catchAsync(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -60,4 +60,4 @@ exports.addFavorite = catchAsync(async (req, res) => {
     status: 'success',
     user,
   });
-}
+});

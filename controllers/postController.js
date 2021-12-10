@@ -7,6 +7,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
     status: 'success',
     results: posts.length,
     posts,
+  });
 });
 
 exports.createPost = catchAsync(async (req, res, next) => {
@@ -16,7 +17,7 @@ exports.createPost = catchAsync(async (req, res, next) => {
     status: 'success',
     post: newPost,
   });
-};
+});
 
 exports.getOnePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
@@ -24,4 +25,4 @@ exports.getOnePost = catchAsync(async (req, res, next) => {
     status: 'success',
     post,
   });
-};
+});

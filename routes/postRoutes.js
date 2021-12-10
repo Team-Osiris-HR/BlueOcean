@@ -5,7 +5,7 @@ const authController = require('../controllers/authController.js');
 const userController = require('../controllers/userController.js');
 const postController = require('../controllers/postController.js');
 
-route.use(authController.protect);
+router.use(authController.protect);
 
 router.post('/', postController.createPost);
 
