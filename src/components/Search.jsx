@@ -1,21 +1,45 @@
 import React from 'react'
+import Form from 'react-bootstrap/Form'
+import Collapse from 'react-bootstrap/Collapse'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Button from 'react-bootstrap/Button'
+import BsSearch from 'react-icons/bs'
+
 
 class Search extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSearchInputChange = this.handleSearchInputChange.bind(this)
+    this.state = {
+      open: false
+    }
+    this.setOpen = this.setOpen.bind(this)
+  }
+
+  setOpen() {
+    if (!this.state.open) {
+      this.setState({ open: true })
+    } else {
+      this.setState({ open: false })
+    }
   }
 
   render() {
     return (
-      <div>
-        <input
-          className="search"
-          type="text"
-          onChange={this.handleSearchInputChange}
-          placeholder="Search Donations">
-        </input>
-      </div>
+      <InputGroup>
+        <Collapse in={this.state.open} dimension="width">
+          <div id="collapse-search">
+            <Form.Control
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </div>
+        </Collapse>
+        <Button onClick={() => this.setOpen()}
+          aria-controls="collapse-search"
+          aria-expanded={this.state.open}
+        >
+        </Button>
+      </InputGroup >
     )
   }
 }

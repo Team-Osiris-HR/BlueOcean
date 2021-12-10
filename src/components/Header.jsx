@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import Search from './Search.jsx'
 
 class Header extends React.Component {
@@ -14,15 +16,20 @@ class Header extends React.Component {
     return (
       <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Toggle aria-controls="offcanvasNavbar" />
-          <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
+          <Col>
+            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+          </Col>
+          <Col xs>
+            <span>blue ocean</span>
+          </Col>
+          <Col>
+            <Search />
+          </Col>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
-            placement="start"
-          >
+            placement="start">
             <Offcanvas.Header closeButton>
-
               <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
