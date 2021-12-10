@@ -14,8 +14,9 @@ router.post('/', postController.createPost);
 
 router.patch('/:id', postController.updatePost);
 router.patch('/:id/favorite', userController.addFavorite);
+router.patch('/:id/toggle', postController.togglePost);
 
-router.delete('/:id', postController.deletePost);
+router.delete('/:id', authController.restrictTo('admin'), postController.deletePost);
 
 
 module.exports = router;

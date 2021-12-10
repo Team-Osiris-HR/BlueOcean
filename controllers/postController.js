@@ -45,3 +45,16 @@ exports.deletePost = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.togglePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return next(new Error('Uh oh something went very wrong'));
+  }
+  post.active = !post.active;
+  post.save();
+  res.status(200).json({
+    status: 'success',
+    post,
+  });
+});
