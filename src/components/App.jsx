@@ -6,6 +6,8 @@ import Login from './Login.jsx'
 import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
+import Feed from './Feed.jsx'
+import FeedTile from './FeedTile.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -49,7 +51,9 @@ class App extends React.Component {
 
   render() {
     return (
-      this.renderView()
+      <div>
+        <Feed/>
+      </div>
     );
   }
 }
