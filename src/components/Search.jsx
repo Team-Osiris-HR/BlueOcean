@@ -36,6 +36,7 @@ class Search extends React.Component {
           aria-controls="collapse-search"
           aria-expanded={this.state.open}
         >
+          Search
         </Button>
       </InputGroup >
     )

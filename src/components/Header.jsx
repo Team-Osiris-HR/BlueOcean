@@ -10,8 +10,17 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Search from './Search.jsx'
 import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    this.clickCategory = this.clickCategory.bind(this)
+  }
+
+  clickCategory(e) {
+    console.log(e.target.outerText)
+  }
 
   render() {
     return (
@@ -40,8 +49,13 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
+                <Nav.Link href="#action1">Account</Nav.Link>
+                <h6>category</h6>
+                <ListGroup as="ul">
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>food</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>furniture</ListGroup.Item>
+                </ListGroup>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
