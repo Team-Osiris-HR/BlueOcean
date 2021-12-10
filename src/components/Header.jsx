@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
+import Search from './Search.jsx'
 
 class Header extends React.Component {
 
