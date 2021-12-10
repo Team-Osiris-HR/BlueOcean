@@ -27,12 +27,10 @@ class Search extends React.Component {
     return (
       <InputGroup>
         <Collapse in={this.state.open} dimension="width">
-          <div id="collapse-search">
-            <Form.Control
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
+          <Form.Control id="example-collapse-text"
+            placeholder="Search"
+            aria-label="Search"
+          />
         </Collapse>
         <Button onClick={() => this.setOpen()}
           aria-controls="collapse-search"

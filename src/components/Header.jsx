@@ -9,6 +9,7 @@ import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Search from './Search.jsx'
+import Button from 'react-bootstrap/Button'
 
 class Header extends React.Component {
 
@@ -20,17 +21,22 @@ class Header extends React.Component {
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
           </Col>
           <Col xs>
-            <span>blue ocean</span>
+            <span>mikeslist</span>
           </Col>
           <Col>
             <Search />
+          </Col>
+          <Col>
+            <Button variant='primary'>
+              Message
+            </Button>
           </Col>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
             placement="start">
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
+              <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
