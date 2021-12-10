@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   setRenderState(whatState) {
-    this.setState({ render: "feed" })
+    this.setState({ render: whatState })
     this.renderView()
   }
 
@@ -70,7 +70,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" ? <Header /> : null}
+        {this.state.render === "feed" ? <Header setRenderState={this.setRenderState} /> : null}
         {this.renderView()}
       </React.Fragment>
     );

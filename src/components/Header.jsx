@@ -12,14 +12,27 @@ import Search from './Search.jsx'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 
+import axios from 'axios'
+
 class Header extends React.Component {
   constructor(props) {
     super(props)
     this.clickCategory = this.clickCategory.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   clickCategory(e) {
     console.log(e.target.outerText)
+  }
+
+  logout() {
+    axios.get('/api/users/logout')
+      .then((result) => {
+        alert('see you again!')
+        this.props.setRenderState("login")
+      }).catch((err) => {
+        console.log(err)
+      });
   }
 
   render() {
@@ -57,6 +70,9 @@ class Header extends React.Component {
                   <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>furniture</ListGroup.Item>
                 </ListGroup>
               </Nav>
+              <Button onClick={() => { this.logout() }}>
+                logout
+              </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
