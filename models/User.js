@@ -70,7 +70,11 @@ const userSchema = new mongoose.Schema({
   favorites: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
-  }]
+  }],
+  loggedIn: {
+    type: Boolean,
+    required: true,
+  }
 });
 
 userSchema.pre('save', async function (next) {
