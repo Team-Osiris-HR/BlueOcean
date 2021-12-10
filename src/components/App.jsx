@@ -7,6 +7,7 @@ import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
 import Feed from './Feed.jsx'
+import axios from 'axios'
 
 
 class App extends React.Component {
@@ -16,6 +17,17 @@ class App extends React.Component {
       render: "",
     }
     this.renderView = this.renderView.bind(this)
+    this.getPosts = this.getPosts.bind(this)
+  }
+
+  componentDidMount() {
+    // this.getPosts()
+  }
+
+  getPosts() {
+    axios.get('/api/posts', (req, res) => {
+      console.log('this is req')
+    })
   }
 
 
