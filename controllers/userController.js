@@ -54,10 +54,19 @@ exports.addFavorite = catchAsync(async (req, res) => {
       message: 'Post not found',
     })
   }
-  user.favorites.push(post);
-  user.save();
-  res.status(200).json({
-    status: 'success',
-    user,
-  });
+  if (user.favorites.includes(post)) {
+    let index = user.favorites.indexOf(post);
+    user.favorites.splice(index, 1);
+    res.status(200).json({
+      status: 'success',
+      message: 'Post removed from favorites',
+    });
+  } else {
+    user.favorites.push(post);
+    user.save();
+    res.status(200).json({
+      status: 'success',
+      user,
+    });
+  }
 });
