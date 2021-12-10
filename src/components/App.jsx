@@ -8,6 +8,8 @@ import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
 import Feed from './Feed.jsx'
 
+
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -50,9 +52,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Feed />
-      </div>
+      <React.Fragment>
+        {this.state.render === "" ? <Header /> : null}
+        {this.renderView()}
+      </React.Fragment>
     );
   }
 }

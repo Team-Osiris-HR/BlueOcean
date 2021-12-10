@@ -6,28 +6,56 @@ import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Search from './Search.jsx'
+import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+    this.clickCategory = this.clickCategory.bind(this)
+  }
+
+  clickCategory(e) {
+    console.log(e.target.outerText)
+  }
 
   render() {
     return (
       <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Toggle aria-controls="offcanvasNavbar" />
-          <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
+          <Col>
+            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+          </Col>
+          <Col xs>
+            <span>mikeslist</span>
+          </Col>
+          <Col>
+            <Search />
+          </Col>
+          <Col>
+            <Button variant='primary'>
+              Message
+            </Button>
+          </Col>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
-            placement="start"
-          >
+            placement="start">
             <Offcanvas.Header closeButton>
-
-              <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
+              <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
+                <Nav.Link href="#action1">Account</Nav.Link>
+                <h6>category</h6>
+                <ListGroup as="ul">
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>food</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>furniture</ListGroup.Item>
+                </ListGroup>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
