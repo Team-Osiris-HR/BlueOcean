@@ -50,7 +50,9 @@ class App extends React.Component {
 
   render() {
     return (
-      this.renderView()
+      <div>
+        <Feed />
+      </div>
     );
   }
 }

@@ -11,9 +11,6 @@ var FeedTile = () => (
     <Card.Text>
       Item Description
     </Card.Text>
-    <Card.Text>
-      location info
-    </Card.Text>
   </Card.Body>
 </Card>
 
