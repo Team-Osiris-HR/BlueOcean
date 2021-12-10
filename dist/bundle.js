@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("console.log('we made it');\n\n//# sourceURL=webpack://blueocean/./src/index.js?");
+eval("console.log('we made it'); // render dom\n\n//# sourceURL=webpack://blueocean/./src/index.js?");
 
 /***/ })
 
