@@ -1,0 +1,22 @@
+.page {
+  padding-top: 15px;
+}
+
+.bottom {
+  max-height: 625px;
+  overflow: auto;
+}
+
+.search {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  width: 100%;
+  color: #0d6efd;
+}
+
+input.search {
+  padding-left: 5px;
+  border: #0d6efd solid 2px;
+}
+
