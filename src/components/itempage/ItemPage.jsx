@@ -21,23 +21,31 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
-    console.log(data);
+    // console.log('Component Did Mount');
+    // console.log(data);
+    // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
+    //   .then((res) => {
+    //     console.log("Recieved new Cookie");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
     axios.get('http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d')
       .then((res) => {
         console.log(res.data);
         this.setState({ data: res.data });
-        saveData();
+        console.log('Hello');
+        this.saveData();
       })
       .catch((err) => {
         console.log(err);
       })
-
   }
 
   saveData() {
     var data = this.state.data[0];
-    var name = data.
+    var name = data.title;
+    console.log(data, name);
   }
 
   askClicked(event) {
