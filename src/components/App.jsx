@@ -14,10 +14,11 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "",
+      render: "login",
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
+    this.setRenderState = this.setRenderState.bind(this)
   }
 
   componentDidMount() {
@@ -30,13 +31,18 @@ class App extends React.Component {
     })
   }
 
+  setRenderState(whatState) {
+    this.setState({ render: "feed" })
+    this.renderView()
+  }
+
 
   renderView() {
     if (this.state.render === "login") {
       return (
         <Container>
           <Col>
-            <Login />
+            <Login setRenderState={this.setRenderState} />
           </Col>
         </Container>
       )
@@ -56,7 +62,7 @@ class App extends React.Component {
           </Col>
         </Container>
       )
-    } else {
+    } else if (this.state.render === 'feed') {
       return <Feed />
     }
   }
@@ -64,7 +70,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "" ? <Header /> : null}
+        {this.state.render === "feed" ? <Header /> : null}
         {this.renderView()}
       </React.Fragment>
     );

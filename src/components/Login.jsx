@@ -25,7 +25,7 @@ class Login extends React.Component {
       password: this.state.password
     })
       .then((result) => {
-        console.log('logged in')
+        this.props.setRenderState("feed")
       }).catch((err) => {
         console.log(err)
       });
