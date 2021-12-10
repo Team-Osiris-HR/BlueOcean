@@ -6,12 +6,13 @@ import Login from './Login.jsx'
 import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
+import Feed from './Feed.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "signup"
+      render: ""
     }
 
     this.renderView = this.renderView.bind(this)
@@ -43,7 +44,7 @@ class App extends React.Component {
         </Container>
       )
     } else {
-      return <Header />
+      return <Feed />
     }
   }
 
