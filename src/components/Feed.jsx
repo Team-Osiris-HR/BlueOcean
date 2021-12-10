@@ -27,25 +27,102 @@ class Feed extends React.Component {
       </div>
       <div className = "middle">
         <Container>
-          <Col></Col>
-          <Col className="text-center">
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-            <FeedTile/>
-          </Col>
-          <Col></Col>
+          <Row xs={1} sm={2} md={4}>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+
+          </Row>
         </Container>
       </div>
       <div className="bottom">
