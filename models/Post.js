@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./User.js');
+// const User = require('./User.js');
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -18,7 +18,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     enum: ['new', 'fair', 'good', 'used', 'poor'],
   },
-  active: Boolean,
+  active: {
+    type: Boolean,
+    default: true,
+  },
   deliveryOptions: {
     type: String,
     enum: ['pickup', 'delivery', 'negotiable']
