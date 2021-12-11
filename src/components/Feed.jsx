@@ -29,99 +29,17 @@ class Feed extends React.Component {
         <div className="middle">
           <Container>
             <Row xs={1} sm={2} md={4}>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
-              <Col className="text-center feed_card">
-                <FeedTile />
-              </Col>
+              {this.props.posts.map((post) => (
+                <Col
+                  className="text-center feed_card"
+                  key={post._id}>
+                    <FeedTile
+                      post={post}
+                    />
+                </Col>
+              ))}
+
+
 
             </Row>
           </Container>
@@ -134,8 +52,6 @@ class Feed extends React.Component {
           </div>
         </div>
       </div>
-
-
     )
   }
 
