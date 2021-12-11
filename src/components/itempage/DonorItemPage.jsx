@@ -17,12 +17,7 @@ class DonorItemPage extends React.Component {
     super(props);
     this.state = {
       postData: {},
-      editPost: {
-        title: '',
-        description: '',
-        photos: ''
-      },
-      showEdit: false
+      showEdit: false,
     };
 
     this.editClicked = this.editClicked.bind(this);
@@ -149,7 +144,7 @@ class DonorItemPage extends React.Component {
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
-          <Qa QAs={this.state.postData.qas} />
+          <Qa QAs={this.state.postData.qas} donor={true} />
           <div>
             <p>Map Place Holder</p>
           </div>
