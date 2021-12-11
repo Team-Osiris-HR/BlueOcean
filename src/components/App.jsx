@@ -20,7 +20,9 @@ class App extends React.Component {
       render: "feed",
       posts: [],
       currentPost: ''
-
+      // address
+      // location
+      //
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
@@ -37,13 +39,13 @@ class App extends React.Component {
 
   getPosts() {
     axios.get('/api/posts')
-      .then((res) =>{
+      .then((res) => {
         this.setState({
           posts: res.data.posts
         })
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
   }
 
@@ -66,6 +68,7 @@ class App extends React.Component {
 
   setRenderState(whatState) {
     this.setState({ render: whatState })
+    this.getPosts();
     this.renderView()
   }
 
