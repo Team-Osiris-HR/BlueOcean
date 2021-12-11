@@ -29,6 +29,17 @@
   margin-bottom: 15px;
 }
 
+.tile {
+  max-height: 220px;
+  overflow-y: hidden;
+}
+
+.card_description {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .donate {
   grid-row-start: 2;
 }

@@ -16,23 +16,35 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "itempage",
+
+      render: "feed",
+      posts: []
+
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
+
   }
 
   componentDidMount() {
+    this.getPosts()
     this.getCookies()
   }
 
   getPosts() {
-    axios.get('/api/posts', (req, res) => {
-      console.log('this is req')
-    })
+    axios.get('/api/posts')
+      .then((res) =>{
+        this.setState({
+          posts: res.data.posts
+        })
+      })
+      .catch((err) => {
+      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+      })
   }
+
 
   getCookies() {
     if (Cookies.get("jwt")) {
@@ -74,7 +86,11 @@ class App extends React.Component {
         </Container>
       )
     } else if (this.state.render === 'feed') {
-      return <Feed />
+      return (
+        <Feed
+          posts={this.state.posts}
+        />
+      )
     } else if (this.state.render === 'itempage') {
       return (
         <ItemPage />
