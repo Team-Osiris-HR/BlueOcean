@@ -2,6 +2,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,8 +26,7 @@ class Login extends React.Component {
       password: this.state.password
     })
       .then((result) => {
-        console.log(result)
-        this.props.setRenderState("feed")
+        this.props.setRenderState("feed",)
       }).catch((err) => {
         console.log(err)
       });
