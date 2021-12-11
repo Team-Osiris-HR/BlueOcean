@@ -20,15 +20,15 @@ class App extends React.Component {
 
       render: "donoritempage",
       posts: [],
-      currentPost: ''
-
+      currentPost: '',
+      currentUser: {}
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
     this.getPostId = this.getPostId.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
-
+    this.setCurrentUser = this.setCurrentUser.bind(this)
   }
 
   componentDidMount() {
@@ -67,7 +67,12 @@ class App extends React.Component {
 
   setRenderState(whatState) {
     this.setState({ render: whatState })
+    this.getPosts();
     this.renderView()
+  }
+
+  setCurrentUser(currentUser) {
+    this.setState({ currentUser: currentUser })
   }
 
 
@@ -76,7 +81,7 @@ class App extends React.Component {
       return (
         <Container>
           <Col>
-            <Login setRenderState={this.setRenderState} />
+            <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
           </Col>
         </Container>
       )

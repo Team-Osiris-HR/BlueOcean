@@ -8,7 +8,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
+      name: '',
       password: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -22,13 +22,14 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     axios.post('/api/users/login', {
-      name: this.state.email,
+      name: this.state.name,
       password: this.state.password
     })
       .then((result) => {
+        this.props.setCurrentUser(result.data.data.user)
         this.props.setRenderState("feed",)
       }).catch((err) => {
-        console.log(err)
+        alert('wrong user and/or password bud')
       });
   }
 
@@ -37,8 +38,8 @@ class Login extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <h1>Login page</h1>
         <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="text" name="email" placeholder="Enter email" onChange={(e) => this.handleChange(e)} />
+          <Form.Label>name</Form.Label>
+          <Form.Control type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">

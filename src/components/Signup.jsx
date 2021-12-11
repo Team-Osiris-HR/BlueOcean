@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
+import Accordion from 'react-bootstrap/Accordion'
 import axios from 'axios'
 
 class Signup extends React.Component {
@@ -77,6 +78,22 @@ class Signup extends React.Component {
           <Form.Group className="mb-3" controlId="formGridPhone" >
             <Form.Control placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
+
+          <Accordion className="mb-3">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>non-profit organization?</Accordion.Header>
+              <Accordion.Body>
+                <Form.Group className="mb-3" controlId="formGridOrgAddress" >
+                  <Form.Control placeholder="Organization Address" name='organizationAddress' onChange={(e) => this.handleChange(e)} />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formGridOrgPhone" >
+                  <Form.Control placeholder="Organization Phone" name='organizationPhone' onChange={(e) => this.handleChange(e)} />
+                </Form.Group>
+
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
 
           <Button size="lg" variant="primary" type="submit">
             Submit
