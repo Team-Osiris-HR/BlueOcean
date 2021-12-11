@@ -3,7 +3,9 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form'
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
@@ -13,12 +15,15 @@ class ItemPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      postData: {}
+      postData: {},
+      showAsk: false,
+      askInput: ""
     };
 
     this.askClicked = this.askClicked.bind(this);
     this.reportClicked = this.reportClicked.bind(this);
     this.messageClicked = this.messageClicked.bind(this);
+    this.toggleModel = this.toggleModel.bind(this);
   }
 
   componentDidMount() {
@@ -47,14 +52,33 @@ class ItemPage extends React.Component {
   }
 
   askClicked(event) {
-    console.log('Someone wants to ask a question');
-    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, {})
+    // console.log('Someone wants to ask a question: ', this.state.askInput);
+    event.preventDefault();
+    var question = this.state.askInput;
+    axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "questionText": question })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        this.getItem();
+        this.toggleModel();
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  toggleModel(event) {
+    // console.log('Model was toggled');
+    var toggle = this.state.showAsk;
+    if (toggle) {
+      this.setState({ showAsk: false });
+    } else {
+      this.setState({ showAsk: true });
+    }
+  }
+
+  askChange(e) {
+    // console.log(e.target.value);
+    this.setState({ askInput: e.target.value })
   }
 
   reportClicked(event) {
@@ -83,7 +107,26 @@ class ItemPage extends React.Component {
           </div>
 
           <div className="bottombuttonscontainer">
-            <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.askClicked} >Ask Question </Button>
+            <div className="askmodal">
+              <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
+              {this.state.showAsk ? <Modal show={this.toggleModel} onHide={this.toggleModel} >
+                <Modal.Body>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Control type="email" placeholder="Ask a Question" style={{ "minHeight": "75px" }} onChange={(e) => this.askChange(e)} />
+                    </Form.Group>
+                    <Button variant="secondary" onClick={this.toggleModel}>
+                      Close
+                    </Button>{" "}
+                    <Button variant="primary" type="submit" onClick={this.askClicked}>
+                      Submit
+                    </Button>
+                  </Form>
+                </Modal.Body>
+              </Modal> : null}
+
+
+            </div>
             <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.reportClicked} >Report Posting</Button>{' '}
           </div>
         </Col>

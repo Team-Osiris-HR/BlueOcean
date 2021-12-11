@@ -69,7 +69,7 @@ exports.addQA = catchAsync(async (req, res, next) => {
       message: 'Post not found',
     });
   }
-  post.qa.push(req.body);
+  post.QAs.push(req.body);
   post.save();
   res.status(201).json({
     status: 'success',
