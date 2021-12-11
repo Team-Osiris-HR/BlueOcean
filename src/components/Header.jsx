@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row'
 import Search from './Search.jsx'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Cookies from 'js-cookie'
 
 import axios from 'axios'
 
@@ -29,7 +30,8 @@ class Header extends React.Component {
     axios.get('/api/users/logout')
       .then((result) => {
         alert('see you again!')
-        this.props.setRenderState("login")
+        Cookies.remove('jwt')
+        this.props.setRenderState("login", this.props.username)
       }).catch((err) => {
         console.log(err)
       });

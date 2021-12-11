@@ -36,11 +36,19 @@ class App extends React.Component {
   }
 
   getCookies() {
-    console.log(Cookies.get())
+    if (Cookies.get("jwt")) {
+      console.log(Cookies.get().manny)
+      this.setState({ render: 'feed' })
+    } else {
+      this.setState({ render: 'login' })
+    }
   }
 
-  setRenderState(whatState) {
-    this.setState({ render: whatState })
+  setRenderState(whatState, username) {
+    this.setState({
+      render: whatState,
+      user: username
+    })
     this.renderView()
   }
 
