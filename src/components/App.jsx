@@ -24,7 +24,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.getPosts()
     this.getCookies()
   }
 
@@ -36,18 +35,14 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      console.log(Cookies.get().manny)
-      this.setState({ render: 'feed' })
+      this.setState({ render: 'signup' }) // change this later
     } else {
       this.setState({ render: 'login' })
     }
   }
 
-  setRenderState(whatState, username) {
-    this.setState({
-      render: whatState,
-      user: username
-    })
+  setRenderState(whatState) {
+    this.setState({ render: whatState })
     this.renderView()
   }
 
