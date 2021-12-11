@@ -4,11 +4,20 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import axios from 'axios'
 
 class Signup extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      phone: '',
+      address: '',
+      loggedIn: false
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -19,7 +28,20 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.name)
+    axios.post('/api/users/signup', {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm,
+      phone: this.state.phone,
+      address: this.state.address,
+      loggedIn: false
+    })
+      .then((result) => {
+        console.log(result.status)
+      }).catch((err) => {
+        console.log(err)
+      });
   }
 
   render() {
@@ -34,11 +56,11 @@ class Signup extends React.Component {
 
           <Row className="mb-3" md="true">
             <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
-              <Form.Control type="email" name='email address' placeholder="Enter email" onChange={(e) => this.handleChange(e)} />
+              <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
             </Form.Group>
 
             <Form.Group className="mb-3" as={Col} controlId="formGridPassword" md>
-              <Form.Control type="password" placeholder="Password" name='password' onChange={(e) => this.handleChange(e)} />
+              <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridConfirmPassword" md>
@@ -51,7 +73,7 @@ class Signup extends React.Component {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridPhone" md>
-            <Form.Control placeholder="555-555-5555" name='phone' onChange={(e) => this.handleChange(e)} />
+            <Form.Control placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
           <Button variant="primary" type="submit">
