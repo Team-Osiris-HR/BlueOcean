@@ -8,7 +8,7 @@ const Qa = ({ QAs }) => {
         return (
           <div className="qaTile" key={index}>
             <h6>{qa.questionText}</h6>
-            <p>- {qa.answerText} </p>
+            <p>- {qa.answerText ? qa.answerText : "To be answered"} </p>
           </div>
         );
       }) : null}
