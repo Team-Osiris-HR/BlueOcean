@@ -32,7 +32,6 @@ exports.getOnePost = catchAsync(async (req, res, next) => {
 
 exports.updatePost = catchAsync(async (req, res, next) => {
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
     runValidators: true,
   });
   res.status(200).json({
