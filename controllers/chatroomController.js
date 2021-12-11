@@ -14,7 +14,7 @@ exports.getUserChats = catchAsync(async (req, res) => {
 });
 
 exports.getOneUserChat = catchAsync(async (req, res) => {
-  const chat = await Chatroom.find({_id: req.params._id});
+  const chat = await Chatroom.find({_id: req.params.chatId});
 
   if (!chat) {
     return res.sendStatus(400);
@@ -28,13 +28,13 @@ exports.createRoom = catchAsync(async (req, res) => {
 });
 
 exports.toggleRoom = catchAsync(async (req, res) => {
-  const room = await Chatroom.findById(req.params._id);
+  const room = await Chatroom.findById(req.params.chatId);
   room.active = !room.active;
   room.save();
   res.sendStatus(200);
 });
 
 exports.deleteRoom = catchAsync(async (req, res) => {
-  const room = await Chatroom.findByIdAndDelete(req.params._id);
+  const room = await Chatroom.findByIdAndDelete(req.params.chatId);
   res.sendStatus(204);
 });
