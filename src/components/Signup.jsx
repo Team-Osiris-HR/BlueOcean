@@ -51,7 +51,7 @@ class Signup extends React.Component {
       <Container>
         <Form onSubmit={this.handleSubmit}>
           <h1>Create an account</h1>
-          <Form.Group controlId="formGridName" md
+          <Form.Group controlId="formGridName"
             className="mb-3">
             <Form.Control name='name' placeholder="Name" onChange={(e) => this.handleChange(e)} />
           </Form.Group>
@@ -61,20 +61,20 @@ class Signup extends React.Component {
               <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
             </Form.Group>
 
-            <Form.Group className="mb-3" as={Col} controlId="formGridPassword" md>
+            <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
               <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridConfirmPassword" md>
+            <Form.Group as={Col} controlId="formGridConfirmPassword" >
               <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
             </Form.Group>
           </Row>
 
-          <Form.Group className="mb-3" controlId="formGridAddress" md>
+          <Form.Group className="mb-3" controlId="formGridAddress" >
             <Form.Control placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGridPhone" md>
+          <Form.Group className="mb-3" controlId="formGridPhone" >
             <Form.Control placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
