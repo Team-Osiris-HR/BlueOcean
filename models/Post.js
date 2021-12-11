@@ -30,6 +30,14 @@ const postSchema = new mongoose.Schema({
     type: String,
     // enum: ['electronics', 'clothing', 'books', 'furniture', 'other'], DO SOMETHING WITH ME LATER PLEASE
   },
+  location: {
+    latitude: {
+      type: Number,
+    },
+    longitude: {
+      type: Number,
+    },
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
