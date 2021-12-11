@@ -25,6 +25,10 @@
   grid-template-rows: 25% 33% 42%;
 }
 
+.feed_card {
+  margin-bottom: 15px;
+}
+
 .donate {
   grid-row-start: 2;
 }

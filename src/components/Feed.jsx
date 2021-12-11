@@ -15,6 +15,7 @@ class Feed extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
@@ -44,6 +45,120 @@ class Feed extends React.Component {
               <FeedTile />
             </Col>
             <Col></Col>
+=======
+    <div className="page">
+      <div className="top">
+      <Stack direction="horizontal" gap={2}>
+        <Button className="rounded-pill" variant="outline-primary" size="sm">map</Button>
+        <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">filter</Button>
+        <Button className="rounded-pill" variant="outline-primary" size="sm">sort</Button>
+      </Stack>
+      </div>
+      <div className = "middle">
+        <Container>
+          <Row xs={1} sm={2} md={4}>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+            <Col className="text-center feed_card">
+              <FeedTile/>
+            </Col>
+
+          </Row>
+        </Container>
+      </div>
+      <div className="bottom">
+        <div className="donate">
+          <Container className="text-center">
+            <Button variant="primary" size="lg">Donate</Button>
+>>>>>>> Phil
           </Container>
           <div className="bottom">
             <Container>
