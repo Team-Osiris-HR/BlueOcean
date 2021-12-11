@@ -48,7 +48,6 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      console.log('kim')
       this.setState({ render: 'feed' })
       this.getPosts(); // change this later
     } else {
