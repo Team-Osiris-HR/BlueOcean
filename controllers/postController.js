@@ -60,3 +60,19 @@ exports.togglePost = catchAsync(async (req, res, next) => {
     post,
   });
 });
+
+exports.addQA = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Post not found',
+    });
+  }
+  post.qa.push(req.body);
+  post.save();
+  res.status(201).json({
+    status: 'success',
+    post,
+  });
+});

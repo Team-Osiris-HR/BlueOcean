@@ -13,6 +13,7 @@ router.get('/:id', postController.getOnePost);
 router.post('/', postController.createPost);
 
 router.patch('/:id', postController.updatePost);
+router.post('/:id', postController.addQA);
 router.patch('/:id/favorite', userController.addFavorite);
 router.patch('/:id/toggle', postController.togglePost);
 
