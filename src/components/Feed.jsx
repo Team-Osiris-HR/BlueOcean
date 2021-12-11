@@ -158,7 +158,11 @@ class Feed extends React.Component {
         <div className="donate">
           <Container className="text-center">
             <Button variant="primary" size="lg">Donate</Button>
+<<<<<<< HEAD
 >>>>>>> Phil
+=======
+>>>>>>> eff8c93ae01124b2654c5348971c1c49100e6ca9
+>>>>>>> kim
           </Container>
           <div className="bottom">
             <Container>
