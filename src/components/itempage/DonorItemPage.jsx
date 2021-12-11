@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form'
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
 
 class DonorItemPage extends React.Component {
@@ -16,16 +17,19 @@ class DonorItemPage extends React.Component {
     super(props);
     this.state = {
       postData: {},
-      showAsk: false,
-      showReport: false,
-      askInput: ""
+      editPost: {
+        title: '',
+        description: '',
+        photos: ''
+      },
+      showEdit: false
     };
 
-    this.askClicked = this.askClicked.bind(this);
-    this.reportClicked = this.reportClicked.bind(this);
-    this.messageClicked = this.messageClicked.bind(this);
-    this.toggleModel = this.toggleModel.bind(this);
-    this.toggleReport = this.toggleReport.bind(this);
+    this.editClicked = this.editClicked.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.editModal = this.editModal.bind(this);
+    this.titleChange = this.titleChange.bind(this);
+    this.descChange = this.descChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +45,7 @@ class DonorItemPage extends React.Component {
   }
 
   getItem() {
-    axios.get(`http://localhost:3000/api/posts/${this.props.currentPost}`)
+    axios.get(`http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d`)
       .then((res) => {
         var post = res.data.post;
         // console.log(post);
@@ -53,73 +57,77 @@ class DonorItemPage extends React.Component {
       })
   }
 
-  askClicked(event) {
-    // console.log('Someone wants to ask a question: ', this.state.askInput);
+  editClicked(event) {
     event.preventDefault();
-    var question = this.state.askInput;
-    axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "questionText": question })
+    var post = this.state.postData;
+    // console.log(post);
+    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "title": post.title, "description": post.description })
       .then((res) => {
         // console.log(res.data);
         this.getItem();
-        this.toggleModel();
+        this.toggleEdit();
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  toggleModel(event) {
+  toggleEdit(event) {
     // console.log('Model was toggled');
-    var toggle = this.state.showAsk;
+    var toggle = this.state.showEdit;
     if (toggle) {
-      this.setState({ showAsk: false });
+      this.setState({ showEdit: false });
     } else {
-      this.setState({ showAsk: true });
+      this.setState({ showEdit: true });
     }
   }
 
-  toggleReport(event) {
-    // console.log('Model was toggled');
-    var toggle = this.state.showReport;
-    if (toggle) {
-      this.setState({ showReport: false });
-    } else {
-      this.setState({ showReport: true });
-    }
+  titleChange(e) {
+    var post = this.state.postData;
+    post.title = e.target.value;
+    this.setState({ postData: post });
   }
 
-  askChange(e) {
-    // console.log(e.target.value);
-    this.setState({ askInput: e.target.value })
+  descChange(e) {
+    var post = this.state.postData;
+    post.description = e.target.value;
+    this.setState({ postData: post });
   }
 
-  reportChange(e) {
-    // console.log(e.target.value);
-    this.setState({ askInput: e.target.value })
-  }
-
-  reportClicked(event) {
-    event.preventDefault();
-    console.log('Someone wants to report a post');
-    this.toggleReport();
-  }
-
-  messageClicked(event) {
-    console.log('Someone wants to message the donor');
-  }
-
-  askModal() {
+  editModal() {
+    var post = this.state.postData;
     return (
-      <Modal show={this.toggleModel} onHide={this.toggleModel} >
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={this.toggleEdit}
+        onHide={this.toggleEdit}
+      >
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="input" placeholder="Ask a Question" style={{ "minHeight": "75px" }} onChange={(e) => this.askChange(e)} />
+            <Form.Group className="mb-3" controlId="title">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Title"
+                className="mb-3"
+              >
+                <Form.Control type="input" value={post.title} style={{ "minHeight": "75px" }} onChange={(e) => this.titleChange(e)} />
+              </FloatingLabel>
             </Form.Group>
-            <Button variant="secondary" onClick={this.toggleModel}>
+            <Form.Group className="mb-3" controlId="description">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Descriptioin"
+                className="mb-3"
+              >
+                <Form.Control type="input" value={post.description} style={{ "minHeight": "75px" }} onChange={(e) => this.descChange(e)} />
+              </FloatingLabel>
+            </Form.Group>
+            <Button variant="secondary" onClick={this.toggleEdit}>
               Close
             </Button>{" "}
-            <Button variant="primary" type="submit" onClick={this.askClicked}>
+            <Button variant="primary" type="submit" onClick={this.editClicked}>
               Submit
             </Button>
           </Form>
@@ -128,25 +136,6 @@ class DonorItemPage extends React.Component {
     );
   }
 
-  reportModal() {
-    return (
-      <Modal show={this.toggleReport} onHide={this.toggleReport} >
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="What do you want to Report?" style={{ "minHeight": "75px" }} onChange={(e) => this.reportChange(e)} />
-            </Form.Group>
-            <Button variant="secondary" onClick={this.toggleReport}>
-              Close
-            </Button>{" "}
-            <Button variant="primary" type="submit" onClick={this.reportClicked}>
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    );
-  }
 
   render() {
     return (
@@ -155,7 +144,8 @@ class DonorItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            {/* <Button variant="primary" onClick={this.messageClicked}>Message Poster</Button>{' '} */}
+            <Button variant="primary" onClick={this.toggleEdit}>Edit Post</Button>
+            {this.state.showEdit ? this.editModal() : null}
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
@@ -163,20 +153,6 @@ class DonorItemPage extends React.Component {
           <div>
             <p>Map Place Holder</p>
           </div>
-
-          {/* <div className="bottombuttonscontainer">
-
-            <div className="askmodal">
-              <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
-              {this.state.showAsk ? this.askModal() : null}
-            </div>
-
-            <div className="reportmodal">
-              <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button>
-              {this.state.showReport ? this.reportModal() : null}
-            </div>
-
-          </div> */}
         </Col>
       </Container >
     );

@@ -18,7 +18,7 @@ class App extends React.Component {
     super(props)
     this.state = {
 
-      render: "donoritempage",
+      render: "feed",
       posts: [],
       currentPost: '',
       currentUser: {}
@@ -58,7 +58,7 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      this.setState({ render: 'feed' })
+      this.setState({ render: 'donoritempage' })
       this.getPosts(); // change this later
     } else {
       this.setState({ render: 'login' })
