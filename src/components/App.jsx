@@ -122,6 +122,7 @@ class App extends React.Component {
         <Feed
           posts={this.state.posts}
           getPostId={this.getPostId}
+          searchItem={this.state.search}
         />
       )
     } else if (this.state.render === 'itempage') {
