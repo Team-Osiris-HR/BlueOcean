@@ -39,7 +39,7 @@ class ItemPage extends React.Component {
   }
 
   getItem() {
-    axios.get(`http://localhost:3000/api/posts/${this.props.id}`)
+    axios.get(`http://localhost:3000/api/posts/${this.props.currentPost}`)
       .then((res) => {
         var post = res.data.post;
         // console.log(post);
