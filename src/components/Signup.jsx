@@ -82,6 +82,7 @@ class Signup extends React.Component {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <Button variant="warning" type="button" onClick={() => this.props.setRenderState('login')}>Go back</Button>
         </Form >
       </Container>
     )

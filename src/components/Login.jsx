@@ -48,6 +48,7 @@ class Login extends React.Component {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Button variant="info" type="button" onClick={() => this.props.setRenderState('signup')}>Create account</Button>
       </Form>
     )
   }
