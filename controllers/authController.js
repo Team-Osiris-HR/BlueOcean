@@ -34,7 +34,7 @@ exports.sendToken = (user, statusCode, req, res) => {
 
   res.cookie('jwt', token, {
     expires: new Date(Date.now() + expirey),
-    httpOnly: true,
+    // httpOnly: true,
   });
 
   user.password = undefined;
@@ -67,7 +67,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res) => {
   res.cookie('jwt', 'Thanks for visiting', {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true,
+    // httpOnly: true,
   });
   res.status(200).json({ status: 'success' });
 };
