@@ -70,3 +70,10 @@ exports.addFavorite = catchAsync(async (req, res) => {
     });
   }
 });
+
+exports.deleteMe = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  user.active = !user.active;
+  user.save();
+  res.sendStatus(200);
+});
