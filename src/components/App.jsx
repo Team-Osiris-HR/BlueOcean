@@ -77,7 +77,6 @@ class App extends React.Component {
   }
 
   setSearch(searchItem) {
-    console.log('this is search item,')
     const filteredSearch = []
     this.setState({ search: searchItem })
     if (searchItem.length >= 3) {
