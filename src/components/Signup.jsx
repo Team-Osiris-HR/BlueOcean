@@ -56,7 +56,7 @@ class Signup extends React.Component {
             <Form.Control name='name' placeholder="Name" onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
-          <Row className="mb-3" md="true">
+          <Row className="mb-3" >
             <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
               <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
             </Form.Group>
