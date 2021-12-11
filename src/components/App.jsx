@@ -57,7 +57,8 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      this.setState({ render: 'feed' }) // change this later
+      this.setState({ render: 'feed' })
+      this.getPosts(); // change this later
     } else {
       this.setState({ render: 'login' })
     }
