@@ -10,6 +10,7 @@ import Feed from './Feed.jsx'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
+import DonorItemPage from './itempage/DonorItemPage.jsx';
 
 
 class App extends React.Component {
@@ -17,7 +18,7 @@ class App extends React.Component {
     super(props)
     this.state = {
 
-      render: "feed",
+      render: "donoritempage",
       posts: [],
       currentPost: ''
 
@@ -37,13 +38,13 @@ class App extends React.Component {
 
   getPosts() {
     axios.get('/api/posts')
-      .then((res) =>{
+      .then((res) => {
         this.setState({
           posts: res.data.posts
         })
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
   }
 
@@ -106,6 +107,12 @@ class App extends React.Component {
       return (
         <ItemPage
           currentPost={this.state.currentPost}
+        />
+      )
+    } else if (this.state.render === 'donoritempage') {
+      return (
+        <DonorItemPage
+
         />
       )
     }
