@@ -46,7 +46,10 @@ class Header extends React.Component {
           </Col>
           <Col xs>
             {/* <span>mikeslist</span> */}
-            <span>Title</span>
+            <span >Title</span>
+          </Col>
+          <Col>
+            <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>back to feed</Button>
           </Col>
           <Col>
             <Search />
