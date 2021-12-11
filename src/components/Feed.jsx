@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
+
 import FeedTile from './FeedTile.jsx'
 
 class Feed extends React.Component {
@@ -10,6 +11,9 @@ class Feed extends React.Component {
       currentFeed: 'public',
     };
   }
+
+
+
 
   render() {
     return (
@@ -126,42 +130,17 @@ class Feed extends React.Component {
             <Container className="text-center">
               <Button variant="primary" size="lg">Donate</Button>
             </Container>
-            <div className="bottom">
-              <Container>
-                <Col></Col>
-                <Col>
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                  <FeedTile />
-                </Col>
-                <Col></Col>
-              </Container>
-            </div>
-          </div>
-          <div className="bottom">
-            <div className="donate">
-              <Container className="text-center">
-                <Button variant="primary" size="lg">Donate</Button>
-              </Container>
-            </div>
           </div>
         </div>
       </div>
+
+
     )
   }
+
 }
+
+
 
 
 export default Feed;
