@@ -20,6 +20,11 @@ const chatroomSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
     required: true,
+  },
+  active: {
+    type: Boolean,
+    default: true,
+    required: true,
   }
 });
 
