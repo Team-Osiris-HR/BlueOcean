@@ -26,6 +26,7 @@ class Login extends React.Component {
       password: this.state.password
     })
       .then((result) => {
+        this.props.setCurrentUser(result.data.data.user)
         this.props.setRenderState("feed",)
       }).catch((err) => {
         alert('wrong user and/or password bud')

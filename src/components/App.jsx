@@ -19,17 +19,15 @@ class App extends React.Component {
 
       render: "feed",
       posts: [],
-      currentPost: ''
-      // address
-      // location
-      //
+      currentPost: '',
+      currentUser: {}
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
     this.getPostId = this.getPostId.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
-
+    this.setCurrentUser = this.setCurrentUser.bind(this)
   }
 
   componentDidMount() {
@@ -72,13 +70,17 @@ class App extends React.Component {
     this.renderView()
   }
 
+  setCurrentUser(currentUser) {
+    this.setState({ currentUser: currentUser })
+  }
+
 
   renderView() {
     if (this.state.render === "login") {
       return (
         <Container>
           <Col>
-            <Login setRenderState={this.setRenderState} />
+            <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
           </Col>
         </Container>
       )
