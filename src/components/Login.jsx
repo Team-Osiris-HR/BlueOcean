@@ -28,7 +28,7 @@ class Login extends React.Component {
       .then((result) => {
         this.props.setRenderState("feed",)
       }).catch((err) => {
-        console.log(err)
+        alert('wrong user and/or password bud')
       });
   }
 
