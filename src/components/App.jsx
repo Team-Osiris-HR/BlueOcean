@@ -18,11 +18,13 @@ class App extends React.Component {
     this.state = {
 
       render: "feed",
-      posts: []
+      posts: [],
+      currentPost: ''
 
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
+    this.getPostId = this.getPostId.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
 
@@ -35,14 +37,21 @@ class App extends React.Component {
 
   getPosts() {
     axios.get('/api/posts')
-      .then((res) => {
+      .then((res) =>{
         this.setState({
           posts: res.data.posts
         })
       })
       .catch((err) => {
-        console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
+  }
+
+  getPostId(id) {
+    this.setState({
+      currentPost: id,
+      render: 'itempage'
+    })
   }
 
 
@@ -57,7 +66,6 @@ class App extends React.Component {
 
   setRenderState(whatState) {
     this.setState({ render: whatState })
-    this.getPosts();
     this.renderView()
   }
 
@@ -91,11 +99,14 @@ class App extends React.Component {
       return (
         <Feed
           posts={this.state.posts}
+          getPostId={this.getPostId}
         />
       )
     } else if (this.state.render === 'itempage') {
       return (
-        <ItemPage />
+        <ItemPage
+          currentPost={this.state.currentPost}
+        />
       )
     }
   }
