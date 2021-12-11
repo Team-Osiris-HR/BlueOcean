@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 import axios from 'axios'
 
-
 class Signup extends React.Component {
   constructor(props) {
     super(props)
@@ -23,6 +22,7 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
@@ -46,37 +46,20 @@ class Signup extends React.Component {
         alert('check all fields')
       });
   }
-
   render() {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
           <h1>Create an account</h1>
-<<<<<<< HEAD
-          <Form.Group controlId="formGridName" md="hello" className="mb-3">
-=======
           <Form.Group controlId="formGridName"
             className="mb-3">
->>>>>>> 241ccad706001c3eb6bc0f4f17aba66489efddc0
             <Form.Control name='name' placeholder="Name" onChange={(e) => this.handleChange(e)} />
           </Form.Group>
-          <Row className="mb-3" md="true">
+
+          <Row className="mb-3" >
             <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
               <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
             </Form.Group>
-<<<<<<< HEAD
-            <Form.Group className="mb-3" as={Col} controlId="formGridPassword" md>
-              <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridConfirmPassword" md>
-              <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
-            </Form.Group>
-          </Row>
-          <Form.Group className="mb-3" controlId="formGridAddress" md>
-            <Form.Control placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGridPhone" md>
-=======
 
             <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
               <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
@@ -92,9 +75,9 @@ class Signup extends React.Component {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridPhone" >
->>>>>>> 241ccad706001c3eb6bc0f4f17aba66489efddc0
             <Form.Control placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
+
           <Button size="lg" variant="primary" type="submit">
             Submit
           </Button>
