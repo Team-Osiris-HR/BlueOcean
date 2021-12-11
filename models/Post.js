@@ -32,17 +32,14 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-<<<<<<< HEAD
-    ref: 'User',
-  },
-  QAs: [{
-      questionText: String,
-      answerText: String,
-  }],
-=======
     ref: "User",
   },
->>>>>>> cecbbd0f7ce878e20f9ea615445a292a37c89067
+  QAs: [
+    {
+      questionText: String,
+      answerText: String,
+    },
+  ],
 });
 
 const Post = mongoose.model("Post", postSchema);
