@@ -11,8 +11,6 @@ class Feed extends React.Component {
     };
   }
 
-
-
   render() {
     return (
       <div className="page">
@@ -25,66 +23,145 @@ class Feed extends React.Component {
         </div>
         <div className="middle">
           <Container>
-            <Col></Col>
-            <Col className="text-center">
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-              <FeedTile />
-            </Col>
-            <Col></Col>
-          </Container>
-          <div className="bottom">
-            <Container>
-              <Col></Col>
-              <Col>
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
-                <FeedTile />
+            <Row xs={1} sm={2} md={4}>
+              <Col className="text-center feed_card">
                 <FeedTile />
               </Col>
-              <Col></Col>
-            </Container>
-          </div>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+              <Col className="text-center feed_card">
+                <FeedTile />
+              </Col>
+
+            </Row>
+          </Container>
         </div>
         <div className="bottom">
           <div className="donate">
             <Container className="text-center">
               <Button variant="primary" size="lg">Donate</Button>
             </Container>
+            <div className="bottom">
+              <Container>
+                <Col></Col>
+                <Col>
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                  <FeedTile />
+                </Col>
+                <Col></Col>
+              </Container>
+            </div>
+          </div>
+          <div className="bottom">
+            <div className="donate">
+              <Container className="text-center">
+                <Button variant="primary" size="lg">Donate</Button>
+              </Container>
+            </div>
           </div>
         </div>
       </div>
-
-
     )
   }
-
 }
-
-
 
 
 export default Feed;

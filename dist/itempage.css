@@ -1,0 +1,52 @@
+.itemContainer {
+  background-color: #F5F5F5;
+  margin: 0 auto;
+  min-width: 325px;
+}
+
+.itemContainer .description {
+  min-height: 80px;
+  border: 1px #DCDCDC solid;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+/* .carousel {
+  margin: 0 auto;
+  max-width: 900px;
+  max-height: 900px;
+} */
+
+.carousel img {
+  max-width: 900px;
+  max-height: 500px;
+
+  /* object-fit: contain; */
+  /* margin: 0 auto; */
+}
+
+.center {
+  margin: 0 auto;
+}
+
+/* Boxes */
+.nameBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+}
+
+.qaContainer {
+  margin-top: 5%;
+}
+.qaTile {
+  min-height: 40px;
+  border: 1px #DCDCDC solid;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.bottombuttonscontainer {
+  display: flex;
+  justify-content: space-between;
+}
