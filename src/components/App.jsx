@@ -35,20 +35,22 @@ class App extends React.Component {
 
   getPosts() {
     axios.get('/api/posts')
-      .then((res) =>{
+      .then((res) => {
         this.setState({
           posts: res.data.posts
         })
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
   }
 
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      this.setState({ render: 'feed' }) // change this later
+      console.log('kim')
+      this.setState({ render: 'feed' })
+      this.getPosts(); // change this later
     } else {
       this.setState({ render: 'login' })
     }
@@ -56,6 +58,7 @@ class App extends React.Component {
 
   setRenderState(whatState) {
     this.setState({ render: whatState })
+    this.getPosts();
     this.renderView()
   }
 
