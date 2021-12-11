@@ -31,7 +31,7 @@ class Header extends React.Component {
       .then((result) => {
         alert('see you again!')
         Cookies.remove('jwt')
-        this.props.setRenderState("login", this.props.username)
+        this.props.setRenderState("login")
       }).catch((err) => {
         console.log(err)
       });
@@ -45,7 +45,8 @@ class Header extends React.Component {
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
           </Col>
           <Col xs>
-            <span>mikeslist</span>
+            {/* <span>mikeslist</span> */}
+            <span>Title</span>
           </Col>
           <Col>
             <Search />

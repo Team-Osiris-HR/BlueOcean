@@ -21,7 +21,6 @@ exports.getUser = catchAsync(async (req, res) => {
 
 exports.updateUser = catchAsync(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
     runValidators: true,
   });
   res.status(200).json({

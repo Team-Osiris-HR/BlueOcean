@@ -9,14 +9,17 @@ import Header from './Header.jsx'
 import Feed from './Feed.jsx'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import ItemPage from './itempage/ItemPage.jsx';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+
       render: "feed",
       posts: []
+
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
@@ -26,16 +29,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
-    // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
-    //   .then((res) => {
-    //     console.log("Recieved new Cookie");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-    //this.getCookies()
     this.getPosts()
+    this.getCookies()
   }
 
   getPosts() {
@@ -53,18 +48,14 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      console.log(Cookies.get().manny)
-      this.setState({ render: 'feed' })
+      this.setState({ render: 'feed' }) // change this later
     } else {
       this.setState({ render: 'login' })
     }
   }
 
-  setRenderState(whatState, username) {
-    this.setState({
-      render: whatState,
-      user: username
-    })
+  setRenderState(whatState) {
+    this.setState({ render: whatState })
     this.renderView()
   }
 
@@ -82,7 +73,7 @@ class App extends React.Component {
       return (
         <Container>
           <Col>
-            <Signup />
+            <Signup setRenderState={this.setRenderState} />
           </Col>
         </Container>
       )
@@ -100,13 +91,17 @@ class App extends React.Component {
           posts={this.state.posts}
         />
       )
+    } else if (this.state.render === 'itempage') {
+      return (
+        <ItemPage />
+      )
     }
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" ? <Header setRenderState={this.setRenderState} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} /> : null}
         {this.renderView()}
       </React.Fragment>
     );
