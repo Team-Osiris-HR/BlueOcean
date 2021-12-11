@@ -20,7 +20,9 @@ class App extends React.Component {
       render: "feed",
       posts: [],
       currentPost: '',
-      currentUser: {}
+      currentUser: {},
+      search: ''
+
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
@@ -28,6 +30,7 @@ class App extends React.Component {
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
+    this.setSearch = this.setSearch.bind(this)
   }
 
   componentDidMount() {
@@ -54,7 +57,6 @@ class App extends React.Component {
     })
   }
 
-
   getCookies() {
     if (Cookies.get("jwt")) {
       this.setState({ render: 'feed' })
@@ -72,6 +74,22 @@ class App extends React.Component {
 
   setCurrentUser(currentUser) {
     this.setState({ currentUser: currentUser })
+  }
+
+  setSearch(searchItem) {
+    console.log('this is search item,')
+    const filteredSearch = []
+    this.setState({ search: searchItem })
+    if (searchItem.length >= 3) {
+      this.state.posts.filter((post) => {
+        if (post.title.toLowerCase().includes(this.state.search)) {
+          filteredSearch.push(post)
+        }
+      })
+    } else {
+      this.getPosts()
+    }
+    this.setState({ posts: filteredSearch })
   }
 
 
@@ -119,7 +137,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} /> : null}
         {this.renderView()}
       </React.Fragment>
     );

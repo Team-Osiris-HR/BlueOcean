@@ -52,7 +52,7 @@ class Header extends React.Component {
             <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>back to feed</Button>
           </Col>
           <Col>
-            <Search />
+            <Search setSearch={this.props.setSearch} />
           </Col>
           <Col>
             <Button variant='primary'>
