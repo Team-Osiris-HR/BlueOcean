@@ -6,7 +6,7 @@ const Qa = ({ QAs }) => {
       <h4>Q&A</h4>
       {QAs ? QAs.map((qa, index) => {
         return (
-          <div key={index}>
+          <div className="qaTile" key={index}>
             <h6>{qa.questionText}</h6>
             <p>- {qa.answerText} </p>
           </div>

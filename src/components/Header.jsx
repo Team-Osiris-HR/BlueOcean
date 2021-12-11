@@ -43,7 +43,8 @@ class Header extends React.Component {
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
           </Col>
           <Col xs>
-            <span>mikeslist</span>
+            {/* <span>mikeslist</span> */}
+            <span>Title</span>
           </Col>
           <Col>
             <Search />

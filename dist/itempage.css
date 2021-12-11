@@ -1,7 +1,9 @@
 .itemContainer {
   background-color: #F5F5F5;
+  /* background-color: red; */
   margin: 0 auto;
   min-width: 325px;
+  /* max-width: 50%; */
 }
 
 .itemContainer .description {

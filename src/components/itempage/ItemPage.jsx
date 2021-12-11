@@ -30,7 +30,7 @@ class ItemPage extends React.Component {
     //   .catch((err) => {
     //     console.log(err);
     //   })
-    axios.get('http://localhost:3000/api/posts/61b3a90a216a5fdea297ed74')
+    axios.get('http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d')
       .then((res) => {
         var post = res.data.post;
         var newPost = { title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
