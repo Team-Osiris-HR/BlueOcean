@@ -9,13 +9,14 @@ import Header from './Header.jsx'
 import Feed from './Feed.jsx'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import ItemPage from './itempage/ItemPage.jsx';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      render: "login",
+      render: "itempage",
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
@@ -79,13 +80,17 @@ class App extends React.Component {
       )
     } else if (this.state.render === 'feed') {
       return <Feed />
+    } else if (this.state.render === 'itempage') {
+      return (
+        <ItemPage />
+      )
     }
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" ? <Header setRenderState={this.setRenderState} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} /> : null}
         {this.renderView()}
       </React.Fragment>
     );

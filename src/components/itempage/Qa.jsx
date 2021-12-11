@@ -4,14 +4,16 @@ const Qa = ({ QAs }) => {
   return (
     <div className="qaContainer">
       <h4>Q&A</h4>
-      {QAs ? QAs.map((qa, index) => {
-        return (
-          <div key={index}>
-            <h6>{qa.questionText}</h6>
-            <p>- {qa.answerText} </p>
-          </div>
-        );
-      }) : null}
+      <div className="qaContainer2">
+        {QAs ? QAs.map((qa, index) => {
+          return (
+            <div className="qaTile" key={index}>
+              <h6>{qa.questionText}</h6>
+              <p>- {qa.answerText ? qa.answerText : "To be answered"} </p>
+            </div>
+          );
+        }) : null}
+      </div>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 .itemContainer {
   background-color: #F5F5F5;
+  /* background-color: red; */
   margin: 0 auto;
   min-width: 325px;
+  /* max-width: 50%; */
 }
 
 .itemContainer .description {
@@ -39,6 +41,12 @@
 .qaContainer {
   margin-top: 5%;
 }
+
+.qaContainer2 {
+  max-height: 200px;
+  overflow: auto;
+}
+
 .qaTile {
   min-height: 40px;
   border: 1px #DCDCDC solid;

@@ -3,7 +3,9 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form'
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
@@ -13,16 +15,19 @@ class ItemPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      postData: {}
+      postData: {},
+      showAsk: false,
+      askInput: ""
     };
 
     this.askClicked = this.askClicked.bind(this);
     this.reportClicked = this.reportClicked.bind(this);
     this.messageClicked = this.messageClicked.bind(this);
+    this.toggleModel = this.toggleModel.bind(this);
   }
 
   componentDidMount() {
-    // console.log('Component Did Mount');
+    console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
@@ -30,10 +35,15 @@ class ItemPage extends React.Component {
     //   .catch((err) => {
     //     console.log(err);
     //   })
-    axios.get('http://localhost:3000/api/posts/61b3a90a216a5fdea297ed74')
+    this.getItem();
+  }
+
+  getItem() {
+    axios.get('http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d')
       .then((res) => {
         var post = res.data.post;
-        var newPost = { title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
+        // console.log(post);
+        var newPost = { id: post._id, title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
       })
       .catch((err) => {
@@ -42,7 +52,33 @@ class ItemPage extends React.Component {
   }
 
   askClicked(event) {
-    console.log('Someone wants to ask a question');
+    // console.log('Someone wants to ask a question: ', this.state.askInput);
+    event.preventDefault();
+    var question = this.state.askInput;
+    axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "questionText": question })
+      .then((res) => {
+        // console.log(res.data);
+        this.getItem();
+        this.toggleModel();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  toggleModel(event) {
+    // console.log('Model was toggled');
+    var toggle = this.state.showAsk;
+    if (toggle) {
+      this.setState({ showAsk: false });
+    } else {
+      this.setState({ showAsk: true });
+    }
+  }
+
+  askChange(e) {
+    // console.log(e.target.value);
+    this.setState({ askInput: e.target.value })
   }
 
   reportClicked(event) {
@@ -66,23 +102,31 @@ class ItemPage extends React.Component {
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
           <Qa QAs={this.state.postData.qas} />
-          {/* <div className="qaContainer">
-            <h4>Q&A</h4>
-            <div className="qaTile">
-              <h6>{this.state.postData.qa[0].question}</h6>
-              <p>- {this.state.postData.qa[0].answer}</p>
-            </div>
-            <div className="qaTile">
-              <h6>{this.state.postData.qa[1].question}</h6>
-              <p>- {this.state.postData.qa[1].answer}</p>
-            </div>
-          </div> */}
           <div>
             <p>Map Place Holder</p>
           </div>
 
           <div className="bottombuttonscontainer">
-            <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.askClicked} >Ask Question </Button>
+            <div className="askmodal">
+              <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
+              {this.state.showAsk ? <Modal show={this.toggleModel} onHide={this.toggleModel} >
+                <Modal.Body>
+                  <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Control type="email" placeholder="Ask a Question" style={{ "minHeight": "75px" }} onChange={(e) => this.askChange(e)} />
+                    </Form.Group>
+                    <Button variant="secondary" onClick={this.toggleModel}>
+                      Close
+                    </Button>{" "}
+                    <Button variant="primary" type="submit" onClick={this.askClicked}>
+                      Submit
+                    </Button>
+                  </Form>
+                </Modal.Body>
+              </Modal> : null}
+
+
+            </div>
             <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.reportClicked} >Report Posting</Button>{' '}
           </div>
         </Col>
