@@ -22,7 +22,7 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('Component Did Mount');
+    console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
@@ -30,10 +30,15 @@ class ItemPage extends React.Component {
     //   .catch((err) => {
     //     console.log(err);
     //   })
+    this.getItem();
+  }
+
+  getItem() {
     axios.get('http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d')
       .then((res) => {
         var post = res.data.post;
-        var newPost = { title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
+        // console.log(post);
+        var newPost = { id: post._id, title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
       })
       .catch((err) => {
@@ -43,6 +48,13 @@ class ItemPage extends React.Component {
 
   askClicked(event) {
     console.log('Someone wants to ask a question');
+    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, {})
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   reportClicked(event) {
@@ -66,17 +78,6 @@ class ItemPage extends React.Component {
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
           <Qa QAs={this.state.postData.qas} />
-          {/* <div className="qaContainer">
-            <h4>Q&A</h4>
-            <div className="qaTile">
-              <h6>{this.state.postData.qa[0].question}</h6>
-              <p>- {this.state.postData.qa[0].answer}</p>
-            </div>
-            <div className="qaTile">
-              <h6>{this.state.postData.qa[1].question}</h6>
-              <p>- {this.state.postData.qa[1].answer}</p>
-            </div>
-          </div> */}
           <div>
             <p>Map Place Holder</p>
           </div>
