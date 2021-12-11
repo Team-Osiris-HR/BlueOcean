@@ -32,6 +32,7 @@ exports.getOnePost = catchAsync(async (req, res, next) => {
 
 exports.updatePost = catchAsync(async (req, res, next) => {
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
     runValidators: true,
   });
   res.status(200).json({
@@ -56,6 +57,22 @@ exports.togglePost = catchAsync(async (req, res, next) => {
   post.active = !post.active;
   post.save();
   res.status(200).json({
+    status: 'success',
+    post,
+  });
+});
+
+exports.addQA = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Post not found',
+    });
+  }
+  post.qa.push(req.body);
+  post.save();
+  res.status(201).json({
     status: 'success',
     post,
   });
