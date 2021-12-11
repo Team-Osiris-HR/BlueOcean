@@ -41,7 +41,11 @@ const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  }
+  },
+  QAs: [{
+      questionText: String,
+      answerText: String,
+  }],
 });
 
 const Post = mongoose.model('Post', postSchema);
