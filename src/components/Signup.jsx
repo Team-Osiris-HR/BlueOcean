@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
 import axios from 'axios'
 
 class Signup extends React.Component {
@@ -22,6 +23,7 @@ class Signup extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -38,15 +40,16 @@ class Signup extends React.Component {
       loggedIn: false
     })
       .then((result) => {
-        console.log(result.status)
+        alert('created')
+        this.props.setRenderState('login')
       }).catch((err) => {
-        console.log(err)
+        alert('check all fields')
       });
   }
-
   render() {
     return (
       <Container>
+
         <Form onSubmit={this.handleSubmit}>
           <h1>Create an account</h1>
           <Form.Group controlId="formGridName" md

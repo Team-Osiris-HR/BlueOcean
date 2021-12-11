@@ -60,7 +60,7 @@ class App extends React.Component {
       return (
         <Container>
           <Col>
-            <Signup />
+            <Signup setRenderState={this.setRenderState} />
           </Col>
         </Container>
       )
