@@ -49,7 +49,6 @@ class Signup extends React.Component {
   render() {
     return (
       <Container>
-
         <Form onSubmit={this.handleSubmit}>
           <h1>Create an account</h1>
           <Form.Group controlId="formGridName" md
@@ -79,10 +78,10 @@ class Signup extends React.Component {
             <Form.Control placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button size="lg" variant="primary" type="submit">
             Submit
           </Button>
-          <Button variant="warning" type="button" onClick={() => this.props.setRenderState('login')}>Go back</Button>
+          <Button size="lg" variant="warning" type="button" onClick={() => this.props.setRenderState('login')}>Go back</Button>
         </Form >
       </Container>
     )

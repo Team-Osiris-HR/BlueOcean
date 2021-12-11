@@ -45,10 +45,10 @@ class Login extends React.Component {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button size="lg" variant="primary" type="submit">
           Submit
         </Button>
-        <Button variant="info" type="button" onClick={() => this.props.setRenderState('signup')}>Create account</Button>
+        <Button size="lg" variant="info" type="button" onClick={() => this.props.setRenderState('signup')}>Create account</Button>
       </Form>
     )
   }
