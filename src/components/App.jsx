@@ -19,15 +19,15 @@ class App extends React.Component {
 
       render: "feed",
       posts: [],
-      currentPost: ''
-
+      currentPost: '',
+      currentUser: {}
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
     this.getPostId = this.getPostId.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
-
+    this.setCurrentUser = this.setCurrentUser.bind(this)
   }
 
   componentDidMount() {
@@ -37,13 +37,13 @@ class App extends React.Component {
 
   getPosts() {
     axios.get('/api/posts')
-      .then((res) =>{
+      .then((res) => {
         this.setState({
           posts: res.data.posts
         })
       })
       .catch((err) => {
-      console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
+        console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
   }
 
@@ -66,7 +66,12 @@ class App extends React.Component {
 
   setRenderState(whatState) {
     this.setState({ render: whatState })
+    this.getPosts();
     this.renderView()
+  }
+
+  setCurrentUser(currentUser) {
+    this.setState({ currentUser: currentUser })
   }
 
 
@@ -75,7 +80,7 @@ class App extends React.Component {
       return (
         <Container>
           <Col>
-            <Login setRenderState={this.setRenderState} />
+            <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
           </Col>
         </Container>
       )
