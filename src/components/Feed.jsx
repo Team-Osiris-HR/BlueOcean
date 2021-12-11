@@ -9,7 +9,7 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentFeed: 'public',
+
     };
   }
 
@@ -35,12 +35,10 @@ class Feed extends React.Component {
                   key={post._id}>
                     <FeedTile
                       post={post}
+                      getPostId={this.props.getPostId}
                     />
                 </Col>
               ))}
-
-
-
             </Row>
           </Container>
         </div>

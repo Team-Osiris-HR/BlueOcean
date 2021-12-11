@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card } from 'react-bootstrap';
 
 
-var FeedTile = ({post}) => (
-<Card className="text-center tile" border="info">
+var FeedTile = ({post, getPostId}) => (
+<Card className="text-center tile" border="info" onClick={() => {getPostId(post._id)}}>
   {post.photos.length > 0 ?
     <Card.Img className="img-thumbnail" variant="top" src={post.photos[0]}/>
     :
