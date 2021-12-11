@@ -1,16 +1,19 @@
 import React from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
-import data from '../../../mockData.js';
+// import data from '../../../mockData.js';
+import Photos from './Photos.jsx';
+import Qa from './Qa.jsx';
 
 
 class ItemPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItem: 0
+      postData: {}
     };
 
     this.askClicked = this.askClicked.bind(this);
@@ -19,8 +22,23 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
-    console.log(data);
+    // console.log('Component Did Mount');
+    // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
+    //   .then((res) => {
+    //     console.log("Recieved new Cookie");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+    axios.get('http://localhost:3000/api/posts/61b3a90a216a5fdea297ed74')
+      .then((res) => {
+        var post = res.data.post;
+        var newPost = { title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
+        this.setState({ postData: newPost });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   askClicked(event) {
@@ -38,43 +56,29 @@ class ItemPage extends React.Component {
 
   render() {
     return (
-      <Container className="itemContainer">
+      <Container className="itemContainer" >
         <Col>
-          <Carousel fade className="mx-auto">
-            <Carousel.Item >
-              <img
-                className="d-block mw-100 mx-auto"
-                src="https://cdn.shopify.com/s/files/1/0272/4770/6214/articles/when-do-puppies-start-walking.jpg?v=1593020034"
-                alt="First slide"
-              // style={imageStyle}
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block mw-100  mx-auto"
-                src="https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1133605325-scaled-e1617227898456.jpg?resize=1536,1023"
-                alt="Second slide"
-              // style={imageStyle}
-              />
-            </Carousel.Item>
-          </Carousel>
+          <Photos images={this.state.postData.photos} />
           <div className="nameBox">
-            <h2>{data.itemPages[1].itemName}</h2>
-            <Button variant="primary" onClick={this.messageClicked}>Send Message</Button>{' '}
+            <h2>{this.state.postData.title}</h2>
+            <Button variant="primary" onClick={this.messageClicked}>Message Poster</Button>{' '}
           </div>
-          <p>{data.itemPages[1].donorName}</p>
-          {/* <Button variant="success">Request</Button>{' '} */}
-          <p className="description">{data.itemPages[1].description}</p>
-          <div className="qaContainer">
+          <p>{this.state.postData.donor}</p>
+          <p className="description">{this.state.postData.description}</p>
+          <Qa QAs={this.state.postData.qas} />
+          {/* <div className="qaContainer">
             <h4>Q&A</h4>
             <div className="qaTile">
-              <h6>{data.itemPages[1].qa[0].question}</h6>
-              <p>- {data.itemPages[1].qa[0].answer}</p>
+              <h6>{this.state.postData.qa[0].question}</h6>
+              <p>- {this.state.postData.qa[0].answer}</p>
             </div>
             <div className="qaTile">
-              <h6>{data.itemPages[1].qa[1].question}</h6>
-              <p>- {data.itemPages[1].qa[1].answer}</p>
+              <h6>{this.state.postData.qa[1].question}</h6>
+              <p>- {this.state.postData.qa[1].answer}</p>
             </div>
+          </div> */}
+          <div>
+            <p>Map Place Holder</p>
           </div>
 
           <div className="bottombuttonscontainer">
