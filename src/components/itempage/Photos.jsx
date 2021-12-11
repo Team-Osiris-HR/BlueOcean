@@ -6,7 +6,7 @@ const Photos = ({ images }) => {
     <div>
       <Carousel fade className="mx-auto" >
         {images ? images.map((image, index) => (
-          <Carousel.Item >
+          <Carousel.Item key={index} >
             <img
               className="d-block mw-100 mx-auto"
               src={image}

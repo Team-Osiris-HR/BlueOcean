@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
+import Qa from './Qa.jsx';
 
 
 class ItemPage extends React.Component {
@@ -60,10 +61,11 @@ class ItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={this.messageClicked}>Send Message</Button>{' '}
+            <Button variant="primary" onClick={this.messageClicked}>Message Poster</Button>{' '}
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
+          <Qa />
           {/* <div className="qaContainer">
             <h4>Q&A</h4>
             <div className="qaTile">
@@ -75,6 +77,9 @@ class ItemPage extends React.Component {
               <p>- {this.state.postData.qa[1].answer}</p>
             </div>
           </div> */}
+          <div>
+            <p>Map Place Holder</p>
+          </div>
 
           <div className="bottombuttonscontainer">
             <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.askClicked} >Ask Question </Button>
