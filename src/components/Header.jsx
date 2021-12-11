@@ -31,7 +31,7 @@ class Header extends React.Component {
       .then((result) => {
         alert('see you again!')
         Cookies.remove('jwt')
-        this.props.setRenderState("login", this.props.username)
+        this.props.setRenderState("login")
       }).catch((err) => {
         console.log(err)
       });
