@@ -8,6 +8,7 @@ import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
 import Feed from './Feed.jsx'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 
 class App extends React.Component {
@@ -19,16 +20,22 @@ class App extends React.Component {
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
     this.setRenderState = this.setRenderState.bind(this)
+    this.getCookies = this.getCookies.bind(this)
   }
 
   componentDidMount() {
     // this.getPosts()
+    this.getCookies()
   }
 
   getPosts() {
     axios.get('/api/posts', (req, res) => {
       console.log('this is req')
     })
+  }
+
+  getCookies() {
+    console.log(Cookies.get())
   }
 
   setRenderState(whatState) {
