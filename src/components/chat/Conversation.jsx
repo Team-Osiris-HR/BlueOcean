@@ -22,7 +22,7 @@ const Conversation = (props) => {
             user={props.user} />
         )
       })}
-      <div style={{ float: 'right' }}>
+      <div>
         <input placeholder='type message'></input>
         <button>Send</button>
       </div>
