@@ -36,14 +36,14 @@ class Chat extends React.Component {
       }
     this.leaveChat = this.leaveChat.bind(this);
     this.selectChat = this.selectChat.bind(this);
-    this.testmessage = this.testmessage.bind(this);
+   // this.testmessage = this.testmessage.bind(this);
   }
 
   getAllChats = () => {
     // database query that returns all active chats. look at object above
     axios.get('/api/chatrooms/mychats')
       .then((result) => {
-        console.log(result.data);
+        console.log('chats', result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -52,14 +52,19 @@ class Chat extends React.Component {
 
   checkIfChatExists = (user1, user2) => {
     // return roomNumber if true, false if not
+    // var listOfIds = [];
+    // this.state.listOfChats.map(chat => {
+    //   listOfIds.push(chat.PostId)
+    // })
+
+    // if(listOfIds.includes(this.props.itemObj.id))
   }
 
   newChat = (user1, user2) => {
     // create new hash for room number
     var roomNumber = uuidv4();
-    console.log(roomNumber);
     // create new database entry {roomNumber: hash, user1: name, user2:name}
-    axios.post('/api/chatrooms/newroom', {noomHash: roomNumber, postId: this.props.itemObj.id})
+    axios.post('/api/chatrooms/newroom', {roomHash: roomNumber, postId: this.props.itemObj.id})
       .then((result) => {
         console.log(result.data);
       })
@@ -70,6 +75,13 @@ class Chat extends React.Component {
 
   getOldChat = (roomNumber) => {
     // query into the table and return all the messages.
+    axios.get(`/api/chatrooms/${roomNumber}/messages`)
+      .then((results) => {
+        console.log(results.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   startChat = (user1, user2) => {
@@ -86,24 +98,24 @@ class Chat extends React.Component {
   }
 
   leaveChat = () => {
-    this.newChat()
+    this.getAllChats();
     this.props.clearMessageStatus();
     this.setState({chatSelected: null, chatSelectedStatus: false});
   }
 
-  testmessage = () => {
+  sendMessage = () => {
     // if logged in
       // send message over socketio
-      socket.emit('something', this.state.connection);
-        // render with setState
-      // send message to db
-    // if not logged in
-      // send message to db
-      // render with setState
+    //   socket.emit('something', this.state.connection);
+    //     // render with setState
+    //   // send message to db
+    // // if not logged in
+    //   // send message to db
+    //   // render with setState
+    //   axios.post(`/api/chatrooms/create`, {chatroom: '2134123', message: {name: 'Mitch', text: 'asdashgafheth'}})
   }
 
   render () {
-    console.log(this.props);
     return (
       <Container>
         <Col>

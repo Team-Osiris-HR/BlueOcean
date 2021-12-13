@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container'
 import MessageEntry from './MessageEntry.jsx'
 
 const Conversation = (props) => {
-  console.log(props);
   return (
     <div>
     <Row>
