@@ -1,22 +1,26 @@
-const authController= require('../controllers/authController.js');
-const userController= require('../controllers/userController.js');
+const authController = require("../controllers/authController.js");
+const userController = require("../controllers/userController.js");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
-router.post('/signup', authController.signup);
-router.post('/login', authController.login);
+router.post("/signup", authController.signup);
+router.post("/login", authController.login);
 
 router.use(authController.protect);
 
-router.patch('/updatemypassword', authController.updatePassword);
-router.get('/logout', authController.logout);
+router.patch("/updatemypassword", authController.updatePassword);
+router.get("/logout", authController.logout);
 
-router.get('/', authController.restrictTo('admin'), userController.getAllUsers);
+router.get("/", authController.restrictTo("admin"), userController.getAllUsers);
 
-router.get('/:id', authController.restrictTo('admin'), userController.getUser);
-router.get('myinfo', userController.getMyInfo);
+router.get("/:id", authController.restrictTo("admin"), userController.getUser);
+router.get("myinfo", userController.getMyInfo);
 
-router.delete('/:id', authController.restrictTo('admin'), userController.deleteUser);
-router.delete('/me', userController.deleteMe);
+router.delete(
+  "/:id",
+  authController.restrictTo("admin"),
+  userController.deleteUser
+);
+router.delete("/me", userController.deleteMe);
 
 module.exports = router;
