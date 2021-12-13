@@ -74,7 +74,12 @@ const userSchema = new mongoose.Schema({
   loggedIn: {
     type: Boolean,
     required: true,
-  }
+  },
+  orgnization: {
+    phone: Number,
+    address: String,
+    url: String,
+  },
 });
 
 userSchema.pre('save', async function (next) {
