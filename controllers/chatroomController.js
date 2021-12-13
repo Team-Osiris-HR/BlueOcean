@@ -1,6 +1,7 @@
 const Chatroom = require('../models/Chatroom.js');
 const catchAsync = require('../utils/catchAsync.js');
 
+
 exports.getAllRooms = catchAsync(async (req, res) => {
   const roomList = await Chatroom.find();
   res.status(200).json(roomList);

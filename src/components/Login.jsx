@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -38,13 +39,21 @@ class Login extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <h1>Login page</h1>
         <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
-          <Form.Label>name</Form.Label>
-          <Form.Control type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} />
+          <FloatingLabel
+            label='name'
+            className='mb-3'
+          >
+            <Form.Control type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} />
+          </FloatingLabel>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
+          <FloatingLabel
+            label='password'
+            className='mb-3'
+          >
+            <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
+          </FloatingLabel>
         </Form.Group>
         <Button size="lg" variant="primary" type="submit">
           Submit
