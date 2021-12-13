@@ -1,21 +1,45 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import MyVerticallyCenteredModal from './QaModal.jsx';
+import { useState, useEffect } from 'react';
 
-const Qa = ({ QAs, donor, answerClicked }) => {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [currentQuestion, setCurrentQuestion] = React.useState('');
+const Qa = ({ QAs, donor, answerClicked, answer, answerChange, submitAnswer }) => {
+  const [show, setShow] = useState(false);
+  const [cQuesiton, setCQuestion] = useState('');
+  const [cAnswer, setCAnswer] = useState('');
+  const [bucket, setBucket] = useState([]);
+
+  const [shownBucket, setShownBucket] = useState('');
+  const handleClose = () => setShow(false);
+  const handleShow = (index) => {
+    setShownBucket(bucket[index]);
+    setShow(true);
+  }
+  const updateQuestion = (e) => setCQuestion(e.target.value);
+  const updateAnswer = (e) => setCAnswer(e.target.value);
+  useEffect(() => {
+    if (QAs === undefined) {
+      return
+    } else {
+      var arr = [];
+      QAs.forEach((qa, index) => {
+        arr.push(qa.questionText);
+      })
+      setBucket(arr);
+    }
+  }, [QAs]);
+
   return (
     <div className="qaContainer">
       <h4>Q&A</h4>
       <div className="qaContainer2">
         {QAs ? QAs.map((qa, index) => {
+          // setBucket([...bucket, qa.questionText]);
           return (
             <div className="qaTile" key={index}>
               <h6>{qa.questionText}</h6>
               <p>- {qa.answerText ? qa.answerText : donor ? <>
-                <Button variant="secondary" onClick={() => { setModalShow(true); setCurrentQuestion(qa.questionText) }}>
+                <Button variant="secondary" onClick={() => handleShow(index)} >
                   Answer
                 </Button>
 
@@ -23,43 +47,24 @@ const Qa = ({ QAs, donor, answerClicked }) => {
             </div>
           );
         }) : null}
-        <MyVerticallyCenteredModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          qa={React.useState(currentQuestion)}
-        />
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{shownBucket}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div >
   );
 }
-
-// function MyVerticallyCenteredModal(props) {
-//   return (
-//     <Modal
-//       {...props}
-//       size="lg"
-//       aria-labelledby="contained-modal-title-vcenter"
-//       centered
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title id="contained-modal-title-vcenter">
-//           {props.qa}
-//         </Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <h4>Your Answer</h4>
-//         <p>
-//           Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-//           dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-//           consectetur ac, vestibulum at eros.
-//         </p>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button onClick={props.onHide}>Close</Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// }
 
 export default Qa;
 

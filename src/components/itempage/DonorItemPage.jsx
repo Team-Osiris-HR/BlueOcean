@@ -5,11 +5,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 class DonorItemPage extends React.Component {
@@ -18,6 +18,7 @@ class DonorItemPage extends React.Component {
     this.state = {
       postData: {},
       showEdit: false,
+      answer: ""
     };
 
     this.editClicked = this.editClicked.bind(this);
@@ -25,6 +26,8 @@ class DonorItemPage extends React.Component {
     this.editModal = this.editModal.bind(this);
     this.titleChange = this.titleChange.bind(this);
     this.descChange = this.descChange.bind(this);
+    this.answerChange = this.answerChange.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -131,6 +134,16 @@ class DonorItemPage extends React.Component {
     );
   }
 
+  answerChange(e) {
+    var cAnswer = this.state.answer;
+    cAnswer = e.target.value;
+    this.setState({ answer: cAnswer });
+  }
+
+  submitAnswer(event, id) {
+    console.log(`The id is: ${id}\nThe answer is: ${this.state.answer}`);
+  }
+
 
   render() {
     return (
@@ -144,7 +157,7 @@ class DonorItemPage extends React.Component {
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
-          <Qa QAs={this.state.postData.qas} donor={true} />
+          <Qa QAs={this.state.postData.qas} donor={true} answer={this.state.answer} answerChange={this.answerChange} submitAnswer={this.submitAnswer} />
           <div>
             <p>Map Place Holder</p>
           </div>
