@@ -38,6 +38,8 @@ exports.getUserChats = catchAsync(async (req, res) => {
     }
     thisObj['title'] = obj[i].product.title;
     thisObj['photos'] = obj[i].product.photos[0] || [];
+    thisObj['postId'] = obj[i].product._id;
+    thisObj['roomId'] = obj[i]._id;
     results.push(thisObj);
   }
   res.status(200).json(results);
@@ -55,7 +57,6 @@ exports.getOneUserChat = catchAsync(async (req, res) => {
 
 exports.createRoom = catchAsync(async (req, res) => {
   const post = await Post.findById(req.body.postId);
-  console.log(req.body)
   const newRoom = {
     userOne: req.user,
     userTwo: post.user,
