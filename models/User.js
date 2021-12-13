@@ -83,6 +83,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  orgnization: {
+    phone: String,
+    address: String,
+    url: String,
+  },
+>>>>>>> manny
 });
 
 userSchema.pre("save", async function (next) {
