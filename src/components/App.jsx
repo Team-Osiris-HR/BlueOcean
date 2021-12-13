@@ -132,19 +132,16 @@ class App extends React.Component {
           currentPost={this.state.currentPost}
         />
       )
-<<<<<<< HEAD
     } else if (this.state.render === 'donoritempage') {
       return (
         <DonorItemPage
 
-        />
-=======
+        />)
     } else if (this.state.render === 'chat') {
       return (
         <Chat
-        user={this.state.currentUser}
-        setRenderState={this.setRenderState} />
->>>>>>> 977d3768c27b5edea227cae4085de955f59190f6
+          user={this.state.currentUser}
+          setRenderState={this.setRenderState} />
       )
     }
   }
