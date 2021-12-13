@@ -8,6 +8,7 @@ import Signup from './Signup.jsx'
 import OrgSignup from './OrgSignup.jsx'
 import Header from './Header.jsx'
 import Feed from './Feed.jsx'
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
