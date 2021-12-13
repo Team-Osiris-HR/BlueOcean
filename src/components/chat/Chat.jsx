@@ -59,7 +59,7 @@ class Chat extends React.Component {
     var roomNumber = uuidv4();
     console.log(roomNumber);
     // create new database entry {roomNumber: hash, user1: name, user2:name}
-    axios.post('/api.chatrooms/newroom', {noomHash: roomNumber, postId: this.props.itemObj.id})
+    axios.post('/api/chatrooms/newroom', {noomHash: roomNumber, postId: this.props.itemObj.id})
       .then((result) => {
         console.log(result.data);
       })
@@ -86,7 +86,6 @@ class Chat extends React.Component {
   }
 
   leaveChat = () => {
-    this.getAllChats()
     this.newChat()
     this.props.clearMessageStatus();
     this.setState({chatSelected: null, chatSelectedStatus: false});

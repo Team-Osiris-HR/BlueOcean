@@ -9,7 +9,7 @@ exports.getAllRooms = catchAsync(async (req, res) => {
 });
 
 exports.getUserChats = catchAsync(async (req, res) => {
-  let userChats = await Chatroom.find(/*{ userOne: req.user._id }*/);
+  let userChats = await Chatroom.find({ userOne: req.user._id });
   let userChats2 = await Chatroom.find({ userTwo: req.user._id });
   userChats = userChats.concat(userChats2);
   let obj = [];
