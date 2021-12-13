@@ -1,7 +1,7 @@
 const Chatroom = require('../models/Chatroom.js');
 const catchAsync = require('../utils/catchAsync.js');
 const User = require('../models/User.js');
-const Product = require('../models/Post.js');
+const Post = require('../models/Post.js');
 
 exports.getAllRooms = catchAsync(async (req, res) => {
   const roomList = await Chatroom.find();
@@ -17,7 +17,7 @@ exports.getUserChats = catchAsync(async (req, res) => {
   for (let i = 0; i < userChats.length; i++) {
     let user = await User.findById(userChats[i].userOne);
     let userTwo = await User.findById(userChats[i].userTwo);
-    let product = await Product.findById(userChats[i].product);
+    let product = await Post.findById(userChats[i].product);
     obj.push({
       userOne: user,
       userTwo: userTwo,
@@ -54,6 +54,9 @@ exports.getOneUserChat = catchAsync(async (req, res) => {
 });
 
 exports.createRoom = catchAsync(async (req, res) => {
+  const post = await Post.findById(req.body.postId);
+  req.body.userOne = req.user._id;
+  req.body.userTwo = post.user._id;
   const room = await Chatroom.create(req.body);
   res.status(201).json(room); //if needed
 });
