@@ -76,19 +76,8 @@ class App extends React.Component {
     this.setState({ currentUser: currentUser })
   }
 
-  setSearch(searchItem) {
-    const filteredSearch = []
-    this.setState({ search: searchItem })
-    if (searchItem.length >= 3) {
-      this.state.posts.filter((post) => {
-        if (post.title.toLowerCase().includes(this.state.search)) {
-          filteredSearch.push(post)
-        }
-      })
-    } else {
-      this.getPosts()
-    }
-    this.setState({ posts: filteredSearch })
+  setSearch(e) {
+    this.setState({ search: e.target.value })
   }
 
 
@@ -123,6 +112,7 @@ class App extends React.Component {
           posts={this.state.posts}
           getPostId={this.getPostId}
           searchItem={this.state.search}
+          currentUser={this.state.currentUser}
         />
       )
     } else if (this.state.render === 'itempage') {
