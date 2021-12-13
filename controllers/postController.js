@@ -76,3 +76,23 @@ exports.addQA = catchAsync(async (req, res, next) => {
     post,
   });
 });
+
+exports.answerQA = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Post not found',
+    });
+  }
+  for (let i = 0; i < post.QAs.length; i++) {
+    if (post.QAs[i]._id.toString() === req.params.QAid) {
+      post.QAs[i].answerText = req.body.answerText;
+      post.save();
+      res.status(201).json({
+        status: 'success',
+        post,
+      });
+    }
+  }
+});
