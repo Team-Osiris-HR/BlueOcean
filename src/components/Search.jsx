@@ -15,7 +15,6 @@ const Search = (props) => {
     event.preventDefault();
   };
 
-
   return (
     <Form>
       <Form.Control

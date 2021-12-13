@@ -115,3 +115,19 @@
   flex-grow: 1;
   word-break: break-all;
 }
+
+.search-form-container {
+  text-align: right;
+  position: absolute;
+  width: 300px;
+  overflow: hidden;
+  background: #fff;
+  right: 60px;
+  top: 0;
+  z-index: 9;
+  transition: all 0.3s ease-in-out;
+}
+
+.hide-search {
+  width: 0;
+}
