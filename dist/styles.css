@@ -59,7 +59,6 @@
 .login-container {
   display: flex;
   justify-content: center;
-  align-item: center;
   -webkit-box-pack: center;
   max-width: 400px;
   position: absolute;
