@@ -1,28 +1,30 @@
-const mongoose = require('mongoose');
-const User = require('./User.js');
+const mongoose = require("mongoose");
+// const User = require('./User.js');
 
 const postSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'A title is required'],
+    required: [true, "A title is required"],
   },
   description: {
     type: String,
-    required: [true, 'A description is required'],
+    required: [true, "A description is required"],
   },
   photos: {
     type: [String],
-    required: [false, 'A photo is required'], // MODIFY THIS SETTING TO REQUIRE PHOTOS
+    required: [false, "A photo is required"], // MODIFY THIS SETTING TO REQUIRE PHOTOS
   },
   condition: {
     type: String,
-    enum: ['new', 'fair', 'good', 'used', 'poor'],
+    enum: ["new", "fair", "good", "used", "poor"],
   },
-  value: Number,
-  active: Boolean,
+  active: {
+    type: Boolean,
+    default: true,
+  },
   deliveryOptions: {
     type: String,
-    enum: ['pickup', 'delivery', 'negotiable']
+    enum: ["pickup", "delivery", "negotiable"],
   },
   category: {
     type: String,
@@ -30,9 +32,14 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
+
     ref: 'User',
-  }
+  },
+  QAs: [{
+    questionText: String,
+    answerText: String,
+  }],
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 module.exports = Post;
