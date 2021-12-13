@@ -84,10 +84,17 @@
 .messageContainerBox {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+.conversationEntry {
+  display: flex;
+  margin: 15px;
+  border: 2px gray solid;
+  border-radius: 10px;
 }
 
 .userMessage {
-  justify-content: flex-end;
   padding: 0 1%;
   margin-top: 3px;
   border: 2px solid gray;
