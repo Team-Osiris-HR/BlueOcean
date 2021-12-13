@@ -56,6 +56,11 @@
   padding-top: 10px;
 }
 
+.login-hello,
+.signup-create {
+  font-size: 120px;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -69,7 +74,8 @@
 }
 
 .create-acc-btn,
-.create-acc-back-btn {
+.create-acc-back-btn,
+.forgot-password {
   border: none 0px;
   background-color: transparent;
   font-size: 12px;
