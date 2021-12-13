@@ -38,6 +38,7 @@ exports.getUserChats = catchAsync(async (req, res) => {
     }
     thisObj['title'] = obj[i].product.title;
     thisObj['photos'] = obj[i].product.photos[0] || [];
+    thisObj['postId'] = obj[i].product._id;
     results.push(thisObj);
   }
   res.status(200).json(results);
