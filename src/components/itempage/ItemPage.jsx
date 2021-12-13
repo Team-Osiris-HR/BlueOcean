@@ -160,6 +160,10 @@ class ItemPage extends React.Component {
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
+          <div className="options">
+            <p>Delivery Options: {this.state.postData.deliveryOptions}</p>
+            <p>Condition: {this.state.postData.condition}</p>
+          </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
             <p>Map Place Holder</p>
