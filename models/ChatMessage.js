@@ -8,12 +8,7 @@ const messageSchema = new mongoose.Schema({
     required: true,
     maxlength: [255, 'Message must be less than 255 characters'],
   },
-  userOne: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  userTwo: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,

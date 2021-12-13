@@ -5,6 +5,10 @@ const catchAsync = require('../utils/catchAsync.js');
 
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   const messages = await Messages.find({chatroom: req.chatroomId});
+  for (let i = 0; i < messages.length; i++) {
+    const user = await User.findById(messages[i].user);
+    messages[i].user = user.name;
+  }
 
   if (!messages) {
     return res.sendStatus(404);
@@ -18,8 +22,11 @@ exports.getAllMessages = catchAsync(async (req, res) => {
 });
 
 exports.postMessage = catchAsync(async (req, res) => {
-  req.body.chatroom = req.chatroomId;
-  const message = await Messages.create(req.body);
+  let newMessage = {};
+  newMessage.chatroom = req.body.chatroomId;
+  newMessage.user = req.user;
+  newMessage.message = req.body.message;
+  const message = await Messages.create(newMessage);
 
   if (!message) {
     return res.sendStatus(500);
