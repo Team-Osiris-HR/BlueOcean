@@ -5,41 +5,27 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false
-    }
-    this.setOpen = this.setOpen.bind(this)
-  }
+const Search = (props) => {
 
-  setOpen() {
-    if (!this.state.open) {
-      this.setState({ open: true })
-    } else {
-      this.setState({ open: false })
-    }
-  }
+  // const handleChange = (event) => {
+  //   props.setSearch(event.target.value);
+  // }
 
-  render() {
-    return (
-      <InputGroup>
-        <Collapse in={this.state.open} dimension="width">
-          <Form.Control id="example-collapse-text"
-            placeholder="Search"
-            aria-label="Search"
-          />
-        </Collapse>
-        <Button onClick={() => this.setOpen()}
-          aria-controls="collapse-search"
-          aria-expanded={this.state.open}
-        >
-          Search
-        </Button>
-      </InputGroup >
-    )
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+
+  return (
+    <Form>
+      <Form.Control
+        type="text"
+        placeholder="Search"
+        onChange={props.setSearch}
+      />
+    </Form>
+  );
+
 }
 
 export default Search

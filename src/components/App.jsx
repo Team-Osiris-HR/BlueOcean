@@ -1,4 +1,5 @@
 import React from 'react';
+import Chat from './chat/Chat.jsx'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -21,7 +22,9 @@ class App extends React.Component {
       render: "feed",
       posts: [],
       currentPost: '',
-      currentUser: {}
+      currentUser: {},
+      search: ''
+
     }
     this.renderView = this.renderView.bind(this)
     this.getPosts = this.getPosts.bind(this)
@@ -29,6 +32,7 @@ class App extends React.Component {
     this.setRenderState = this.setRenderState.bind(this)
     this.getCookies = this.getCookies.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
+    this.setSearch = this.setSearch.bind(this)
   }
 
   componentDidMount() {
@@ -55,10 +59,18 @@ class App extends React.Component {
     })
   }
 
-
   getCookies() {
     if (Cookies.get("jwt")) {
-      this.setState({ render: 'donoritempage' })
+      if (Object.keys(this.state.currentUser).length === 0) {
+        axios.get('/api/users/myinfo')
+          .then((result) => {
+            this.setState({ currentUser: result.data.user })
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+      this.setState({ render: 'feed' })
       this.getPosts(); // change this later
     } else {
       this.setState({ render: 'login' })
@@ -73,6 +85,10 @@ class App extends React.Component {
 
   setCurrentUser(currentUser) {
     this.setState({ currentUser: currentUser })
+  }
+
+  setSearch(e) {
+    this.setState({ search: e.target.value })
   }
 
 
@@ -106,6 +122,8 @@ class App extends React.Component {
         <Feed
           posts={this.state.posts}
           getPostId={this.getPostId}
+          searchItem={this.state.search}
+          currentUser={this.state.currentUser}
         />
       )
     } else if (this.state.render === 'itempage') {
@@ -114,19 +132,28 @@ class App extends React.Component {
           currentPost={this.state.currentPost}
         />
       )
+<<<<<<< HEAD
     } else if (this.state.render === 'donoritempage') {
       return (
         <DonorItemPage
 
         />
+=======
+    } else if (this.state.render === 'chat') {
+      return (
+        <Chat
+        user={this.state.currentUser}
+        setRenderState={this.setRenderState} />
+>>>>>>> 977d3768c27b5edea227cae4085de955f59190f6
       )
     }
   }
 
+
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} /> : null}
         {this.renderView()}
       </React.Fragment>
     );
