@@ -141,11 +141,10 @@ class App extends React.Component {
     }
   }
 
-
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} render={this.state.render} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" || this.state.render === 'chat' ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} render={this.state.render} /> : null}
         {this.renderView()}
       </React.Fragment>
     );
