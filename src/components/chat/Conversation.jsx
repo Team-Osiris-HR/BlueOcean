@@ -9,7 +9,6 @@ const Conversation = (props) => {
   console.log(props);
   return (
     <div>
-    <button onClick={() => {props.leaveChat()}} style={{margin: '15px'}}>Go Back</button>
     <Row>
       <Col>{props.chat.itemPhoto}</Col>
       <Col>{props.chat.item}</Col>

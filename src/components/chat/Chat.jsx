@@ -4,6 +4,7 @@ import Conversation from './Conversation.jsx';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 import { io } from 'socket.io-client';
 const socket = io();
@@ -48,19 +49,25 @@ class Chat extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <Container>
         <Col>
           {!this.state.chatSelectedStatus ?
+          <>
+          <Button type="button" onClick={() => {this.props.setRenderState('feed')}}>Back</Button>
           <ListOfConversations
             chats={this.state.listOfChats}
             selectChat={this.selectChat} />
+          </>
           :
+          <>
+          <Button onClick={() => {this.leaveChat()}} >Back</Button>
           <Conversation
             user={this.state.user}
             chat={this.state.chatSelected}
-            messages={this.state.messages}
-            leaveChat={this.leaveChat} />
+            messages={this.state.messages} />
+          </>
           }
         </Col>
       </Container>
