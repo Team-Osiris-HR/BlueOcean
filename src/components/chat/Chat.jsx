@@ -36,7 +36,7 @@ class Chat extends React.Component {
       }
     this.leaveChat = this.leaveChat.bind(this);
     this.selectChat = this.selectChat.bind(this);
-   // this.testmessage = this.testmessage.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   getAllChats = () => {
@@ -98,21 +98,27 @@ class Chat extends React.Component {
   }
 
   leaveChat = () => {
-    this.getAllChats();
+    this.sendMessage('61b233aeebd11ca7af078d80');
     this.props.clearMessageStatus();
     this.setState({chatSelected: null, chatSelectedStatus: false});
   }
 
-  sendMessage = () => {
+  sendMessage = (roomId) => {
     // if logged in
-      // send message over socketio
-    //   socket.emit('something', this.state.connection);
-    //     // render with setState
-    //   // send message to db
-    // // if not logged in
-    //   // send message to db
-    //   // render with setState
-    //   axios.post(`/api/chatrooms/create`, {chatroom: '2134123', message: {name: 'Mitch', text: 'asdashgafheth'}})
+    //   send message over socketio
+      //socket.emit('something', this.state.connection);
+        // render with setState
+      // send message to db
+    // if not logged in
+      // send message to db
+      // render with setState
+      axios.post(`/api/chatrooms/${roomId}/messages/create`, {message: 'this is my test'})
+        .then((result) => {
+          console.log('You sent a message')
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   }
 
   render () {
