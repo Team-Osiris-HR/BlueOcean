@@ -72,3 +72,24 @@ exports.addFavorite = catchAsync(async (req, res) => {
     });
   }
 });
+
+exports.setLogIn = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  user.loggedIn = true;
+  user.save();
+  res.status(200).json({
+    status: 'success',
+    user,
+    message: 'User logged in status set to true',
+  });
+});
+exports.setLogOut = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  user.loggedIn = false;
+  user.save();
+  res.status(200).json({
+    status: 'success',
+    user,
+    message: 'User logged in status set to false',
+  });
+});
