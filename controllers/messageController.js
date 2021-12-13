@@ -25,7 +25,7 @@ exports.postMessage = catchAsync(async (req, res) => {
   let newMessage = {};
   newMessage.chatroom = req.chatroomId;
   newMessage.user = req.user;
-  newMessage.username = req.user.name;
+  newMessage.name = req.user.name;
   newMessage.message = req.body.message;
   const message = await Messages.create(newMessage);
 
