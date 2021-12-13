@@ -83,6 +83,7 @@ exports.setLogIn = catchAsync(async (req, res) => {
     message: 'User logged in status set to true',
   });
 });
+
 exports.setLogOut = catchAsync(async (req, res) => {
   const user = await User.findById(req.user._id);
   user.loggedIn = false;
