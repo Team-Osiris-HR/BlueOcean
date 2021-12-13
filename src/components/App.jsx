@@ -1,4 +1,5 @@
 import React from 'react';
+import Chat from './chat/Chat.jsx'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -59,6 +60,15 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
+      if (Object.keys(this.state.currentUser).length === 0) {
+        axios.get('/api/users/myinfo')
+          .then((result) => {
+            this.setState({ currentUser: result.data.user})
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
       this.setState({ render: 'feed' })
       this.getPosts(); // change this later
     } else {
@@ -121,8 +131,15 @@ class App extends React.Component {
           currentPost={this.state.currentPost}
         />
       )
+    } else if (this.state.render === 'chat') {
+      return (
+        <Chat
+        user={this.state.currentUser}
+        setRenderState={this.setRenderState} />
+      )
     }
   }
+
 
   render() {
     return (

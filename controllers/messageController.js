@@ -14,10 +14,6 @@ exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
 
 exports.getAllMessages = catchAsync(async (req, res) => {
   const messages = await Messages.find();
-
-  if (!messages) {
-    return res.status.send('Uh oh something terrible happened!');
-  }
   res.status(200).json(messages);
 });
 
