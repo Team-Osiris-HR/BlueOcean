@@ -76,6 +76,7 @@ const userSchema = new mongoose.Schema({
   loggedIn: {
     type: Boolean,
     required: true,
+    default: false,
   },
   orgnization: {
     phone: String,
