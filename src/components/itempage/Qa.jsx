@@ -2,16 +2,18 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
 
 const Qa = ({ QAs, donor, answerClicked, answer, answerChange, submitAnswer }) => {
   const [show, setShow] = useState(false);
-  const [cQuesiton, setCQuestion] = useState('');
-  const [cAnswer, setCAnswer] = useState('');
+  const [questionId, setQuestionId] = useState('');
+  const [, setCAnswer] = useState('');
   const [bucket, setBucket] = useState([]);
 
   const [shownBucket, setShownBucket] = useState('');
   const handleClose = () => setShow(false);
-  const handleShow = (index) => {
+  const handleShow = (index, e) => {
+    setQuestionId(e.target.parentElement.parentElement.id);
     setShownBucket(bucket[index]);
     setShow(true);
   }
@@ -29,6 +31,12 @@ const Qa = ({ QAs, donor, answerClicked, answer, answerChange, submitAnswer }) =
     }
   }, [QAs]);
 
+  const submit = () => {
+    // console.log(questionId);
+    submitAnswer(questionId);
+    handleClose();
+  }
+
   return (
     <div className="qaContainer">
       <h4>Q&A</h4>
@@ -36,10 +44,10 @@ const Qa = ({ QAs, donor, answerClicked, answer, answerChange, submitAnswer }) =
         {QAs ? QAs.map((qa, index) => {
           // setBucket([...bucket, qa.questionText]);
           return (
-            <div className="qaTile" key={index}>
+            <div className="qaTile" key={index} id={qa._id}>
               <h6>{qa.questionText}</h6>
               <p>- {qa.answerText ? qa.answerText : donor ? <>
-                <Button variant="secondary" onClick={() => handleShow(index)} >
+                <Button variant="secondary" onClick={(e) => handleShow(index, e)} >
                   Answer
                 </Button>
 
@@ -51,12 +59,24 @@ const Qa = ({ QAs, donor, answerClicked, answer, answerChange, submitAnswer }) =
           <Modal.Header closeButton>
             <Modal.Title>{shownBucket}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control type="input" placeholder="Your Answer" style={{ "minHeight": "75px" }} onChange={(e) => answerChange(e)} />
+              </Form.Group>
+              {/* <Button variant="secondary" onClick={this.toggleModel}> {'      '}
+              Close
+            </Button>{" "}
+            <Button variant="primary" type="submit" onClick={this.askClicked}> {'       '}
+              Submit
+            </Button> */}
+            </Form>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={submit}>
               Save Changes
             </Button>
           </Modal.Footer>

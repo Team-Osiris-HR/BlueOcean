@@ -140,8 +140,9 @@ class DonorItemPage extends React.Component {
     this.setState({ answer: cAnswer });
   }
 
-  submitAnswer(event, id) {
-    console.log(`The id is: ${id}\nThe answer is: ${this.state.answer}`);
+  submitAnswer(id) {
+    console.log(`The Product id is: ${this.state.postData.id}\nThe id is: ${id}\nThe answer is: ${this.state.answer}`);
+
   }
 
 
