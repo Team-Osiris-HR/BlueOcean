@@ -98,7 +98,7 @@ class Chat extends React.Component {
   }
 
   leaveChat = () => {
-    this.sendMessage('61b233aeebd11ca7af078d80');
+    this.getOldChat('61b233aeebd11ca7af078d80');
     this.props.clearMessageStatus();
     this.setState({chatSelected: null, chatSelectedStatus: false});
   }
