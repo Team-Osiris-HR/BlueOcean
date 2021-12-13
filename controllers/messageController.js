@@ -7,7 +7,7 @@ exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   const messages = await Messages.find({chatroom: req.chatroomId});
   for (let i = 0; i < messages.length; i++) {
     const user = await User.findById(messages[i].user);
-    messages[i].user = user.name;
+    messages[i].username = user.name;
   }
 
   if (!messages) {
@@ -25,6 +25,7 @@ exports.postMessage = catchAsync(async (req, res) => {
   let newMessage = {};
   newMessage.chatroom = req.chatroomId;
   newMessage.user = req.user;
+  newMessage.username = req.user.name;
   newMessage.message = req.body.message;
   const message = await Messages.create(newMessage);
 
