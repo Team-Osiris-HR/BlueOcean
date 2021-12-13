@@ -1,16 +1,18 @@
+
 .page {
   height: 100%;
   width: 100%;
   position: fixed;
-  padding-top: 15px;
+  padding-top: 7px;
   display: grid;
-  grid-template-rows: 7% 78% 15%;
+  grid-template-rows: 7% 67% 26%;
 }
 
 .top {
   grid-row-start: 1;
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 25px;
 }
 
 .middle {
@@ -21,8 +23,7 @@
 
 .bottom {
   grid-row-start: 3;
-  display: grid;
-  grid-template-rows: 25% 33% 42%;
+  padding-top: 7px
 }
 
 .feed_card {
@@ -30,7 +31,7 @@
 }
 
 .tile {
-  max-height: 220px;
+  max-height: 280px;
   overflow-y: hidden;
 }
 
@@ -40,7 +41,19 @@
   font-weight: 500;
 }
 
-.donate {
-  grid-row-start: 2;
+.donate:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.feed_image {
+  object-fit: contain;
+  height: 180px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.card_body {
+  padding-top: 10px;
 }
 

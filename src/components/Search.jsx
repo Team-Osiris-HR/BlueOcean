@@ -7,9 +7,9 @@ import Button from 'react-bootstrap/Button'
 
 const Search = (props) => {
 
-  const handleChange = (event) => {
-    props.setSearch(event.target.value);
-  }
+  // const handleChange = (event) => {
+  //   props.setSearch(event.target.value);
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,11 +17,11 @@ const Search = (props) => {
 
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <Form.Control
         type="text"
         placeholder="Search"
-        onChange={(event) => handleChange(event)}
+        onChange={props.setSearch}
       />
     </Form>
   );
