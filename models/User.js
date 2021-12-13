@@ -76,7 +76,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   orgnization: {
-    phone: Number,
+    phone: String,
     address: String,
     url: String,
   },
