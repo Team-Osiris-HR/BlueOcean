@@ -161,11 +161,14 @@ class Signup extends React.Component {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-
-          <Button size="lg" variant="primary" type="submit">
-            Submit
-          </Button>
-          <Button size="lg" variant="warning" type="button" onClick={() => this.props.setRenderState('login')}>Go back</Button>
+          <div className='text-center'>
+            <Button className='mb-5' size="lg" variant="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+          <div>
+            <button className='create-acc-back-btn' type="button" onClick={() => this.props.setRenderState('login')}>already have an account? log in here.</button>
+          </div>
         </Form >
       </Container>
     )

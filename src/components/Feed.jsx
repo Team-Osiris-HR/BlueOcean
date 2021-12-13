@@ -36,21 +36,21 @@ class Feed extends React.Component {
         </div>
         <div className="middle">
           <Container>
-            <Row xs={1} sm={2} md={4}>
+            <Row xs={1} sm={2} md={3}>
               {this.props.posts.filter((value) => {
-                   if (this.props.searchItem.length < 3) {
-                    return value;
-                  } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
-                    return value;
-                  }
+                if (this.props.searchItem.length < 3) {
+                  return value;
+                } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
+                  return value;
+                }
               }).map((post) => (
                 <Col
                   className="text-center feed_card"
                   key={post._id}>
-                    <FeedTile
-                      post={post}
-                      getPostId={this.props.getPostId}
-                    />
+                  <FeedTile
+                    post={post}
+                    getPostId={this.props.getPostId}
+                  />
                 </Col>
               ))}
             </Row>
@@ -60,7 +60,7 @@ class Feed extends React.Component {
           <Container className="text-center">
             <Button variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
           </Container>
-          {this.state.showDonate ? <Donate  toggleDonate={this.toggleDonate} currentUser={this.props.currentUser}/>: null}
+          {this.state.showDonate ? <Donate toggleDonate={this.toggleDonate} currentUser={this.props.currentUser} /> : null}
         </div>
       </div>
     )

@@ -37,7 +37,7 @@ class Login extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h1 className="hello-msg">Hello</h1>
+        <h1 className='text-center'>Hello</h1>
         <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
           <FloatingLabel
             label='name'
@@ -55,10 +55,14 @@ class Login extends React.Component {
             <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
           </FloatingLabel>
         </Form.Group>
-        <Button size="lg" variant="primary" type="submit">
-          Submit
-        </Button>
-        <button className="create-acc-btn" type="button" onClick={() => this.props.setRenderState('signup')}>don't have an account? click here.</button>
+        <div className='text-center'>
+          <Button className='mb-3' size="lg" variant="primary" type="submit">
+            Submit
+          </Button>
+        </div>
+        <div>
+          <button className="create-acc-btn" type="button" onClick={() => this.props.setRenderState('signup')}>don't have an account? click here.</button>
+        </div>
       </Form>
     )
   }

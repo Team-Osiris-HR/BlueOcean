@@ -56,23 +56,21 @@
   padding-top: 10px;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-}
-
 .login-container {
   display: flex;
+  justify-content: center;
+  align-item: center;
   -webkit-box-pack: center;
   max-width: 400px;
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
-.create-acc-btn {
+.create-acc-btn,
+.create-acc-back-btn {
   border: none 0px;
   background-color: transparent;
   font-size: 12px;
