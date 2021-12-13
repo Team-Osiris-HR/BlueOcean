@@ -21,6 +21,11 @@ const chatroomSchema = new mongoose.Schema({
     ref: "Post",
     required: true,
   },
+  active: {
+    type: Boolean,
+    default: true,
+    required: true,
+  }
 });
 
 const Chatroom = mongoose.model("Chatroom", chatroomSchema);
