@@ -143,6 +143,15 @@ class Signup extends React.Component {
                   </FloatingLabel>
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="formGridOrgURL" >
+                  <FloatingLabel
+                    label='organization url'
+                    className='mb-3'
+                  >
+                    <Form.Control placeholder="Organization URL" name='organizationURL' onChange={(e) => this.handleChange(e)} />
+                  </FloatingLabel>
+                </Form.Group>
+
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
