@@ -84,19 +84,19 @@ class App extends React.Component {
   renderView() {
     if (this.state.render === "login") {
       return (
-        <Container>
-          <Col>
+        <Container >
+          <Col className='login-container'>
             <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
           </Col>
         </Container>
       )
     } else if (this.state.render === "signup") {
       return (
-        <Container>
-          <Col>
+        <Container >
+          <Col className='login-container'>
             <Signup setRenderState={this.setRenderState} />
           </Col>
-        </Container>
+        </Container >
       )
     } else if (this.state.render === 'organization') {
       return (

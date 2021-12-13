@@ -20,7 +20,10 @@ class Signup extends React.Component {
       phone: '',
       address: '',
       loggedIn: false,
-      role: 'user'
+      role: 'user',
+      organizationAddress: '',
+      organizationPhone: '',
+      organizationURL: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -42,7 +45,12 @@ class Signup extends React.Component {
       passwordConfirm: this.state.passwordConfirm,
       phone: this.state.phone,
       address: this.state.address,
-      loggedIn: false
+      loggedIn: false,
+      organization: {
+        phone: this.state.organizationPhone,
+        address: this.state.organizationAddress,
+        url: this.state.organizationURL
+      }
     })
       .then((result) => {
         alert('created')
@@ -75,33 +83,31 @@ class Signup extends React.Component {
             </FloatingLabel>
           </Form.Group>
 
-          <Row className="mb-3" >
-            <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
-              <FloatingLabel
-                label='email'
-                className='mb-3'
-              >
-                <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
+          <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
+            <FloatingLabel
+              label='email'
+              className='mb-3'
+            >
+              <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
 
-            <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
-              <FloatingLabel
-                label='password'
-                className='mb-3'
-              >
-                <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridConfirmPassword" >
-              <FloatingLabel
-                label='confirm password'
-                className='mb-3'
-              >
-                <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-          </Row>
+          <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
+            <FloatingLabel
+              label='password'
+              className='mb-3'
+            >
+              <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group as={Col} controlId="formGridConfirmPassword" >
+            <FloatingLabel
+              label='confirm password'
+              className='mb-3'
+            >
+              <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridAddress" >
             <FloatingLabel

@@ -37,7 +37,7 @@ class Login extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h1>Login page</h1>
+        <h1 className="hello-msg">Hello</h1>
         <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
           <FloatingLabel
             label='name'
@@ -58,7 +58,7 @@ class Login extends React.Component {
         <Button size="lg" variant="primary" type="submit">
           Submit
         </Button>
-        <Button size="lg" variant="info" type="button" onClick={() => this.props.setRenderState('signup')}>Create account</Button>
+        <button className="create-acc-btn" type="button" onClick={() => this.props.setRenderState('signup')}>don't have an account? click here.</button>
       </Form>
     )
   }
