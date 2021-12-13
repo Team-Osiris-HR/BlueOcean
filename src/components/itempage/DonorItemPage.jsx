@@ -142,7 +142,14 @@ class DonorItemPage extends React.Component {
 
   submitAnswer(id) {
     console.log(`The Product id is: ${this.state.postData.id}\nThe id is: ${id}\nThe answer is: ${this.state.answer}`);
-
+    axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}/${id}`, { "answerText": this.state.answer })
+      .then((res) => {
+        // console.log(res.data);
+        this.getItem();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 
