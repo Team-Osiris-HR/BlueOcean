@@ -11,6 +11,7 @@ import Feed from './Feed.jsx'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
+import DonorItemPage from './itempage/DonorItemPage.jsx';
 
 
 class App extends React.Component {
@@ -63,7 +64,7 @@ class App extends React.Component {
       if (Object.keys(this.state.currentUser).length === 0) {
         axios.get('/api/users/myinfo')
           .then((result) => {
-            this.setState({ currentUser: result.data.user})
+            this.setState({ currentUser: result.data.user })
           })
           .catch((error) => {
             console.log(error);
@@ -131,11 +132,16 @@ class App extends React.Component {
           currentPost={this.state.currentPost}
         />
       )
+    } else if (this.state.render === 'donoritempage') {
+      return (
+        <DonorItemPage
+
+        />)
     } else if (this.state.render === 'chat') {
       return (
         <Chat
-        user={this.state.currentUser}
-        setRenderState={this.setRenderState} />
+          user={this.state.currentUser}
+          setRenderState={this.setRenderState} />
       )
     }
   }
