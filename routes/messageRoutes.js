@@ -6,8 +6,8 @@ const authController = require('../controllers/authController.js');
 
 router.use(authController.protect);
 
-router.get('/chatroom', messageController.getAllMessagesChatroom);
-router.get('/', authController.restrictTo('admin') ,messageController.getAllMessages);
+router.get('/', messageController.getAllMessagesChatroom);
+router.get('/allmessages', authController.restrictTo('admin') ,messageController.getAllMessages);
 
 router.post('/create', messageController.postMessage);
 

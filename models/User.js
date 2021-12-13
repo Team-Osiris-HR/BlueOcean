@@ -16,12 +16,6 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "charity", "admin"],
     default: "user",
   },
-  role: {
-    type: String,
-    required: [true, "A role must be given!"],
-    enum: ["user", "charity", "admin"],
-    default: "user",
-  },
   email: {
     type: String,
     required: [true, "An email must be given!"],
@@ -82,6 +76,7 @@ const userSchema = new mongoose.Schema({
   loggedIn: {
     type: Boolean,
     required: true,
+    default: false,
   },
   orgnization: {
     phone: String,

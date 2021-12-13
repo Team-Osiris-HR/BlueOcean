@@ -18,6 +18,7 @@ exports.getAllMessages = catchAsync(async (req, res) => {
 });
 
 exports.postMessage = catchAsync(async (req, res) => {
+  req.body.chatroom = req.chatroomId;
   const message = await Messages.create(req.body);
 
   if (!message) {
