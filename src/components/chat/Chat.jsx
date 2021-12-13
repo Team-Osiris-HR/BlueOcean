@@ -112,7 +112,7 @@ class Chat extends React.Component {
     // if not logged in
       // send message to db
       // render with setState
-      axios.post(`/api/chatrooms/${roomId}/messages/create`, {message: 'this is my test'})
+      axios.post(`/api/chatrooms/${roomId}/messages/create`, {message: 'this is my test 3'})
         .then((result) => {
           console.log('You sent a message')
         })
