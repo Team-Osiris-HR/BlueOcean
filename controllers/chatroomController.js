@@ -7,11 +7,11 @@ exports.getAllRooms = catchAsync(async (req, res) => {
 });
 
 exports.getUserChats = catchAsync(async (req, res) => {
-  const userChats = await Chatroom.find({userOne: req.user._id});
-  const userChats2 = await Chatroom.find({userTwo: req.user._id});
+  let userChats = await Chatroom.find({userOne: req.user._id});
+  let userChats2 = await Chatroom.find({userTwo: req.user._id});
   userChats = userChats.concat(userChats2);
 
-  res.status(200).json(roomList);
+  res.status(200).json(userChats);
 });
 
 exports.getOneUserChat = catchAsync(async (req, res) => {

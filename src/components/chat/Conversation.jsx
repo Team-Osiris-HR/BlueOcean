@@ -10,8 +10,8 @@ const Conversation = (props) => {
   return (
     <div>
     <Row>
-      <Col>{props.chat.itemPhoto}</Col>
-      <Col>{props.chat.item}</Col>
+      <Col>{props.chat.photos}</Col>
+      <Col>{props.chat.title}</Col>
     </Row>
     {props.messages.map((message, i) => {
       return (

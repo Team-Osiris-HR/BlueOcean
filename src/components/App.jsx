@@ -22,7 +22,9 @@ class App extends React.Component {
       posts: [],
       currentPost: '',
       currentUser: {},
-      search: ''
+      search: '',
+      newMessageStatus: false,
+      itemObj: {}
 
     }
     this.renderView = this.renderView.bind(this)
@@ -32,6 +34,8 @@ class App extends React.Component {
     this.getCookies = this.getCookies.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.setSearch = this.setSearch.bind(this)
+    this.messagePoster = this.messagePoster.bind(this)
+    this.clearMessageStatus = this.clearMessageStatus.bind(this)
   }
 
   componentDidMount() {
@@ -60,7 +64,7 @@ class App extends React.Component {
 
   getCookies() {
     if (Cookies.get("jwt")) {
-      if (Object.keys(this.state.currentUser).length === 0) {
+      if (!this.state.currentUser.name) {
         axios.get('/api/users/myinfo')
           .then((result) => {
             this.setState({ currentUser: result.data.user})
@@ -88,6 +92,14 @@ class App extends React.Component {
 
   setSearch(e) {
     this.setState({ search: e.target.value })
+  }
+
+  messagePoster = (item) => {
+    this.setState({ render: 'chat', newMessageStatus: true, itemObj: item})
+  }
+
+  clearMessageStatus = () => {
+    this.setState({newMessageStatus: false})
   }
 
 
@@ -129,13 +141,18 @@ class App extends React.Component {
       return (
         <ItemPage
           currentPost={this.state.currentPost}
+          messagePoster={this.messagePoster}
         />
       )
     } else if (this.state.render === 'chat') {
       return (
         <Chat
+        itemObj={this.state.itemObj}
         user={this.state.currentUser}
-        setRenderState={this.setRenderState} />
+        currentPost={this.state.currentPost}
+        newMessageStatus={this.state.newMessageStatus}
+        setRenderState={this.setRenderState}
+        clearMessageStatus={this.clearMessageStatus} />
       )
     }
   }

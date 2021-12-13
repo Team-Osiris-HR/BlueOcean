@@ -15,6 +15,9 @@ io.on("connection", (socket) => {
   socket.on('something', (msg) => {
     console.log(`${msg} ${socket.id}`)
   })
+  socket.on('disconnect', () => {
+    console.log('disconnect');
+  })
 })
 const userRouter = require("./routes/userRoutes.js");
 const postRouter = require("./routes/postRoutes.js");
