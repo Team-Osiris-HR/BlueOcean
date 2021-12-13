@@ -46,7 +46,7 @@ class Signup extends React.Component {
       phone: this.state.phone,
       address: this.state.address,
       loggedIn: false,
-      organization: {
+      orgnization: {
         phone: this.state.organizationPhone,
         address: this.state.organizationAddress,
         url: this.state.organizationURL
@@ -56,6 +56,7 @@ class Signup extends React.Component {
         alert('created')
         this.props.setRenderState('login')
       }).catch((err) => {
+        console.log(err)
         alert('check all fields')
       });
   }
@@ -70,9 +71,9 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="text-center">
         <Form onSubmit={this.handleSubmit}>
-          <h1>Create an account</h1>
+          <h1>Create</h1>
           <Form.Group controlId="formGridName"
             className="mb-3">
             <FloatingLabel
@@ -162,7 +163,7 @@ class Signup extends React.Component {
             </Accordion.Item>
           </Accordion>
           <div className='text-center'>
-            <Button className='mb-5' size="lg" variant="primary" type="submit">
+            <Button className='mb-3' size="lg" variant="primary" type="submit">
               Submit
             </Button>
           </div>

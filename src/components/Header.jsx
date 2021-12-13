@@ -49,13 +49,13 @@ class Header extends React.Component {
             <span >Title</span>
           </Col>
           <Col>
-            <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>back to feed</Button>
+            {this.props.render === 'itempage' ? <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>back to feed</Button> : null}
           </Col>
           <Col>
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col>
-            <Button variant='primary' onClick={()=>{this.props.setRenderState('chat')}}>
+            <Button variant='primary' onClick={() => { this.props.setRenderState('chat') }}>
               Inbox
             </Button>
           </Col>
@@ -68,7 +68,7 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Account</Nav.Link>
+                <h6 onClick={(e) => this.clickCategory(e)}>my feed</h6>
                 <h6>category</h6>
                 <ListGroup as="ul">
                   <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>clothes</ListGroup.Item>

@@ -7,13 +7,12 @@ const MessageEntry = (props) => {
   //console.log(props);
   return (
     <>
-      <div style={{marginBottom: '10px'}}>
-        {props.messages.name === props.user ?
-          <div style={{textAlign: 'right', backgroundColor: 'lightGray'}}>{props.messages.message}</div>
-          :
-          <div style={{backgroundColor: 'ivory'}}>{props.messages.message}</div>
-        }
-      </div>
+      {props.messages.name === props.user ?
+        <div className="userMessage"
+        >{props.user} : {props.messages.message}</div>
+        :
+        <div className="otherUserMessage" >otherUser : {props.messages.message} </div>
+      }
     </>
   )
 }

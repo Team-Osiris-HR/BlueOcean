@@ -63,7 +63,7 @@ class App extends React.Component {
       if (Object.keys(this.state.currentUser).length === 0) {
         axios.get('/api/users/myinfo')
           .then((result) => {
-            this.setState({ currentUser: result.data.user})
+            this.setState({ currentUser: result.data.user })
           })
           .catch((error) => {
             console.log(error);
@@ -134,8 +134,8 @@ class App extends React.Component {
     } else if (this.state.render === 'chat') {
       return (
         <Chat
-        user={this.state.currentUser}
-        setRenderState={this.setRenderState} />
+          user={this.state.currentUser}
+          setRenderState={this.setRenderState} />
       )
     }
   }
@@ -144,7 +144,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} /> : null}
+        {this.state.render === "feed" || this.state.render === "itempage" ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} render={this.state.render} /> : null}
         {this.renderView()}
       </React.Fragment>
     );

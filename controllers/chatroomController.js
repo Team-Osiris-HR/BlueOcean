@@ -1,5 +1,5 @@
-const Chatroom = require('../models/Chatroom.js');
-const catchAsync = require('../utils/catchAsync.js')
+const Chatroom = require("../models/Chatroom.js");
+const catchAsync = require("../utils/catchAsync.js");
 
 exports.getAllRooms = catchAsync(async (req, res) => {
   const roomList = await Chatroom.find();
@@ -7,15 +7,15 @@ exports.getAllRooms = catchAsync(async (req, res) => {
 });
 
 exports.getUserChats = catchAsync(async (req, res) => {
-  const userChats = await Chatroom.find({userOne: req.user._id});
-  const userChats2 = await Chatroom.find({userTwo: req.user._id});
+  const userChats = await Chatroom.find({ userOne: req.user._id });
+  const userChats2 = await Chatroom.find({ userTwo: req.user._id });
   userChats = userChats.concat(userChats2);
 
   res.status(200).json(roomList);
 });
 
 exports.getOneUserChat = catchAsync(async (req, res) => {
-  const chat = await Chatroom.find({_id: req.params.chatId});
+  const chat = await Chatroom.find({ _id: req.params.chatId });
 
   if (!chat) {
     return res.sendStatus(400);
