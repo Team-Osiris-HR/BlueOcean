@@ -55,8 +55,8 @@ class Header extends React.Component {
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col>
-            <Button variant='primary'>
-              Message
+            <Button variant='primary' onClick={()=>{this.props.setRenderState('chat')}}>
+              Inbox
             </Button>
           </Col>
           <Navbar.Offcanvas

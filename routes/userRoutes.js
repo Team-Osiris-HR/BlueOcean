@@ -13,8 +13,8 @@ router.get("/logout", authController.logout);
 
 router.get("/", authController.restrictTo("admin"), userController.getAllUsers);
 
+router.get("/myinfo", userController.getMyInfo);
 router.get("/:id", authController.restrictTo("admin"), userController.getUser);
-router.get("myinfo", userController.getMyInfo);
 
 router.delete(
   "/:id",
