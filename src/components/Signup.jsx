@@ -19,10 +19,12 @@ class Signup extends React.Component {
       passwordConfirm: '',
       phone: '',
       address: '',
-      loggedIn: false
+      loggedIn: false,
+      role: 'user'
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeRole = this.changeRole.bind(this)
   }
 
 
@@ -48,6 +50,15 @@ class Signup extends React.Component {
         alert('check all fields')
       });
   }
+
+  changeRole() {
+    if (this.state.role === 'user') {
+      this.setState({ role: 'charity' })
+    } else {
+      this.setState({ role: 'user' })
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -111,7 +122,7 @@ class Signup extends React.Component {
 
           <Accordion className="mb-3">
             <Accordion.Item eventKey="0">
-              <Accordion.Header>non-profit organization?</Accordion.Header>
+              <Accordion.Header onClick={() => this.changeRole()}>non-profit organization?</Accordion.Header>
               <Accordion.Body>
                 <Form.Group className="mb-3" controlId="formGridOrgAddress" >
                   <FloatingLabel
