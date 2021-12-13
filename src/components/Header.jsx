@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Search from './Search.jsx'
 import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Cookies from 'js-cookie'
 
@@ -44,10 +45,10 @@ class Header extends React.Component {
     return (
       <Navbar bg="light" expand={false}>
         <Container>
-          <Col>
+          <Col className="p-2 flex-shrink-1">
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
           </Col>
-          {this.props.render === 'itempage' ? <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
+          {this.props.render === 'itempage' || this.props.render === 'chat' ? <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
             </svg>
@@ -66,18 +67,27 @@ class Header extends React.Component {
           <Navbar.Offcanvas
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
-            placement="start">
+            placement="start"
+          >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <h6 onClick={(e) => this.clickCategory(e)}>my feed</h6>
+                <h6 className='mb-3' onClick={(e) => this.clickCategory(e)}>my feed</h6>
+                <ButtonGroup className="mb-3" aria-label="pickupOption">
+                  <Button variant="primary">pick up</Button>
+                  <Button variant="secondary">delivery</Button>
+                  <Button variant="primary">requires assistance</Button>
+                </ButtonGroup>
                 <h6>category</h6>
                 <ListGroup as="ul">
-                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>appliances</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>electronics</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>furniture</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>pet</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>furnitures</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.clickCategory(e)}>vehicles</ListGroup.Item>
                 </ListGroup>
               </Nav>
               <Button onClick={() => { this.logout() }}>
