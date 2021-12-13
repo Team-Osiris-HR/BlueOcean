@@ -13,7 +13,7 @@ const messageSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  username: String,
+  name: String,
   time: {
     type: Date,
     default: Date.now,
