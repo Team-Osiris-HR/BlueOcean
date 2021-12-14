@@ -18,7 +18,8 @@ class DonorItemPage extends React.Component {
     this.state = {
       postData: {},
       showEdit: false,
-      answer: ""
+      answer: "",
+      imageAddress: ""
     };
 
     this.editClicked = this.editClicked.bind(this);
@@ -58,8 +59,11 @@ class DonorItemPage extends React.Component {
   editClicked(event) {
     event.preventDefault();
     var post = this.state.postData;
-    // console.log(post);
-    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "title": post.title, "description": post.description })
+    var address = this.state.imageAddress;
+    address = address.split(', ');
+    address = post.photos.concat(address);
+    // console.log(address);
+    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "title": post.title, "description": post.description, photos: address })
       .then((res) => {
         // console.log(res.data);
         this.getItem();
@@ -92,6 +96,12 @@ class DonorItemPage extends React.Component {
     this.setState({ postData: post });
   }
 
+  imageChange(e) {
+    var address = this.state.imageAddress;
+    address = e.target.value;
+    this.setState({ imageAddress: address });
+  }
+
   editModal() {
     var post = this.state.postData;
     return (
@@ -120,6 +130,18 @@ class DonorItemPage extends React.Component {
                 className="mb-3"
               >
                 <Form.Control type="input" value={post.description} style={{ "minHeight": "75px" }} onChange={(e) => this.descChange(e)} />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="description">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Images"
+                className="mb-3"
+              >
+                <Form.Control type="input" value={this.state.imageAddress} style={{ "minHeight": "75px" }} onChange={(e) => this.imageChange(e)} />
+                <Form.Text className="text-muted">
+                  Add URL with comma inbetween for multiple images
+                </Form.Text>
               </FloatingLabel>
             </Form.Group>
             <Button variant="secondary" onClick={this.toggleEdit}>
