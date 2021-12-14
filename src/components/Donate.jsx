@@ -7,7 +7,7 @@ var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) =>
 
   <Modal show={toggleDonate} onHide={toggleDonate}>
     <Modal.Body>
-      <Form>
+      <Form enctype="multipart/form-data">
         <Form.Group>
           <FloatingLabel
             controlId="floatingInput"
