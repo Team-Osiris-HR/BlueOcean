@@ -29,8 +29,6 @@ class ResetPassword extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     // todo post request to change password
-
-    // console.log(this.state) // * i know where getting the new password on submit
     this.setState({
       type: 'password',
       render: 'confirm'
@@ -60,7 +58,6 @@ class ResetPassword extends React.Component {
   render() {
     // todo email form
     if (this.state.render === 'form') {
-
       return (
         <Form className='text-center' onSubmit={this.handleSubmit}>
           <h1>new password here</h1>
@@ -70,7 +67,6 @@ class ResetPassword extends React.Component {
               className='mb-3'
             >
               <Form.Control
-                aria-describedby="basic-addon2"
                 type={this.state.type}
                 name="password"
                 placeholder="password"
@@ -80,19 +76,18 @@ class ResetPassword extends React.Component {
           <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
             <FloatingLabel
               label='confirm password'
-              className='mb-0'
+              className='mb-3'
             >
               <Form.Control
-                aria-describedby="basic-addon2"
                 type={this.state.type}
                 name="passwordConfirm"
                 placeholder="confirm password"
                 onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
-            <button type='button' className='see-password' onClick={() => this.changeType()}>
-              <span>see password</span>
-            </button>
           </Form.Group>
+          <button type='button' className='see-password' onClick={() => this.changeType()}>
+            <span>see password</span>
+          </button>
           <div className='text-center'>
             <Button className='button' type="submit" disabled={this.disableSubmit()}>
               Reset password

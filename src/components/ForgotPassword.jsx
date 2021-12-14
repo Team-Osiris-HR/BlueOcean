@@ -40,7 +40,11 @@ class ForgotPassword extends React.Component {
               label='email'
               className='mb-3'
             >
-              <Form.Control type="email" name="email" placeholder="email" onChange={(e) => this.handleChange(e)} />
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="email"
+                onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
           <div className='text-center'>

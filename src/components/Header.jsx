@@ -28,11 +28,11 @@ class Header extends React.Component {
   }
 
   chooseCategory(e) {
-    console.log(e.target.outerText)
+    this.props.setCategory(e.target.outerText)
   }
 
   choosePickup(e) {
-    console.log(e.target.outerText)
+    this.props.setPickup(e.target.outerText)
   }
 
   logout() {
