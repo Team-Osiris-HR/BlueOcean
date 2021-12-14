@@ -1,6 +1,8 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
 
@@ -59,41 +61,46 @@ class ResetPassword extends React.Component {
     // todo email form
     if (this.state.render === 'form') {
       return (
-        <Form className='text-center' onSubmit={this.handleSubmit}>
-          <h1>new password here</h1>
-          <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
-            <FloatingLabel
-              label='password'
-              className='mb-3'
-            >
-              <Form.Control
-                type={this.state.type}
-                name="password"
-                placeholder="password"
-                onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
-          </Form.Group>
-          <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
-            <FloatingLabel
-              label='confirm password'
-              className='mb-3'
-            >
-              <Form.Control
-                type={this.state.type}
-                name="passwordConfirm"
-                placeholder="confirm password"
-                onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
-          </Form.Group>
-          <button type='button' className='see-password' onClick={() => this.changeType()}>
-            <span>see password</span>
-          </button>
-          <div className='text-center'>
-            <Button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
-              Reset password
-            </Button>
-          </div>
-        </Form >
+        <Container>
+          <Col className='login-container'>
+
+            <Form className='text-center' onSubmit={this.handleSubmit}>
+              <h1>new password here</h1>
+              <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
+                <FloatingLabel
+                  label='password'
+                  className='mb-3'
+                >
+                  <Form.Control
+                    type={this.state.type}
+                    name="password"
+                    placeholder="password"
+                    onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
+                <FloatingLabel
+                  label='confirm password'
+                  className='mb-3'
+                >
+                  <Form.Control
+                    type={this.state.type}
+                    name="passwordConfirm"
+                    placeholder="confirm password"
+                    onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              <button type='button' className='see-password' onClick={() => this.changeType()}>
+                <span>see password</span>
+              </button>
+              <div className='text-center'>
+                <Button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
+                  Reset password
+                </Button>
+              </div>
+            </Form >
+          </Col>
+        </Container>
       )
     } else {
       return (

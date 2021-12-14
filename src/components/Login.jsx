@@ -87,16 +87,16 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      return (
-        <Container>
-          <ForgotPassword backToLogin={this.renderForgotPassword} />
-        </Container>
-      )
       // return (
       //   <Container>
-      //     <ResetPassword backToLogin={this.renderForgotPassword} />
+      //     <ForgotPassword backToLogin={this.renderForgotPassword} />
       //   </Container>
       // )
+      return (
+        <Container>
+          <ResetPassword backToLogin={this.renderForgotPassword} />
+        </Container>
+      )
     }
   }
 }
