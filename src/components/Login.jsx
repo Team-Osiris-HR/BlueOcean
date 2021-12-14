@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/Alert'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import ForgotPassword from './ForgotPassword.jsx'
+import ResetPassword from './ResetPassword.jsx'
 
 class Login extends React.Component {
   constructor(props) {
@@ -85,7 +86,8 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      return <ForgotPassword backToLogin={this.renderForgotPassword} />
+      // return <ForgotPassword backToLogin={this.renderForgotPassword} />
+      return <ResetPassword />
     }
 
   }
