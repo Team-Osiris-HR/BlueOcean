@@ -1,5 +1,8 @@
 const express = require('express');
+const multer = require('multer');
+
 const router = express.Router();
+const upload = multer({ dest: 'public/img/posts' });
 
 const authController = require('../controllers/authController.js');
 const userController = require('../controllers/userController.js');
@@ -10,7 +13,7 @@ router.use(authController.protect);
 router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getOnePost);
 
-router.post('/', postController.createPost);
+router.post('/', upload.array('photos', 4), postController.createPost);
 router.post('/:id', postController.addQA);
 router.post('/:id/:QAid', postController.answerQA);
 
