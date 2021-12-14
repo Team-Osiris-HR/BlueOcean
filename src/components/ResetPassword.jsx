@@ -89,7 +89,7 @@ class ResetPassword extends React.Component {
             <span>see password</span>
           </button>
           <div className='text-center'>
-            <Button className='button' type="submit" disabled={this.disableSubmit()}>
+            <Button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
               Reset password
             </Button>
           </div>

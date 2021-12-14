@@ -14,7 +14,7 @@ class ForgotPassword extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
+    this.disableSubmit = this.disableSubmit.bind(this)
   }
 
   // todo handle change
@@ -27,6 +27,14 @@ class ForgotPassword extends React.Component {
     e.preventDefault()
     // todo post request to change password
     this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+  }
+
+  disableSubmit() {
+    if (this.state.email === '') {
+      return true
+    } else {
+      return false
+    }
   }
 
   render() {
@@ -48,7 +56,7 @@ class ForgotPassword extends React.Component {
             </FloatingLabel>
           </Form.Group>
           <div className='text-center'>
-            <Button className='button' type="submit">
+            <Button className='button' type="submit" disabled={this.disableSubmit()}>
               Reset password
             </Button>
           </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
+import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Alert from 'react-bootstrap/Alert'
@@ -86,10 +87,17 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      // return <ForgotPassword backToLogin={this.renderForgotPassword} />
-      return <ResetPassword backToLogin={this.renderForgotPassword} />
+      return (
+        <Container>
+          <ForgotPassword backToLogin={this.renderForgotPassword} />
+        </Container>
+      )
+      // return (
+      //   <Container>
+      //     <ResetPassword backToLogin={this.renderForgotPassword} />
+      //   </Container>
+      // )
     }
-
   }
 }
 
