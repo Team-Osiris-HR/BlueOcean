@@ -1,19 +1,20 @@
 import React from 'react';
-import MapContainer from './MapContainer.jsx';
+import CharityMap from './CharityMap.jsx';
 
-class App extends React.Components {
+class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
   }
-
 
   render() {
     return (
       <div>
-        <p>Home Page</p>
-        <MapContainer />
+        <h2>Nearby Charities</h2>
+        <CharityMap />
       </div>
+
     );
   }
 }
+
+export default App;

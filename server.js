@@ -1,19 +1,18 @@
-const express = require('express');
+const express = require("express");
 
-const mongoose = require('mongoose');
-const config = require('./db.config.js');
+const mongoose = require("mongoose");
+const config = require("./db.config.js");
+const path = require("path");
 
-const db = config.DATABASE.replace(
-  '-PASSWORD-',
-  config.DATABASE_PASSWORD
-);
+const db = config.DATABASE.replace("-PASSWORD-", config.DATABASE_PASSWORD);
 
 mongoose.connect(db).then(() => {
-  console.log('db connected');
+  console.log("db connected");
 });
 
+
 const app = express();
-app.use(express.static('dist'));
+app.use(express.static("dist"));
 
 const port = process.env.PORT || 3000;
 
