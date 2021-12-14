@@ -31,7 +31,10 @@ class ResetPassword extends React.Component {
     // todo post request to change password
 
     // console.log(this.state) // * i know where getting the new password on submit
-    this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+    this.setState({
+      type: 'password',
+      render: 'confirm'
+    }) // * this is gonna happen upon successful response from server
   }
 
   changeType() {
@@ -43,7 +46,9 @@ class ResetPassword extends React.Component {
   }
 
   disableSubmit() {
-    if (this.state.password === '' || this.state.passwordConfirm === '') {
+    if (this.state.password.length < 6) {
+      return true
+    } else if (this.state.passwordConfirm.length < 6) {
       return true
     } else if (this.state.password !== this.state.passwordConfirm) {
       return true
