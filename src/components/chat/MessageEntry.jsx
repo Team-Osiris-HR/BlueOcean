@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
 const MessageEntry = (props) => {
-  //console.log(props);
+  console.log('props', props);
   return (
     <>
       {props.messages.name === props.user ?

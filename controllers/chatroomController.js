@@ -56,7 +56,6 @@ exports.getOneUserChat = catchAsync(async (req, res) => {
 
 exports.createRoom = catchAsync(async (req, res) => {
   const post = await Post.findById(req.body.postId);
-  console.log(req.body);
   const newRoom = {
     userOne: req.user,
     userTwo: post.user,
