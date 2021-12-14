@@ -14,6 +14,7 @@ class ResetPassword extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeType = this.changeType.bind(this)
   }
 
   // todo handle change
@@ -27,6 +28,15 @@ class ResetPassword extends React.Component {
     // todo post request to change password
     // this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
   }
+
+  changeType() {
+    if (this.state.type === 'password') {
+      this.setState({ type: 'text' })
+    } else {
+      this.setState({ type: 'password' })
+    }
+  }
+
 
   render() {
     // todo email form
@@ -47,7 +57,7 @@ class ResetPassword extends React.Component {
                 onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
-          <Button size='sm' variant="outline-secondary" id="button-addon2">
+          <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
             see password
           </Button>
         </InputGroup>
@@ -66,7 +76,7 @@ class ResetPassword extends React.Component {
                 onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
-          <Button size='sm' variant="outline-secondary" id="button-addon2">
+          <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
             see password
           </Button>
         </InputGroup>
