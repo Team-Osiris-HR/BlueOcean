@@ -153,7 +153,7 @@ class ItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={() => {this.props.messagePoster(this.state.postData)}}>Message Poster</Button>{' '}
+            <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '}
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
