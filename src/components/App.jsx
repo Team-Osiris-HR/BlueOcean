@@ -92,7 +92,6 @@ class App extends React.Component {
     this.setState({ search: e.target.value })
   }
 
-
   renderView() {
     if (this.state.render === "login") {
       return (
