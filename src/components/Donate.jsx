@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal, Form, Button, FloatingLabel, Row, Col, Stack } from 'react-bootstrap';
 
 
-var Donate = ({toggleDonate, currentUser, handleOnChange, handleFileChange}) => (
+var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) => (
 
   <Modal show={toggleDonate} onHide={toggleDonate}>
     <Modal.Body>
@@ -17,7 +17,7 @@ var Donate = ({toggleDonate, currentUser, handleOnChange, handleFileChange}) => 
             <Form.Control
               type="text"
               placeholder='Item Name'
-              name='itemName'
+              name='title'
               onChange={handleOnChange}
             />
           </FloatingLabel>
@@ -75,7 +75,7 @@ var Donate = ({toggleDonate, currentUser, handleOnChange, handleFileChange}) => 
           <FloatingLabel controlId="floatingPickupDelivery" label="Pickup/Delivery">
             <Form.Select
               aria-label="Floating label select example"
-              name='pickupOrDelivery'
+              name='deliveryOptions'
               onChange={handleOnChange}
             >
               <option value="negotiable">Negotiable</option>
@@ -160,7 +160,7 @@ var Donate = ({toggleDonate, currentUser, handleOnChange, handleFileChange}) => 
             </Button>{" "}
           </Col>
           <Col>
-            <Button variant="primary" type="submit" >
+            <Button variant="primary" type="submit" onClick={makeDonation}>
               Submit
             </Button>
           </Col>
