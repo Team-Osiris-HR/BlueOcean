@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const catchAsync = require('../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 exports.getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
@@ -10,6 +11,8 @@ exports.getAllUsers = catchAsync(async (req, res) => {
     users,
   });
 });
+
+// exports.getAllUsers = factory.findAll(User);
 
 exports.getUser = catchAsync(async (req, res) => {
   const user = await User.findById(req.params.id);
@@ -75,4 +78,26 @@ exports.deleteMe = catchAsync(async (req, res) => {
   user.active = !user.active;
   user.save();
   res.sendStatus(200);
+});
+
+exports.setLogIn = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  user.loggedIn = true;
+  user.save();
+  res.status(200).json({
+    status: 'success',
+    user,
+    message: 'User logged in status set to true',
+  });
+});
+
+exports.setLogOut = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  user.loggedIn = false;
+  user.save();
+  res.status(200).json({
+    status: 'success',
+    user,
+    message: 'User logged in status set to false',
+  });
 });

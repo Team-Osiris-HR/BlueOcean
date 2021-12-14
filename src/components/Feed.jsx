@@ -11,18 +11,21 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       showDonate: false,
-      itemName: '',
+      title: '',
       description: '',
       category: 'appliances',
-      pickupOrDelivery: 'negotiable',
+      deliveryOptions: 'negotiable',
       charitiesOnly: true,
-      photoURLs: [],
       files: []
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+<<<<<<< HEAD
+=======
+    this.makeDonation = this.makeDonation.bind(this);
+>>>>>>> dev
   }
 
   toggleDonate(e) {
@@ -35,22 +38,50 @@ class Feed extends React.Component {
   }
 
   makeDonation(e) {
+    e.preventDefault()
+    let photoUrls = []
+    if (this.state.photo1) { photoUrls.push(this.state.photo1) }
+    if (this.state.photo2) { photoUrls.push(this.state.photo2) }
+    if (this.state.photo3) { photoUrls.push(this.state.photo3) }
+    if (this.state.photo4) { photoUrls.push(this.state.photo4) }
+    if (this.state.photo5) { photoUrls.push(this.state.photo5) }
 
+    let photoFiles = new FormData()
+    let files = this.state.files;
+    for (var i = 0; i < files.length; i++) {
+      photoFiles.append(`photo${i + 1}`, files[i])
+    }
+
+    axios.post('/', {
+      name: this.props.currentUser.name,
+      email: this.props.currentUser.email,
+      title: this.state.title,
+      description: this.state.description,
+      category: this.state.category,
+      condition: this.state.condition,
+      deliveryOptions: this.state.deliveryOptions,
+      charitiesOnly: this.state.charitiesOnly,
+      photoLinks: photoUrls,
+      photoFiles: photoFiles
+    })
+      .then((res) => {
+        console.log(`Success! ${res}`)
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: Feed.jsx ~ line 68 ~ Feed ~ makeDonation ~ err", err)
+      })
   }
 
   handleFileChange(e) {
-    let file = e.target.files
-    let files = this.state.files
-    var photoData = new FormData()
-    photoData.append('photos[]', file)
-    if (files.length >= 4) {
-      alert('Max of 4 files allowed!!')
-    } else {
-      files.push(file)
-      this.setState({
-        files: files
-      })
+    let file = e.target.files[0]
+    let files = this.state.files;
+    if (files.length >= 5) {
+      alert('Upload Limit Reached!! Max of 5 photos allowed!')
     }
+    files.push(file)
+    this.setState({ files: files })
+
+
   }
 
 
@@ -100,9 +131,9 @@ class Feed extends React.Component {
           {this.state.showDonate ?
             <Donate
               toggleDonate={this.toggleDonate}
-              currentUser={this.props.currentUser}
               handleOnChange={this.handleOnChange}
               handleFileChange={this.handleFileChange}
+              makeDonation={this.makeDonation}
             /> : null}
         </div>
       </div>

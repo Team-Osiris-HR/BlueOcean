@@ -8,16 +8,12 @@ const messageSchema = new mongoose.Schema({
     required: true,
     maxlength: [255, 'Message must be less than 255 characters'],
   },
-  userOne: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  userTwo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
+  name: String,
   time: {
     type: Date,
     default: Date.now,

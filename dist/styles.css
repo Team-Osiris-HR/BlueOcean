@@ -30,15 +30,10 @@
 }
 
 .tile {
-  max-height: 280px;
+  max-height: 260px;
   overflow-y: hidden;
 }
 
-.card_description {
-  text-align: left;
-  font-size: 12px;
-  font-weight: 500;
-}
 
 .donate:hover {
   background-color: #dc3545;
@@ -49,7 +44,6 @@
   object-fit: contain;
   height: 180px;
   width: 100%;
-  margin-top: 5px;
 }
 
 .card_body {
