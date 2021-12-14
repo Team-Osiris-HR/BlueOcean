@@ -2,6 +2,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Alert from 'react-bootstrap/Alert'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -10,11 +11,13 @@ class Login extends React.Component {
     super(props)
     this.state = {
       name: '',
-      password: ''
+      password: '',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
@@ -30,14 +33,16 @@ class Login extends React.Component {
         this.props.setCurrentUser(result.data.data.user)
         this.props.setRenderState("feed",)
       }).catch((err) => {
-        alert('wrong user and/or password bud')
+
       });
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h1>Login page</h1>
+      <Form className='text-center' onSubmit={this.handleSubmit}>
+        <div className='jumbotron'>
+          <h1 style={{ fontSize: '128px' }}>Hello</h1>
+        </div>
         <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
           <FloatingLabel
             label='name'
@@ -55,11 +60,18 @@ class Login extends React.Component {
             <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
           </FloatingLabel>
         </Form.Group>
-        <Button size="lg" variant="primary" type="submit">
-          Submit
-        </Button>
-        <Button size="lg" variant="info" type="button" onClick={() => this.props.setRenderState('signup')}>Create account</Button>
-      </Form>
+        <div className='text-center'>
+          <Button className='button' size="lg" type="submit">
+            Submit
+          </Button>
+        </div>
+        <div>
+          <button className='forgot-password' type="button">forgot password?</button>
+        </div>
+        <div>
+          <button className="create-acc-btn" type="button" onClick={() => this.props.setRenderState('signup')}>don't have an account? click here.</button>
+        </div>
+      </Form >
     )
   }
 }

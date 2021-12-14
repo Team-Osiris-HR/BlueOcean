@@ -20,7 +20,10 @@ class Signup extends React.Component {
       phone: '',
       address: '',
       loggedIn: false,
-      role: 'user'
+      role: 'user',
+      organizationAddress: '',
+      organizationPhone: '',
+      organizationURL: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -42,12 +45,18 @@ class Signup extends React.Component {
       passwordConfirm: this.state.passwordConfirm,
       phone: this.state.phone,
       address: this.state.address,
-      loggedIn: false
+      loggedIn: false,
+      orgnization: {
+        phone: this.state.organizationPhone,
+        address: this.state.organizationAddress,
+        url: this.state.organizationURL
+      }
     })
       .then((result) => {
         alert('created')
         this.props.setRenderState('login')
       }).catch((err) => {
+        console.log(err)
         alert('check all fields')
       });
   }
@@ -62,9 +71,9 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="text-center">
         <Form onSubmit={this.handleSubmit}>
-          <h1>Create an account</h1>
+          <h1>Create</h1>
           <Form.Group controlId="formGridName"
             className="mb-3">
             <FloatingLabel
@@ -75,33 +84,31 @@ class Signup extends React.Component {
             </FloatingLabel>
           </Form.Group>
 
-          <Row className="mb-3" >
-            <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
-              <FloatingLabel
-                label='email'
-                className='mb-3'
-              >
-                <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
+          <Form.Group className="mb-3" as={Col} controlId="formGridEmail">
+            <FloatingLabel
+              label='email'
+              className='mb-3'
+            >
+              <Form.Control type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
 
-            <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
-              <FloatingLabel
-                label='password'
-                className='mb-3'
-              >
-                <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridConfirmPassword" >
-              <FloatingLabel
-                label='confirm password'
-                className='mb-3'
-              >
-                <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-          </Row>
+          <Form.Group className="mb-3" as={Col} controlId="formGridPassword" >
+            <FloatingLabel
+              label='password'
+              className='mb-3'
+            >
+              <Form.Control type="password" placeholder="Password (min 6 char)" name='password' onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group as={Col} controlId="formGridConfirmPassword" >
+            <FloatingLabel
+              label='confirm password'
+              className='mb-3'
+            >
+              <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridAddress" >
             <FloatingLabel
@@ -155,11 +162,14 @@ class Signup extends React.Component {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-
-          <Button size="lg" variant="primary" type="submit">
-            Submit
-          </Button>
-          <Button size="lg" variant="warning" type="button" onClick={() => this.props.setRenderState('login')}>Go back</Button>
+          <div className='text-center'>
+            <Button className='button' size="lg" variant="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+          <div>
+            <button className='create-acc-back-btn' type="button" onClick={() => this.props.setRenderState('login')}>already have an account? log in here.</button>
+          </div>
         </Form >
       </Container>
     )

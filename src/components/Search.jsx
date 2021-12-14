@@ -15,12 +15,11 @@ const Search = (props) => {
     event.preventDefault();
   };
 
-
   return (
     <Form>
       <Form.Control
         type="text"
-        placeholder="Search"
+        placeholder="search mikeslist"
         onChange={props.setSearch}
       />
     </Form>

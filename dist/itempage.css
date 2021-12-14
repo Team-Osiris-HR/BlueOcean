@@ -3,6 +3,7 @@
   /* background-color: red; */
   margin: 0 auto;
   min-width: 325px;
+  padding-bottom: 3%;
   /* max-width: 50%; */
 }
 
@@ -57,4 +58,16 @@
 .bottombuttonscontainer {
   display: flex;
   justify-content: space-between;
+}
+
+.options {
+  display: flex;
+  border: 1px #DCDCDC solid;
+  border-radius: 4px;
+  padding: 1%;
+  text-align: center;
+}
+
+.options p {
+  margin: 0 auto;
 }

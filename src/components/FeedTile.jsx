@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 
 
 var FeedTile = ({post, getPostId}) => (
-<Card className="text-center tile" border="primary" onClick={() => {getPostId(post._id)}}>
+<Card className="text-center tile" border="dark" onClick={() => {getPostId(post._id)}}>
   {post.photos.length > 0 ?
     <Card.Img className="feed_image" variant="top" src={post.photos[0]}/>
     : null
