@@ -1,7 +1,7 @@
-const Chatroom = require('../models/Chatroom.js');
-const catchAsync = require('../utils/catchAsync.js');
-const User = require('../models/User.js');
-const Post = require('../models/Post.js');
+const Chatroom = require("../models/Chatroom.js");
+const catchAsync = require("../utils/catchAsync.js");
+const User = require("../models/User.js");
+const Post = require("../models/Post.js");
 
 exports.getAllRooms = catchAsync(async (req, res) => {
   const roomList = await Chatroom.find();
@@ -23,31 +23,30 @@ exports.getUserChats = catchAsync(async (req, res) => {
       userTwo: userTwo,
       product: product,
     });
-  };
+  }
   let thisObj;
   for (let i = 0; i < obj.length; i++) {
     thisObj = {};
     if (obj[i].userOne.name === req.user.name) {
-      thisObj['name'] = obj[i].userTwo.name;
-      thisObj['userPhoto'] = obj[i].userTwo.photo;
+      thisObj["name"] = obj[i].userTwo.name;
+      thisObj["userPhoto"] = obj[i].userTwo.photo;
       thisObj.id = obj[i].userTwo._id;
     } else {
-      thisObj['name'] = obj[i].userOne.name;
-      thisObj['userPhoto'] = obj[i].userOne.photo;
+      thisObj["name"] = obj[i].userOne.name;
+      thisObj["userPhoto"] = obj[i].userOne.photo;
       thisObj.id = obj[i].userOne._id;
     }
-    thisObj['title'] = obj[i].product.title;
-    thisObj['photos'] = obj[i].product.photos[0] || [];
-    thisObj['postId'] = obj[i].product._id;
-    thisObj['roomId'] = obj[i]._id;
+    thisObj["title"] = obj[i].product.title;
+    thisObj["photos"] = obj[i].product.photos[0] || [];
+    thisObj["postId"] = obj[i].product._id;
+    thisObj["roomId"] = obj[i]._id;
     results.push(thisObj);
   }
   res.status(200).json(results);
 });
 
-
 exports.getOneUserChat = catchAsync(async (req, res) => {
-  const chat = await Chatroom.find({_id: req.params.chatId});
+  const chat = await Chatroom.find({ _id: req.params.chatId });
 
   if (!chat) {
     return res.sendStatus(400);
@@ -57,13 +56,12 @@ exports.getOneUserChat = catchAsync(async (req, res) => {
 
 exports.createRoom = catchAsync(async (req, res) => {
   const post = await Post.findById(req.body.postId);
-  console.log(req.body);
   const newRoom = {
     userOne: req.user,
     userTwo: post.user,
     product: req.body.postId,
     roomHash: req.body.roomHash,
-  }
+  };
 
   const room = await Chatroom.create(newRoom);
   res.status(201).json(room); //if needed

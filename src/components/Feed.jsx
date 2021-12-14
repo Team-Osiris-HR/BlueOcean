@@ -37,16 +37,16 @@ class Feed extends React.Component {
   makeDonation(e) {
     e.preventDefault()
     let photoUrls = []
-    if (this.state.photo1) {photoUrls.push(this.state.photo1)}
-    if (this.state.photo2) {photoUrls.push(this.state.photo2)}
-    if (this.state.photo3) {photoUrls.push(this.state.photo3)}
-    if (this.state.photo4) {photoUrls.push(this.state.photo4)}
-    if (this.state.photo5) {photoUrls.push(this.state.photo5)}
+    if (this.state.photo1) { photoUrls.push(this.state.photo1) }
+    if (this.state.photo2) { photoUrls.push(this.state.photo2) }
+    if (this.state.photo3) { photoUrls.push(this.state.photo3) }
+    if (this.state.photo4) { photoUrls.push(this.state.photo4) }
+    if (this.state.photo5) { photoUrls.push(this.state.photo5) }
 
     let photoFiles = new FormData()
     let files = this.state.files;
     for (var i = 0; i < files.length; i++) {
-      photoFiles.append(`photo${i+1}`, files[i])
+      photoFiles.append(`photo${i + 1}`, files[i])
     }
 
     axios.post('/', {
@@ -65,7 +65,7 @@ class Feed extends React.Component {
         console.log(`Success! ${res}`)
       })
       .catch((err) => {
-      console.log("🚀 ~ file: Feed.jsx ~ line 68 ~ Feed ~ makeDonation ~ err", err)
+        console.log("🚀 ~ file: Feed.jsx ~ line 68 ~ Feed ~ makeDonation ~ err", err)
       })
   }
 
@@ -76,7 +76,7 @@ class Feed extends React.Component {
       alert('Upload Limit Reached!! Max of 5 photos allowed!')
     }
     files.push(file)
-    this.setState({ files: files})
+    this.setState({ files: files })
 
 
   }
@@ -101,37 +101,37 @@ class Feed extends React.Component {
         </div>
         <div className="middle">
           <Container>
-            <Row xs={1} sm={2} md={4}>
+            <Row xs={1} sm={2} md={3}>
               {this.props.posts.filter((value) => {
-                   if (this.props.searchItem.length < 3) {
-                    return value;
-                  } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
-                    return value;
-                  }
+                if (this.props.searchItem.length < 3) {
+                  return value;
+                } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
+                  return value;
+                }
               }).map((post) => (
                 <Col
                   className="text-center feed_card"
                   key={post._id}>
-                    <FeedTile
-                      post={post}
-                      getPostId={this.props.getPostId}
-                    />
+                  <FeedTile
+                    post={post}
+                    getPostId={this.props.getPostId}
+                  />
                 </Col>
               ))}
             </Row>
           </Container>
         </div>
         <div className="bottom">
-          <Container className="text-center">
-            <Button variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
+          <Container>
+            <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
           </Container>
-            {this.state.showDonate ?
-              <Donate
+          {this.state.showDonate ?
+            <Donate
               toggleDonate={this.toggleDonate}
               handleOnChange={this.handleOnChange}
               handleFileChange={this.handleFileChange}
               makeDonation={this.makeDonation}
-            />: null}
+            /> : null}
         </div>
       </div>
     )
