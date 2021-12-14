@@ -47,6 +47,8 @@ const postSchema = new mongoose.Schema({
     questionText: String,
     answerText: String,
   }],
+  username: String,
+  email: String,
 });
 
 const Post = mongoose.model("Post", postSchema);
