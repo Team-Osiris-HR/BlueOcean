@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox } from '@react-google-maps/api';
-import { API_Key } from '../../config.js';
+import { API_Key } from '../../../config.js';
 
 
 const CharityMap = (props) => {
@@ -16,8 +16,8 @@ const CharityMap = (props) => {
   const onPlacesChanged = () => console.log(this.searchBox.getPlaces());
 
   const mapStyles = {
-    height: "70vh",
-    width: "50%",
+    height: "40vh",
+    width: "100%",
   };
 
   const defaultCenter = {
@@ -80,11 +80,11 @@ const CharityMap = (props) => {
          {
             locations.map(item => {
               return (
-              <Marker key={item.name}
+              /* <Marker key={item.name}
                 position={item.location}
                 onClick={() => onSelect(item)}
-              />
-              /* <Circle key={item.name}
+              /> */
+              <Circle key={item.name}
                 center={item.location}
                 radius={500}
                 options={{geodesic: true,
@@ -92,7 +92,7 @@ const CharityMap = (props) => {
                 strokeOpacity: 1.5,
                 strokeWeight: 2}}
                 onClick={() => onSelect(item)}
-              /> */
+              />
               )
             })
          }
