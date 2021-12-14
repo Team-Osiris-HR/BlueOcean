@@ -85,7 +85,7 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      return <ForgotPassword />
+      return <ForgotPassword backToLogin={this.renderForgotPassword} />
     }
 
   }
