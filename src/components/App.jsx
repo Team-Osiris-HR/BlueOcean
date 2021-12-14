@@ -41,6 +41,7 @@ class App extends React.Component {
     this.getCookies()
   }
 
+  // * Grabs all the post, unfiltered
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
@@ -53,6 +54,7 @@ class App extends React.Component {
       })
   }
 
+  // * Grabs the post id
   getPostId(id) {
     this.setState({
       currentPost: id,
@@ -60,6 +62,7 @@ class App extends React.Component {
     })
   }
 
+  // * Check cookies. If present, straight to feed, otherwise, login
   getCookies() {
     if (Cookies.get("jwt")) {
       if (Object.keys(this.state.currentUser).length === 0) {
@@ -78,82 +81,93 @@ class App extends React.Component {
     }
   }
 
+  // * set whatever page we want to render
   setRenderState(whatState) {
     this.setState({ render: whatState })
     this.getPosts();
-    this.renderView()
-  }
+    this.rende
 
-  setCurrentUser(currentUser) {
-    this.setState({ currentUser: currentUser })
-  }
+    // * set the current user to whoever is loggedin
+    setCurrentUser(currentUser) {
+      this.setState({ currentUser: currentUser })
+    }
 
-  setSearch(e) {
-    this.setState({ search: e.target.value })
-  }
+    // * set state for whatever item is being searched
+    setSearch(e) {
+      this.setState({ search: e.target.value })
+    }
 
-  renderView() {
-    if (this.state.render === "login") {
-      return (
-        <Container >
-          <Col className='login-container'>
-            <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
-          </Col>
-        </Container>
-      )
-    } else if (this.state.render === "signup") {
-      return (
-        <Container >
-          <Col className='login-container'>
-            <Signup setRenderState={this.setRenderState} />
-          </Col>
-        </Container >
-      )
-    } else if (this.state.render === 'organization') {
-      return (
-        <Container>
-          <Col>
-            <OrgSignup />
-          </Col>
-        </Container>
-      )
-    } else if (this.state.render === 'feed') {
-      return (
-        <Feed
-          posts={this.state.posts}
-          getPostId={this.getPostId}
-          searchItem={this.state.search}
-          currentUser={this.state.currentUser}
-        />
-      )
-    } else if (this.state.render === 'itempage') {
-      return (
-        <ItemPage
-          currentPost={this.state.currentPost}
-        />
-      )
-    } else if (this.state.render === 'donoritempage') {
-      return (
-        <DonorItemPage
+    // * conditional rendering
+    renderView() {
+      if (this.state.render === "login") {
+        return (
+          <Container >
+            <Col className='login-container'>
+              <Login setRenderState={this.setRenderState} setCurrentUser={this.setCurrentUser} />
+            </Col>
+          </Container>
+        )
+      } else if (this.state.render === "signup") {
+        return (
+          <Container >
+            <Col className='login-container'>
+              <Signup setRenderState={this.setRenderState} />
+            </Col>
+          </Container >
+        )
+      } else if (this.state.render === 'organization') {
+        return (
+          <Container>
+            <Col>
+              <OrgSignup />
+            </Col>
+          </Container>
+        )
+      } else if (this.state.render === 'feed') {
+        return (
+          <Feed
+            posts={this.state.posts}
+            getPostId={this.getPostId}
+            searchItem={this.state.search}
+            currentUser={this.state.currentUser}
+          />
+        )
+      } else if (this.state.render === 'itempage') {
+        return (
+          <ItemPage
+            currentPost={this.state.currentPost}
+          />
+        )
+      } else if (this.state.render === 'donoritempage') {
+        return (
+          <DonorItemPage
 
-        />)
-    } else if (this.state.render === 'chat') {
+          />)
+      } else if (this.state.render === 'chat') {
+        return (
+          <Chat
+            user={this.state.currentUser}
+            setRenderState={this.setRenderState} />
+        )
+      }
+    }
+
+    render() {
       return (
-        <Chat
-          user={this.state.currentUser}
-          setRenderState={this.setRenderState} />
-      )
+        <React.Fragment>
+          {this.state.render === "feed" ||
+            this.state.render === "itempage" ||
+            this.state.render === 'chat' ?
+            <Header
+              setRenderState={this.setRenderState}
+              setSearch={this.setSearch}
+              render={this.state.render}
+            />
+            : null}
+          {this.renderView()} {/* //* conditonal rendering based on what page we want to render */}
+        </React.Fragment>
+      );
     }
   }
-
-  render() {
-    return (
-      <React.Fragment>
-        {this.state.render === "feed" || this.state.render === "itempage" || this.state.render === 'chat' ? <Header setRenderState={this.setRenderState} setSearch={this.setSearch} render={this.state.render} /> : null}
-        {this.renderView()}
-      </React.Fragment>
-    );
-  }
-}
 
 export default App;
