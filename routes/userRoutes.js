@@ -12,13 +12,15 @@ router.get('/myinfo', userController.getMyInfo);
 router.get('/setloginstatus', userController.setLogIn);
 router.get('/setlogoutstatus', userController.setLogOut);
 
-router.patch("/updatemypassword", authController.updatePassword);
 router.get("/logout", authController.logout);
 
 router.get("/", authController.restrictTo("admin"), userController.getAllUsers);
 
 router.get("/myinfo", userController.getMyInfo);
 router.get("/:id", authController.restrictTo("admin"), userController.getUser);
+
+router.patch("/updatemypassword", authController.updatePassword);
+router.patch('/:id/updateinfo', userController.updateUser);
 
 router.delete(
   "/:id",
