@@ -23,7 +23,7 @@ class ItemPage extends React.Component {
 
     this.askClicked = this.askClicked.bind(this);
     this.reportClicked = this.reportClicked.bind(this);
-    this.messageClicked = this.messageClicked.bind(this);
+    // this.messageClicked = this.messageClicked.bind(this);
     this.toggleModel = this.toggleModel.bind(this);
     this.toggleReport = this.toggleReport.bind(this);
   }
@@ -102,10 +102,6 @@ class ItemPage extends React.Component {
     event.preventDefault();
     console.log('Someone wants to report a post');
     this.toggleReport();
-  }
-
-  messageClicked(event) {
-    console.log('Someone wants to message the donor');
   }
 
   askModal() {
