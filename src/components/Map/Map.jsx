@@ -1,11 +1,20 @@
-/* import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox } from '@react-google-maps/api';
-import { API_Key } from '../../config.js';
+import { API_Key } from '../../../config.js';
+import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
+// import { getAllUsers } from '../../../controllers/userController.js';
 
 
-const ItemTest = (props) => {
+const Map = (props) => {
+  console.log(props.currentUser)
 
   const [ selected, setSelected ] = useState({});
+  const [ view, setView] = useState({value: 'charities'});
+  const [ markerList, setList ] = useState({});
+
+  const onToggle = (ref) => {
+    setView(ref.target.innerHTML);
+  }
 
   const onSelect = item => {
     setSelected(item);
@@ -16,8 +25,8 @@ const ItemTest = (props) => {
   const onPlacesChanged = () => console.log(this.searchBox.getPlaces());
 
   const mapStyles = {
-    height: "70vh",
-    width: "50%",
+    height: "80vh",
+    width: "80%",
   };
 
   const defaultCenter = {
@@ -66,6 +75,9 @@ const ItemTest = (props) => {
 
   return (
     <>
+    <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
+
+    <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
      <LoadScript
        googleMapsApiKey={API_Key}
        libraries={["places"]}>
@@ -79,12 +91,16 @@ const ItemTest = (props) => {
           center={defaultCenter}>
          {
             locations.map(item => {
-              return (
+              return view === 'charities' ?
+              (
               <Marker key={item.name}
                 position={item.location}
                 onClick={() => onSelect(item)}
               />
-               <Circle key={item.name}
+              )
+              :
+              (
+              <Circle key={item.name}
                 center={item.location}
                 radius={500}
                 options={{geodesic: true,
@@ -96,6 +112,9 @@ const ItemTest = (props) => {
               )
             })
          }
+          : (
+           <div>other map</div>
+         )
         {
             selected.location &&
             (
@@ -113,13 +132,14 @@ const ItemTest = (props) => {
             )
          }
      </GoogleMap>
+     <br />
      <StandaloneSearchBox
       //onLoad={onLoad}
       onPlacesChanged={onPlacesChanged}
       libraries={["places"]}>
       <input
         type="text"
-        placeholder="Customized your placeholder"
+        placeholder="Search an address..."
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
@@ -137,11 +157,11 @@ const ItemTest = (props) => {
         }}
       />
     </StandaloneSearchBox>
+    <br />
+    <button>Enter address</button>
      </LoadScript>
      </>
   )
 }
 
-export default ItemTest;
-
-*/
+export default Map;

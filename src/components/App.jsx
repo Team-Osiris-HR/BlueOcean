@@ -83,6 +83,7 @@ class App extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+
   }
 
   // * set whatever page we want to render

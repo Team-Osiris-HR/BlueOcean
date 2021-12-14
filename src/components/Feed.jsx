@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
-
 import FeedTile from './FeedTile.jsx'
 import Donate from './Donate.jsx'
+import Map from './Map/Map.jsx'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -17,18 +17,18 @@ class Feed extends React.Component {
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
       files: [],
-      showMap: false
+      view: "sort"
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
-    this.toggleMap = this.toggleMap.bind(this);
+    this.toggleFeed = this.toggleFeed.bind(this);
   }
 
-  toggleMap (e) {
-    this.setState({showMap: !this.state.showMap});
+  toggleFeed (e) {
+    this.setState({view: e.target.innerHTML});
   }
 
   toggleDonate(e) {
@@ -101,13 +101,15 @@ class Feed extends React.Component {
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">sort</Button>
-            <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleMap}>map</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>sort</Button>
+            <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>map</Button>
           </Stack>
         </div>
-        {this.state.showMap ?
+        {this.state.view === "map" ?
         (<div>
-          <p>test</p>
+          <Map type="feedView"
+          posts={this.props.posts}
+          currentUser={this.props.currentUser}/>
         </div>)
         :
         (<div className="middle">

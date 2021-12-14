@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Accordion from 'react-bootstrap/Accordion'
-import CharityMap from './Map/CharityMap.jsx'
+import SearchBar from './Map/SearchBar.jsx'
 import axios from 'axios'
 
 class Signup extends React.Component {
@@ -116,6 +116,7 @@ class Signup extends React.Component {
               className='mb-3'
             >
               <Form.Control placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
+              <SearchBar onChange={(e) => this.handleChange(e)}/>
             </FloatingLabel>
           </Form.Group>
 
