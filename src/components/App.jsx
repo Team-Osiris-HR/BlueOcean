@@ -102,19 +102,15 @@ class App extends React.Component {
     this.setState({ search: e.target.value })
   }
 
-<<<<<<< HEAD
-  // * conditional rendering
-=======
   messagePoster = (item) => {
-    this.setState({ render: 'chat', newMessageStatus: true, itemObj: item})
+    this.setState({ render: 'chat', newMessageStatus: true, itemObj: item })
   }
 
   clearMessageStatus = () => {
-    this.setState({newMessageStatus: false})
+    this.setState({ newMessageStatus: false })
   }
 
 
->>>>>>> mitch
   renderView() {
     if (this.state.render === "login") {
       return (

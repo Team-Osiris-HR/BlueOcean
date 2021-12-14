@@ -22,10 +22,7 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
-<<<<<<< HEAD
-=======
     this.makeDonation = this.makeDonation.bind(this);
->>>>>>> dev
   }
 
   toggleDonate(e) {
