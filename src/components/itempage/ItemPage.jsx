@@ -5,7 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
@@ -17,6 +17,7 @@ class ItemPage extends React.Component {
     this.state = {
       postData: {},
       showAsk: false,
+      showReport: false,
       askInput: ""
     };
 
@@ -24,6 +25,7 @@ class ItemPage extends React.Component {
     this.reportClicked = this.reportClicked.bind(this);
     this.messageClicked = this.messageClicked.bind(this);
     this.toggleModel = this.toggleModel.bind(this);
+    this.toggleReport = this.toggleReport.bind(this);
   }
 
   componentDidMount() {
@@ -76,17 +78,74 @@ class ItemPage extends React.Component {
     }
   }
 
+  toggleReport(event) {
+    // console.log('Model was toggled');
+    var toggle = this.state.showReport;
+    if (toggle) {
+      this.setState({ showReport: false });
+    } else {
+      this.setState({ showReport: true });
+    }
+  }
+
   askChange(e) {
     // console.log(e.target.value);
     this.setState({ askInput: e.target.value })
   }
 
+  reportChange(e) {
+    // console.log(e.target.value);
+    this.setState({ askInput: e.target.value })
+  }
+
   reportClicked(event) {
+    event.preventDefault();
     console.log('Someone wants to report a post');
+    this.toggleReport();
   }
 
   messageClicked(event) {
     console.log('Someone wants to message the donor');
+  }
+
+  askModal() {
+    return (
+      <Modal show={this.toggleModel} onHide={this.toggleModel} >
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control type="input" placeholder="Ask a Question" style={{ "minHeight": "75px" }} onChange={(e) => this.askChange(e)} />
+            </Form.Group>
+            <Button variant="secondary" onClick={this.toggleModel}>
+              Close
+            </Button>{" "}
+            <Button variant="primary" type="submit" onClick={this.askClicked}>
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+
+  reportModal() {
+    return (
+      <Modal show={this.toggleReport} onHide={this.toggleReport} >
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control type="email" placeholder="What do you want to Report?" style={{ "minHeight": "75px" }} onChange={(e) => this.reportChange(e)} />
+            </Form.Group>
+            <Button variant="secondary" onClick={this.toggleReport}>
+              Close
+            </Button>{" "}
+            <Button variant="primary" type="submit" onClick={this.reportClicked}>
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    );
   }
 
 
@@ -101,33 +160,27 @@ class ItemPage extends React.Component {
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
+          <div className="options">
+            <p>Delivery Options: {this.state.postData.deliveryOptions}</p>
+            <p>Condition: {this.state.postData.condition}</p>
+          </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
             <p>Map Place Holder</p>
           </div>
 
           <div className="bottombuttonscontainer">
+
             <div className="askmodal">
               <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
-              {this.state.showAsk ? <Modal show={this.toggleModel} onHide={this.toggleModel} >
-                <Modal.Body>
-                  <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control type="email" placeholder="Ask a Question" style={{ "minHeight": "75px" }} onChange={(e) => this.askChange(e)} />
-                    </Form.Group>
-                    <Button variant="secondary" onClick={this.toggleModel}>
-                      Close
-                    </Button>{" "}
-                    <Button variant="primary" type="submit" onClick={this.askClicked}>
-                      Submit
-                    </Button>
-                  </Form>
-                </Modal.Body>
-              </Modal> : null}
-
-
+              {this.state.showAsk ? this.askModal() : null}
             </div>
-            <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.reportClicked} >Report Posting</Button>{' '}
+
+            <div className="reportmodal">
+              <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button>
+              {this.state.showReport ? this.reportModal() : null}
+            </div>
+
           </div>
         </Col>
       </Container >

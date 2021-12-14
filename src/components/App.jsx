@@ -12,6 +12,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
+import DonorItemPage from './itempage/DonorItemPage.jsx';
 
 
 class App extends React.Component {
@@ -132,6 +133,11 @@ class App extends React.Component {
           currentPost={this.state.currentPost}
         />
       )
+    } else if (this.state.render === 'donoritempage') {
+      return (
+        <DonorItemPage
+
+        />)
     } else if (this.state.render === 'chat') {
       return (
         <Chat
