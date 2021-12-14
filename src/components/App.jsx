@@ -152,6 +152,7 @@ class App extends React.Component {
           getPostId={this.getPostId}
           searchItem={this.state.search}
           currentUser={this.state.currentUser}
+          update={this.getPosts}
         />
       )
     } else if (this.state.render === 'itempage') {
