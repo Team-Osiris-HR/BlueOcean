@@ -59,11 +59,20 @@ class App extends React.Component {
   }
 
   // * Grabs the post id
-  getPostId(id) {
-    this.setState({
-      currentPost: id,
-      render: 'itempage'
-    })
+  getPostId(id, userId) {
+    console.log(userId);
+    console.log(this.state.currentUser._id);
+    if (userId === this.state.currentUser._id) {
+      this.setState({
+        currentPost: id,
+        render: 'donoritempage'
+      })
+    } else {
+      this.setState({
+        currentPost: id,
+        render: 'itempage'
+      })
+    }
   }
 
   // * Check cookies. If present, straight to feed, otherwise, login
@@ -175,6 +184,7 @@ class App extends React.Component {
       <React.Fragment>
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
+          this.state.render === 'donoritempage' ||
           this.state.render === 'chat' ?
           <Header
             setRenderState={this.setRenderState}
