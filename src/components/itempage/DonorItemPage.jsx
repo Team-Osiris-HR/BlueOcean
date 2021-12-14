@@ -44,7 +44,7 @@ class DonorItemPage extends React.Component {
   }
 
   getItem() {
-    axios.get(`http://localhost:3000/api/posts/61b3a70c216a5fdea297ed6d`)
+    axios.get(`http://localhost:3000/api/posts/${this.props.id}`)
       .then((res) => {
         var post = res.data.post;
         // console.log(post);
@@ -163,7 +163,7 @@ class DonorItemPage extends React.Component {
   }
 
   submitAnswer(id) {
-    console.log(`The Product id is: ${this.state.postData.id}\nThe id is: ${id}\nThe answer is: ${this.state.answer}`);
+    // console.log(`The Product id is: ${this.state.postData.id}\nThe id is: ${id}\nThe answer is: ${this.state.answer}`);
     axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}/${id}`, { "answerText": this.state.answer })
       .then((res) => {
         // console.log(res.data);

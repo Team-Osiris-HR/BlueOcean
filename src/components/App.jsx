@@ -60,8 +60,6 @@ class App extends React.Component {
 
   // * Grabs the post id
   getPostId(id, userId) {
-    console.log(userId);
-    console.log(this.state.currentUser._id);
     if (userId === this.state.currentUser._id) {
       this.setState({
         currentPost: id,
@@ -164,7 +162,7 @@ class App extends React.Component {
     } else if (this.state.render === 'donoritempage') {
       return (
         <DonorItemPage
-
+          id={this.state.currentPost}
         />)
     } else if (this.state.render === 'chat') {
       return (
