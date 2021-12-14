@@ -10,7 +10,8 @@ class ResetPassword extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      type: 'password'
+      type: 'password',
+      render: 'form'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,7 +27,9 @@ class ResetPassword extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     // todo post request to change password
-    // this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+
+    // console.log(this.state) // * i know where getting the new password on submit
+    this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
   }
 
   changeType() {
@@ -40,79 +43,60 @@ class ResetPassword extends React.Component {
 
   render() {
     // todo email form
-    return (
-      <Form className='text-center' onSubmit={this.handleSubmit}>
-        <h1>new password here</h1>
-        <InputGroup className="mb-3">
-          <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
-            <FloatingLabel
-              label='password'
-              className='mb-3'
-            >
-              <Form.Control
-                aria-describedby="basic-addon2"
-                type={this.state.type}
-                name="password"
-                placeholder="password"
-                onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
-          </Form.Group>
-          <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
-            see password
-          </Button>
-        </InputGroup>
+    if (this.state.render === 'form') {
 
-        <InputGroup>
-          <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
-            <FloatingLabel
-              label='confirm password'
-              className='mb-3'
-            >
-              <Form.Control
-                aria-describedby="basic-addon2"
-                type={this.state.type}
-                name="passwordConfirm"
-                placeholder="confirm password"
-                onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
-          </Form.Group>
-          <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
-            see password
-          </Button>
-        </InputGroup>
-        <div className='text-center'>
-          <Button className='button' type="submit">
-            Reset password
-          </Button>
+      return (
+        <Form className='text-center' onSubmit={this.handleSubmit}>
+          <h1>new password here</h1>
+          <InputGroup className="mb-3">
+            <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
+              <FloatingLabel
+                label='password'
+                className='mb-3'
+              >
+                <Form.Control
+                  aria-describedby="basic-addon2"
+                  type={this.state.type}
+                  name="password"
+                  placeholder="password"
+                  onChange={(e) => this.handleChange(e)} />
+              </FloatingLabel>
+            </Form.Group>
+          </InputGroup>
+
+          <InputGroup>
+            <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
+              <FloatingLabel
+                label='confirm password'
+                className='mb-3'
+              >
+                <Form.Control
+                  aria-describedby="basic-addon2"
+                  type={this.state.type}
+                  name="passwordConfirm"
+                  placeholder="confirm password"
+                  onChange={(e) => this.handleChange(e)} />
+              </FloatingLabel>
+            </Form.Group>
+            <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
+              see password
+            </Button>
+          </InputGroup>
+          <div className='text-center'>
+            <Button className='button' type="submit">
+              Reset password
+            </Button>
+          </div>
+        </Form >
+      )
+    } else {
+      return (
+        <div onClick={() => this.props.backToLogin('login')}>
+          <span>Congrats! click here to login</span>
         </div>
-      </Form >
-    )
+      )
+    }
   }
 }
 
 export default ResetPassword;
-
-/*
- <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
-          <FloatingLabel
-            label='password'
-            className='mb-3'
-          >
-            <Form.Control type="password" name="password" placeholder="password" onChange={(e) => this.handleChange(e)} />
-          </FloatingLabel>
-        </Form.Group>
-        <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
-          <FloatingLabel
-            label='confirm password'
-            className='mb-3'
-          >
-            <Form.Control type="password" name="passwordConfirm" placeholder="confirm password" onChange={(e) => this.handleChange(e)} />
-          </FloatingLabel>
-        </Form.Group>
-        <div className='text-center'>
-          <Button className='button' type="submit">
-            Reset password
-          </Button>
-        </div>
-
-*/

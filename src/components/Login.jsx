@@ -87,7 +87,7 @@ class Login extends React.Component {
       )
     } else {
       // return <ForgotPassword backToLogin={this.renderForgotPassword} />
-      return <ResetPassword />
+      return <ResetPassword backToLogin={this.renderForgotPassword} />
     }
 
   }
