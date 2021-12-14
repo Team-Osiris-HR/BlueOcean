@@ -68,7 +68,7 @@ class ResetPassword extends React.Component {
               <h1>new password here</h1>
               <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
                 <FloatingLabel
-                  label='password'
+                  label='password min 6 char'
                   className='mb-3'
                 >
                   <Form.Control
@@ -81,7 +81,7 @@ class ResetPassword extends React.Component {
               <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
                 <FloatingLabel
                   label='confirm password'
-                  className='mb-3'
+                  className=''
                 >
                   <Form.Control
                     type={this.state.type}
@@ -89,10 +89,10 @@ class ResetPassword extends React.Component {
                     placeholder="confirm password"
                     onChange={(e) => this.handleChange(e)} />
                 </FloatingLabel>
+                <button type='button' className='see-password' onClick={() => this.changeType()}>
+                  <span>see password</span>
+                </button>
               </Form.Group>
-              <button type='button' className='see-password' onClick={() => this.changeType()}>
-                <span>see password</span>
-              </button>
               <div className='text-center'>
                 <Button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
                   Reset password
