@@ -14,12 +14,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     return next(new Error("Please provide all required fields"));
   }
   this.sendToken(newUser, 201, req, res);
-  // res.status(201).json({
-  //   status: 'success',
-  //   data: {
-  //     user: newUser,
-  //   },
-  // });
 });
 
 exports.signToken = (id) => {
@@ -30,14 +24,12 @@ exports.signToken = (id) => {
 
 exports.sendToken = (user, statusCode, req, res) => {
   const token = this.signToken(user._id);
-
   res.cookie("jwt", token, {
     expires: new Date(Date.now() + expirey),
     // httpOnly: true,
   });
 
   user.password = undefined;
-
   res.status(statusCode).json({
     status: "success",
     // token,
