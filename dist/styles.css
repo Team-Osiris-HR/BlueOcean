@@ -34,7 +34,6 @@
   overflow-y: hidden;
 }
 
-
 .donate:hover {
   background-color: #dc3545;
   border-color: #dc3545;
@@ -69,7 +68,8 @@
 
 .create-acc-btn,
 .create-acc-back-btn,
-.forgot-password {
+.forgot-password,
+.see-password {
   border: none 0px;
   background-color: transparent;
   font-size: 12px;

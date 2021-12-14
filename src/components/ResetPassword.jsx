@@ -1,6 +1,5 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import axios from 'axios'
@@ -11,11 +10,14 @@ class ResetPassword extends React.Component {
     super(props)
     this.state = {
       type: 'password',
-      render: 'form'
+      render: 'form',
+      password: '',
+      passwordConfirm: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.changeType = this.changeType.bind(this)
+    this.disableSubmit = this.disableSubmit.bind(this)
   }
 
   // todo handle change
@@ -40,6 +42,15 @@ class ResetPassword extends React.Component {
     }
   }
 
+  disableSubmit() {
+    if (this.state.password === '' || this.state.passwordConfirm === '') {
+      return true
+    } else if (this.state.password !== this.state.passwordConfirm) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   render() {
     // todo email form
@@ -48,42 +59,37 @@ class ResetPassword extends React.Component {
       return (
         <Form className='text-center' onSubmit={this.handleSubmit}>
           <h1>new password here</h1>
-          <InputGroup className="mb-3">
-            <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
-              <FloatingLabel
-                label='password'
-                className='mb-3'
-              >
-                <Form.Control
-                  aria-describedby="basic-addon2"
-                  type={this.state.type}
-                  name="password"
-                  placeholder="password"
-                  onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-          </InputGroup>
-
-          <InputGroup>
-            <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
-              <FloatingLabel
-                label='confirm password'
-                className='mb-3'
-              >
-                <Form.Control
-                  aria-describedby="basic-addon2"
-                  type={this.state.type}
-                  name="passwordConfirm"
-                  placeholder="confirm password"
-                  onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            <Button size='sm' variant="outline-secondary" id="button-addon2" onClick={() => this.changeType()}>
-              see password
-            </Button>
-          </InputGroup>
+          <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
+            <FloatingLabel
+              label='password'
+              className='mb-3'
+            >
+              <Form.Control
+                aria-describedby="basic-addon2"
+                type={this.state.type}
+                name="password"
+                placeholder="password"
+                onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="mb-3 mw-50" controlId="formBasicPasswordConfirm">
+            <FloatingLabel
+              label='confirm password'
+              className='mb-0'
+            >
+              <Form.Control
+                aria-describedby="basic-addon2"
+                type={this.state.type}
+                name="passwordConfirm"
+                placeholder="confirm password"
+                onChange={(e) => this.handleChange(e)} />
+            </FloatingLabel>
+            <button type='button' className='see-password' onClick={() => this.changeType()}>
+              <span>see password</span>
+            </button>
+          </Form.Group>
           <div className='text-center'>
-            <Button className='button' type="submit">
+            <Button className='button' type="submit" disabled={this.disableSubmit()}>
               Reset password
             </Button>
           </div>
