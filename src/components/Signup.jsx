@@ -163,7 +163,7 @@ class Signup extends React.Component {
             </Accordion.Item>
           </Accordion>
           <div className='text-center'>
-            <Button className='mb-3' size="lg" variant="primary" type="submit">
+            <Button className='button' size="lg" variant="primary" type="submit">
               Submit
             </Button>
           </div>
