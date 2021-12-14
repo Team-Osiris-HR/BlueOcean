@@ -94,7 +94,7 @@ class Feed extends React.Component {
           </Container>
         </div>
         <div className="bottom">
-          <Container className="text-center">
+          <Container>
             <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
           </Container>
           {this.state.showDonate ?
