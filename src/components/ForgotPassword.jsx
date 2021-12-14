@@ -2,6 +2,8 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 import axios from 'axios'
 
 
@@ -41,26 +43,30 @@ class ForgotPassword extends React.Component {
     // todo email form
     if (this.state.render === 'form') {
       return (
-        <Form className='text-center' onSubmit={this.handleSubmit}>
-          <h1>enter your email here</h1>
-          <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
-            <FloatingLabel
-              label='email'
-              className='mb-3'
-            >
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="email"
-                onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
-          </Form.Group>
-          <div className='text-center'>
-            <Button className='button' type="submit" disabled={this.disableSubmit()}>
-              Reset password
-            </Button>
-          </div>
-        </Form >
+        <Container>
+          <Col className='login-container'>
+            <Form className='text-center' onSubmit={this.handleSubmit}>
+              <h1>enter your email here</h1>
+              <Form.Group className="mb-3 mw-50" controlId="formBasicEmail">
+                <FloatingLabel
+                  label='email'
+                  className='mb-3'
+                >
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              <div className='text-center'>
+                <Button variant='primary' className='button' type="submit" disabled={this.disableSubmit()}>
+                  Reset password
+                </Button>
+              </div>
+            </Form >
+          </Col>
+        </Container>
       )
     } else {
       return (
