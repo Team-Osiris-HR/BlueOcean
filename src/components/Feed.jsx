@@ -10,9 +10,19 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDonate: false
+      showDonate: false,
+      itemName: '',
+      description: '',
+      category: 'appliances',
+      pickupOrDelivery: 'negotiable',
+      charitiesOnly: true,
+      photoURLs: [],
+      files: []
     };
     this.toggleDonate = this.toggleDonate.bind(this);
+    this.makeDonation = this.makeDonation.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleFileChange= this.handleFileChange.bind(this);
   }
 
   toggleDonate(e) {
@@ -22,6 +32,33 @@ class Feed extends React.Component {
     } else {
       this.setState({ showDonate: true });
     }
+  }
+
+  makeDonation(e) {
+
+  }
+
+  handleFileChange(e) {
+    let file = e.target.files
+    let files = this.state.files
+    var photoData = new FormData()
+    photoData.append('photos[]', file)
+    if (files.length >= 4) {
+      alert('Max of 4 files allowed!!')
+    } else {
+      files.push(file)
+      this.setState({
+        files: files
+      })
+    }
+  }
+
+
+  handleOnChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+
   }
 
 
@@ -60,7 +97,13 @@ class Feed extends React.Component {
           <Container className="text-center">
             <Button variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
           </Container>
-          {this.state.showDonate ? <Donate  toggleDonate={this.toggleDonate} currentUser={this.props.currentUser}/>: null}
+            {this.state.showDonate ?
+              <Donate
+              toggleDonate={this.toggleDonate}
+              currentUser={this.props.currentUser}
+              handleOnChange={this.handleOnChange}
+              handleFileChange={this.handleFileChange}
+            />: null}
         </div>
       </div>
     )
@@ -68,7 +111,5 @@ class Feed extends React.Component {
 
 }
 
-
-
-
 export default Feed;
+
