@@ -7,7 +7,7 @@ exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   const messages = await Messages.find({chatroom: req.chatroomId});
   for (let i = 0; i < messages.length; i++) {
     const user = await User.findById(messages[i].user);
-    messages[i].username = user.name;
+    messages[i].name = user.name;
   }
 
   if (!messages) {

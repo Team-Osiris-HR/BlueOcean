@@ -19,24 +19,18 @@ class Chat extends React.Component {
       user: this.props.user.name,
       chatSelectedStatus: false,
       chatSelected: this.props.itemObj,
-      listOfChats: [{name: 'kim', title: 'fridge', userPhoto: 'userPhoto', photos: 'photos'},
-                    {name: 'manny', title: 'grapes', userPhoto: 'userPhoto', photos: 'photos'},
-                    {name: 'cam', title: 'car', userPhoto: 'userPhoto', photos: 'photos'},
-                    {name: 'phil', title: 'guitar', userPhoto: 'userPhoto', photos: 'photos'},
-                    {name: 'matthew', title: 'weights', userPhoto: 'userPhoto', photos: 'photos'},
-                    {name: 'alex', title: 'stars', userPhoto: 'userPhoto', photos: 'photos'}],
-      messages: [{name: this.props.user.name, message: 'this is s a fake conversation', time: 7},
-                 {name: 'otherPerson', message: 'hey how are you?', time: 6},
-                 {name: this.props.user.name, message: 'Was goody', time: 5},
-                 {name: 'otherPerson', message: 'Are you able to drop off the item?', time: 4},
-                 {name: 'otherPerson', message: 'I would like to get it by noon', time: 3},
-                 {name: this.props.user.name, message: 'yeah I can do that!', time: 2},
-                 {name: 'otherPerson', message: 'Awesome see you then', time: 1}],
+      listOfChats: [],
+      messages: [],
       firstMessage: false
       }
     this.leaveChat = this.leaveChat.bind(this);
     this.selectChat = this.selectChat.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.getAllChats = this.getAllChats.bind(this);
+  }
+
+  componentDidMount () {
+    this.getAllChats();
   }
 
   getAllChats = () => {
@@ -44,6 +38,8 @@ class Chat extends React.Component {
     axios.get('/api/chatrooms/mychats')
       .then((result) => {
         console.log('chats', result.data);
+        this.setState({ listOfChats: result.data })
+        console.log(this.state.listOfChats)
       })
       .catch((error) => {
         console.log(error);
@@ -52,18 +48,18 @@ class Chat extends React.Component {
 
   checkIfChatExists = (user1, user2) => {
     // return roomNumber if true, false if not
-    // var listOfIds = [];
-    // this.state.listOfChats.map(chat => {
-    //   listOfIds.push(chat.PostId)
-    // })
+    var listOfIds = [];
+    this.state.listOfChats.map(chat => {
+      listOfIds.push(chat.PostId)
+    })
 
-    // if(listOfIds.includes(this.props.itemObj.id))
+    if(listOfIds.includes(this.props.itemObj.id)) {
+
+    }
   }
 
   newChat = (user1, user2) => {
-    // create new hash for room number
     var roomNumber = uuidv4();
-    // create new database entry {roomNumber: hash, user1: name, user2:name}
     axios.post('/api/chatrooms/newroom', {roomHash: roomNumber, postId: this.props.itemObj.id})
       .then((result) => {
         console.log(result.data);
@@ -74,10 +70,13 @@ class Chat extends React.Component {
   }
 
   getOldChat = (roomNumber) => {
-    // query into the table and return all the messages.
     axios.get(`/api/chatrooms/${roomNumber}/messages`)
-      .then((results) => {
-        console.log(results.data);
+      .then((result) => {
+        this.setState({ messages: result.data })
+        console.log(this.state.chatSelected);
+      })
+      .then((result) => {
+        this.setState({ chatSelectedStatus: true })
       })
       .catch((error) => {
         console.log(error);
@@ -93,12 +92,11 @@ class Chat extends React.Component {
     }
   }
 
-  selectChat = (chat) => {
-    this.setState({chatSelected: chat, chatSelectedStatus: true});
+  selectChat = (id) => {
+    this.getOldChat(id);
   }
 
   leaveChat = () => {
-    this.getOldChat('61b233aeebd11ca7af078d80');
     this.props.clearMessageStatus();
     this.setState({chatSelected: null, chatSelectedStatus: false});
   }
@@ -112,7 +110,7 @@ class Chat extends React.Component {
     // if not logged in
       // send message to db
       // render with setState
-      axios.post(`/api/chatrooms/${roomId}/messages/create`, {message: 'this is my test 3'})
+      axios.post(`/api/chatrooms/${roomId}/messages/create`, {message: 'this is my test 7'})
         .then((result) => {
           console.log('You sent a message')
         })
