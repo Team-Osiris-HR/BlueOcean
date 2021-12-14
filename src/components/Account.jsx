@@ -28,77 +28,79 @@ class Account extends React.Component {
     return (
       <>
         <h1>this is account page</h1>
-        <Container className="text-center">
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group controlId="formGridName"
-              className="mb-3">
-              <FloatingLabel
-                label='name'
-                className='mb-3'
-              >
-                <Form.Control type='input' defaultValue={this.state.currentUser.name} name='name' placeholder="Name" onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
+        <Container>
+          <Col className='account-container' >
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group controlId="formGridName"
+                className="mb-3">
+                <FloatingLabel
+                  label='name'
+                  className='mb-3'
+                >
+                  <Form.Control type='input' defaultValue={this.state.currentUser.name} name='name' placeholder="Name" onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridEmail">
-              <FloatingLabel
-                label='email'
-                className='mb-3'
-              >
-                <Form.Control defaultValue={this.state.currentUser.email} type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGridAddress" >
-              <FloatingLabel
-                label='address'
-                className='mb-3'
-              >
-                <Form.Control defaultValue={this.state.currentUser.address} placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGridPhone" >
-              <FloatingLabel
-                label='phone'
-                className='mb-3'
-              >
-                <Form.Control defaultValue={this.state.currentUser.phone} placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
-              </FloatingLabel>
-            </Form.Group>
-            {this.state.currentUser.role === 'charity' ?
-              <>
-                <Form.Group className="mb-3" controlId="formGridOrgAddress" >
-                  <FloatingLabel
-                    label='organization address'
-                    className='mb-3'
-                  >
-                    <Form.Control placeholder="Organization Address" name='organizationAddress' onChange={(e) => this.handleChange(e)} />
-                  </FloatingLabel>
-                </Form.Group>
+              <Form.Group className="mb-3" controlId="formGridEmail">
+                <FloatingLabel
+                  label='email'
+                  className='mb-3'
+                >
+                  <Form.Control defaultValue={this.state.currentUser.email} type="email" name='email' placeholder=" Email" onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formGridAddress" >
+                <FloatingLabel
+                  label='address'
+                  className='mb-3'
+                >
+                  <Form.Control defaultValue={this.state.currentUser.address} placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formGridPhone" >
+                <FloatingLabel
+                  label='phone'
+                  className='mb-3'
+                >
+                  <Form.Control defaultValue={this.state.currentUser.phone} placeholder="1230001234" name='phone' onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+              {this.state.currentUser.role === 'charity' ?
+                <>
+                  <Form.Group className="mb-3" controlId="formGridOrgAddress" >
+                    <FloatingLabel
+                      label='organization address'
+                      className='mb-3'
+                    >
+                      <Form.Control placeholder="Organization Address" name='organizationAddress' onChange={(e) => this.handleChange(e)} />
+                    </FloatingLabel>
+                  </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formGridOrgPhone" >
-                  <FloatingLabel
-                    label='organization phone'
-                    className='mb-3'
-                  >
-                    <Form.Control placeholder="Organization Phone" name='organizationPhone' onChange={(e) => this.handleChange(e)} />
-                  </FloatingLabel>
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="formGridOrgPhone" >
+                    <FloatingLabel
+                      label='organization phone'
+                      className='mb-3'
+                    >
+                      <Form.Control placeholder="Organization Phone" name='organizationPhone' onChange={(e) => this.handleChange(e)} />
+                    </FloatingLabel>
+                  </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formGridOrgURL" >
-                  <FloatingLabel
-                    label='organization url'
-                    className='mb-3'
-                  >
-                    <Form.Control placeholder="Organization URL" name='organizationURL' onChange={(e) => this.handleChange(e)} />
-                  </FloatingLabel>
-                </Form.Group>
-              </>
-              : null}
+                  <Form.Group className="mb-3" controlId="formGridOrgURL" >
+                    <FloatingLabel
+                      label='organization url'
+                      className='mb-3'
+                    >
+                      <Form.Control placeholder="Organization URL" name='organizationURL' onChange={(e) => this.handleChange(e)} />
+                    </FloatingLabel>
+                  </Form.Group>
+                </>
+                : null}
 
-            <Button className='text-center' size="lg" variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form >
+              <Button className='text-center' size="lg" variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form >
+          </Col>
         </Container>
       </>
     )
