@@ -13,6 +13,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
 import DonorItemPage from './itempage/DonorItemPage.jsx';
+import Account from './Account.jsx'
 
 
 class App extends React.Component {
@@ -186,6 +187,10 @@ class App extends React.Component {
           setRenderState={this.setRenderState}
           clearMessageStatus={this.clearMessageStatus} />
       )
+    } else if (this.state.render === 'account') {
+      return (
+        <Account />
+      )
     }
   }
 
@@ -195,7 +200,8 @@ class App extends React.Component {
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
           this.state.render === 'donoritempage' ||
-          this.state.render === 'chat' ?
+          this.state.render === 'chat' ||
+          this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}
             setSearch={this.setSearch}
