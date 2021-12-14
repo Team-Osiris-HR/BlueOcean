@@ -78,7 +78,7 @@ class Header extends React.Component {
                 <ButtonGroup className="mb-3" aria-label="pickupOption">
                   <Button variant="primary">pick up</Button>
                   <Button variant="secondary">delivery</Button>
-                  <Button variant="primary">requires assistance</Button>
+                  <Button variant="primary">negotiable</Button>
                 </ButtonGroup>
                 <h6>category</h6>
                 <ListGroup as="ul">
