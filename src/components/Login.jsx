@@ -17,13 +17,15 @@ class Login extends React.Component {
       password: '',
       render: 'login',
       token: '',
-      passwordPage: 'forgot'
+      passwordPage: 'forgot',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderForgotPassword = this.renderForgotPassword.bind(this)
     this.setToken = this.setToken.bind(this)
     this.setPasswordPage = this.setPasswordPage.bind(this)
+    this.errorMessage = this.errorMessage.bind(this)
   }
 
 
@@ -42,6 +44,7 @@ class Login extends React.Component {
         this.props.setRenderState("feed",)
       }).catch((err) => {
         console.log("🚀 ~ file: Login.jsx ~ line 38 ~ Login ~ .then ~ err", err)
+        this.setState({ error: true })
       });
   }
 
@@ -60,13 +63,11 @@ class Login extends React.Component {
   }
 
   setPasswordPage(input) {
-    // console.log('yes')
-    // if (this.passwordPage === 'forgot') {
-    //   this.setState({ passwordPage: 'reset' })
-    // } else {
-    //   this.setState({ passwordPage: 'forgot' })
-    // }
     this.setState({ passwordPage: input })
+  }
+
+  errorMessage(error) {
+    return <span style={{ fontSize: '12px', color: 'red' }}>wrong username/password. please try again</span>
   }
 
   render() {
@@ -92,6 +93,7 @@ class Login extends React.Component {
             >
               <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
+            {this.state.error ? this.errorMessage() : null}
           </Form.Group>
           <div className='text-center'>
             <button className='button' size="lg" type="submit">
