@@ -81,7 +81,7 @@ class Header extends React.Component {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <h6 className='mb-3' onClick={() => this.props.setRenderState('account')}>account</h6>
                 <ButtonGroup className="mb-3" aria-label="pickupOption">
-                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pick up</Button>
+                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
                   <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
                 </ButtonGroup>
@@ -91,7 +91,7 @@ class Header extends React.Component {
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>clothes</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>electronic</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>furnitures</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>furniture</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>pets</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>toys</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>vehicles</ListGroup.Item>

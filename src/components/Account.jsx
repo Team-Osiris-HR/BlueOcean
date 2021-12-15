@@ -10,18 +10,33 @@ class Account extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      id: this.props.currentUser._id,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange() {
-
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    axios.patch(`/api/users/${this.props.currentUser._id}/updateinfo`, {
+      name: this.state.name,
+      role: this.props.currentUser.role,
+      email: this.state.email,
+      phone: this.state.phone,
+      address: this.state.address,
+      loggedIn: this.props.currentUser.loggedIn
+    })
+      .then((result) => {
+        this.props.setCurrentUser(result.data.data)
+        alert('your info has been updated!')
+      }).catch((err) => {
+        console.log("🚀 ~ file: Account.jsx ~ line 41 ~ Account ~ .then ~ err", err)
+      });
   }
 
   render() {
