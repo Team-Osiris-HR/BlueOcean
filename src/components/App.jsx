@@ -26,7 +26,8 @@ class App extends React.Component {
       currentUser: {},
       search: '',
       newMessageStatus: false,
-      itemObj: {}
+      itemObj: null,
+      listOfChats: [],
 
     }
     this.renderView = this.renderView.bind(this)
@@ -37,12 +38,14 @@ class App extends React.Component {
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.setSearch = this.setSearch.bind(this)
     this.messagePoster = this.messagePoster.bind(this)
+    this.getAllChats = this.getAllChats.bind(this)
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
   }
 
   componentDidMount() {
     this.getPosts()
     this.getCookies()
+    this.getAllChats()
   }
 
   // * Grabs all the post, unfiltered
@@ -102,12 +105,23 @@ class App extends React.Component {
     this.setState({ search: e.target.value })
   }
 
+  getAllChats = () => {
+    // database query that returns all active chats. look at object above
+    axios.get('/api/chatrooms/mychats')
+      .then((result) => {
+        this.setState({ listOfChats: result.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   messagePoster = (item) => {
     this.setState({ render: 'chat', newMessageStatus: true, itemObj: item })
   }
 
   clearMessageStatus = () => {
-    this.setState({ newMessageStatus: false })
+    this.setState({ newMessageStatus: false, itemObj: {} })
   }
 
 
@@ -162,6 +176,7 @@ class App extends React.Component {
         <Chat
           itemObj={this.state.itemObj}
           user={this.state.currentUser}
+          listOfChats={this.state.listOfChats}
           currentPost={this.state.currentPost}
           newMessageStatus={this.state.newMessageStatus}
           setRenderState={this.setRenderState}
