@@ -15,11 +15,15 @@ class Login extends React.Component {
     this.state = {
       name: '',
       password: '',
-      render: 'login'
+      render: 'login',
+      token: '',
+      passwordPage: 'forgot'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderForgotPassword = this.renderForgotPassword.bind(this)
+    this.setToken = this.setToken.bind(this)
+    this.setPasswordPage = this.setPasswordPage.bind(this)
   }
 
 
@@ -47,6 +51,22 @@ class Login extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+  }
+
+  setToken(newToken) {
+    this.setState({
+      token: newToken,
+    })
+  }
+
+  setPasswordPage(input) {
+    // console.log('yes')
+    // if (this.passwordPage === 'forgot') {
+    //   this.setState({ passwordPage: 'reset' })
+    // } else {
+    //   this.setState({ passwordPage: 'forgot' })
+    // }
+    this.setState({ passwordPage: input })
   }
 
   render() {
@@ -87,16 +107,25 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      return (
-        <Container>
-          <ForgotPassword backToLogin={this.renderForgotPassword} />
-        </Container>
-      )
-      // return (
-      //   <Container>
-      //     <ResetPassword backToLogin={this.renderForgotPassword} />
-      //   </Container>
-      // )
+      if (this.state.passwordPage === 'forgot') {
+        return (
+          <Container>
+            <ForgotPassword
+              backToLogin={this.renderForgotPassword}
+              setRenderState={this.props.setRenderState}
+              setToken={this.setToken}
+              setPasswordPage={this.setPasswordPage}
+            />
+          </Container>
+        )
+      } else {
+        return (
+          <Container>
+            <ResetPassword backToLogin={this.renderForgotPassword} />
+          </Container>
+        )
+      }
+
     }
   }
 }

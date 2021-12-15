@@ -7,26 +7,8 @@
 5. [Contributors](#🤝-Contributors)
 
 ### General Info
-MikesList is a non-profit website that allows users to donate tangible items to charities or other users. 
+MikesList is a non-profit website that allows users to donate tangible items to charities or other users.
 
 ### ⚜️ Demo
-#### Login Page
-![](/readMeStuff/LoginPage.gif)
-
-The Login page allows the user to login. They can also switch to the signup page or forgot password page
-
-#### Signup Page
-
-#### Forgot Password Page
-
-#### Feed
-
-#### Item Page
-
-#### Donor Item Page
-
-#### Feed Side Bar
-
-#### Account Page
-
-#### Messages Page
+#### Overview
+![](/readMeStuff/ezgif.com-gif-maker.gif)

@@ -29,7 +29,8 @@ class App extends React.Component {
       newMessageStatus: false,
       itemObj: {},
       pickup: 'negotiable',
-      category: 'none'
+      category: 'none',
+      sort: 'date'
 
     }
     this.renderView = this.renderView.bind(this)
@@ -43,6 +44,7 @@ class App extends React.Component {
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   componentDidMount() {
@@ -54,8 +56,9 @@ class App extends React.Component {
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
+        var posts = res.data.posts.reverse()
         this.setState({
-          posts: res.data.posts
+          posts: posts
         })
       })
       .catch((err) => {
@@ -129,6 +132,9 @@ class App extends React.Component {
   setPickup(inputPickup) {
     this.setState({ pickup: inputPickup })
   }
+  setSort(inputSort) {
+    this.setState({ sort: inputSort })
+  }
 
   renderView() {
     if (this.state.render === "login") {
@@ -141,7 +147,7 @@ class App extends React.Component {
       )
     } else if (this.state.render === "signup") {
       return (
-        <Container >
+        <Container>
           <Col className='login-container'>
             <Signup setRenderState={this.setRenderState} />
           </Col>
@@ -165,6 +171,7 @@ class App extends React.Component {
           update={this.getPosts}
           category={this.state.category}
           pickup={this.state.pickup}
+          sort={this.state.sort}
         />
       )
     } else if (this.state.render === 'itempage') {
@@ -192,7 +199,11 @@ class App extends React.Component {
       )
     } else if (this.state.render === 'account') {
       return (
-        <Account currentUser={this.state.currentUser} />
+        <Account
+          currentUser={this.state.currentUser}
+          setCurrentUser={this.setCurrentUser}
+          setRenderState={this.setRenderState}
+        />
       )
     }
   }
@@ -210,6 +221,8 @@ class App extends React.Component {
             setSearch={this.setSearch}
             setCategory={this.setCategory}
             setPickup={this.setPickup}
+            setSort={this.setSort}
+            setCurrentUser={this.setCurrentUser}
             render={this.state.render}
           />
           : null}

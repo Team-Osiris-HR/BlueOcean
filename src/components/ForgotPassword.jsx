@@ -27,8 +27,16 @@ class ForgotPassword extends React.Component {
   // Todo handle submit
   handleSubmit(e) {
     e.preventDefault()
-    // todo post request to change password
-    this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+    axios.post('/api/users/forgot', {
+      email: this.state.email
+    })
+      .then((result) => {
+        this.setState({ render: 'confirm' })
+        this.props.setToken(result.data.token)
+      }).catch((err) => {
+        console.log(err)
+      });
+
   }
 
   disableSubmit() {
@@ -64,13 +72,16 @@ class ForgotPassword extends React.Component {
                   Reset password
                 </Button>
               </div>
+              <div>
+                <button className='create-acc-back-btn' type="button" onClick={() => this.props.backToLogin('login')}>back to login</button>
+              </div>
             </Form >
           </Col>
         </Container>
       )
     } else {
       return (
-        <div onClick={() => this.props.backToLogin('login')}>
+        <div onClick={() => this.props.setPasswordPage('reset')}>
           <span>We've sent you a reset link, please check your email</span>
         </div>
       )
