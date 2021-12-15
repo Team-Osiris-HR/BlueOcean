@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
+import { Button, Container, Row, Col, ButtonGroup, Stack } from 'react-bootstrap';
 import FeedTile from './FeedTile.jsx'
 import Donate from './Donate.jsx'
 import Map from './Map/Map.jsx'
@@ -10,8 +10,7 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feed: 'public',
-      sort: 'date',
+      feed: 'Public Feed',
       showDonate: false,
       title: '',
       description: '',
@@ -19,16 +18,13 @@ class Feed extends React.Component {
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
       files: [],
-      view: "sort"
+
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
-    this.makeDonation = this.makeDonation.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
-    this.toggleSort = this.toggleSort.bind(this);
-    this.toggleMap = this.toggleMap.bind(this);
   }
 
   toggleDonate(e) {
@@ -75,14 +71,6 @@ class Feed extends React.Component {
       })
   }
 
-  toggleMap(e) {
-    if (this.state.view === 'map') {
-      this.setState({view: 'sort'})
-    } else {
-      this.setState({ view: e.target.innerHTML });
-    }
-  }
-
   handleFileChange(e) {
     let file = e.target.files[0]
     let files = this.state.files;
@@ -99,16 +87,8 @@ class Feed extends React.Component {
     })
   }
 
-  toggleFeed() {
-    this.state.feed === 'public' ?
-      this.setState({ feed: 'myFeed' }) :
-      this.setState({ feed: 'public' })
-  }
-
-  toggleSort() {
-    this.state.sort === 'date' ?
-      this.setState({ sort: 'distance' }) :
-      this.setState({ sort: 'date' })
+  toggleFeed(e) {
+    this.setState({ feed: e.target.outerText })
   }
 
   render() {
@@ -116,25 +96,17 @@ class Feed extends React.Component {
     return (
       <div className="page">
         <div className="top">
-          <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => this.toggleMap(e)}>map</Button>
-            <React.Fragment>
-              {this.state.sort === 'date' ?
-                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
-                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by date</Button>
-              }
-            </React.Fragment>
-            <React.Fragment>
-              {this.state.feed === 'public' ?
-                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>My Feed</Button> :
-                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>Public</Button>
-              }
-            </React.Fragment>
+          <Stack direction="horizontal">
+            <ButtonGroup className="ms-auto">
+              <Button variant="primary" size="sm" onClick={this.toggleFeed}>Map</Button>
+              <Button variant="info" size="sm" onClick={this.toggleFeed}>Public Feed</Button>
+              <Button variant="primary" size="sm" onClick={this.toggleFeed}>My Posts</Button>
+            </ButtonGroup>
           </Stack>
         </div>
-        {this.state.view === "map" ?
+        {this.state.feed === "Map" ?
           (<div>
-            <Map type="feedView"
+            <Map
               posts={this.props.posts}
               currentUser={this.props.currentUser} />
           </div>)
@@ -151,10 +123,10 @@ class Feed extends React.Component {
                       return !val.charitiesOnly
                     }
                   }).filter((val) => {
-                    if (this.state.feed === 'public') {
+                    if (this.state.feed === 'Public Feed') {
                       return val
                     }
-                    if (this.state.feed === 'myFeed') {
+                    if (this.state.feed === 'My Posts') {
                       return val.user === this.props.currentUser._id
                     }
                   }).filter((val) => {

@@ -56,8 +56,9 @@ class App extends React.Component {
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
+        var posts = res.data.posts.reverse()
         this.setState({
-          posts: res.data.posts
+          posts: posts
         })
       })
       .catch((err) => {
@@ -170,6 +171,7 @@ class App extends React.Component {
           update={this.getPosts}
           category={this.state.category}
           pickup={this.state.pickup}
+          sort={this.state.sort}
         />
       )
     } else if (this.state.render === 'itempage') {
