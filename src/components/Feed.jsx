@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
-
 import FeedTile from './FeedTile.jsx'
 import Donate from './Donate.jsx'
+import Map from './Map/Map.jsx'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -16,12 +16,19 @@ class Feed extends React.Component {
       category: 'appliances',
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
-      files: []
+      files: [],
+      view: "sort"
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.makeDonation = this.makeDonation.bind(this);
+    this.toggleFeed = this.toggleFeed.bind(this);
+  }
+
+  toggleFeed (e) {
+    this.setState({view: e.target.innerHTML});
   }
 
   toggleDonate(e) {
@@ -94,10 +101,18 @@ class Feed extends React.Component {
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">sort</Button>
-            <Button className="rounded-pill" variant="outline-primary" size="sm">map</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>list</Button>
+            <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>map</Button>
           </Stack>
         </div>
+        {this.state.view === "map" ?
+        (<div>
+          <Map type="feedView"
+          posts={this.props.posts}
+          currentUser={this.props.currentUser}/>
+        </div>)
+        :
+        (<>
         <div className="middle">
           <Container>
             <Row xs={1} sm={2} md={3}>
@@ -132,6 +147,8 @@ class Feed extends React.Component {
               makeDonation={this.makeDonation}
             /> : null}
         </div>
+        </>
+        )}
       </div>
     )
   }
