@@ -54,18 +54,19 @@ class Login extends React.Component {
   }
 
   setToken(newToken) {
-
     this.setState({
-      token: newToken
+      token: newToken,
     })
   }
 
-  setPasswordPage() {
-    if (this.passwordPage === 'forgot') {
-      this.setState({ passwordPage: 'reset' })
-    } else {
-      this.setState({ passwordPage: 'forgot' })
-    }
+  setPasswordPage(input) {
+    // console.log('yes')
+    // if (this.passwordPage === 'forgot') {
+    //   this.setState({ passwordPage: 'reset' })
+    // } else {
+    //   this.setState({ passwordPage: 'forgot' })
+    // }
+    this.setState({ passwordPage: input })
   }
 
   render() {
@@ -109,7 +110,10 @@ class Login extends React.Component {
       if (this.state.passwordPage === 'forgot') {
         return (
           <Container>
-            <ForgotPassword backToLogin={this.renderForgotPassword} setToken={this.setToken} />
+            <ForgotPassword backToLogin={this.renderForgotPassword}
+              setToken={this.setToken}
+              setPasswordPage={this.setPasswordPage}
+            />
           </Container>
         )
       } else {

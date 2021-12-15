@@ -78,7 +78,7 @@ class ForgotPassword extends React.Component {
       )
     } else {
       return (
-        <div onClick={() => this.props.backToLogin('login')}>
+        <div onClick={() => this.props.setPasswordPage('reset')}>
           <span>We've sent you a reset link, please check your email</span>
         </div>
       )
