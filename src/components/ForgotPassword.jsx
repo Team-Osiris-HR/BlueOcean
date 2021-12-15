@@ -27,13 +27,14 @@ class ForgotPassword extends React.Component {
   // Todo handle submit
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/user/forgot', {
+    axios.post('/api/users/forgot', {
       email: this.state.email
     })
       .then((result) => {
-        this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+        this.setState({ render: 'confirm' })
+        this.props.setToken(result.data.token)
       }).catch((err) => {
-
+        console.log(err)
       });
 
   }
