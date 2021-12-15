@@ -19,7 +19,7 @@ router.get("/logout", authController.logout);
 router.get("/", userController.getAllUsers);
 
 router.get("/myinfo", userController.getMyInfo);
-router.get("/:id", authController.restrictTo("admin"), userController.getUser);
+router.get("/:id", userController.getUser);
 
 router.patch("/updatemypassword", authController.updatePassword);
 router.patch('/:id/updateinfo', userController.updateUser);
