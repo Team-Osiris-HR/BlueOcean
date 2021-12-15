@@ -72,6 +72,9 @@ class ForgotPassword extends React.Component {
                   Reset password
                 </Button>
               </div>
+              <div>
+                <button className='create-acc-back-btn' type="button" onClick={() => this.props.backToLogin('login')}>back to login</button>
+              </div>
             </Form >
           </Col>
         </Container>

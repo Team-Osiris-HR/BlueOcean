@@ -22,7 +22,8 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      toggleSearch: 'hide-search'
+      toggleSearch: 'hide-search',
+      chosenCategory: 'all'
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
@@ -32,14 +33,17 @@ class Header extends React.Component {
 
   chooseCategory(e) {
     this.props.setCategory(e.target.outerText)
+    this.setState({ chosenCategory: e.target.outerText })
   }
 
   choosePickup(e) {
     this.props.setPickup(e.target.outerText)
+    this.setState({ chosenPickup: e.target.outerText })
   }
 
   chooseSort(e) {
     this.props.setSort(e.target.outerText)
+    this.setState({ chosenSort: e.target.outerText })
   }
 
   logout() {
@@ -85,28 +89,30 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <h6 className='mb-3' onClick={() => this.props.setRenderState('account')}>account</h6>
+                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>account</Button>
+                <h6>pickup: {this.state.chosenPickup}</h6>
                 <ButtonGroup className="mb-3" aria-label="pickupOption">
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
                   <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
                 </ButtonGroup>
+                <h6>sort: {this.state.chosenSort}</h6>
                 <ButtonGroup className="mb-3" aria-label="sort">
                   <Button variant="primary" onClick={(e) => this.chooseSort(e)}>date</Button>
                   <Button variant="secondary" onClick={(e) => this.chooseSort(e)}>distance</Button>
                 </ButtonGroup>
-                <h6>category</h6>
-                <ListGroup as="ul">
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>all</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>appliances</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>clothes</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>electronics</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>furniture</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>pets</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>toys</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>vehicles</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>other</ListGroup.Item>
+                <h6>category: {this.state.chosenCategory}</h6>
+                <ListGroup as="ul" className='mb-5'>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>all</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>appliances</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>electronics</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>food</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>furniture</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>pets</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>toys</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>vehicles</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>other</ListGroup.Item>
                 </ListGroup>
               </Nav>
               <Button onClick={() => { this.logout() }}>
