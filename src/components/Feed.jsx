@@ -10,6 +10,8 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      feed: 'public',
+      sort: 'date',
       showDonate: false,
       title: '',
       description: '',
@@ -22,6 +24,8 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.toggleFeed = this.toggleFeed.bind(this);
+    this.toggleSort = this.toggleSort.bind(this);
   }
 
   toggleDonate(e) {
@@ -57,7 +61,7 @@ class Feed extends React.Component {
       condition: this.state.condition,
       deliveryOptions: this.state.deliveryOptions,
       charitiesOnly: this.state.charitiesOnly,
-      photos: photoFiles
+      //photos: photoFiles
       })
       .then((res) => {
         this.props.update()
@@ -83,23 +87,70 @@ class Feed extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-
   }
 
+  toggleFeed() {
+    this.state.feed === 'public' ?
+    this.setState({ feed: 'myFeed'}) :
+    this.setState({ feed: 'public'})
+  }
+
+  toggleSort() {
+    this.state.sort === 'date' ?
+    this.setState({ sort: 'distance'}) :
+    this.setState({ sort: 'date'})
+  }
 
   render() {
     return (
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">sort</Button>
-            <Button className="rounded-pill" variant="outline-primary" size="sm">map</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">map</Button>
+            <React.Fragment>
+              {this.state.sort === 'date' ?
+              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
+              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by date</Button>
+              }
+            </React.Fragment>
+            <React.Fragment>
+              {this.state.feed === 'public' ?
+              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>My Feed</Button> :
+              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>Public</Button>
+              }
+            </React.Fragment>
           </Stack>
         </div>
         <div className="middle">
           <Container>
             <Row xs={1} sm={2} md={3}>
-              {this.props.posts.filter((value) => {
+              {this.props.posts.reverse().filter((val) =>{
+                if (this.props.currentUser.role === 'charity') {
+                  return val
+                }
+                if (this.props.currentUser.role === 'user') {
+                  return !val.charitiesOnly
+                }
+              }).filter((val) => {
+                if (this.state.feed === 'public') {
+                  return val
+                }
+                if (this.state.feed === 'myFeed') {
+                  return val.user === this.props.currentUser._id
+                }
+              }).filter((val) => {
+                if (this.props.category === 'none' || this.props.category === 'all' || !this.props.category) {
+                  return val
+                } else {
+                  return val.category === this.props.category
+                }
+              }).filter((val) => {
+                if (this.props.pickup === 'negotiable' || !this.props.pickup) {
+                  return val
+                } else {
+                  return val.deliveryOptions === this.props.pickup
+                }
+              }).filter((value) => {
                 if (this.props.searchItem.length < 3) {
                   return value;
                 } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {

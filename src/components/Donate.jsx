@@ -52,7 +52,7 @@ var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) =>
               <option value="pets">Pets</option>
               <option value="toys">Toys</option>
               <option value="vehicles">Vehicles</option>
-              <option value="vehicles">Other</option>
+              <option value="other">Other</option>
             </Form.Select>
           </FloatingLabel>
         </Form.Group>

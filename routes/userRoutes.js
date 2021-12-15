@@ -5,6 +5,8 @@ const router = require("express").Router();
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
+router.post("/forgot", authController.forgotPassword);
+router.post('/reset', authController.resetPassword);
 
 router.use(authController.protect);
 router.get('/myinfo', userController.getMyInfo);
@@ -21,6 +23,7 @@ router.get("/:id", authController.restrictTo("admin"), userController.getUser);
 
 router.patch("/updatemypassword", authController.updatePassword);
 router.patch('/:id/updateinfo', userController.updateUser);
+router.patch('/')
 
 router.delete(
   "/:id",
