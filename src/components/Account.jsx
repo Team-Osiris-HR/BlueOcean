@@ -7,6 +7,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Col from 'react-bootstrap/Col'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 class Account extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Account extends React.Component {
       id: this.props.currentUser._id,
       password: '',
       passwordConfirm: '',
+      passwordCurrent: '',
       type: 'password'
     }
     this.handleChange = this.handleChange.bind(this)
@@ -50,7 +52,18 @@ class Account extends React.Component {
 
   handleChangePassword(e) {
     e.preventDefault()
-    console.log('this is handle change password')
+    axios.patch(`/api/users/updatemypassword`, {
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm,
+      passwordCurrent: this.state.passwordCurrent,
+    })
+      .then((result) => {
+        Cookies.remove('jwt')
+        alert('success. please log in again')
+        this.props.setRenderState('login')
+      }).catch((err) => {
+        console.log("🚀 ~ file: Account.jsx ~ line 63 ~ Account ~ .then ~ err", err)
+      });
   }
 
   disableSubmit() {
