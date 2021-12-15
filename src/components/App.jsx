@@ -163,6 +163,8 @@ class App extends React.Component {
           searchItem={this.state.search}
           currentUser={this.state.currentUser}
           update={this.getPosts}
+          category={this.state.category}
+          pickup={this.state.pickup}
         />
       )
     } else if (this.state.render === 'itempage') {
