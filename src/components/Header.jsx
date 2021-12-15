@@ -88,11 +88,14 @@ class Header extends React.Component {
                 <h6>category</h6>
                 <ListGroup as="ul">
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>appliances</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>electronics</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>electronic</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>pet</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>furnitures</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>pets</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>toys</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>vehicles</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>other</ListGroup.Item>
                 </ListGroup>
               </Nav>
               <Button onClick={() => { this.logout() }}>
