@@ -13,6 +13,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
 import DonorItemPage from './itempage/DonorItemPage.jsx';
+import Account from './Account.jsx'
 
 
 class App extends React.Component {
@@ -26,7 +27,9 @@ class App extends React.Component {
       currentUser: {},
       search: '',
       newMessageStatus: false,
-      itemObj: {}
+      itemObj: {},
+      pickup: 'negotiable',
+      category: 'none'
 
     }
     this.renderView = this.renderView.bind(this)
@@ -38,6 +41,8 @@ class App extends React.Component {
     this.setSearch = this.setSearch.bind(this)
     this.messagePoster = this.messagePoster.bind(this)
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
+    this.setCategory = this.setCategory.bind(this);
+    this.setPickup = this.setPickup.bind(this);
   }
 
   componentDidMount() {
@@ -117,6 +122,12 @@ class App extends React.Component {
     this.setState({ newMessageStatus: false })
   }
 
+  setCategory(inputCategory) {
+    this.setState({ category: inputCategory })
+  }
+  setPickup(inputPickup) {
+    this.setState({ pickup: inputPickup })
+  }
 
   renderView() {
     if (this.state.render === "login") {
@@ -175,6 +186,10 @@ class App extends React.Component {
           setRenderState={this.setRenderState}
           clearMessageStatus={this.clearMessageStatus} />
       )
+    } else if (this.state.render === 'account') {
+      return (
+        <Account currentUser={this.state.currentUser} />
+      )
     }
   }
 
@@ -184,10 +199,13 @@ class App extends React.Component {
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
           this.state.render === 'donoritempage' ||
-          this.state.render === 'chat' ?
+          this.state.render === 'chat' ||
+          this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}
             setSearch={this.setSearch}
+            setCategory={this.setCategory}
+            setPickup={this.setPickup}
             render={this.state.render}
           />
           : null}

@@ -78,8 +78,6 @@ class Feed extends React.Component {
     }
     files.push(file)
     this.setState({ files: files })
-
-
   }
 
 
