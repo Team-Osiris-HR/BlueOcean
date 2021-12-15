@@ -22,6 +22,7 @@ class Account extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.changeType = this.changeType.bind(this)
     this.disableSubmit = this.disableSubmit.bind(this)
+    this.handleChangePassword = this.handleChangePassword.bind(this)
   }
 
   handleChange(e) {
@@ -45,6 +46,11 @@ class Account extends React.Component {
       }).catch((err) => {
         console.log("🚀 ~ file: Account.jsx ~ line 41 ~ Account ~ .then ~ err", err)
       });
+  }
+
+  handleChangePassword(e) {
+    e.preventDefault()
+    console.log('this is handle change password')
   }
 
   disableSubmit() {
@@ -149,7 +155,17 @@ class Account extends React.Component {
         <Tab eventKey="password" title="password">
           <Container>
             <Col className='account-container' >
-              <Form onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.handleChangePassword}>
+
+                <Form.Group controlId="formGridCurrentPassword"
+                  className="mb-3">
+                  <FloatingLabel
+                    label='current password'
+                    className='mb-3'>
+                    <Form.Control type={this.state.type} name='passwordCurrent' placeholder="current password" onChange={(e) => this.handleChange(e)} />
+                  </FloatingLabel>
+                </Form.Group>
+
                 <Form.Group controlId="formGridPassword"
                   className="mb-3">
                   <FloatingLabel
