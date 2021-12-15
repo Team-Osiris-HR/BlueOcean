@@ -116,7 +116,8 @@ class Chat extends React.Component {
 
 
   render() {
-    console.log(this.state.chatSelected)
+    console.log(this.state.chatSelected);
+    
     return (
       <Container>
         <Col>
