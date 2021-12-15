@@ -95,6 +95,7 @@ class App extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+
   }
 
   // * set whatever page we want to render
@@ -213,6 +214,7 @@ class App extends React.Component {
           : null}
         {this.renderView()} {/* //* conditonal rendering based on what page we want to render */}
       </React.Fragment>
+
     );
   }
 }

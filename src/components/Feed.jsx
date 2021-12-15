@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
-
 import FeedTile from './FeedTile.jsx'
 import Donate from './Donate.jsx'
+import Map from './Map/Map.jsx'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -18,14 +18,24 @@ class Feed extends React.Component {
       category: 'appliances',
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
-      files: []
+      files: [],
+      view: "sort"
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+<<<<<<< HEAD
     this.toggleFeed = this.toggleFeed.bind(this);
     this.toggleSort = this.toggleSort.bind(this);
+=======
+    this.makeDonation = this.makeDonation.bind(this);
+    this.toggleFeed = this.toggleFeed.bind(this);
+  }
+
+  toggleFeed (e) {
+    this.setState({view: e.target.innerHTML});
+>>>>>>> dev
   }
 
   toggleDonate(e) {
@@ -62,7 +72,7 @@ class Feed extends React.Component {
       deliveryOptions: this.state.deliveryOptions,
       charitiesOnly: this.state.charitiesOnly,
       //photos: photoFiles
-      })
+    })
       .then((res) => {
         this.props.update()
         console.log(`Success! ${res}`)
@@ -91,14 +101,14 @@ class Feed extends React.Component {
 
   toggleFeed() {
     this.state.feed === 'public' ?
-    this.setState({ feed: 'myFeed'}) :
-    this.setState({ feed: 'public'})
+      this.setState({ feed: 'myFeed' }) :
+      this.setState({ feed: 'public' })
   }
 
   toggleSort() {
     this.state.sort === 'date' ?
-    this.setState({ sort: 'distance'}) :
-    this.setState({ sort: 'date'})
+      this.setState({ sort: 'distance' }) :
+      this.setState({ sort: 'date' })
   }
 
   render() {
@@ -109,78 +119,88 @@ class Feed extends React.Component {
             <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">map</Button>
             <React.Fragment>
               {this.state.sort === 'date' ?
-              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
-              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by date</Button>
+                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
+                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by date</Button>
               }
             </React.Fragment>
             <React.Fragment>
               {this.state.feed === 'public' ?
-              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>My Feed</Button> :
-              <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>Public</Button>
+                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>My Feed</Button> :
+                <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>Public</Button>
               }
             </React.Fragment>
           </Stack>
         </div>
-        <div className="middle">
-          <Container>
-            <Row xs={1} sm={2} md={3}>
-              {this.props.posts.reverse().filter((val) =>{
-                if (this.props.currentUser.role === 'charity') {
-                  return val
-                }
-                if (this.props.currentUser.role === 'user') {
-                  return !val.charitiesOnly
-                }
-              }).filter((val) => {
-                if (this.state.feed === 'public') {
-                  return val
-                }
-                if (this.state.feed === 'myFeed') {
-                  return val.user === this.props.currentUser._id
-                }
-              }).filter((val) => {
-                if (this.props.category === 'none' || this.props.category === 'all' || !this.props.category) {
-                  return val
-                } else {
-                  return val.category === this.props.category
-                }
-              }).filter((val) => {
-                if (this.props.pickup === 'negotiable' || !this.props.pickup) {
-                  return val
-                } else {
-                  return val.deliveryOptions === this.props.pickup
-                }
-              }).filter((value) => {
-                if (this.props.searchItem.length < 3) {
-                  return value;
-                } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
-                  return value;
-                }
-              }).map((post) => (
-                <Col
-                  className="text-center feed_card"
-                  key={post._id}>
-                  <FeedTile
-                    post={post}
-                    getPostId={this.props.getPostId}
-                  />
-                </Col>
-              ))}
-            </Row>
-          </Container>
-        </div>
-        <div className="bottom">
-          <Container>
-            <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
-          </Container>
-          {this.state.showDonate ?
-            <Donate
-              toggleDonate={this.toggleDonate}
-              handleOnChange={this.handleOnChange}
-              handleFileChange={this.handleFileChange}
-              makeDonation={this.makeDonation}
-            /> : null}
-        </div>
+        {this.state.view === "map" ?
+          (<div>
+            <Map type="feedView"
+              posts={this.props.posts}
+              currentUser={this.props.currentUser} />
+          </div>)
+          :
+          (<>
+            <div className="middle">
+              <Container>
+                <Row xs={1} sm={2} md={3}>
+                  {this.props.posts.reverse().filter((val) => {
+                    if (this.props.currentUser.role === 'charity') {
+                      return val
+                    }
+                    if (this.props.currentUser.role === 'user') {
+                      return !val.charitiesOnly
+                    }
+                  }).filter((val) => {
+                    if (this.state.feed === 'public') {
+                      return val
+                    }
+                    if (this.state.feed === 'myFeed') {
+                      return val.user === this.props.currentUser._id
+                    }
+                  }).filter((val) => {
+                    if (this.props.category === 'none' || this.props.category === 'all' || !this.props.category) {
+                      return val
+                    } else {
+                      return val.category === this.props.category
+                    }
+                  }).filter((val) => {
+                    if (this.props.pickup === 'negotiable' || !this.props.pickup) {
+                      return val
+                    } else {
+                      return val.deliveryOptions === this.props.pickup
+                    }
+                  }).filter((value) => {
+                    if (this.props.searchItem.length < 3) {
+                      return value;
+                    } else if (value.title.toLowerCase().includes(this.props.searchItem.toLowerCase())) {
+                      return value;
+                    }
+                  }).map((post) => (
+                    <Col
+                      className="text-center feed_card"
+                      key={post._id}>
+                      <FeedTile
+                        post={post}
+                        getPostId={this.props.getPostId}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </Container>
+            </div>
+            <div className="bottom">
+              <Container>
+                <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
+              </Container>
+              {this.state.showDonate ?
+                <Donate
+                  toggleDonate={this.toggleDonate}
+                  handleOnChange={this.handleOnChange}
+                  handleFileChange={this.handleFileChange}
+                  makeDonation={this.makeDonation}
+                /> : null}
+            </div>
+          </>
+          )}
       </div>
     )
   }

@@ -7,11 +7,13 @@ import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Accordion from 'react-bootstrap/Accordion'
+import SearchBar from './Map/SearchBar.jsx'
 import axios from 'axios'
 
 class Signup extends React.Component {
   constructor(props) {
     super(props)
+    this.searchBox = null;
     this.state = {
       name: '',
       email: '',
@@ -19,6 +21,8 @@ class Signup extends React.Component {
       passwordConfirm: '',
       phone: '',
       address: '',
+      lat: '',
+      lng: '',
       loggedIn: false,
       role: 'user',
       organizationAddress: '',
@@ -28,12 +32,27 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
     this.changeRole = this.changeRole.bind(this)
+    this.onPlacesChanged = this.onPlacesChanged.bind(this)
+    this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
   }
 
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
+  onSearchBoxMounted (ref) {
+    this.searchBox = ref;
+  }
+  onPlacesChanged() {
+    const places = this.searchBox.getPlaces();
+    console.log(places);
+    this.setState({
+      address: places[0].formatted_address,
+      lat: places[0].geometry.location.lat(),
+      lng: places[0].geometry.location.lng()})
+  }
+
+
 
   handleSubmit(e) {
     e.preventDefault()
@@ -45,6 +64,8 @@ class Signup extends React.Component {
       passwordConfirm: this.state.passwordConfirm,
       phone: this.state.phone,
       address: this.state.address,
+      location: {latitude: this.state.lat,
+      longitude: this.state.lng},
       loggedIn: false,
       orgnization: {
         phone: this.state.organizationPhone,
@@ -109,14 +130,10 @@ class Signup extends React.Component {
               <Form.Control type="password" placeholder="Confirm Password" name='passwordConfirm' onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formGridAddress" >
-            <FloatingLabel
-              label='address'
-              className='mb-3'
-            >
-              <Form.Control placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
-            </FloatingLabel>
+            <SearchBar onChange={(e) => this.handleChange(e)}
+            onPlacesChanged={this.onPlacesChanged}
+            onSearchBoxMounted={this.onSearchBoxMounted}/>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridPhone" >
