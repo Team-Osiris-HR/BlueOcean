@@ -1,16 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox, Loader } from '@react-google-maps/api';
 import { API_Key } from '../../../config.js';
-import { Button, Container, Row, Col, Offcanvas, Stack } from 'react-bootstrap';
-// import { getAllUsers } from '../../../controllers/userController.js';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 
 const Map = (props) => {
-  console.log(props.currentUser)
 
   const [ selected, setSelected ] = useState({});
   const [ view, setView] = useState({value: 'charities'});
   const [ markerList, setList ] = useState({});
+  const [ users, setUsers ] = useState({});
+  const [ isBusy, setIsBusy ] = useState(true);
+
+  useEffect(() => {
+    // clean-up control
+    var isSubscribed = true;
+
+    axios.get('/api/users/')
+      .then ((results) => {
+        if (isSubscribed) {
+          setUsers(results.data.data);
+          setIsBusy(false);
+          console.log(results.data.data);
+        }
+      })
+      .catch((err) => {
+        if (isSubscribed) {
+          console.log(err);
+        };
+      })
+
+    // unsubscribe
+    return () => (isSubscribed=false);
+  }, []);
 
   const onToggle = (ref) => {
     setView(ref.target.innerHTML);
@@ -19,10 +42,6 @@ const Map = (props) => {
   const onSelect = item => {
     setSelected(item);
   }
-
-  //const onLoad = (ref) => this.searchBox = ref;
-
-  const onPlacesChanged = () => console.log(this.searchBox.getPlaces());
 
   const mapStyles = {
     height: "80vh",
@@ -74,13 +93,16 @@ const Map = (props) => {
   ];
 
   return (
-    <>
+    isBusy ? (
+      <>
+      <p>loading...</p>
+      </>
+    ) : (
+      <>
     <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
-
     <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
      <LoadScript
-       googleMapsApiKey={API_Key}
-       libraries={["places"]}>
+       googleMapsApiKey={API_Key}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           options={{
@@ -104,7 +126,6 @@ const Map = (props) => {
                 center={item.location}
                 radius={500}
                 options={{geodesic: true,
-                strokeColor: "#FF0000",
                 strokeOpacity: 1.5,
                 strokeWeight: 2}}
                 onClick={() => onSelect(item)}
@@ -112,9 +133,6 @@ const Map = (props) => {
               )
             })
          }
-          : (
-           <div>other map</div>
-         )
         {
             selected.location &&
             (
@@ -132,36 +150,11 @@ const Map = (props) => {
             )
          }
      </GoogleMap>
-     <br />
-     <StandaloneSearchBox
-      //onLoad={onLoad}
-      onPlacesChanged={onPlacesChanged}
-      libraries={["places"]}>
-      <input
-        type="text"
-        placeholder="Search an address..."
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `240px`,
-          height: `32px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `14px`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-          position: "absolute",
-          left: "50%",
-          marginLeft: "-120px"
-        }}
-      />
-    </StandaloneSearchBox>
-    <br />
-    <button>Enter address</button>
      </LoadScript>
      </>
+    )
   )
+
 }
 
 export default Map;
