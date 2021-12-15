@@ -27,8 +27,15 @@ class ForgotPassword extends React.Component {
   // Todo handle submit
   handleSubmit(e) {
     e.preventDefault()
-    // todo post request to change password
-    this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+    axios.post('/api/user/forgot', {
+      email: this.state.email
+    })
+      .then((result) => {
+        this.setState({ render: 'confirm' }) // * this is gonna happen upon successful response from server
+      }).catch((err) => {
+
+      });
+
   }
 
   disableSubmit() {

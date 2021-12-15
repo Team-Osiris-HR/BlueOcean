@@ -15,11 +15,14 @@ class Login extends React.Component {
     this.state = {
       name: '',
       password: '',
-      render: 'login'
+      render: 'login',
+      token: '',
+      passwordPage: 'forgot'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderForgotPassword = this.renderForgotPassword.bind(this)
+    this.setToken = this.setToken.bind(this)
   }
 
 
@@ -47,6 +50,12 @@ class Login extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+  }
+
+  setToken(newToken) {
+    this.setState({
+      token: newToken
+    })
   }
 
   render() {
@@ -89,7 +98,7 @@ class Login extends React.Component {
     } else {
       return (
         <Container>
-          <ForgotPassword backToLogin={this.renderForgotPassword} />
+          <ForgotPassword backToLogin={this.renderForgotPassword} setToken={this.setToken} />
         </Container>
       )
       // return (

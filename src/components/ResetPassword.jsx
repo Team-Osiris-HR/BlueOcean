@@ -15,7 +15,7 @@ class ResetPassword extends React.Component {
       render: 'form',
       password: '',
       passwordConfirm: '',
-      email: '' // todo
+      email: '', // todo
       token: '' // todo
     }
     this.handleChange = this.handleChange.bind(this)
