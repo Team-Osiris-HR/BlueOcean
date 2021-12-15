@@ -6,7 +6,7 @@ const catchAsync = require('../utils/catchAsync.js');
 const factory = require('./handlerFactory.js');
 
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
-  const chatroom = await Chatroom.find({ product: req.chatroomId });
+  const chatroom = await Chatroom.findById(req.chatroomId);
   let messages = await Messages.find({ chatroom });
   // let messages = await Messages.find();
   // const post = await Post.findById(req.chatroomId);
