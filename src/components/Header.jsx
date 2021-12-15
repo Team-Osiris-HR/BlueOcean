@@ -13,6 +13,8 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Cookies from 'js-cookie'
+import { BsFillChatLeftTextFill } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
 
 import axios from 'axios'
 
@@ -20,19 +22,28 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      toggleSearch: 'hide-search'
+      toggleSearch: 'hide-search',
+      chosenCategory: 'all'
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
+    this.chooseSort = this.chooseSort.bind(this)
     this.logout = this.logout.bind(this)
   }
 
   chooseCategory(e) {
     this.props.setCategory(e.target.outerText)
+    this.setState({ chosenCategory: e.target.outerText })
   }
 
   choosePickup(e) {
     this.props.setPickup(e.target.outerText)
+    this.setState({ chosenPickup: e.target.outerText })
+  }
+
+  chooseSort(e) {
+    this.props.setSort(e.target.outerText)
+    this.setState({ chosenSort: e.target.outerText })
   }
 
   logout() {
@@ -48,26 +59,24 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Navbar bg="light" expand={false}>
+      <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
           <Col className="p-2 flex-shrink-1">
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
           </Col>
-          {this.props.render === 'itempage' || this.props.render === 'donoritempage' || this.props.render === 'chat' || this.props.render === 'account' ? <Button type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-          </Button> : null}
+          {this.props.render === 'itempage' || this.props.render === 'donoritempage' || this.props.render === 'chat' || this.props.render === 'account' ? <button className='search-button' type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
+            <BsArrowLeft size={24} />
+          </button> : null}
           <Col className="p-2 flex-fill">
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
-            {this.props.render === 'feed' ? <button className='search-button' alt-text="messages" onClick={() => { this.props.setRenderState('chat') }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chat-left-text" viewBox="0 0 16 16">
-                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
-              </svg>
-            </button> : null}
+            {this.props.render === 'feed' ?
+              <button
+                className='search-button' alt-text="messages" onClick={() => { this.props.setRenderState('chat') }}>
+                <BsFillChatLeftTextFill size={24} />
+              </button>
+              : null}
           </Col>
           <Navbar.Offcanvas
             id="offcanvasNavbar"
@@ -80,24 +89,30 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <h6 className='mb-3' onClick={() => this.props.setRenderState('account')}>account</h6>
+                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
+                <h6>pickup: {this.state.chosenPickup}</h6>
                 <ButtonGroup className="mb-3" aria-label="pickupOption">
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
                   <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
                 </ButtonGroup>
-                <h6>category</h6>
-                <ListGroup as="ul">
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>all</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>appliances</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>clothes</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>electronics</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>furniture</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>pets</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>toys</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>vehicles</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)}>other</ListGroup.Item>
+                <h6>sort: {this.state.chosenSort}</h6>
+                <ButtonGroup className="mb-3" aria-label="sort">
+                  <Button variant="primary" onClick={(e) => this.chooseSort(e)}>date</Button>
+                  <Button variant="secondary" onClick={(e) => this.chooseSort(e)}>distance</Button>
+                </ButtonGroup>
+                <h6>category: {this.state.chosenCategory}</h6>
+                <ListGroup as="ul" className='mb-5'>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>all</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>appliances</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>electronics</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>food</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>furniture</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>pets</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>toys</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>vehicles</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>other</ListGroup.Item>
                 </ListGroup>
               </Nav>
               <Button onClick={() => { this.logout() }}>
@@ -106,7 +121,7 @@ class Header extends React.Component {
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
-      </Navbar>
+      </Navbar >
     )
   }
 

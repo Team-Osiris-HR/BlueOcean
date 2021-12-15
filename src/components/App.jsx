@@ -29,7 +29,8 @@ class App extends React.Component {
       newMessageStatus: false,
       itemObj: {},
       pickup: 'negotiable',
-      category: 'none'
+      category: 'none',
+      sort: 'date'
 
     }
     this.renderView = this.renderView.bind(this)
@@ -43,6 +44,7 @@ class App extends React.Component {
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   componentDidMount() {
@@ -54,8 +56,9 @@ class App extends React.Component {
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
+        var posts = res.data.posts.reverse()
         this.setState({
-          posts: res.data.posts
+          posts: posts
         })
       })
       .catch((err) => {
@@ -129,6 +132,9 @@ class App extends React.Component {
   setPickup(inputPickup) {
     this.setState({ pickup: inputPickup })
   }
+  setSort(inputSort) {
+    this.setState({ sort: inputSort })
+  }
 
   renderView() {
     if (this.state.render === "login") {
@@ -165,6 +171,7 @@ class App extends React.Component {
           update={this.getPosts}
           category={this.state.category}
           pickup={this.state.pickup}
+          sort={this.state.sort}
         />
       )
     } else if (this.state.render === 'itempage') {
@@ -178,6 +185,7 @@ class App extends React.Component {
       return (
         <DonorItemPage
           id={this.state.currentPost}
+          setRenderState={this.setRenderState}
         />)
     } else if (this.state.render === 'chat') {
       return (
@@ -213,6 +221,7 @@ class App extends React.Component {
             setSearch={this.setSearch}
             setCategory={this.setCategory}
             setPickup={this.setPickup}
+            setSort={this.setSort}
             setCurrentUser={this.setCurrentUser}
             render={this.state.render}
           />

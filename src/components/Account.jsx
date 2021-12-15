@@ -199,7 +199,7 @@ class Account extends React.Component {
                   </button>
                 </Form.Group>
                 <Button className='text-center' size="lg" variant="primary" type="submit" disabled={this.disableSubmit()}>
-                  Update password
+                  Update
                 </Button>
               </Form >
             </Col>
