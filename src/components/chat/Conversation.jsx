@@ -22,7 +22,7 @@ const Conversation = (props) => {
       })}
       <div style={{ float: 'right' }}>
         <input placeholder='type message' value={props.message} onChange={props.handleMessage} ></input>
-        <button onClick={() => { props.sendMessage(props.chat.id) }}>Send</button>
+        <button onClick={() => { props.sendMessage(props.chat.chatroomId) }}>Send</button>
       </div>
     </div>
   )

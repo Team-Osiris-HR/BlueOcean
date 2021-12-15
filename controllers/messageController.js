@@ -8,14 +8,7 @@ const factory = require('./handlerFactory.js');
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   const chatroom = await Chatroom.findById(req.chatroomId);
   let messages = await Messages.find({ chatroom });
-  // let messages = await Messages.find();
-  // const post = await Post.findById(req.chatroomId);
-  // const chatroom = await Chatroom.find({ product: req.chatroomId });
-  // console.log(chatroom);
-  // const user = await User.findById(post.user);
-  // messages = messages.filter(message => {
-  //   return message.chatroom.toString() === chatroom[0]._id.toString();
-  // })
+
   if (!messages) {
     return res.sendStatus(404);
   }

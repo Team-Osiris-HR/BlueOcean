@@ -22,7 +22,7 @@ async function main(message) {
     html: "<b>Hello world?</b>", // html body
   });
 
-  // console.log("Message sent: ", info.messageId);
+  // .log("Message sent: ", info.messageId);
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
