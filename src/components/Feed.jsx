@@ -93,7 +93,6 @@ class Feed extends React.Component {
     this.setState({ files: files })
   }
 
-
   handleOnChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -113,6 +112,7 @@ class Feed extends React.Component {
   }
 
   render() {
+
     return (
       <div className="page">
         <div className="top">
@@ -143,7 +143,7 @@ class Feed extends React.Component {
             <div className="middle">
               <Container>
                 <Row xs={1} sm={2} md={3}>
-                  {this.props.posts.reverse().filter((val) => {
+                  {this.props.posts.filter((val) => {
                     if (this.props.currentUser.role === 'charity') {
                       return val
                     }
