@@ -30,7 +30,7 @@ exports.getUserChats = catchAsync(async (req, res) => {
     if (obj[i].userOne.name === req.user.name) {
       thisObj["name"] = obj[i].userTwo.name;
       thisObj["userPhoto"] = obj[i].userTwo.photo;
-      thisObj.id = obj[i].userTwo._id;
+      thisObj.donorId = obj[i].userTwo._id;
     } else {
       thisObj["name"] = obj[i].userOne.name;
       thisObj["userPhoto"] = obj[i].userOne.photo;

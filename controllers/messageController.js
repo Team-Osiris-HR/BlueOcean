@@ -10,11 +10,12 @@ exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   messages = messages.concat(await Messages.find({ userTwo: req.user._id }));
   // const chatroom = await Chatroom.findById(req.chatroomId);
   const post = await Post.findById(req.chatroomId);
+  const chatroom = await Chatroom.find({ product: req.chatroomId });
   const user = await User.findById(post.user);
   messages = messages.filter(message => {
-    console.log("id", message.user._id, req.user._id)
-    console.log(message.user._id.toString() === req.user._id.toString() || message.user._id.toString() === user._id.toString())
-    return message.user._id.toString() === req.user._id.toString() || message.user._id.toString() === user._id.toString() && post._id === req.chatroomId;
+    console.log(message);
+    // console.log("id", message.user._id, req.user._id)
+    return message.user._id.toString() === req.user._id.toString() || message.user._id.toString() === user._id.toString();
   })
   // messages = messages.filter((mesage) => message.userOne === req.);
   // for (let i = 0; i < messages.length; i++) {
