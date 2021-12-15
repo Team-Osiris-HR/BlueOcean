@@ -8,7 +8,7 @@ var FeedTile = ({ post, getPostId }) => (
     {
       post.photos.length > 0 ?
         <Card.Img className="feed_image" variant="top" src={post.photos[0]} />
-        : null
+        : <Card.Img className="feed_image" variant="top" src="https://www.indexdirect.ie/images/ownproducts/Credit57x40x127.jpg" />
     }
     < Card.Body className="card_body" >
       <Card.Title>{post.title}</Card.Title>
