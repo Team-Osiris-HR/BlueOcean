@@ -141,7 +141,7 @@ class App extends React.Component {
       )
     } else if (this.state.render === "signup") {
       return (
-        <Container >
+        <Container>
           <Col className='login-container'>
             <Signup setRenderState={this.setRenderState} />
           </Col>
@@ -191,7 +191,11 @@ class App extends React.Component {
       )
     } else if (this.state.render === 'account') {
       return (
-        <Account currentUser={this.state.currentUser} />
+        <Account
+          currentUser={this.state.currentUser}
+          setCurrentUser={this.setCurrentUser}
+          setRenderState={this.setRenderState}
+        />
       )
     }
   }
@@ -209,6 +213,7 @@ class App extends React.Component {
             setSearch={this.setSearch}
             setCategory={this.setCategory}
             setPickup={this.setPickup}
+            setCurrentUser={this.setCurrentUser}
             render={this.state.render}
           />
           : null}

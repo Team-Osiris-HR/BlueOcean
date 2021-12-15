@@ -75,7 +75,8 @@ class Header extends React.Component {
             placement="start"
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
+              {/* <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title> */}
+              <Offcanvas.Title id="offcanvasNavbarLabel">sample app</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">

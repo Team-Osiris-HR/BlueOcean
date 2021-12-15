@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Modal, Form, Button, FloatingLabel, Row, Col, Stack } from 'react-bootstrap';
 
 
-var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) => (
+var Donate = ({ toggleDonate, handleOnChange, handleFileChange, makeDonation }) => (
 
   <Modal show={toggleDonate} onHide={toggleDonate}>
     <Modal.Body>
@@ -32,7 +32,7 @@ var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) =>
               as='textarea'
               placeholder='Description'
               name='description'
-              style={{height: '100px'}}
+              style={{ height: '100px' }}
               onChange={handleOnChange}
             />
           </FloatingLabel>
@@ -97,7 +97,7 @@ var Donate = ({toggleDonate, handleOnChange, handleFileChange, makeDonation}) =>
           </FloatingLabel>
         </Form.Group>
         <Form.Group controlId="photosLinks" className="mb-3">
-        <Form.Label>Link Photos</Form.Label>
+          <Form.Label>Link Photos</Form.Label>
           <FloatingLabel controlId="photo1" label="Link a Photo">
             <Form.Control
               type="text"
