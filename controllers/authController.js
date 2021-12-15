@@ -3,10 +3,27 @@ const crypto = require("crypto");
 const catchAsync = require("../utils/catchAsync.js");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
+const nodemailer = require('nodemailer');
 
 const config = require("../controller.config.js");
 
 const expirey = 24 * 60 * 60 * 1000;
+
+
+async function main(message) {
+  let transporter = nodemailer.createTransport(require('../email.config.js'));
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <osiris@aledoux.net>', // sender address
+    to: "cam.alex.mccurdy@gmail.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+
+  // console.log("Message sent: ", info.messageId);
+}
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
@@ -124,6 +141,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email.`;
 
+  await main(message).catch(console.error);
   // await sendEmail({
   //   email: user.email,
   //   subject: 'Your password reset token (valid for 10 minutes)',
