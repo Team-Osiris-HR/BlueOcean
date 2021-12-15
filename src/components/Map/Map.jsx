@@ -23,16 +23,28 @@ const Map = (props) => {
         if (isSubscribed) {
           var charities = results.data.data.filter(user => user.role==="charity")
           setCharities(charities);
-
-          //setUsers(results.data.data);
           setIsBusy(false);
-          console.log(results.data.data);
         }
       })
       .catch((err) => {
         if (isSubscribed) {
           console.log(err);
         };
+      })
+
+    axios.get('/api/posts/')
+      .then((results) => {
+        if (isSubscribed) {
+          var items = results.data.posts;
+          console.log(items);
+          setItems(items);
+          setIsBusy(false);
+        }
+      })
+      .catch((err) => {
+        if (isSubscribed) {
+          console.log(err);
+        }
       })
 
     // unsubscribe
@@ -116,37 +128,32 @@ const Map = (props) => {
           zoom={15}
           center={defaultCenter}>
          {
-            locations.map(item => {
+           charities.length > 0 &&
+            charities.map(charity => {
               return view === 'charities' ?
               (
-              <Marker key={item.name}
-                position={item.location}
-                onClick={() => onSelect(item)}
+                charity.location &&
+              <Marker key={charity.name}
+                position={{
+                  lat: charity.location.latitude,
+                  lng: charity.location.longitude
+                }}
+                onClick={() => onSelect(charity)}
               />
-              )
-              :
-              (
-              <Circle key={item.name}
-                center={item.location}
-                radius={500}
-                options={{geodesic: true,
-                strokeOpacity: 1.5,
-                strokeWeight: 2}}
-                onClick={() => onSelect(item)}
-              />
-              )
-            })
-         }
+              ) : null})
+          }
         {
             selected.location &&
             (
               <InfoWindow
-              position={selected.location}
+              position={{
+                lat: selected.location.latitude,
+                lng: selected.location.longitude
+              }}
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
               <>
-              <img src={selected.img} width="50" height="50" />
               <p>{selected.name}</p>
               <p>{selected.address}</p>
               </>
