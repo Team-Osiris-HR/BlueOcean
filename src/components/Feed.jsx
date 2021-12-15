@@ -49,7 +49,7 @@ class Feed extends React.Component {
       photoFiles.append(`photo${i + 1}`, files[i])
     }
 
-    axios.post('/', {
+    axios.post('/api/posts', {
       name: this.props.currentUser.name,
       email: this.props.currentUser.email,
       title: this.state.title,
