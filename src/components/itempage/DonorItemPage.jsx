@@ -88,15 +88,14 @@ class DonorItemPage extends React.Component {
 
   deleteClicked(event) {
     event.preventDefault();
-    // axios.delete(`http://localhost:3000/api/post/${this.state.postData.id}`)
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.toggleDelete;
-    //   })
-    //   .catch((err) => {
-    //     console.log("🚀 ~ file: DonorItemPage.jsx ~ line 94 ~ DonorItemPage ~ deleteClicked ~ err", err)
-    //   })
-    this.toggleDelete();
+    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}/toggle`)
+      .then((res) => {
+        console.log(res);
+        this.props.setRenderState('feed');
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: DonorItemPage.jsx ~ line 94 ~ DonorItemPage ~ deleteClicked ~ err", err)
+      })
   }
 
   toggleEdit(event) {

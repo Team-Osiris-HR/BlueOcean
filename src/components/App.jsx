@@ -178,6 +178,7 @@ class App extends React.Component {
       return (
         <DonorItemPage
           id={this.state.currentPost}
+          setRenderState={this.setRenderState}
         />)
     } else if (this.state.render === 'chat') {
       return (
