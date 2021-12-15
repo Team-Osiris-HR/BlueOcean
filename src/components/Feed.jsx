@@ -23,15 +23,12 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
-<<<<<<< HEAD
     this.makeDonation = this.makeDonation.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
   }
 
   toggleFeed (e) {
     this.setState({view: e.target.innerHTML});
-=======
->>>>>>> f03e06132898e2a89a3ed1c161a79faa768a26d4
   }
 
   toggleDonate(e) {
@@ -104,7 +101,7 @@ class Feed extends React.Component {
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>sort</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>list</Button>
             <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleFeed}>map</Button>
           </Stack>
         </div>
@@ -115,7 +112,8 @@ class Feed extends React.Component {
           currentUser={this.props.currentUser}/>
         </div>)
         :
-        (<div className="middle">
+        (<>
+        <div className="middle">
           <Container>
             <Row xs={1} sm={2} md={3}>
               {this.props.posts.filter((value) => {
@@ -136,7 +134,7 @@ class Feed extends React.Component {
               ))}
             </Row>
           </Container>
-        </div> )}
+        </div>
         <div className="bottom">
           <Container>
             <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
@@ -149,6 +147,8 @@ class Feed extends React.Component {
               makeDonation={this.makeDonation}
             /> : null}
         </div>
+        </>
+        )}
       </div>
     )
   }

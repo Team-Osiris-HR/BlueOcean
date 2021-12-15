@@ -131,7 +131,8 @@ class Signup extends React.Component {
             </FloatingLabel>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGridAddress" >
-            <SearchBar onChange={(e) => this.handleChange(e)} onPlacesChanged={this.onPlacesChanged}
+            <SearchBar onChange={(e) => this.handleChange(e)}
+            onPlacesChanged={this.onPlacesChanged}
             onSearchBoxMounted={this.onSearchBoxMounted}/>
           </Form.Group>
 
