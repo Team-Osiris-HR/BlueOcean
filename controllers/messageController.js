@@ -7,22 +7,26 @@ const factory = require('./handlerFactory.js');
 
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   let messages = await Messages.find({ userOne: req.user._id });
+  //console.log('first get', messages)
   messages = messages.concat(await Messages.find({ userTwo: req.user._id }));
   // const chatroom = await Chatroom.findById(req.chatroomId);
   const post = await Post.findById(req.chatroomId);
   const chatroom = await Chatroom.find({ product: req.chatroomId });
+  console.log('chatRoom', chatroom);
   const user = await User.findById(post.user);
+  //console.log('second get', messages)
   messages = messages.filter(message => {
-    console.log(message);
+    //console.log(message.chatroom.toString() === chatroom[0]._id.toString());
     // console.log("id", message.user._id, req.user._id)
-    return message.user._id.toString() === req.user._id.toString() || message.user._id.toString() === user._id.toString();
+    return message.chatroom.toString() === chatroom[0]._id.toString();
+    // (message.user._id.toString() === req.user._id.toString() || message.user._id.toString() === user._id.toString()) && message.chatroom === chatroom[0]._id;
   })
   // messages = messages.filter((mesage) => message.userOne === req.);
   // for (let i = 0; i < messages.length; i++) {
   //   const user = await User.findById(messages[i].user);
   //   messages[i].name = user.name;
   // }
-
+  //console.log(messages)
   if (!messages) {
     return res.sendStatus(404);
   }

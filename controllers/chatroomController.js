@@ -34,8 +34,9 @@ exports.getUserChats = catchAsync(async (req, res) => {
     } else {
       thisObj["name"] = obj[i].userOne.name;
       thisObj["userPhoto"] = obj[i].userOne.photo;
-      thisObj.id = obj[i].userOne._id;
+      thisObj.donorId = obj[i].userOne._id;
     }
+    thisObj.chatroomId = userChats[i]._id;
     thisObj["title"] = obj[i].product.title;
     thisObj["photos"] = obj[i].product.photos[0] || [];
     thisObj["postId"] = obj[i].product._id;
