@@ -30,9 +30,9 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 * Js-cookie : 3.0.1
 * Jsonwebtoken : 8.5.1
 * Moment : 2.29.1
-*  Mongoose : 6.1.0
+* 💎 Mongoose : 6.1.0
 * Nodemailer : 6.7.2
-*  Nodemon : 2.0.15
+* 💎 Nodemon : 2.0.15
 * Popper.js : 1.16.1
 * 💎 React : 17.0.2
 * React-dom : 17.0.2
