@@ -14,7 +14,9 @@ class ResetPassword extends React.Component {
       type: 'password',
       render: 'form',
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      email: '', // todo
+      token: '' // todo
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,11 +32,20 @@ class ResetPassword extends React.Component {
   // Todo handle submit
   handleSubmit(e) {
     e.preventDefault()
-    // todo post request to change password
-    this.setState({
-      type: 'password',
-      render: 'confirm'
-    }) // * this is gonna happen upon successful response from server
+
+    axios.post(`api/users/reset/${this.state.token}`, {
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm
+    })
+      .then((result) => {
+        this.setState({
+          type: 'password',
+          render: 'confirm'
+        })
+      }).catch((err) => {
+        console.log("🚀 ~ file: ResetPassword.jsx ~ line 46 ~ ResetPassword ~ .then ~ err", err)
+      });
+
   }
 
   changeType() {
@@ -66,9 +77,22 @@ class ResetPassword extends React.Component {
 
             <Form className='text-center' onSubmit={this.handleSubmit}>
               <h1>new password here</h1>
+              <Form.Group className="mb-3 mw-50" controlId="formBasicToken">
+                <FloatingLabel
+                  label='add token here'
+                  className='mb-3'
+                >
+                  <Form.Control
+                    type='text'
+                    name="token"
+                    placeholder="token"
+                    onChange={(e) => this.handleChange(e)} />
+                </FloatingLabel>
+              </Form.Group>
+
               <Form.Group className="mb-3 mw-50" controlId="formBasicPassword">
                 <FloatingLabel
-                  label='password min 6 char'
+                  label='new password min 6 char'
                   className='mb-3'
                 >
                   <Form.Control
