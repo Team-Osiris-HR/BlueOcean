@@ -8,11 +8,11 @@ const factory = require('./handlerFactory.js');
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
   let messages = await Messages.find({ userOne: req.user._id });
   messages = messages.concat(await Messages.find({ userTwo: req.user._id }));
-  const chatroom = await Chatroom.findById(req.chatroomId);
-  const post = await Post.findById(chatroom.product);
+  // const chatroom = await Chatroom.findById(req.chatroomId);
+  const post = await Post.findById(req.chatroomId);
   const user = await User.findById(post.user);
   messages = messages.filter(message => {
-    return message.userOne === req.user._id && message.userTwo === user._id || message.userOne === user._id && message.userTwo === req.user._id;
+    return message.user === req.user._id  || message.user === user._id && post._id === req.chatroomId
   })
   // messages = messages.filter((mesage) => message.userOne === req.);
   // for (let i = 0; i < messages.length; i++) {
