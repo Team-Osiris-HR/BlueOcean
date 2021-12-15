@@ -10,6 +10,7 @@ const postController = require('../controllers/postController.js');
 
 router.use(authController.protect);
 
+
 router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getOnePost);
 
