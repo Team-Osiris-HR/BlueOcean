@@ -44,9 +44,8 @@ class Feed extends React.Component {
 
     let photoFiles = new FormData()
     let files = this.state.files;
-    for (var i = 0; i < files.length; i++) {
-      photoFiles.append(`photo${i + 1}`, files[i])
-    }
+    photoFiles.append(`photos`, files.concat(photoUrls))
+
     this.toggleDonate(e)
 
     axios.post('/api/posts', {
@@ -58,8 +57,7 @@ class Feed extends React.Component {
       condition: this.state.condition,
       deliveryOptions: this.state.deliveryOptions,
       charitiesOnly: this.state.charitiesOnly,
-      photoLinks: photoUrls,
-      photoFiles: photoFiles
+      photos: photoFiles
       })
       .then((res) => {
         this.props.update()
