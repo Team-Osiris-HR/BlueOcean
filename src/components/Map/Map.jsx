@@ -10,7 +10,8 @@ const Map = (props) => {
   const [ selected, setSelected ] = useState({});
   const [ view, setView] = useState({value: 'charities'});
   const [ markerList, setList ] = useState({});
-  const [ users, setUsers ] = useState({});
+  const [ charities, setCharities ] = useState({});
+  const [ items, setItems ] = useState({});
   const [ isBusy, setIsBusy ] = useState(true);
 
   useEffect(() => {
@@ -20,7 +21,10 @@ const Map = (props) => {
     axios.get('/api/users/')
       .then ((results) => {
         if (isSubscribed) {
-          setUsers(results.data.data);
+          var charities = results.data.data.filter(user => user.role==="charity")
+          setCharities(charities);
+
+          //setUsers(results.data.data);
           setIsBusy(false);
           console.log(results.data.data);
         }
