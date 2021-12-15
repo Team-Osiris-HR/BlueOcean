@@ -141,7 +141,7 @@ class App extends React.Component {
       )
     } else if (this.state.render === "signup") {
       return (
-        <Container >
+        <Container>
           <Col className='login-container'>
             <Signup setRenderState={this.setRenderState} />
           </Col>
