@@ -46,7 +46,11 @@ class Feed extends React.Component {
     let formData = new FormData()
     let files = this.state.files;
     // for (var i = 0; i < files.length; i++) {
-    //   photoFiles.append(`photo${i + 1}`, files[i])
+    //   formData.append('photos', {
+    //     uri: files[i].uri,
+    //     type: files[i].type,
+    //     name: files[i].fileName
+    //   })
     // }
     formData.append('photos', files[0]);
     formData.append('name', this.props.currentUser.name);
