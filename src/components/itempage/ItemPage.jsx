@@ -29,7 +29,7 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
+    // console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
@@ -146,7 +146,7 @@ class ItemPage extends React.Component {
 
 
   render() {
-    console.log(this.state.postData)
+    // console.log(this.state.postData)
     return (
       <Container className="itemContainer" >
         <Col>
