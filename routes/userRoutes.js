@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 router.post("/forgot", authController.forgotPassword);
-router.post('/reset', authController.resetPassword);
+router.post('/reset/:token', authController.resetPassword);
 
 router.use(authController.protect);
 router.get('/myinfo', userController.getMyInfo);
