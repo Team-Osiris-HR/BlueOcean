@@ -111,7 +111,7 @@ class Feed extends React.Component {
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm">map</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>map</Button>
             <React.Fragment>
               {this.state.sort === 'date' ?
                 <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
