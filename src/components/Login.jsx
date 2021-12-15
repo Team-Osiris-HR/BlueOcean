@@ -110,7 +110,9 @@ class Login extends React.Component {
       if (this.state.passwordPage === 'forgot') {
         return (
           <Container>
-            <ForgotPassword backToLogin={this.renderForgotPassword}
+            <ForgotPassword
+              backToLogin={this.renderForgotPassword}
+              setRenderState={this.props.setRenderState}
               setToken={this.setToken}
               setPasswordPage={this.setPasswordPage}
             />
