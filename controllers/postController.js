@@ -13,6 +13,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 
 exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
+  console.log(req.photos)
   const newPost = await Post.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -33,7 +34,7 @@ exports.getOnePost = catchAsync(async (req, res, next) => {
 exports.updatePost = catchAsync(async (req, res, next) => {
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
-    new: true,
+    new: true
   });
   res.status(200).json({
     status: 'success',

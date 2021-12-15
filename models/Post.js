@@ -30,6 +30,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     // enum: ['electronics', 'clothing', 'books', 'furniture', 'other'], DO SOMETHING WITH ME LATER PLEASE
   },
+  charitiesOnly: {
+    type: Boolean,
+    default:false,
+  },
   location: {
     latitude: {
       type: Number,
@@ -40,7 +44,6 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-
     ref: 'User',
   },
   QAs: [{
