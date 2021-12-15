@@ -192,6 +192,7 @@ class App extends React.Component {
         <Account
           currentUser={this.state.currentUser}
           setCurrentUser={this.setCurrentUser}
+          setRenderState={this.setRenderState}
         />
       )
     }

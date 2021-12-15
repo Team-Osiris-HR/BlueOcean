@@ -34,6 +34,7 @@ class Account extends React.Component {
       .then((result) => {
         this.props.setCurrentUser(result.data.data)
         alert('your info has been updated!')
+        this.props.setRenderState('feed')
       }).catch((err) => {
         console.log("🚀 ~ file: Account.jsx ~ line 41 ~ Account ~ .then ~ err", err)
       });
