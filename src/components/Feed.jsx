@@ -22,7 +22,6 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
-    this.makeDonation = this.makeDonation.bind(this);
   }
 
   toggleDonate(e) {
@@ -48,8 +47,9 @@ class Feed extends React.Component {
     for (var i = 0; i < files.length; i++) {
       photoFiles.append(`photo${i + 1}`, files[i])
     }
+    this.toggleDonate(e)
 
-    axios.post('/', {
+    axios.post('/api/posts', {
       name: this.props.currentUser.name,
       email: this.props.currentUser.email,
       title: this.state.title,
@@ -60,8 +60,9 @@ class Feed extends React.Component {
       charitiesOnly: this.state.charitiesOnly,
       photoLinks: photoUrls,
       photoFiles: photoFiles
-    })
+      })
       .then((res) => {
+        this.props.update()
         console.log(`Success! ${res}`)
       })
       .catch((err) => {
