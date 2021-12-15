@@ -40,12 +40,13 @@ class Signup extends React.Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
+
   onSearchBoxMounted (ref) {
     this.searchBox = ref;
   }
+
   onPlacesChanged() {
     const places = this.searchBox.getPlaces();
-    console.log(places);
     this.setState({
       address: places[0].formatted_address,
       lat: places[0].geometry.location.lat(),

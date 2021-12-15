@@ -28,10 +28,7 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
     this.toggleSort = this.toggleSort.bind(this);
-  }
-
-  toggleFeed(e) {
-    this.setState({ view: e.target.innerHTML });
+    this.toggleMap = this.toggleMap.bind(this);
   }
 
   toggleDonate(e) {
@@ -78,6 +75,14 @@ class Feed extends React.Component {
       })
   }
 
+  toggleMap(e) {
+    if (this.state.view === 'map') {
+      this.setState({view: 'sort'})
+    } else {
+      this.setState({ view: e.target.innerHTML });
+    }
+  }
+
   handleFileChange(e) {
     let file = e.target.files[0]
     let files = this.state.files;
@@ -112,7 +117,7 @@ class Feed extends React.Component {
       <div className="page">
         <div className="top">
           <Stack direction="horizontal" gap={2}>
-            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={this.toggleFeed}>map</Button>
+            <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => this.toggleMap(e)}>map</Button>
             <React.Fragment>
               {this.state.sort === 'date' ?
                 <Button className="rounded-pill" variant="outline-primary" size="sm" onClick={this.toggleSort}>sort by distance</Button> :
