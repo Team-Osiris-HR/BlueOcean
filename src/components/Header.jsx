@@ -26,6 +26,7 @@ class Header extends React.Component {
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
+    this.chooseSort = this.chooseSort.bind(this)
     this.logout = this.logout.bind(this)
   }
 
@@ -35,6 +36,10 @@ class Header extends React.Component {
 
   choosePickup(e) {
     this.props.setPickup(e.target.outerText)
+  }
+
+  chooseSort(e) {
+    this.props.setSort(e.target.outerText)
   }
 
   logout() {
@@ -85,6 +90,10 @@ class Header extends React.Component {
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
                   <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
+                </ButtonGroup>
+                <ButtonGroup className="mb-3" aria-label="sort">
+                  <Button variant="primary" onClick={(e) => this.chooseSort(e)}>date</Button>
+                  <Button variant="secondary" onClick={(e) => this.chooseSort(e)}>distance</Button>
                 </ButtonGroup>
                 <h6>category</h6>
                 <ListGroup as="ul">
