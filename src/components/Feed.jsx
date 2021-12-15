@@ -27,6 +27,7 @@ class Feed extends React.Component {
     this.handleFileChange = this.handleFileChange.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
+    this.toggleSort = this.toggleSort.bind(this);
   }
 
   toggleFeed(e) {
