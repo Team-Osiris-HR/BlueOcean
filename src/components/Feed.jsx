@@ -25,17 +25,12 @@ class Feed extends React.Component {
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
-<<<<<<< HEAD
-    this.toggleFeed = this.toggleFeed.bind(this);
-    this.toggleSort = this.toggleSort.bind(this);
-=======
     this.makeDonation = this.makeDonation.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
   }
 
-  toggleFeed (e) {
-    this.setState({view: e.target.innerHTML});
->>>>>>> dev
+  toggleFeed(e) {
+    this.setState({ view: e.target.innerHTML });
   }
 
   toggleDonate(e) {
