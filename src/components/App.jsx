@@ -29,7 +29,8 @@ class App extends React.Component {
       newMessageStatus: false,
       itemObj: {},
       pickup: 'negotiable',
-      category: 'none'
+      category: 'none',
+      sort: 'date'
 
     }
     this.renderView = this.renderView.bind(this)
@@ -43,6 +44,7 @@ class App extends React.Component {
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   componentDidMount() {
@@ -129,6 +131,9 @@ class App extends React.Component {
   setPickup(inputPickup) {
     this.setState({ pickup: inputPickup })
   }
+  setSort(inputSort) {
+    this.setState({ sort: inputSort })
+  }
 
   renderView() {
     if (this.state.render === "login") {
@@ -213,6 +218,7 @@ class App extends React.Component {
             setSearch={this.setSearch}
             setCategory={this.setCategory}
             setPickup={this.setPickup}
+            setSort={this.setSort}
             setCurrentUser={this.setCurrentUser}
             render={this.state.render}
           />
