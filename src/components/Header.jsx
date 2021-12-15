@@ -59,7 +59,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Navbar bg="light" expand={false}>
+      <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
           <Col className="p-2 flex-shrink-1">
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
@@ -89,7 +89,7 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>account</Button>
+                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
                 <h6>pickup: {this.state.chosenPickup}</h6>
                 <ButtonGroup className="mb-3" aria-label="pickupOption">
                   <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>

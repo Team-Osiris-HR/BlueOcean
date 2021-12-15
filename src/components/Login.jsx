@@ -94,9 +94,9 @@ class Login extends React.Component {
             </FloatingLabel>
           </Form.Group>
           <div className='text-center'>
-            <Button className='button' size="lg" type="submit">
+            <button className='button' size="lg" type="submit">
               Submit
-            </Button>
+            </button>
           </div>
           <div>
             <button className='forgot-password' type="button" onClick={() => this.renderForgotPassword()}>forgot password?</button>

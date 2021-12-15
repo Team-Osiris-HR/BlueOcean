@@ -132,7 +132,14 @@
   height: 60px;
   left: calc(50% - 282px / 2);
   top: calc(50% - 60px / 2 + 299px);
+  font-size: 22px;
+  border: 0px none;
+  color: white;
 
-  background: rgba(65, 0, 250, 0.56);
+  background-color: rgba(65, 0, 250, 0.56);
   border-radius: 13px;
+}
+
+.container-fluid {
+  background-color: rgb(65, 0, 250, 0.69);
 }
