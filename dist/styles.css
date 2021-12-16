@@ -42,11 +42,12 @@
 
 .photobox {
   height: 77%;
-  width: 100%
+  width: 100%;
 }
 
 .cardTextBox {
-  height: 23%
+  height: 23%;
+  background-color: #7D4EFC;
 }
 
 .login-hello,
