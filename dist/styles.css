@@ -26,27 +26,27 @@
 }
 
 .feed_card {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .tile {
-  max-height: 260px;
+  height: 255px;
   overflow-y: hidden;
-}
-
-.donate:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .feed_image {
-  object-fit: contain;
-  height: 180px;
-  width: 100%;
+  height: 100%;
 }
 
-.card_body {
-  padding-top: 10px;
+.photobox {
+  height: 77%;
+  width: 100%
+}
+
+.cardTextBox {
+  height: 23%
 }
 
 .login-hello,

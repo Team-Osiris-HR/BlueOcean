@@ -99,7 +99,7 @@ class Feed extends React.Component {
           <Stack direction="horizontal">
             <ButtonGroup className="ms-auto">
               <Button variant="primary" size="sm" onClick={this.toggleFeed}>Map</Button>
-              <Button variant="info" size="sm" onClick={this.toggleFeed}>Public Feed</Button>
+              <Button variant="info" size="sm" className="text-white" onClick={this.toggleFeed}>Public Feed</Button>
               <Button variant="primary" size="sm" onClick={this.toggleFeed}>My Posts</Button>
             </ButtonGroup>
           </Stack>
