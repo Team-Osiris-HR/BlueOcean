@@ -143,7 +143,7 @@ class Chat extends React.Component {
     return (
       <>
 
-        <ChatHeader />
+        <ChatHeader setRenderState={this.props.setRenderState} />
         <Container>
           <Col>
             {!this.state.chatSelectedStatus ?

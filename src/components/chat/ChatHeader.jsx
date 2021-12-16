@@ -60,7 +60,7 @@ class ChatHeader extends React.Component {
     return (
       <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
-          <Button>Back</Button>
+          <Button onClick={() => this.props.setRenderState('feed')}>Back</Button>
           <Col className="p-2 flex-fill">
             <span>Inbox</span>
           </Col>
