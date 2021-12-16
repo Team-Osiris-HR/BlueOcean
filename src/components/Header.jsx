@@ -56,7 +56,7 @@ class Header extends React.Component {
         Cookies.remove('jwt')
         setTimeout(() => {
           this.props.setRenderState("login")
-        }, 1500)
+        }, 1000)
       }).catch((err) => {
         console.log(err)
       });
