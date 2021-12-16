@@ -18,7 +18,10 @@ class Feed extends React.Component {
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
       files: [],
-
+      posts: [],
+      mapBtn: 'top_buttons',
+      publicBtn: 'selected',
+      userFdBtn: 'top_buttons'
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
@@ -45,22 +48,29 @@ class Feed extends React.Component {
     if (this.state.photo4) { photoUrls.push(this.state.photo4) }
     if (this.state.photo5) { photoUrls.push(this.state.photo5) }
 
-    let photoFiles = new FormData()
+    let formData = new FormData()
     let files = this.state.files;
-    photoFiles.append(`photos`, files.concat(photoUrls))
-
-    this.toggleDonate(e)
-
-    axios.post('/api/posts', {
-      name: this.props.currentUser.name,
-      email: this.props.currentUser.email,
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      condition: this.state.condition,
-      deliveryOptions: this.state.deliveryOptions,
-      charitiesOnly: this.state.charitiesOnly,
-      //photos: photoFiles
+    // for (var i = 0; i < files.length; i++) {
+    //   formData.append('photos', {
+    //     uri: files[i].uri,
+    //     type: files[i].type,
+    //     name: files[i].fileName
+    //   })
+    // }
+    formData.append('photos', files[0]);
+    formData.append('name', this.props.currentUser.name);
+    formData.append('email', this.props.currentUser.email);
+    formData.append('title', this.state.title);
+    formData.append('description', this.state.description);
+    formData.append('category', this.state.category);
+    formData.append('condition', this.state.condition);
+    formData.append('deliveryOptions', this.state.deliveryOptions);
+    formData.append('charitiesOnly', this.state.charitiesOnly);
+    formData.append('photoUrls', photoUrls);
+    axios.post('/api/posts', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data;`
+      }
     })
       .then((res) => {
         this.props.update()
@@ -88,19 +98,43 @@ class Feed extends React.Component {
   }
 
   toggleFeed(e) {
-    this.setState({ feed: e.target.outerText })
+    var selection = e.target.outerText
+    if (selection === 'Public Feed') {
+      this.setState({
+        feed: 'Public Feed',
+        mapBtn: 'top_buttons',
+        publicBtn: 'selected',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'Map') {
+      this.setState({
+        feed:'Map',
+        mapBtn: 'selected',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'My Posts') {
+      this.setState({
+        feed:'My Posts',
+        mapBtn: 'top_buttons',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'selected'
+      })
+    }
   }
 
-  render() {
 
+  render() {
     return (
       <div className="page">
         <div className="top">
           <Stack direction="horizontal">
             <ButtonGroup className="ms-auto">
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>Map</Button>
-              <Button variant="info" size="sm" className="text-white" onClick={this.toggleFeed}>Public Feed</Button>
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>My Posts</Button>
+              <button className={this.state.mapBtn} onClick={this.toggleFeed}>Map</button>
+              <button className={this.state.publicBtn} onClick={this.toggleFeed}>Public Feed</button>
+              <button className={this.state.userFdBtn} onClick={this.toggleFeed}>My Posts</button>
             </ButtonGroup>
           </Stack>
         </div>
@@ -114,13 +148,13 @@ class Feed extends React.Component {
           (<>
             <div className="middle">
               <Container>
-                <Row xs={1} sm={2} md={3}>
+                <Row xs={1} md={2} lg={3}>
                   {this.props.posts.filter((val) => {
                     if(val.active) {
                       return val
                     }
                   }).filter((val) => {
-                    if (this.props.currentUser.role === 'charity') {
+                    if (this.props.currentUser.role === 'charity' || this.props.currentUser.role === 'admin') {
                       return val
                     }
                     if (this.props.currentUser.role === 'user') {
@@ -166,7 +200,7 @@ class Feed extends React.Component {
             </div>
             <div className="bottom">
               <Container>
-                <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
+                <button className='donateBtn' size="lg" onClick={this.toggleDonate}>Donate</button>
               </Container>
               {this.state.showDonate ?
                 <Donate

@@ -5,6 +5,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require('socket.io')
 const io = new Server(server);
+const cors = require('cors');
 
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -29,7 +30,7 @@ mongoose.connect(db).then(() => {
   console.log("db connected");
 });
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("dist"));

@@ -41,6 +41,7 @@ class App extends React.Component {
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.setSearch = this.setSearch.bind(this)
     this.messagePoster = this.messagePoster.bind(this)
+    this.getAllChats = this.getAllChats.bind(this)
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
@@ -50,13 +51,14 @@ class App extends React.Component {
   componentDidMount() {
     this.getPosts()
     this.getCookies()
+    this.getAllChats()
   }
 
   // * Grabs all the post, unfiltered
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
-        var posts = res.data.posts.reverse()
+        var posts = res.data.posts.reverse();
         this.setState({
           posts: posts
         })
@@ -118,12 +120,23 @@ class App extends React.Component {
     this.setState({ search: e.target.value })
   }
 
+  getAllChats = () => {
+    // database query that returns all active chats. look at object above
+    axios.get('/api/chatrooms/mychats')
+      .then((result) => {
+        this.setState({ listOfChats: result.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   messagePoster = (item) => {
     this.setState({ render: 'chat', newMessageStatus: true, itemObj: item })
   }
 
   clearMessageStatus = () => {
-    this.setState({ newMessageStatus: false })
+    this.setState({ newMessageStatus: false, itemObj: {} })
   }
 
   setCategory(inputCategory) {
@@ -192,6 +205,7 @@ class App extends React.Component {
         <Chat
           itemObj={this.state.itemObj}
           user={this.state.currentUser}
+          listOfChats={this.state.listOfChats}
           currentPost={this.state.currentPost}
           newMessageStatus={this.state.newMessageStatus}
           setRenderState={this.setRenderState}
