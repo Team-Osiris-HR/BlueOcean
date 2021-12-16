@@ -154,7 +154,8 @@ class ItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '}
+            {/* <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '} */}
+            <button type="button" className="messageposterbutton" onClick={() => { this.props.messagePoster(this.state.postData) }} >Message Poster</button>
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
@@ -164,18 +165,20 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            <ItemMap donor={this.state.postData.donor}/>
+            <ItemMap donor={this.state.postData.donor} />
           </div>
 
           <div className="bottombuttonscontainer">
 
             <div className="askmodal">
-              <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
+              {/* <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button> */}
+              <button type="button" className="askbutton" style={{ "marginTop": "2%" }} onClick={this.toggleModel} >Ask Question</button>
               {this.state.showAsk ? this.askModal() : null}
             </div>
 
             <div className="reportmodal">
-              <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button>
+              {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button> */}
+              <button type="button" className="reportbutton" style={{ "marginTop": "2%" }} onClick={this.toggleReport}>Report Posting</button>
               {this.state.showReport ? this.reportModal() : null}
             </div>
 
