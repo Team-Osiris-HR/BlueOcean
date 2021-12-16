@@ -16,6 +16,9 @@ import Cookies from 'js-cookie'
 import { BsChatLeftText } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
 
+import ToggleButton from 'react-bootstrap/ToggleButton'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
 import axios from 'axios'
 
 class Header extends React.Component {
@@ -23,7 +26,7 @@ class Header extends React.Component {
     super(props)
     this.state = {
       toggleSearch: 'hide-search',
-      chosenCategory: 'all'
+      chosenCategory: 'all',
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
@@ -93,16 +96,16 @@ class Header extends React.Component {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
                 <h6>pickup: {this.state.chosenPickup}</h6>
-                <ButtonGroup className="mb-3" aria-label="pickupOption">
-                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
-                  <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
-                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
-                </ButtonGroup>
+                <ToggleButtonGroup name='pickupOption' className="mb-3" aria-label="pickupOption" type='checkbox'>
+                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='pickup'>pickup</ToggleButton>
+                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='delivery'>delivery</ToggleButton>
+                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='negotiable'>negotiable</ToggleButton>
+                </ToggleButtonGroup>
                 <h6>sort: {this.state.chosenSort}</h6>
-                <ButtonGroup className="mb-3" aria-label="sort">
-                  <Button variant="primary" onClick={(e) => this.chooseSort(e)}>date</Button>
-                  <Button variant="secondary" onClick={(e) => this.chooseSort(e)}>distance</Button>
-                </ButtonGroup>
+                <ToggleButtonGroup name='sort' className="mb-3" aria-label="sort">
+                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.chooseSort(e)}>date</ToggleButton>
+                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.chooseSort(e)}>distance</ToggleButton>
+                </ToggleButtonGroup>
                 <h6>category: {this.state.chosenCategory}</h6>
                 <ListGroup as="ul" className='mb-5'>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>all</ListGroup.Item>

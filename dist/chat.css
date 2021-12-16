@@ -6,10 +6,12 @@
 
 .message-container {
   height: 500px;
+  max-height: 500px;
   border: 2px solid red;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  flex-grow: 1;
+  /* display: -ms-flexbox;
+  display: -webkit-flex; */
+  /* display: flex; */
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -25,6 +27,7 @@
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
+  overflow: scroll;
 }
 
 .otherUserMessage {
