@@ -14,7 +14,7 @@ const Map = (props) => {
   const [ items, setItems ] = useState({});
   const [ isBusy, setIsBusy ] = useState(true);
   const [ allLocations, setAllLocations ] = useState([]);
-  const [ index, setIndex ] = useState();
+  const [ index, setIndex ] = useState(0);
 
   const users = [];
   props.posts.map((post) => {
@@ -38,10 +38,11 @@ const Map = (props) => {
     setView(e.target.innerHTML);
   }
 
-  const onSelect = (item, index) => {
+  const onSelect = (item, i) => {
     console.log(item);
+    console.log(i);
     setSelected(item);
-    setIndex(index);
+    setIndex(i);
   }
 
   const mapStyles = {
@@ -112,7 +113,7 @@ const Map = (props) => {
                   lat: charity.location.latitude,
                   lng: charity.location.longitude
                 }}
-                onClick={() => onSelect(charity)}
+                onClick={() => onSelect(charity, 0)}
               />
               )
             })
@@ -136,19 +137,18 @@ const Map = (props) => {
          ) : null}
 
         {
-            selected.location &&
+            allLocations[index] &&
             (
               <InfoWindow
               position={{
-                lat: allLocations[i].latitude
-                lng: allLocations[i].longitude
+                lat: allLocations[index].latitude,
+                lng: allLocations[index].longitude
               }}
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
               <>
-              <p>{selected.name}</p>
-              <p>{selected.address}</p>
+              <p>{selected.title}</p>
               </>
             </InfoWindow>
             )
