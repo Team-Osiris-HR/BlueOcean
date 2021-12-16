@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
+import ItemMap from '../Map/ItemMap.jsx'
 
 
 class ItemPage extends React.Component {
@@ -29,7 +30,7 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
+    // console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
@@ -41,7 +42,7 @@ class ItemPage extends React.Component {
   }
 
   getItem() {
-    axios.get(`http://localhost:3000/api/posts/${this.props.currentPost}`)
+    axios.get(`/api/posts/${this.props.currentPost}`)
       .then((res) => {
         var post = res.data.post;
         // console.log(post);
@@ -57,7 +58,7 @@ class ItemPage extends React.Component {
     // console.log('Someone wants to ask a question: ', this.state.askInput);
     event.preventDefault();
     var question = this.state.askInput;
-    axios.post(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "questionText": question })
+    axios.post(`/api/posts/${this.state.postData.id}`, { "questionText": question })
       .then((res) => {
         // console.log(res.data);
         this.getItem();
@@ -146,14 +147,14 @@ class ItemPage extends React.Component {
 
 
   render() {
-    console.log(this.state.postData)
+    // console.log(this.state.postData)
     return (
       <Container className="itemContainer" >
         <Col>
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={() => {this.props.messagePoster(this.state.postData)}}>Message Poster</Button>{' '}
+            <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '}
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
@@ -163,7 +164,7 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            <p>Map Place Holder</p>
+            <ItemMap donor={this.state.postData.donor}/>
           </div>
 
           <div className="bottombuttonscontainer">
