@@ -82,7 +82,7 @@
 }
 
 .editbutton:hover {
-  background-color:#6742cc;
+  background-color:#6742CC;
 }
 
 .editbutton:active {
@@ -100,7 +100,7 @@
 }
 
 .messageposterbutton:hover {
-  background-color:#6742cc;
+  background-color:#6742CC;
 }
 
 .messageposterbutton:active {
@@ -118,10 +118,46 @@
 }
 
 .askbutton:hover {
-  background-color:#6742cc;
+  background-color:#6742CC;
 }
 
 .askbutton:active {
   position:relative;
 	top:1px;
+}
+
+.reportbutton {
+  border: none;
+  border-radius: 13px;
+  width: 145px;
+  height: 45px;
+  background-color: #DC3545;
+  color: white;
+}
+
+.reportbutton:hover {
+  background-color: #C2303E;
+}
+
+.reportbutton:active {
+  position: relative;
+  top: 1px;
+}
+
+.deletebutton {
+  border: none;
+  border-radius: 13px;
+  width: 145px;
+  height: 45px;
+  background-color: #DC3545;
+  color: white;
+}
+
+.deletebutton:hover {
+  background-color: #C2303E;
+}
+
+.deletebutton:active {
+  position: relative;
+  top: 1px;
 }

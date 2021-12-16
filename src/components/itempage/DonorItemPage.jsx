@@ -303,7 +303,8 @@ class DonorItemPage extends React.Component {
             <p>Map Place Holder</p>
           </div>
           <div className="deletemodal">
-            <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleDelete} >Delete Posting</Button>
+            {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleDelete} >Delete Posting</Button> */}
+            <button type="button" className="deletebutton" style={{ "marginTop": "2%" }} onClick={this.toggleDelete} >Delete Posting</button>
             {this.state.showDelete ? this.deleteModal() : null}
           </div>
         </Col>

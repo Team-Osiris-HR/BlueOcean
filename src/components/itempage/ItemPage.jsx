@@ -177,7 +177,8 @@ class ItemPage extends React.Component {
             </div>
 
             <div className="reportmodal">
-              <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button>
+              {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button> */}
+              <button type="button" className="reportbutton" style={{ "marginTop": "2%" }} onClick={this.toggleReport}>Report Posting</button>
               {this.state.showReport ? this.reportModal() : null}
             </div>
 
