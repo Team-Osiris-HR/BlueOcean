@@ -127,8 +127,12 @@ class Feed extends React.Component {
 
 
   render() {
+    var page;
+    if (this.props.currentUser.role === 'user') { page="page"}
+    if (this.props.currentUser.role === 'charity') { page="charityPage"}
+
     return (
-      <div className="page">
+      <div className={page}>
         <div className="top">
           <Stack direction="horizontal">
             <ButtonGroup className="ms-auto">
@@ -198,6 +202,7 @@ class Feed extends React.Component {
                 </Row>
               </Container>
             </div>
+            {this.props.currentUser.role === 'user' ?
             <div className="bottom">
               <Container>
                 <button className='donateBtn' size="lg" onClick={this.toggleDonate}>Donate</button>
@@ -209,7 +214,7 @@ class Feed extends React.Component {
                   handleFileChange={this.handleFileChange}
                   makeDonation={this.makeDonation}
                 /> : null}
-            </div>
+            </div> : null}
           </>
           )}
       </div>
