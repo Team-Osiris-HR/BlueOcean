@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const catchAsync = require("../utils/catchAsync.js");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const config = require("../controller.config.js");
 
@@ -124,6 +124,7 @@ exports.restrictTo = (...roles) => {
 };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -148,7 +149,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  console.log(req.params)
   const hashedToken = crypto
     .createHash("sha256")
     .update(req.params.token)

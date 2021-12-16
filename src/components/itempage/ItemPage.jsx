@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 // import data from '../../../mockData.js';
 import Photos from './Photos.jsx';
 import Qa from './Qa.jsx';
+import ItemMap from '../Map/ItemMap.jsx'
 
 
 class ItemPage extends React.Component {
@@ -29,8 +30,13 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     console.log('Component Did Mount');
     // axios.post('/api/users/login', { "name": "manny", "password": "123456" })
+=======
+    // console.log('Component Did Mount');
+    // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
+>>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
     //   })
@@ -146,14 +152,14 @@ class ItemPage extends React.Component {
 
 
   render() {
-    console.log(this.state.postData)
+    // console.log(this.state.postData)
     return (
       <Container className="itemContainer" >
         <Col>
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={() => {this.props.messagePoster(this.state.postData)}}>Message Poster</Button>{' '}
+            <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '}
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
@@ -163,7 +169,7 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            <p>Map Place Holder</p>
+            <ItemMap donor={this.state.postData.donor}/>
           </div>
 
           <div className="bottombuttonscontainer">

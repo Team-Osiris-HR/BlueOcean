@@ -5,7 +5,7 @@ const Photos = ({ images }) => {
   return (
     <div>
       <Carousel fade className="mx-auto" >
-        {images ? images.map((image, index) => (
+        {images !== undefined && images.length !== 0 ? images.map((image, index) => (
           <Carousel.Item key={index} >
             <img
               className="d-block mw-100 mx-auto"
@@ -13,7 +13,9 @@ const Photos = ({ images }) => {
               alt={`slide ${index}`}
             />
           </Carousel.Item>
-        )) : null}
+        )) : <Carousel.Item >
+          <img className="d-block mw-100 mx-auto" src="https://www.indexdirect.ie/images/ownproducts/noimage.jpg" alt="only slide" />
+        </Carousel.Item>}
       </Carousel>
     </div>
   );
