@@ -142,11 +142,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     message: "created token",
-<<<<<<< HEAD
-    token: resetToken
-=======
     token: resetToken,
->>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
   });
 });
 
@@ -183,10 +179,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
-<<<<<<< HEAD
     token: req.params.token,
-=======
->>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
     data: {
       user,
     },
