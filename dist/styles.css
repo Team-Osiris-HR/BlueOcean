@@ -47,7 +47,7 @@
 
 .cardTextBox {
   height: 23%;
-  background-color: #7D4EFC;
+  background-color: #7d4efc;
 }
 
 .login-hello,
@@ -91,40 +91,6 @@
 .search-button {
   border: none 0px;
   background-color: transparent;
-}
-
-.messageContainerBox {
-  display: flex;
-  flex-direction: column;
-}
-
-.conversationEntry {
-  display: flex;
-  margin: 15px;
-  border: 2px gray solid;
-  border-radius: 10px;
-}
-
-.userMessage {
-  align-self: flex-end;
-  float: right;
-  padding: 0 1%;
-  margin-top: 3px;
-  border: 2px solid red;
-  border-radius: 10px;
-  height: auto;
-  width: 300px;
-  word-break: break-all;
-}
-
-.otherUserMessage {
-  padding: 0 1%;
-  margin-top: 3px;
-  border: 2px solid gray;
-  border-radius: 10px;
-  height: auto;
-  width: 300px;
-  word-break: break-all;
 }
 
 .button {
