@@ -125,6 +125,7 @@ class App extends React.Component {
     // database query that returns all active chats. look at object above
     axios.get('/api/chatrooms/mychats')
       .then((result) => {
+        console.log('got here')
         this.setState({ listOfChats: result.data })
       })
       .catch((error) => {
@@ -209,6 +210,7 @@ class App extends React.Component {
           listOfChats={this.state.listOfChats}
           currentPost={this.state.currentPost}
           newMessageStatus={this.state.newMessageStatus}
+          getAllChats={this.getAllChats}
           setRenderState={this.setRenderState}
           clearMessageStatus={this.clearMessageStatus} />
       )
@@ -229,7 +231,6 @@ class App extends React.Component {
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
           this.state.render === 'donoritempage' ||
-          this.state.render === 'chat' ||
           this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}

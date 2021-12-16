@@ -51,9 +51,14 @@ class Chat extends React.Component {
       })
       if(this.state.chatSelected) {
         if (!ids.includes(this.state.chatSelected.id)){
-          this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
+          console.log('test', this.state.chatSelected)
+          console.log('test2', Object.keys(this.state.chatSelected).length > 0)
+          if (Object.keys(this.state.chatSelected).length > 0) {
+            this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
+          }
         } else {
           this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
+
         }
       }
   }
@@ -86,29 +91,30 @@ class Chat extends React.Component {
   sendMessage = (roomId, messageObj) => {
     if (this.state.firstMessageStatus) {
       this.newChat(this.state.chatSelected.id)
-      this.setState({chatSelectedStatus: false})
-      getAllChats = () => {
-        // database query that returns all active chats. look at object above
-        axios.get('/api/chatrooms/mychats')
-          .then((result) => {
-            this.setState({ listOfChats: result.data })
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
+      this.props.getAllChats();
       setTimeout(()=>{
         axios.post(`/api/chatrooms/${this.state.newRoom}/messages/create`, { message: this.state.message })
         .then((result) => {
           console.log('You sent a message')
-          // this.socket.emit('joinRoom', id)
-          // this.socket.emit('send', messageObj, this.state.newRoom)
+          var newChat = {
+            chatroomId: this.state.newRoom,
+            donorId: null,
+            name: this.state.chatSelected.donor,
+            photos: this.state.chatSelected.photos[0],
+            postId: this.state.chatSelected.id,
+            title: this.state.chatSelected.title,
+            userPhoto: null,
+          }
+          var newArray = this.state.listOfChats.slice();
+          newArray.push(newChat);
+          this.setState({ listOfChats: newArray })
+          this.leaveChat();
         })
         .catch((error) => {
           console.log(error);
         })
         this.setState({ message: '' })
-      }, 300)
+      }, 200)
     } else {
       this.socket.emit('send', messageObj, roomId)
       axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
@@ -130,6 +136,7 @@ class Chat extends React.Component {
 
   leaveChat = () => {
     this.props.clearMessageStatus();
+    this.props.getAllChats();
     this.setState({ chatSelected: null, chatSelectedStatus: false, firstMessageStatus: false });
   }
 
@@ -138,13 +145,14 @@ class Chat extends React.Component {
   }
 
   render() {
-    console.log(this.state.chatSelected)
+    console.log('list', this.props)
     return (
       <Container>
         <Col>
           {!this.state.chatSelectedStatus ?
             <>
-              <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button>
+              <Button type="button" onClick={() => {
+                this.props.setRenderState('feed') }}>Back</Button>
               <ListOfConversations
                 chats={this.state.listOfChats}
                 selectChat={this.selectChat} />
