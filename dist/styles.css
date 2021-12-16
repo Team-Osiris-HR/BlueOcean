@@ -26,28 +26,28 @@
 }
 
 .feed_card {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .tile {
-  max-height: 260px;
+  height: 255px;
   overflow-y: hidden;
-}
-
-
-.donate:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .feed_image {
-  object-fit: contain;
-  height: 180px;
+  height: 100%;
+}
+
+.photobox {
+  height: 77%;
   width: 100%;
 }
 
-.card_body {
-  padding-top: 10px;
+.cardTextBox {
+  height: 23%;
+  background-color: #7D4EFC;
 }
 
 .login-hello,
@@ -67,9 +67,22 @@
   transform: translate(-50%, -50%);
 }
 
+.account-container {
+  display: flex;
+  justify-content: center;
+  -webkit-box-pack: center;
+  max-width: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .create-acc-btn,
 .create-acc-back-btn,
-.forgot-password {
+.forgot-password,
+.see-password {
   border: none 0px;
   background-color: transparent;
   font-size: 12px;
@@ -120,7 +133,14 @@
   height: 60px;
   left: calc(50% - 282px / 2);
   top: calc(50% - 60px / 2 + 299px);
+  font-size: 22px;
+  border: 0px none;
+  color: white;
 
-  background: rgba(65, 0, 250, 0.56);
+  background-color: rgba(65, 0, 250, 0.56);
   border-radius: 13px;
+}
+
+.container-fluid {
+  background-color: rgba(65, 0, 250, 0.69);
 }

@@ -13,6 +13,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
 import DonorItemPage from './itempage/DonorItemPage.jsx';
+import Account from './Account.jsx'
 
 
 class App extends React.Component {
@@ -26,8 +27,10 @@ class App extends React.Component {
       currentUser: {},
       search: '',
       newMessageStatus: false,
-      itemObj: null,
-      listOfChats: [],
+      itemObj: {},
+      pickup: 'negotiable',
+      category: 'none',
+      sort: 'date'
 
     }
     this.renderView = this.renderView.bind(this)
@@ -40,6 +43,9 @@ class App extends React.Component {
     this.messagePoster = this.messagePoster.bind(this)
     this.getAllChats = this.getAllChats.bind(this)
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
+    this.setCategory = this.setCategory.bind(this);
+    this.setPickup = this.setPickup.bind(this);
+    this.setSort = this.setSort.bind(this);
   }
 
   componentDidMount() {
@@ -52,8 +58,9 @@ class App extends React.Component {
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
+        var posts = res.data.posts.reverse()
         this.setState({
-          posts: res.data.posts
+          posts: posts
         })
       })
       .catch((err) => {
@@ -62,11 +69,18 @@ class App extends React.Component {
   }
 
   // * Grabs the post id
-  getPostId(id) {
-    this.setState({
-      currentPost: id,
-      render: 'itempage'
-    })
+  getPostId(id, userId) {
+    if (userId === this.state.currentUser._id) {
+      this.setState({
+        currentPost: id,
+        render: 'donoritempage'
+      })
+    } else {
+      this.setState({
+        currentPost: id,
+        render: 'itempage'
+      })
+    }
   }
 
   // * Check cookies. If present, straight to feed, otherwise, login
@@ -86,6 +100,7 @@ class App extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+
   }
 
   // * set whatever page we want to render
@@ -124,6 +139,15 @@ class App extends React.Component {
     this.setState({ newMessageStatus: false, itemObj: {} })
   }
 
+  setCategory(inputCategory) {
+    this.setState({ category: inputCategory })
+  }
+  setPickup(inputPickup) {
+    this.setState({ pickup: inputPickup })
+  }
+  setSort(inputSort) {
+    this.setState({ sort: inputSort })
+  }
 
   renderView() {
     if (this.state.render === "login") {
@@ -136,7 +160,7 @@ class App extends React.Component {
       )
     } else if (this.state.render === "signup") {
       return (
-        <Container >
+        <Container>
           <Col className='login-container'>
             <Signup setRenderState={this.setRenderState} />
           </Col>
@@ -157,6 +181,10 @@ class App extends React.Component {
           getPostId={this.getPostId}
           searchItem={this.state.search}
           currentUser={this.state.currentUser}
+          update={this.getPosts}
+          category={this.state.category}
+          pickup={this.state.pickup}
+          sort={this.state.sort}
         />
       )
     } else if (this.state.render === 'itempage') {
@@ -169,7 +197,8 @@ class App extends React.Component {
     } else if (this.state.render === 'donoritempage') {
       return (
         <DonorItemPage
-
+          id={this.state.currentPost}
+          setRenderState={this.setRenderState}
         />)
     } else if (this.state.render === 'chat') {
       return (
@@ -182,6 +211,14 @@ class App extends React.Component {
           setRenderState={this.setRenderState}
           clearMessageStatus={this.clearMessageStatus} />
       )
+    } else if (this.state.render === 'account') {
+      return (
+        <Account
+          currentUser={this.state.currentUser}
+          setCurrentUser={this.setCurrentUser}
+          setRenderState={this.setRenderState}
+        />
+      )
     }
   }
 
@@ -190,15 +227,22 @@ class App extends React.Component {
       <React.Fragment>
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
-          this.state.render === 'chat' ?
+          this.state.render === 'donoritempage' ||
+          this.state.render === 'chat' ||
+          this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}
             setSearch={this.setSearch}
+            setCategory={this.setCategory}
+            setPickup={this.setPickup}
+            setSort={this.setSort}
+            setCurrentUser={this.setCurrentUser}
             render={this.state.render}
           />
           : null}
         {this.renderView()} {/* //* conditonal rendering based on what page we want to render */}
       </React.Fragment>
+
     );
   }
 }

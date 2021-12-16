@@ -1,59 +1,63 @@
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require("../utils/catchAsync");
 
-exports.findAll = (Model) => catchAsync(async (req, res, next) => {
+exports.findAll = (Model) =>
+  catchAsync(async (req, res, next) => {
     const doc = await Model.find();
     if (!doc) {
-        return res.status(404).send({
-            status: 'fail',
-            message: `No documents found at route: ${req.route}`
-        });
-    };
+      return res.status(404).send({
+        status: "fail",
+        message: `No documents found at route: ${req.route}`,
+      });
+    }
     res.status(200).send({
-        status: 'success',
-        data: doc,
+      status: "success",
+      data: doc,
     });
-});
+  });
 
-exports.getOne = (Model) => catchAsync(async (req, res, next) => {
+exports.getOne = (Model) =>
+  catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id);
     if (!doc) {
-        return res.status(404).send({
-            status: 'fail',
-            message: `No documents found at route: ${req.route}`
-        });
-    };
+      return res.status(404).send({
+        status: "fail",
+        message: `No documents found at route: ${req.route}`,
+      });
+    }
     res.status(200).send({
-        status: 'success',
-        data: doc,
+      status: "success",
+      data: doc,
     });
-});
+  });
 
-exports.updateOne = (Model) => catchAsync(async (req, res, next) => {
+exports.updateOne = (Model) =>
+  catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
-        runValidators: true,
-        new: true,
+      runValidators: true,
+      new: true,
     });
     if (!doc) {
-        return res.status(404).send({
-            status: 'fail',
-            message: `No documents found at route: ${req.route}`
-        });
-    };
+      return res.status(404).send({
+        status: "fail",
+        message: `No documents found at route: ${req.route}`,
+      });
+    }
     res.status(200).send({
-        status: 'success',
-        data: doc,
+      status: "success",
+      data: doc,
     });
-});
+  });
 
-exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
+exports.deleteOne = (Model) =>
+  catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) {
-        return res.status(404).send({
-            status: 'fail',
-            message: `No documents found at route: ${req.route}`
-        });
-    };
+      return res.status(404).send({
+        status: "fail",
+        message: `No documents found at route: ${req.route}`,
+      });
+    }
     res.status(204).send({
-        status: 'success',
+      status: "success",
     });
-})
+  });

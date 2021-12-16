@@ -19,7 +19,8 @@ const Search = (props) => {
     <Form>
       <Form.Control
         type="text"
-        placeholder="search mikeslist"
+        placeholder="search sample app"
+        // placeholder="search mikeslist"
         onChange={props.setSearch}
       />
     </Form>
