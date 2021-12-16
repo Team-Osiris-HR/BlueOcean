@@ -288,7 +288,8 @@ class DonorItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={this.toggleEdit}>Edit Post</Button>
+            {/* <Button variant="primary" onClick={this.toggleEdit}>Edit Post</Button> */}
+            <button type="button" className="editbutton" onClick={this.toggleEdit} >Edit Post</button>
             {this.state.showEdit ? this.editModal() : null}
           </div>
           <p>{this.state.postData.donor}</p>

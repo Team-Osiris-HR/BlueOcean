@@ -71,3 +71,57 @@
 .options p {
   margin: 0 auto;
 }
+
+.editbutton {
+  border: none;
+  border-radius: 13px;
+  width: 125px;
+  height: 45px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.editbutton:hover {
+  background-color:#6742cc;
+}
+
+.editbutton:active {
+  position:relative;
+	top:1px;
+}
+
+.messageposterbutton {
+  border: none;
+  border-radius: 13px;
+  width: 145px;
+  height: 45px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.messageposterbutton:hover {
+  background-color:#6742cc;
+}
+
+.messageposterbutton:active {
+  position:relative;
+	top:1px;
+}
+
+.askbutton {
+  border: none;
+  border-radius: 13px;
+  width: 145px;
+  height: 45px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.askbutton:hover {
+  background-color:#6742cc;
+}
+
+.askbutton:active {
+  position:relative;
+	top:1px;
+}
