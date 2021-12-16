@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 const Map = (props) => {
+  console.log('PROPS > ')
 
 // Getting post locations:
   // Get all posts
@@ -17,6 +18,24 @@ const Map = (props) => {
   // Iterate through each post location
   // Calculate the distance
   // Store the distance
+
+  async function getUser () {
+    const result = await axios.get('/api/users/');
+    return result.data.data.filter(user => user.name===/**/)[0]._id;
+    // returns user id
+  }
+
+  async function getLocation () {
+    const id = await getUser();
+    const result = await axios.get(`/api/users/${id}`);
+    if (result.data.data.location) {
+      var loc = {
+        lat: result.data.data.location.latitude,
+        lng: result.data.data.location.longitude
+      }
+      setUserLocation(loc);
+    }
+  }
 
   const [ selected, setSelected ] = useState({});
   const [ view, setView] = useState({value: 'charities'});
