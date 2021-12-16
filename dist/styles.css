@@ -26,27 +26,28 @@
 }
 
 .feed_card {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .tile {
-  max-height: 260px;
+  height: 255px;
   overflow-y: hidden;
-}
-
-.donate:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .feed_image {
-  object-fit: contain;
-  height: 180px;
+  height: 100%;
+}
+
+.photobox {
+  height: 77%;
   width: 100%;
 }
 
-.card_body {
-  padding-top: 10px;
+.cardTextBox {
+  height: 23%;
+  background-color: #7D4EFC;
 }
 
 .login-hello,
@@ -141,5 +142,5 @@
 }
 
 .container-fluid {
-  background-color: rgb(65, 0, 250, 0.69);
+  background-color: rgba(65, 0, 250, 0.69);
 }

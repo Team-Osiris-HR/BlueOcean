@@ -13,7 +13,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Cookies from 'js-cookie'
-import { BsFillChatLeftTextFill } from "react-icons/bs";
+import { BsChatLeftText } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
 
 import axios from 'axios'
@@ -62,7 +62,7 @@ class Header extends React.Component {
       <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
           <Col className="p-2 flex-shrink-1">
-            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+            <Navbar.Toggle bg="white" aria-controls="offcanvasNavbar" />
           </Col>
           {this.props.render === 'itempage' || this.props.render === 'donoritempage' || this.props.render === 'chat' || this.props.render === 'account' ? <button className='search-button' type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
             <BsArrowLeft size={24} />
@@ -74,7 +74,7 @@ class Header extends React.Component {
             {this.props.render === 'feed' ?
               <button
                 className='search-button' alt-text="messages" onClick={() => { this.props.setRenderState('chat') }}>
-                <BsFillChatLeftTextFill size={24} />
+                <BsChatLeftText size={24} />
               </button>
               : null}
           </Col>

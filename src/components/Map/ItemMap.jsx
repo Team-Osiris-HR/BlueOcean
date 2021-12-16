@@ -1,63 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox, Loader } from '@react-google-maps/api';
-import { API_Key } from '../../../config.js';
+import { API_KEY } from '../../../config.js';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+require("babel-polyfill");
 
 const ItemMap = (props) => {
 
+  const defaultLocation = {
+    lat: 40.75127626575399,
+    lng: -73.98404960675472
+  }
+
   const [ selected, setSelected ] = useState({});
-  var userLocation;
+  const [ userLocation, setUserLocation ] = useState(defaultLocation);
+  const [ isBusy, setIsBusy ] = useState(true);
 
   const mapStyles = {
     height: "40vh",
     width: "80%",
   };
 
-  const defaultCenter = {
-    lat: 40.75127626575399, lng: -73.98404960675472
+  async function getUser () {
+    const result = await axios.get('/api/users/');
+    return result.data.data.filter(user => user.name===props.donor)[0]._id;
+    // returns user id
+  }
+
+  async function getLocation () {
+    const id = await getUser();
+    const result = await axios.get(`/api/users/${id}`);
+    if (result.data.data.location) {
+      var loc = {
+        lat: result.data.data.location.latitude,
+        lng: result.data.data.location.longitude
+      }
+      console.log(loc);
+      setUserLocation(loc);
+    }
   }
 
   useEffect(() => {
     // clean-up control
     var isSubscribed = true;
 
-    axios.get('/api/users/')
-      .then ((results) => {
-        if (isSubscribed) {
-          console.log(props);
-          var id = results.data.data.filter(user => user.name===props.donor)[0]._id;
-          axios.get(`/api/users/${id}`)
-            .then((result) => {
-              if (result.data.data.location) {
-                userLocation = result.data.data.location;
-              } else {
-                userLocation = defaultCenter;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            })
+    if (isBusy) {
+      getLocation();
+      setIsBusy(false);
+    }
 
-        }
-      })
-      .catch((err) => {
-        if (isSubscribed) {
-          console.log(err);
-        };
-      })
-      return () => (isSubscribed=false);
-    }, []);
+  //return () => (isSubscribed=false);
+  }, []);
 
   const onSelect = item => {
     setSelected(item);
+    console.log(item)
   }
 
-
   return (
+    isBusy ? (
+      <>
+      <p>loading...</p>
+      </>
+    ) : (
     <>
     <LoadScript
-       googleMapsApiKey={API_Key}>
+       googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           options={{
@@ -68,31 +76,16 @@ const ItemMap = (props) => {
           center={userLocation}>
            <Circle key={'name'}
                 center={userLocation}
-                radius={300}
+                radius={350}
                 options={{geodesic: true,
                 strokeOpacity: 1.5,
                 strokeWeight: 2}}
-                //onClick={() => onSelect(item)}
+                onClick={() => onSelect(item)}
               />
-      {
-        selected.location &&
-            (
-              <InfoWindow
-              position={location}
-              clickable={true}
-              onCloseClick={() => setSelected({})}
-            >
-              <>
-              <p>{selected.name}</p>
-              <p>{selected.address}</p>
-              </>
-            </InfoWindow>
-            )
-         }
      </GoogleMap>
      </LoadScript>
      </>
-  )
+  ))
 }
 
 

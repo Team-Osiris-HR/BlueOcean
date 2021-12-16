@@ -37,6 +37,7 @@
     "@googlemaps/react-wrapper": "^1.1.16",
     "@react-google-maps/api": "^2.7.0",
     "axios": "^0.24.0",
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.1.3",

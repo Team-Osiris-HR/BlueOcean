@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox, Loader } from '@react-google-maps/api';
-import { API_Key } from '../../../config.js';
+import { API_KEY } from '../../../config.js';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
 const Map = (props) => {
+
+// Getting post locations:
+  // Get all posts
+    // For each post, get userID
+    // For each userID, get location
+    // Associate each post with a location
+
+// Getting distance from current user:
+  // Iterate through each post location
+  // Calculate the distance
+  // Store the distance
 
   const [ selected, setSelected ] = useState({});
   const [ view, setView] = useState({value: 'charities'});
@@ -114,11 +125,11 @@ const Map = (props) => {
       <p>loading...</p>
       </>
     ) : (
-      <>
+    <>
     <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
     <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
      <LoadScript
-       googleMapsApiKey={API_Key}>
+       googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           options={{

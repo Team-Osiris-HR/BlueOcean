@@ -147,7 +147,6 @@ class ItemPage extends React.Component {
 
 
   render() {
-    // console.log(this.state.postData)
     return (
       <Container className="itemContainer" >
         <Col>
@@ -164,7 +163,7 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            <ItemMap postData={this.state.postData}/>
+            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
           </div>
 
           <div className="bottombuttonscontainer">
