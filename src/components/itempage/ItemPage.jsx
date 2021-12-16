@@ -164,7 +164,7 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            <ItemMap donor={this.state.postData.donor}/>
+            <ItemMap postData={this.state.postData}/>
           </div>
 
           <div className="bottombuttonscontainer">

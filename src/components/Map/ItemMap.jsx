@@ -7,7 +7,7 @@ import axios from 'axios';
 const ItemMap = (props) => {
 
   const [ selected, setSelected ] = useState({});
-  var location = {};
+  var userLocation;
 
   const mapStyles = {
     height: "40vh",
@@ -18,20 +18,21 @@ const ItemMap = (props) => {
     lat: 40.75127626575399, lng: -73.98404960675472
   }
 
-  /* useEffect(() => {
+  useEffect(() => {
     // clean-up control
     var isSubscribed = true;
 
     axios.get('/api/users/')
       .then ((results) => {
         if (isSubscribed) {
+          console.log(props);
           var id = results.data.data.filter(user => user.name===props.donor)[0]._id;
           axios.get(`/api/users/${id}`)
             .then((result) => {
               if (result.data.data.location) {
-                location = result.data.data.location;
+                userLocation = result.data.data.location;
               } else {
-                location = defaultCenter;
+                userLocation = defaultCenter;
               }
             })
             .catch((err) => {
@@ -47,8 +48,6 @@ const ItemMap = (props) => {
       })
       return () => (isSubscribed=false);
     }, []);
-
-    */
 
   const onSelect = item => {
     setSelected(item);
@@ -66,9 +65,9 @@ const ItemMap = (props) => {
           }}
           mapTypeId='terrain'
           zoom={15}
-          center={defaultCenter}>
+          center={userLocation}>
            <Circle key={'name'}
-                center={defaultCenter}
+                center={userLocation}
                 radius={300}
                 options={{geodesic: true,
                 strokeOpacity: 1.5,

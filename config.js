@@ -1,3 +1,3 @@
 module_exports = {
-  API_Key: "AIzaSyCT46YJTgonNY4MCgunS19KUS1eF10pVdY",
+  API_Key: 'AIzaSyC32pGX0SfGJQWSzLvGlEP1sGFxxaIH19g'
 };
