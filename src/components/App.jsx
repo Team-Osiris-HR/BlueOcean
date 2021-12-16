@@ -229,7 +229,6 @@ class App extends React.Component {
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
           this.state.render === 'donoritempage' ||
-          this.state.render === 'chat' ||
           this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}
