@@ -19,6 +19,9 @@ class Feed extends React.Component {
       charitiesOnly: true,
       files: [],
       posts: [],
+      mapBtn: 'top_buttons',
+      publicBtn: 'selected',
+      userFdBtn: 'top_buttons'
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
@@ -95,8 +98,33 @@ class Feed extends React.Component {
   }
 
   toggleFeed(e) {
-    this.setState({ feed: e.target.outerText })
+    var selection = e.target.outerText
+    if (selection === 'Public Feed') {
+      this.setState({
+        feed: 'Public Feed',
+        mapBtn: 'top_buttons',
+        publicBtn: 'selected',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'Map') {
+      this.setState({
+        feed:'Map',
+        mapBtn: 'selected',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'My Posts') {
+      this.setState({
+        feed:'My Posts',
+        mapBtn: 'top_buttons',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'selected'
+      })
+    }
   }
+
 
   render() {
     return (
@@ -104,9 +132,9 @@ class Feed extends React.Component {
         <div className="top">
           <Stack direction="horizontal">
             <ButtonGroup className="ms-auto">
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>Map</Button>
-              <Button variant="info" size="sm" className="text-white" onClick={this.toggleFeed}>Public Feed</Button>
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>My Posts</Button>
+              <button className={this.state.mapBtn} onClick={this.toggleFeed}>Map</button>
+              <button className={this.state.publicBtn} onClick={this.toggleFeed}>Public Feed</button>
+              <button className={this.state.userFdBtn} onClick={this.toggleFeed}>My Posts</button>
             </ButtonGroup>
           </Stack>
         </div>

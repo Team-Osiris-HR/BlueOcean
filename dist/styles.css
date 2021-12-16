@@ -14,6 +14,43 @@
   padding-bottom: 25px;
 }
 
+.top_buttons {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #7D4EFC;
+  color: white;
+
+}
+
+.selected {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #DC3545;
+  color: white;
+}
+
+.top_buttons:hover {
+  background-color:#6742CC;
+}
+
+.top_buttons:active {
+  position:relative;
+	top:1px;
+}
+
+
 .middle {
   width: 100%;
   overflow: auto;
@@ -22,7 +59,7 @@
 
 .bottom {
   grid-row-start: 3;
-  padding-top: 7px;
+  padding-top: 15px;
 }
 
 .feed_card {
@@ -36,6 +73,14 @@
   margin-left: auto;
   -webkit-box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
   box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
+}
+
+.tile:active {
+  position:relative;
+	top:3px;
+  left: 3px;
+  -webkit-box-shadow: 9px 10px 13px -7px rgba(0,0,0,0.35);
+  box-shadow: 9px 10px 13px -7px rgba(0,0,0,0.35);
 }
 
 .feed_image {
@@ -59,10 +104,19 @@
   left: calc(50% - 282px / 2);
   top: calc(50% - 60px / 2 + 299px);
   font-size: 22px;
-  border: 0px none;
-  color: #FFFFFF;
-  background: #7D4EFC;
+  border: none;
   border-radius: 13px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.donateBtn:hover {
+  background-color:#6742CC;
+}
+
+.donateBtn:active {
+  position:relative;
+	top:1px;
 }
 
 .login-hello,
