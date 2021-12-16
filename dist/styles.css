@@ -71,7 +71,7 @@
   display: flex;
   justify-content: center;
   -webkit-box-pack: center;
-  max-width: 600px;
+  width: 600px;
   position: absolute;
   left: 50%;
   top: 50%;
