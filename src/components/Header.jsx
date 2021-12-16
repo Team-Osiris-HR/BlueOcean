@@ -27,11 +27,18 @@ class Header extends React.Component {
     this.state = {
       toggleSearch: 'hide-search',
       chosenCategory: 'all',
+      pickupBtn: 'top_buttons',
+      negoBtn: 'selected',
+      deliveryBtn: 'top_buttons',
+      dateBtn: 'selected',
+      distanceBtn: 'top_buttons'
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
     this.chooseSort = this.chooseSort.bind(this)
     this.logout = this.logout.bind(this)
+    this.toggleFeed = this.toggleFeed.bind(this);
+    this.toggleSort = this.toggleSort.bind(this);
   }
 
   chooseCategory(e) {
@@ -39,14 +46,12 @@ class Header extends React.Component {
     this.setState({ chosenCategory: e.target.outerText })
   }
 
-  choosePickup(e) {
-    this.props.setPickup(e.target.outerText)
-    this.setState({ chosenPickup: e.target.outerText })
+  choosePickup(input) {
+    this.props.setPickup(input)
   }
 
-  chooseSort(e) {
-    this.props.setSort(e.target.outerText)
-    this.setState({ chosenSort: e.target.outerText })
+  chooseSort(input) {
+    this.props.setSort(input)
   }
 
   logout() {
@@ -60,6 +65,52 @@ class Header extends React.Component {
       }).catch((err) => {
         console.log(err)
       });
+  }
+
+  toggleFeed(e) {
+    var selection = e.target.outerText
+    if (selection === 'pickup') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'selected',
+        negoBtn: 'top_buttons',
+        deliveryBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'delivery') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'top_buttons',
+        negoBtn: 'top_buttons',
+        deliveryBtn: 'selected'
+      })
+    }
+    if (selection === 'negotiable') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'top_buttons',
+        negoBtn: 'selected',
+        deliveryBtn: 'top_buttons'
+      })
+    }
+  }
+
+  toggleSort(e) {
+    var selection = e.target.outerText
+    if (selection === 'date') {
+      this.chooseSort(selection)
+      this.setState({
+        dateBtn: 'selected',
+        distanceBtn: 'top_buttons',
+      })
+    }
+    if (selection === 'distance') {
+      this.chooseSort(selection)
+      this.setState({
+        dateBtn: 'top_buttons',
+        distanceBtn: 'selected',
+      })
+    }
   }
 
   render() {
@@ -95,17 +146,17 @@ class Header extends React.Component {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
-                <h6>pickup: {this.state.chosenPickup}</h6>
-                <ToggleButtonGroup name='pickupOption' className="mb-3" aria-label="pickupOption" type='checkbox'>
-                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='pickup'>pickup</ToggleButton>
-                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='delivery'>delivery</ToggleButton>
-                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.choosePickup(e)} value='negotiable'>negotiable</ToggleButton>
-                </ToggleButtonGroup>
-                <h6>sort: {this.state.chosenSort}</h6>
-                <ToggleButtonGroup name='sort' className="mb-3" aria-label="sort">
-                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.chooseSort(e)}>date</ToggleButton>
-                  <ToggleButton type='checkbox' variant="outline-primary" onClick={(e) => this.chooseSort(e)}>distance</ToggleButton>
-                </ToggleButtonGroup>
+                <h6>pickup</h6>
+                <ButtonGroup className="">
+                  <button className={this.state.deliveryBtn} onClick={this.toggleFeed}>delivery</button>
+                  <button className={this.state.pickupBtn} onClick={this.toggleFeed}>pickup</button>
+                  <button className={this.state.negoBtn} onClick={this.toggleFeed}>negotiable</button>
+                </ButtonGroup>
+                <h6>sort</h6>
+                <ButtonGroup className="">
+                  <button className={this.state.dateBtn} onClick={this.toggleSort}>date</button>
+                  <button className={this.state.distanceBtn} onClick={this.toggleSort}>distance</button>
+                </ButtonGroup>
                 <h6>category: {this.state.chosenCategory}</h6>
                 <ListGroup as="ul" className='mb-5'>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>all</ListGroup.Item>
