@@ -6,11 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import ChatHeader from './ChatHeader.jsx'
 import axios from 'axios';
-
 import { io } from 'socket.io-client';
-
+import ChatHeader from './ChatHeader.jsx'
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +30,6 @@ class Chat extends React.Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
   }
-
   componentDidMount() {
     this.socket = io();
     this.checkFirstTimeMessage();
@@ -44,7 +41,6 @@ class Chat extends React.Component {
       console.log('after', newArray);
     })
   }
-
   checkFirstTimeMessage() {
     var ids = [];
     this.state.listOfChats.map(chat => {
@@ -52,13 +48,16 @@ class Chat extends React.Component {
     })
     if (this.state.chatSelected) {
       if (!ids.includes(this.state.chatSelected.id)) {
-        this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
+        console.log('test', this.state.chatSelected)
+        console.log('test2', Object.keys(this.state.chatSelected).length > 0)
+        if (Object.keys(this.state.chatSelected).length > 0) {
+          this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
+        }
       } else {
         this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
       }
     }
   }
-
   newChat = (postId) => {
     var roomNumber = uuidv4();
     axios.post('/api/chatrooms/newroom', { roomHash: roomNumber, postId: postId })
@@ -69,7 +68,6 @@ class Chat extends React.Component {
         console.log(error);
       })
   }
-
   getOldChat = (roomNumber) => {
     axios.get(`/api/chatrooms/${roomNumber}/messages`)
       .then((result) => {
@@ -83,33 +81,33 @@ class Chat extends React.Component {
         console.log(error);
       })
   }
-
   sendMessage = (roomId, messageObj) => {
     if (this.state.firstMessageStatus) {
       this.newChat(this.state.chatSelected.id)
-      this.setState({ chatSelectedStatus: false })
-      getAllChats = () => {
-        // database query that returns all active chats. look at object above
-        axios.get('/api/chatrooms/mychats')
-          .then((result) => {
-            this.setState({ listOfChats: result.data })
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
+      this.props.getAllChats();
       setTimeout(() => {
         axios.post(`/api/chatrooms/${this.state.newRoom}/messages/create`, { message: this.state.message })
           .then((result) => {
             console.log('You sent a message')
-            // this.socket.emit('joinRoom', id)
-            // this.socket.emit('send', messageObj, this.state.newRoom)
+            var newChat = {
+              chatroomId: this.state.newRoom,
+              donorId: null,
+              name: this.state.chatSelected.donor,
+              photos: this.state.chatSelected.photos[0],
+              postId: this.state.chatSelected.id,
+              title: this.state.chatSelected.title,
+              userPhoto: null,
+            }
+            var newArray = this.state.listOfChats.slice();
+            newArray.push(newChat);
+            this.setState({ listOfChats: newArray })
+            this.leaveChat();
           })
           .catch((error) => {
             console.log(error);
           })
         this.setState({ message: '' })
-      }, 300)
+      }, 200)
     } else {
       this.socket.emit('send', messageObj, roomId)
       axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
@@ -122,55 +120,51 @@ class Chat extends React.Component {
       this.setState({ message: '' })
     }
   }
-
   selectChat = (id, chat) => {
     this.socket.emit('joinRoom', id)
     this.setState({ chatSelected: chat })
     this.getOldChat(id, chat);
   }
-
   leaveChat = () => {
     this.props.clearMessageStatus();
+    this.props.getAllChats();
     this.setState({ chatSelected: null, chatSelectedStatus: false, firstMessageStatus: false });
   }
-
   handleMessage = (e) => {
     this.setState({ message: e.target.value })
   }
-
   render() {
-    console.log(this.state.chatSelected)
+    console.log('list', this.props)
     return (
-      <>
-
-        <ChatHeader setRenderState={this.props.setRenderState} leaveChat={this.leaveChat} chatSelectedStatus={this.state.chatSelectedStatus} />
-        <Container>
-          <Col>
-            {!this.state.chatSelectedStatus ?
-              <>
-                {/* <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button> */}
-                <ListOfConversations
-                  chats={this.state.listOfChats}
-                  selectChat={this.selectChat} />
-              </>
-              :
-              <>
-                {/* <Button onClick={() => { this.leaveChat() }} > Back </Button> */}
-                <Conversation
-                  user={this.props.user.name}
-                  message={this.state.message}
-                  chat={this.state.chatSelected}
-                  messages={this.state.messages}
-                  sendMessage={this.sendMessage}
-                  handleMessage={this.handleMessage}
-                />
-              </>
-            }
-          </Col>
-        </Container>
-      </>
+      <Container>
+        <Col>
+          {!this.state.chatSelectedStatus ?
+            <>
+              {/* <Button type="button" onClick={() => {
+                this.props.setRenderState('feed')
+              }}>Back</Button> */}
+              <ChatHeader setRenderState={this.props.setRenderState} chatSelectedStatus={this.state.chatSelectedStatus} />
+              <ListOfConversations
+                chats={this.state.listOfChats}
+                selectChat={this.selectChat} />
+            </>
+            :
+            <>
+              {/* <Button onClick={() => { this.leaveChat() }} > Back </Button> */}
+              <ChatHeader leaveChat={this.leaveChat} chatSelectedStatus={this.state.chatSelectedStatus} />
+              <Conversation
+                user={this.props.user.name}
+                message={this.state.message}
+                chat={this.state.chatSelected}
+                messages={this.state.messages}
+                sendMessage={this.sendMessage}
+                handleMessage={this.handleMessage}
+              />
+            </>
+          }
+        </Col>
+      </Container>
     );
   }
 }
-
 export default Chat;
