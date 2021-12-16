@@ -1,69 +1,30 @@
+const multer = require('multer');
+
 const Post = require('../models/Post.js');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User.js');
+const factory = require('./handlerFactory.js');
 
-exports.getAllPosts = catchAsync(async (req, res, next) => {
-  const posts = await Post.find();
-  // let obj = {};
-  // let user;
-  // const results = [];
-  // let placeholder = {};
-  // for (let i = 0; i < posts.length; i++) {
-  //   obj = {};
-  //   user = await User.findById(posts[i].user);
-  //   obj.name = user.name;
-  //   obj.email = user.email;
-  //   for (let key in posts[i]) {
-  //     obj[key] = posts[i][key];
-  //     console.log(key);
-  //   }
-  //   console.log(obj);
-  //   results.push(obj);
-  // }
-  res.status(200).json({
-    status: 'success',
-    results: posts.length,
-    posts
-  });
-});
+
+exports.getAllPosts = factory.findAll(Post);
+exports.getOnePost = factory.getOne(Post);
+exports.updatePost = factory.updateOne(Post);
+exports.deletePost = factory.deleteOne(Post);
 
 exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
   req.body.username = req.user.name;
   req.body.email = req.user.email;
+<<<<<<< HEAD
+=======
+  req.body.photos = ['public/img/posts/' + req.file.filename];
+  req.body.photos = req.body.photos.concat(req.body.photoUrls.split(','));
+
+>>>>>>> a8e60d8e46eebb690cf8e44f4bedf06fa4c35c07
   const newPost = await Post.create(req.body);
   res.status(201).json({
     status: 'success',
     post: newPost,
-  });
-});
-
-exports.getOnePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
-  const user = await User.findById(post.user);
-  post.user = user;
-  res.status(200).json({
-    status: 'success',
-    post,
-  });
-});
-
-exports.updatePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    runValidators: true,
-    new: true
-  });
-  res.status(200).json({
-    status: 'success',
-    post,
-  });
-});
-
-exports.deletePost = catchAsync(async (req, res, next) => {
-  await Post.findByIdAndDelete(req.params.id);
-  res.status(204).json({
-    status: 'success',
-    data: null,
   });
 });
 

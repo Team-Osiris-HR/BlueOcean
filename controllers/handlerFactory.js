@@ -11,7 +11,7 @@ exports.findAll = (Model) =>
     }
     res.status(200).send({
       status: "success",
-      data: doc,
+      doc,
     });
   });
 
@@ -26,7 +26,7 @@ exports.getOne = (Model) =>
     }
     res.status(200).send({
       status: "success",
-      data: doc,
+      doc,
     });
   });
 
@@ -44,7 +44,7 @@ exports.updateOne = (Model) =>
     }
     res.status(200).send({
       status: "success",
-      data: doc,
+      doc,
     });
   });
 

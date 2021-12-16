@@ -18,7 +18,7 @@ class Feed extends React.Component {
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
       files: [],
-
+      posts: [],
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
@@ -45,7 +45,7 @@ class Feed extends React.Component {
     if (this.state.photo4) { photoUrls.push(this.state.photo4) }
     if (this.state.photo5) { photoUrls.push(this.state.photo5) }
 
-    let photoFiles = new FormData()
+    let formData = new FormData()
     let files = this.state.files;
     photoFiles.append(`photos`, files.concat(photoUrls))
 
@@ -92,7 +92,6 @@ class Feed extends React.Component {
   }
 
   render() {
-
     return (
       <div className="page">
         <div className="top">
@@ -116,11 +115,11 @@ class Feed extends React.Component {
               <Container>
                 <Row xs={1} sm={2} md={3}>
                   {this.props.posts.filter((val) => {
-                    if(val.active) {
+                    if (val.active) {
                       return val
                     }
                   }).filter((val) => {
-                    if (this.props.currentUser.role === 'charity') {
+                    if (this.props.currentUser.role === 'charity' || this.props.currentUser.role === 'admin') {
                       return val
                     }
                     if (this.props.currentUser.role === 'user') {

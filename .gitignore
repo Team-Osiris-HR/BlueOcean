@@ -2,6 +2,10 @@ node_modules
 *.config.js
 *.config.js.*
 dist/bundle.js
+<<<<<<< HEAD
 package-lock.json
 config.js
 config.js
+=======
+config.js
+>>>>>>> a8e60d8e46eebb690cf8e44f4bedf06fa4c35c07
