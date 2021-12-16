@@ -7,9 +7,9 @@ const MessageEntry = (props) => {
   return (
     <div className='message'>
       {props.messages.name === props.user ?
-        <div className="otherUserMessage" >{props.user}: {props.messages.message}</div>
-        :
-        <div className="userMessage">{props.messages.message}</div>
+      <div className="otherUserMessage" >{props.messages.message}</div>
+      :
+      <div className="userMessage">{props.messages.message}</div>
       }
     </div>
   )

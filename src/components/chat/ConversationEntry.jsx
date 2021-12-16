@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ConversationEntry = (props) => {
-  console.log(props.chats)
   return (
     <div className='convo-entry' onClick={() => { props.selectChat(props.chats[props.index].chatroomId, props.chats[props.index]) }}>
       <div className='picture-container'>
@@ -12,9 +11,13 @@ const ConversationEntry = (props) => {
         }
       </div>
 
-      <div className='poster-name'>{props.chats[props.index].name}</div>
+      <div className='poster-name-container'>
+        <div className='poster-name'>{props.chats[props.index].name}</div>
+      </div>
 
-      <div className='post-title' >{props.chats[props.index].title}</div>
+      <div className='post-title-container'>
+        <div className='post-title'>{props.chats[props.index].title}</div>
+      </div>
     </div>
   )
 }
