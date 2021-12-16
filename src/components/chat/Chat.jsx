@@ -155,7 +155,7 @@ class Chat extends React.Component {
               </>
               :
               <>
-                <Button onClick={() => { this.leaveChat() }} > Back </Button>
+                {/* <Button onClick={() => { this.leaveChat() }} > Back </Button> */}
                 <Conversation
                   user={this.props.user.name}
                   message={this.state.message}
