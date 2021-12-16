@@ -28,6 +28,7 @@ class ChatHeader extends React.Component {
     this.choosePickup = this.choosePickup.bind(this)
     this.chooseSort = this.chooseSort.bind(this)
     this.logout = this.logout.bind(this)
+    this.backButton = this.backButton.bind(this)
   }
 
   chooseCategory(e) {
@@ -56,11 +57,19 @@ class ChatHeader extends React.Component {
       });
   }
 
+  backButton() {
+    if (!this.props.chatSelectedStatus) {
+      this.props.setRenderState('feed')
+    } else {
+      this.props.leaveChat()
+    }
+  }
+
   render() {
     return (
       <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
-          <Button onClick={() => this.props.setRenderState('feed')}>Back</Button>
+          <Button onClick={() => this.backButton()}>Back</Button>
           <Col className="p-2 flex-fill">
             <span>Inbox</span>
           </Col>

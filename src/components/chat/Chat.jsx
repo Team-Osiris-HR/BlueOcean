@@ -143,12 +143,12 @@ class Chat extends React.Component {
     return (
       <>
 
-        <ChatHeader setRenderState={this.props.setRenderState} />
+        <ChatHeader setRenderState={this.props.setRenderState} leaveChat={this.leaveChat} chatSelectedStatus={this.state.chatSelectedStatus} />
         <Container>
           <Col>
             {!this.state.chatSelectedStatus ?
               <>
-                <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button>
+                {/* <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button> */}
                 <ListOfConversations
                   chats={this.state.listOfChats}
                   selectChat={this.selectChat} />
