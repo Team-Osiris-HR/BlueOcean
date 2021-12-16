@@ -12,11 +12,13 @@ class ForgotPassword extends React.Component {
     super(props)
     this.state = {
       email: '',
-      render: 'form'
+      render: 'form',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.disableSubmit = this.disableSubmit.bind(this)
+    this.errorMessage = this.errorMessage.bind(this)
   }
 
   // todo handle change
@@ -34,7 +36,8 @@ class ForgotPassword extends React.Component {
         this.setState({ render: 'confirm' })
         this.props.setToken(result.data.token)
       }).catch((err) => {
-        console.log(err)
+        this.setState({ error: true })
+        setTimeout(() => { this.setState({ error: false }) }, 1500)
       });
 
   }
@@ -45,6 +48,10 @@ class ForgotPassword extends React.Component {
     } else {
       return false
     }
+  }
+
+  errorMessage(error) {
+    return <span style={{ fontSize: '12px', color: 'red' }}>email not found. please try again</span>
   }
 
   render() {
@@ -66,11 +73,12 @@ class ForgotPassword extends React.Component {
                     placeholder="email"
                     onChange={(e) => this.handleChange(e)} />
                 </FloatingLabel>
+                {this.state.error ? this.errorMessage() : null}
               </Form.Group>
               <div className='text-center'>
-                <Button variant='primary' className='button' type="submit" disabled={this.disableSubmit()}>
+                <button className='button' type="submit" disabled={this.disableSubmit()}>
                   Reset password
-                </Button>
+                </button>
               </div>
               <div>
                 <button className='create-acc-back-btn' type="button" onClick={() => this.props.backToLogin('login')}>back to login</button>
@@ -82,7 +90,7 @@ class ForgotPassword extends React.Component {
     } else {
       return (
         <div onClick={() => this.props.setPasswordPage('reset')}>
-          <span>We've sent you a reset link, please check your email</span>
+          <span>We've sent you a reset link, please check your email and click here</span>
         </div>
       )
     }
