@@ -129,3 +129,6 @@ exports.answerQA = catchAsync(async (req, res, next) => {
     }
   }
 });
+
+// https://www.yesmagazine.org/wp-content/uploads/imports/0bf91a5233fc4b57a641bab18f270e02.png
+// https://www.storyofstuff.org/wp-content/uploads/2020/03/logo-color_3fc18254.png
