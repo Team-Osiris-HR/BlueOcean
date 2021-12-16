@@ -47,20 +47,27 @@ class Feed extends React.Component {
 
     let formData = new FormData()
     let files = this.state.files;
-    photoFiles.append(`photos`, files.concat(photoUrls))
-
-    this.toggleDonate(e)
-
-    axios.post('/api/posts', {
-      name: this.props.currentUser.name,
-      email: this.props.currentUser.email,
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      condition: this.state.condition,
-      deliveryOptions: this.state.deliveryOptions,
-      charitiesOnly: this.state.charitiesOnly,
-      //photos: photoFiles
+    // for (var i = 0; i < files.length; i++) {
+    //   formData.append('photos', {
+    //     uri: files[i].uri,
+    //     type: files[i].type,
+    //     name: files[i].fileName
+    //   })
+    // }
+    formData.append('photos', files[0]);
+    formData.append('name', this.props.currentUser.name);
+    formData.append('email', this.props.currentUser.email);
+    formData.append('title', this.state.title);
+    formData.append('description', this.state.description);
+    formData.append('category', this.state.category);
+    formData.append('condition', this.state.condition);
+    formData.append('deliveryOptions', this.state.deliveryOptions);
+    formData.append('charitiesOnly', this.state.charitiesOnly);
+    formData.append('photoUrls', photoUrls);
+    axios.post('/api/posts', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data;`
+      }
     })
       .then((res) => {
         this.props.update()

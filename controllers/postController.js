@@ -1,10 +1,9 @@
-const multer = require('multer');
+const multer = require("multer");
 
-const Post = require('../models/Post.js');
-const catchAsync = require('../utils/catchAsync');
-const User = require('../models/User.js');
-const factory = require('./handlerFactory.js');
-
+const Post = require("../models/Post.js");
+const catchAsync = require("../utils/catchAsync");
+const User = require("../models/User.js");
+const factory = require("./handlerFactory.js");
 
 exports.getAllPosts = factory.findAll(Post);
 exports.getOnePost = factory.getOne(Post);
@@ -15,15 +14,14 @@ exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
   req.body.username = req.user.name;
   req.body.email = req.user.email;
-<<<<<<< HEAD
-=======
-  req.body.photos = ['public/img/posts/' + req.file.filename];
-  req.body.photos = req.body.photos.concat(req.body.photoUrls.split(','));
+  if (req.file) {
+    req.body.photos = ["public/img/posts/" + req.file.filename];
+    req.body.photos = req.body.photos.concat(req.body.photoUrls.split(","));
+  }
 
->>>>>>> a8e60d8e46eebb690cf8e44f4bedf06fa4c35c07
   const newPost = await Post.create(req.body);
   res.status(201).json({
-    status: 'success',
+    status: "success",
     post: newPost,
   });
 });
@@ -31,12 +29,12 @@ exports.createPost = catchAsync(async (req, res, next) => {
 exports.togglePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
-    return next(new Error('Uh oh something went very wrong'));
+    return next(new Error("Uh oh something went very wrong"));
   }
   post.active = !post.active;
   post.save();
   res.status(200).json({
-    status: 'success',
+    status: "success",
     post,
   });
 });
@@ -45,14 +43,14 @@ exports.addQA = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
     return res.status(404).json({
-      status: 'fail',
-      message: 'Post not found',
+      status: "fail",
+      message: "Post not found",
     });
   }
   post.QAs.push(req.body);
   post.save();
   res.status(201).json({
-    status: 'success',
+    status: "success",
     post,
   });
 });
@@ -61,8 +59,8 @@ exports.answerQA = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
   if (!post) {
     return res.status(404).json({
-      status: 'fail',
-      message: 'Post not found',
+      status: "fail",
+      message: "Post not found",
     });
   }
   for (let i = 0; i < post.QAs.length; i++) {
@@ -70,7 +68,7 @@ exports.answerQA = catchAsync(async (req, res, next) => {
       post.QAs[i].answerText = req.body.answerText;
       post.save();
       res.status(201).json({
-        status: 'success',
+        status: "success",
         post,
       });
     }
