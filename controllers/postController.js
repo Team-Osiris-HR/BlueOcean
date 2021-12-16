@@ -6,15 +6,6 @@ const User = require('../models/User.js');
 const factory = require('./handlerFactory.js');
 
 
-// exports.getAllPosts = catchAsync(async (req, res, next) => {
-//   const posts = await Post.find();
-//   res.status(200).json({
-//     status: 'success',
-//     results: posts.length,
-//     posts,
-//   });
-// });
-
 exports.getAllPosts = factory.findAll(Post);
 exports.getOnePost = factory.getOne(Post);
 exports.updatePost = factory.updateOne(Post);
@@ -33,35 +24,6 @@ exports.createPost = catchAsync(async (req, res, next) => {
     post: newPost,
   });
 });
-
-// exports.getOnePost = catchAsync(async (req, res, next) => {
-//   const post = await Post.findById(req.params.id);
-//   const user = await User.findById(post.user);
-//   post.user = user;
-//   res.status(200).json({
-//     status: 'success',
-//     post,
-//   });
-// });
-
-// exports.updatePost = catchAsync(async (req, res, next) => {
-//   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-//     runValidators: true,
-//     new: true
-//   });
-//   res.status(200).json({
-//     status: 'success',
-//     post,
-//   });
-// });
-
-// exports.deletePost = catchAsync(async (req, res, next) => {
-//   await Post.findByIdAndDelete(req.params.id);
-//   res.status(204).json({
-//     status: 'success',
-//     data: null,
-//   });
-// });
 
 exports.togglePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
@@ -111,6 +73,3 @@ exports.answerQA = catchAsync(async (req, res, next) => {
     }
   }
 });
-
-// https://www.yesmagazine.org/wp-content/uploads/imports/0bf91a5233fc4b57a641bab18f270e02.png
-// https://www.storyofstuff.org/wp-content/uploads/2020/03/logo-color_3fc18254.png
