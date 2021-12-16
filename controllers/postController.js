@@ -4,16 +4,33 @@ const User = require('../models/User.js');
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
   const posts = await Post.find();
+  // let obj = {};
+  // let user;
+  // const results = [];
+  // let placeholder = {};
+  // for (let i = 0; i < posts.length; i++) {
+  //   obj = {};
+  //   user = await User.findById(posts[i].user);
+  //   obj.name = user.name;
+  //   obj.email = user.email;
+  //   for (let key in posts[i]) {
+  //     obj[key] = posts[i][key];
+  //     console.log(key);
+  //   }
+  //   console.log(obj);
+  //   results.push(obj);
+  // }
   res.status(200).json({
     status: 'success',
     results: posts.length,
-    posts,
+    posts
   });
 });
 
 exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
-  console.log(req.photos)
+  req.body.username = req.user.name;
+  req.body.email = req.user.email;
   const newPost = await Post.create(req.body);
   res.status(201).json({
     status: 'success',

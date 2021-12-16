@@ -27,7 +27,8 @@ class App extends React.Component {
       currentUser: {},
       search: '',
       newMessageStatus: false,
-      itemObj: {},
+      itemObj: null,
+      listOfChats: [],
       pickup: 'negotiable',
       category: 'none',
       sort: 'date'
@@ -41,6 +42,7 @@ class App extends React.Component {
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.setSearch = this.setSearch.bind(this)
     this.messagePoster = this.messagePoster.bind(this)
+    this.getAllChats = this.getAllChats.bind(this)
     this.clearMessageStatus = this.clearMessageStatus.bind(this)
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
@@ -50,6 +52,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getPosts()
     this.getCookies()
+    this.getAllChats()
   }
 
   // * Grabs all the post, unfiltered
@@ -118,12 +121,24 @@ class App extends React.Component {
     this.setState({ search: e.target.value })
   }
 
+  getAllChats = () => {
+    // database query that returns all active chats. look at object above
+    axios.get('/api/chatrooms/mychats')
+      .then((result) => {
+        console.log('got here')
+        this.setState({ listOfChats: result.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   messagePoster = (item) => {
     this.setState({ render: 'chat', newMessageStatus: true, itemObj: item })
   }
 
   clearMessageStatus = () => {
-    this.setState({ newMessageStatus: false })
+    this.setState({ newMessageStatus: false, itemObj: {} })
   }
 
   setCategory(inputCategory) {
@@ -192,8 +207,10 @@ class App extends React.Component {
         <Chat
           itemObj={this.state.itemObj}
           user={this.state.currentUser}
+          listOfChats={this.state.listOfChats}
           currentPost={this.state.currentPost}
           newMessageStatus={this.state.newMessageStatus}
+          getAllChats={this.getAllChats}
           setRenderState={this.setRenderState}
           clearMessageStatus={this.clearMessageStatus} />
       )
@@ -222,7 +239,6 @@ class App extends React.Component {
         {this.state.render === "feed" ||
           this.state.render === "itempage" ||
           this.state.render === 'donoritempage' ||
-          this.state.render === 'chat' ||
           this.state.render === 'account' ?
           <Header
             setRenderState={this.setRenderState}

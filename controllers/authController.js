@@ -123,7 +123,6 @@ exports.restrictTo = (...roles) => {
 };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -180,6 +179,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
+    token: req.params.token,
     data: {
       user,
     },

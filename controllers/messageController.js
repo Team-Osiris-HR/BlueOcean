@@ -1,26 +1,26 @@
 const User = require('../models/User.js');
 const Chatroom = require('../models/Chatroom.js');
 const Messages = require('../models/ChatMessage.js');
+const Post = require('../models/Post.js');
 const catchAsync = require('../utils/catchAsync.js');
 const factory = require('./handlerFactory.js');
 
 exports.getAllMessagesChatroom = catchAsync(async (req, res) => {
-  const messages = await Messages.find({chatroom: req.chatroomId});
-  for (let i = 0; i < messages.length; i++) {
-    const user = await User.findById(messages[i].user);
-    messages[i].name = user.name;
-  }
-
+  const chatroom = await Chatroom.findById(req.chatroomId);
+  let messages = await Messages.find({ chatroom });
+  // let messages = await Messages.find();
+  // const post = await Post.findById(req.chatroomId);
+  // const chatroom = await Chatroom.find({ product: req.chatroomId });
+  // console.log(chatroom);
+  // const user = await User.findById(post.user);
+  // messages = messages.filter(message => {
+  //   return message.chatroom.toString() === chatroom[0]._id.toString();
+  // })
   if (!messages) {
     return res.sendStatus(404);
   }
   res.status(200).json(messages);
 });
-
-// exports.getAllMessages = catchAsync(async (req, res) => {
-//   const messages = await Messages.find();
-//   res.status(200).json(messages);
-// });
 
 exports.getAllMessages = factory.findAll(Messages);
 
