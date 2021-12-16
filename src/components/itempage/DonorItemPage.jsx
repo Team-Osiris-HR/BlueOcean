@@ -288,7 +288,8 @@ class DonorItemPage extends React.Component {
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={this.toggleEdit}>Edit Post</Button>
+            {/* <Button variant="primary" onClick={this.toggleEdit}>Edit Post</Button> */}
+            <button type="button" className="editbutton" onClick={this.toggleEdit} >Edit Post</button>
             {this.state.showEdit ? this.editModal() : null}
           </div>
           <p>{this.state.postData.donor}</p>
@@ -302,7 +303,8 @@ class DonorItemPage extends React.Component {
             <p>Map Place Holder</p>
           </div>
           <div className="deletemodal">
-            <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleDelete} >Delete Posting</Button>
+            {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleDelete} >Delete Posting</Button> */}
+            <button type="button" className="deletebutton" style={{ "marginTop": "2%" }} onClick={this.toggleDelete} >Delete Posting</button>
             {this.state.showDelete ? this.deleteModal() : null}
           </div>
         </Col>

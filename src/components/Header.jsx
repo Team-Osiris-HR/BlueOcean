@@ -71,7 +71,7 @@ class Header extends React.Component {
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
-            {this.props.render === 'feed' ?
+            {this.props.render === 'feed' || this.props.render === 'itempage' || this.props.render === 'donoritempage' ?
               <button
                 className='search-button' alt-text="messages" onClick={() => { this.props.setRenderState('chat') }}>
                 <BsChatLeftText size={24} />
