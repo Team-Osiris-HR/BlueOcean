@@ -43,23 +43,29 @@ class Feed extends React.Component {
     if (this.state.photo4) { photoUrls.push(this.state.photo4) }
     if (this.state.photo5) { photoUrls.push(this.state.photo5) }
 
-    let photoFiles = new FormData()
+    let formData = new FormData()
     let files = this.state.files;
-    for (var i = 0; i < files.length; i++) {
-      photoFiles.append(`photo${i + 1}`, files[i])
-    }
-
-    axios.post('/', {
-      name: this.props.currentUser.name,
-      email: this.props.currentUser.email,
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      condition: this.state.condition,
-      deliveryOptions: this.state.deliveryOptions,
-      charitiesOnly: this.state.charitiesOnly,
-      photoLinks: photoUrls,
-      photoFiles: photoFiles
+    // for (var i = 0; i < files.length; i++) {
+    //   formData.append('photos', {
+    //     uri: files[i].uri,
+    //     type: files[i].type,
+    //     name: files[i].fileName
+    //   })
+    // }
+    formData.append('photos', files[0]);
+    formData.append('name', this.props.currentUser.name);
+    formData.append('email', this.props.currentUser.email);
+    formData.append('title', this.state.title);
+    formData.append('description', this.state.description);
+    formData.append('category', this.state.category);
+    formData.append('condition', this.state.condition);
+    formData.append('deliveryOptions', this.state.deliveryOptions);
+    formData.append('charitiesOnly', this.state.charitiesOnly);
+    formData.append('photoUrls', photoUrls);
+    axios.post('/api/posts', formData, {
+      headers: {
+        'Content-Type': `multipart/form-data;`
+      }
     })
       .then((res) => {
         console.log(`Success! ${res}`)

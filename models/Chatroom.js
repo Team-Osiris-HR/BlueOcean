@@ -25,6 +25,9 @@ const chatroomSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     required: true,
+  },
+  messages: {
+    message: String,
   }
 });
 

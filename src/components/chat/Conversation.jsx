@@ -6,11 +6,9 @@ import Container from 'react-bootstrap/Container'
 import MessageEntry from './MessageEntry.jsx'
 
 const Conversation = (props) => {
-  console.log('conversation', props)
   return (
     <div>
       <Row>
-        <Col>{props.chat.photos}</Col>
         <Col>{props.chat.title}</Col>
       </Row>
       {props.messages.map((message, i) => {
@@ -23,8 +21,8 @@ const Conversation = (props) => {
         )
       })}
       <div style={{ float: 'right' }}>
-        <input placeholder='type message'></input>
-        <button>Send</button>
+        <input placeholder='type message' value={props.message} onChange={props.handleMessage} ></input>
+        <button onClick={() => { props.sendMessage(props.chat.chatroomId) }}>Send</button>
       </div>
     </div>
   )

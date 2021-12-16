@@ -3,3 +3,4 @@ node_modules
 *.config.js.*
 dist/bundle.js
 bundle.js
+package-lock.json
