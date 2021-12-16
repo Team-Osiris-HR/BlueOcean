@@ -3,40 +3,19 @@ const multer = require('multer');
 const Post = require('../models/Post.js');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User.js');
+const factory = require('./handlerFactory.js');
 
-// const storage = multer.diskStorage({
-//   destination: './dist/public/img/posts',
-//   filename: (req, file, cb) => {
-//     cb(null, new Date().toISOString() + '-' + file.originalname);
-//   }
+
+// exports.getAllPosts = catchAsync(async (req, res, next) => {
+//   const posts = await Post.find();
+//   res.status(200).json({
+//     status: 'success',
+//     results: posts.length,
+//     posts,
+//   });
 // });
 
-// const upload = multer({ storage }).single('photos'); http://127.0.0.1:3000/dist/public/img/posts/img-1639602355195download.jpeg http://127.0.0.1:3000/public/img/posts/img-download.jpeg
-
-exports.getAllPosts = catchAsync(async (req, res, next) => {
-  const posts = await Post.find();
-  // let obj = {};
-  // let user;
-  // const results = [];
-  // let placeholder = {};
-  // for (let i = 0; i < posts.length; i++) {
-  //   obj = {};
-  //   user = await User.findById(posts[i].user);
-  //   obj.name = user.name;
-  //   obj.email = user.email;
-  //   for (let key in posts[i]) {
-  //     obj[key] = posts[i][key];
-  //     console.log(key);
-  //   }
-  //   console.log(obj);
-  //   results.push(obj);
-  // }
-  res.status(200).json({
-    status: 'success',
-    results: posts.length,
-    posts
-  });
-});
+exports.getAllPosts = factory.findAll(Post);
 
 exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
