@@ -8,7 +8,6 @@ import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Search from './Search.jsx'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -68,7 +67,6 @@ class ChatHeader extends React.Component {
             <BsArrowLeft size={24} />
           </button> : null}
           <Col className="p-2 flex-fill">
-            <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
             {this.props.render === 'feed' ?

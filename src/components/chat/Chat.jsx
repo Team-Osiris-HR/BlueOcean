@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import ChatHeader from './ChatHeader.jsx'
 import axios from 'axios';
 
 import { io } from 'socket.io-client';
@@ -32,37 +33,37 @@ class Chat extends React.Component {
     this.handleMessage = this.handleMessage.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.socket = io();
     this.checkFirstTimeMessage();
     this.socket.on('receive', messageObj => {
       console.log('we are here')
       var newArray = this.state.messages.slice();
       newArray.push(messageObj)
-      this.setState({messages: newArray})
+      this.setState({ messages: newArray })
       console.log('after', newArray);
     })
   }
 
-  checkFirstTimeMessage () {
+  checkFirstTimeMessage() {
     var ids = [];
-      this.state.listOfChats.map(chat => {
-        ids.push(chat.postId)
-      })
-      if(this.state.chatSelected) {
-        if (!ids.includes(this.state.chatSelected.id)){
-          this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
-        } else {
-          this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
-        }
+    this.state.listOfChats.map(chat => {
+      ids.push(chat.postId)
+    })
+    if (this.state.chatSelected) {
+      if (!ids.includes(this.state.chatSelected.id)) {
+        this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
+      } else {
+        this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
       }
+    }
   }
 
   newChat = (postId) => {
     var roomNumber = uuidv4();
     axios.post('/api/chatrooms/newroom', { roomHash: roomNumber, postId: postId })
       .then((result) => {
-        this.setState({ newRoom: result.data._id})
+        this.setState({ newRoom: result.data._id })
       })
       .catch((error) => {
         console.log(error);
@@ -86,7 +87,7 @@ class Chat extends React.Component {
   sendMessage = (roomId, messageObj) => {
     if (this.state.firstMessageStatus) {
       this.newChat(this.state.chatSelected.id)
-      this.setState({chatSelectedStatus: false})
+      this.setState({ chatSelectedStatus: false })
       getAllChats = () => {
         // database query that returns all active chats. look at object above
         axios.get('/api/chatrooms/mychats')
@@ -97,27 +98,27 @@ class Chat extends React.Component {
             console.log(error);
           })
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         axios.post(`/api/chatrooms/${this.state.newRoom}/messages/create`, { message: this.state.message })
-        .then((result) => {
-          console.log('You sent a message')
-          // this.socket.emit('joinRoom', id)
-          // this.socket.emit('send', messageObj, this.state.newRoom)
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+          .then((result) => {
+            console.log('You sent a message')
+            // this.socket.emit('joinRoom', id)
+            // this.socket.emit('send', messageObj, this.state.newRoom)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
         this.setState({ message: '' })
       }, 300)
     } else {
       this.socket.emit('send', messageObj, roomId)
       axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
-      .then((result) => {
-        console.log('You sent a message')
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+        .then((result) => {
+          console.log('You sent a message')
+        })
+        .catch((error) => {
+          console.log(error);
+        })
       this.setState({ message: '' })
     }
   }
@@ -140,30 +141,34 @@ class Chat extends React.Component {
   render() {
     console.log(this.state.chatSelected)
     return (
-      <Container>
-        <Col>
-          {!this.state.chatSelectedStatus ?
-            <>
-              <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button>
-              <ListOfConversations
-                chats={this.state.listOfChats}
-                selectChat={this.selectChat} />
-            </>
-            :
-            <>
-              <Button onClick={() => { this.leaveChat() }} > Back </Button>
-              <Conversation
-                user={this.props.user.name}
-                message={this.state.message}
-                chat={this.state.chatSelected}
-                messages={this.state.messages}
-                sendMessage={this.sendMessage}
-                handleMessage={this.handleMessage}
-              />
-            </>
-          }
-        </Col>
-      </Container>
+      <>
+
+        <ChatHeader />
+        <Container>
+          <Col>
+            {!this.state.chatSelectedStatus ?
+              <>
+                <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button>
+                <ListOfConversations
+                  chats={this.state.listOfChats}
+                  selectChat={this.selectChat} />
+              </>
+              :
+              <>
+                <Button onClick={() => { this.leaveChat() }} > Back </Button>
+                <Conversation
+                  user={this.props.user.name}
+                  message={this.state.message}
+                  chat={this.state.chatSelected}
+                  messages={this.state.messages}
+                  sendMessage={this.sendMessage}
+                  handleMessage={this.handleMessage}
+                />
+              </>
+            }
+          </Col>
+        </Container>
+      </>
     );
   }
 }
