@@ -26,7 +26,7 @@
 }
 
 .feed_card {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .tile {
@@ -34,6 +34,8 @@
   overflow-y: hidden;
   margin-right: auto;
   margin-left: auto;
+  -webkit-box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
+  box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
 }
 
 .feed_image {
@@ -48,6 +50,19 @@
 .cardTextBox {
   height: 23%;
   background-color: #7D4EFC;
+}
+
+.donateBtn {
+  position: relative;
+  width: 282px;
+  height: 60px;
+  left: calc(50% - 282px / 2);
+  top: calc(50% - 60px / 2 + 299px);
+  font-size: 22px;
+  border: 0px none;
+  color: #FFFFFF;
+  background: #7D4EFC;
+  border-radius: 13px;
 }
 
 .login-hello,

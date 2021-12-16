@@ -120,7 +120,7 @@ class Feed extends React.Component {
           (<>
             <div className="middle">
               <Container>
-                <Row xs={1} sm={2} md={3}>
+                <Row xs={1} md={2} lg={3}>
                   {this.props.posts.filter((val) => {
                     if(val.active) {
                       return val
@@ -172,7 +172,7 @@ class Feed extends React.Component {
             </div>
             <div className="bottom">
               <Container>
-                <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
+                <button className='donateBtn' size="lg" onClick={this.toggleDonate}>Donate</button>
               </Container>
               {this.state.showDonate ?
                 <Donate
