@@ -47,7 +47,6 @@ class Feed extends React.Component {
 
     let formData = new FormData()
     let files = this.state.files;
-<<<<<<< HEAD
     // for (var i = 0; i < files.length; i++) {
     //   formData.append('photos', {
     //     uri: files[i].uri,
@@ -69,22 +68,6 @@ class Feed extends React.Component {
       headers: {
         'Content-Type': `multipart/form-data;`
       }
-=======
-    photoFiles.append(`photos`, files.concat(photoUrls))
-
-    this.toggleDonate(e)
-
-    axios.post('/api/posts', {
-      name: this.props.currentUser.name,
-      email: this.props.currentUser.email,
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      condition: this.state.condition,
-      deliveryOptions: this.state.deliveryOptions,
-      charitiesOnly: this.state.charitiesOnly,
-      //photos: photoFiles
->>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
     })
       .then((res) => {
         this.props.update()

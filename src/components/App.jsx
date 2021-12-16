@@ -27,15 +27,10 @@ class App extends React.Component {
       currentUser: {},
       search: '',
       newMessageStatus: false,
-<<<<<<< HEAD
-      itemObj: null,
-      listOfChats: [],
-=======
       itemObj: {},
       pickup: 'negotiable',
       category: 'none',
       sort: 'date'
->>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
 
     }
     this.renderView = this.renderView.bind(this)

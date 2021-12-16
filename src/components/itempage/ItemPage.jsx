@@ -30,13 +30,8 @@ class ItemPage extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    console.log('Component Did Mount');
-    // axios.post('/api/users/login', { "name": "manny", "password": "123456" })
-=======
     // console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
->>>>>>> 414620c905416dfc9e91500c4c4f76272e265d16
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
     //   })
