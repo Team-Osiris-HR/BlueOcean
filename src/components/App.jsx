@@ -58,7 +58,7 @@ class App extends React.Component {
   getPosts() {
     axios.get('/api/posts')
       .then((res) => {
-        var posts = res.data.posts.reverse();
+        var posts = res.data.doc.reverse();
         this.setState({
           posts: posts
         })

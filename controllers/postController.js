@@ -16,6 +16,9 @@ const factory = require('./handlerFactory.js');
 // });
 
 exports.getAllPosts = factory.findAll(Post);
+exports.getOnePost = factory.getOne(Post);
+exports.updatePost = factory.updateOne(Post);
+exports.deletePost = factory.deleteOne(Post);
 
 exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
@@ -31,34 +34,34 @@ exports.createPost = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getOnePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
-  const user = await User.findById(post.user);
-  post.user = user;
-  res.status(200).json({
-    status: 'success',
-    post,
-  });
-});
+// exports.getOnePost = catchAsync(async (req, res, next) => {
+//   const post = await Post.findById(req.params.id);
+//   const user = await User.findById(post.user);
+//   post.user = user;
+//   res.status(200).json({
+//     status: 'success',
+//     post,
+//   });
+// });
 
-exports.updatePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    runValidators: true,
-    new: true
-  });
-  res.status(200).json({
-    status: 'success',
-    post,
-  });
-});
+// exports.updatePost = catchAsync(async (req, res, next) => {
+//   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+//     runValidators: true,
+//     new: true
+//   });
+//   res.status(200).json({
+//     status: 'success',
+//     post,
+//   });
+// });
 
-exports.deletePost = catchAsync(async (req, res, next) => {
-  await Post.findByIdAndDelete(req.params.id);
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
-});
+// exports.deletePost = catchAsync(async (req, res, next) => {
+//   await Post.findByIdAndDelete(req.params.id);
+//   res.status(204).json({
+//     status: 'success',
+//     data: null,
+//   });
+// });
 
 exports.togglePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);

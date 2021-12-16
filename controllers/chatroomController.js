@@ -2,11 +2,16 @@ const Chatroom = require("../models/Chatroom.js");
 const catchAsync = require("../utils/catchAsync.js");
 const User = require("../models/User.js");
 const Post = require("../models/Post.js");
+const factory = require('./handlerFactory.js');
 
-exports.getAllRooms = catchAsync(async (req, res) => {
-  const roomList = await Chatroom.find();
-  res.status(200).json(roomList);
-});
+// exports.getAllRooms = catchAsync(async (req, res) => {
+//   const roomList = await Chatroom.find();
+//   res.status(200).json(roomList);
+// });
+
+exports.getAllRooms = factory.findAll(Chatroom);
+exports.getOneUserChat = factory.getOne(Chatroom);
+exports.deleteRoom = factory.deleteOne(Chatroom);
 
 exports.getUserChats = catchAsync(async (req, res) => {
   let userChats = await Chatroom.find({ userOne: req.user._id });
@@ -46,14 +51,14 @@ exports.getUserChats = catchAsync(async (req, res) => {
   res.status(200).json(results);
 });
 
-exports.getOneUserChat = catchAsync(async (req, res) => {
-  const chat = await Chatroom.find({ _id: req.params.chatId });
+// exports.getOneUserChat = catchAsync(async (req, res) => {
+//   const chat = await Chatroom.find({ _id: req.params.chatId });
 
-  if (!chat) {
-    return res.sendStatus(400);
-  }
-  res.status(200).json(chat);
-});
+//   if (!chat) {
+//     return res.sendStatus(400);
+//   }
+//   res.status(200).json(chat);
+// });
 
 exports.createRoom = catchAsync(async (req, res) => {
   const post = await Post.findById(req.body.postId);
@@ -75,7 +80,7 @@ exports.toggleRoom = catchAsync(async (req, res) => {
   res.sendStatus(200);
 });
 
-exports.deleteRoom = catchAsync(async (req, res) => {
-  const room = await Chatroom.findByIdAndDelete(req.params.chatId);
-  res.sendStatus(204);
-});
+// exports.deleteRoom = catchAsync(async (req, res) => {
+//   const room = await Chatroom.findByIdAndDelete(req.params.chatId);
+//   res.sendStatus(204);
+// });
