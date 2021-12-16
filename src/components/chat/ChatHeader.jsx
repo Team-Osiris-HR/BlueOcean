@@ -69,7 +69,9 @@ class ChatHeader extends React.Component {
     return (
       <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
-          <Button onClick={() => this.backButton()}>Back</Button>
+          <button className='search-button' type="button" variant='warning' onClick={() => { this.backButton() }}>
+            <BsArrowLeft size={24} />
+          </button>
           <Col className="p-2 flex-fill">
             <span>Inbox</span>
           </Col>

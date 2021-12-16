@@ -109,4 +109,5 @@
 
 .container-fluid {
   background-color: rgba(65, 0, 250, 0.69);
+  min-height: 60px;
 }

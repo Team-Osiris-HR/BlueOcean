@@ -134,24 +134,24 @@ class Chat extends React.Component {
     this.setState({ message: e.target.value })
   }
   render() {
-    console.log('list', this.props)
     return (
-      <Container>
-        <Col>
+          <>
           {!this.state.chatSelectedStatus ?
-            <>
-              {/* <Button type="button" onClick={() => {
-                this.props.setRenderState('feed')
-              }}>Back</Button> */}
-              <ChatHeader setRenderState={this.props.setRenderState} chatSelectedStatus={this.state.chatSelectedStatus} />
+          <>
+            <ChatHeader setRenderState={this.props.setRenderState} chatSelectedStatus={this.state.chatSelectedStatus} />
+            <Container>
+              <Col>
               <ListOfConversations
                 chats={this.state.listOfChats}
                 selectChat={this.selectChat} />
+              </Col>
+            </Container>
             </>
             :
             <>
-              {/* <Button onClick={() => { this.leaveChat() }} > Back </Button> */}
-              <ChatHeader leaveChat={this.leaveChat} chatSelectedStatus={this.state.chatSelectedStatus} />
+            <ChatHeader leaveChat={this.leaveChat} chatSelectedStatus={this.state.chatSelectedStatus} />
+            <Container>
+              <Col>
               <Conversation
                 user={this.props.user.name}
                 message={this.state.message}
@@ -159,11 +159,12 @@ class Chat extends React.Component {
                 messages={this.state.messages}
                 sendMessage={this.sendMessage}
                 handleMessage={this.handleMessage}
-              />
+                />
+              </Col>
+            </Container>
             </>
-          }
-        </Col>
-      </Container>
+              }
+          </>
     );
   }
 }
