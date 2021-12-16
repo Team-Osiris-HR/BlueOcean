@@ -6,6 +6,14 @@
   display: grid;
   grid-template-rows: 7% 67% 26%;
 }
+.charityPage {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  padding-top: 7px;
+  display: grid;
+  grid-template-rows: 7% 88% 5%;
+}
 
 .top {
   grid-row-start: 1;
@@ -13,6 +21,43 @@
   padding-right: 5%;
   padding-bottom: 25px;
 }
+
+.top_buttons {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #7D4EFC;
+  color: white;
+
+}
+
+.selected {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #DC3545;
+  color: white;
+}
+
+.top_buttons:hover {
+  background-color:#6742CC;
+}
+
+.top_buttons:active {
+  position:relative;
+	top:1px;
+}
+
 
 .middle {
   width: 100%;
@@ -22,11 +67,11 @@
 
 .bottom {
   grid-row-start: 3;
-  padding-top: 7px;
+  padding-top: 20px;
 }
 
 .feed_card {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .tile {
@@ -34,6 +79,16 @@
   overflow-y: hidden;
   margin-right: auto;
   margin-left: auto;
+  -webkit-box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
+  box-shadow: 9px 10px 14px -1px rgba(0,0,0,0.31);
+}
+
+.tile:active {
+  position:relative;
+	top:3px;
+  left: 3px;
+  -webkit-box-shadow: 9px 10px 13px -7px rgba(0,0,0,0.35);
+  box-shadow: 9px 10px 13px -7px rgba(0,0,0,0.35);
 }
 
 .feed_image {
@@ -48,6 +103,28 @@
 .cardTextBox {
   height: 23%;
   background-color: #7d4efc;
+}
+
+.donateBtn {
+  position: relative;
+  width: 282px;
+  height: 60px;
+  left: calc(50% - 282px / 2);
+  top: calc(50% - 60px / 2 + 299px);
+  font-size: 22px;
+  border: none;
+  border-radius: 13px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.donateBtn:hover {
+  background-color:#6742CC;
+}
+
+.donateBtn:active {
+  position:relative;
+	top:1px;
 }
 
 .login-hello,

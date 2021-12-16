@@ -19,6 +19,9 @@ class Feed extends React.Component {
       charitiesOnly: true,
       files: [],
       posts: [],
+      mapBtn: 'top_buttons',
+      publicBtn: 'selected',
+      userFdBtn: 'top_buttons'
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
@@ -95,18 +98,47 @@ class Feed extends React.Component {
   }
 
   toggleFeed(e) {
-    this.setState({ feed: e.target.outerText })
+    var selection = e.target.outerText
+    if (selection === 'Public Feed') {
+      this.setState({
+        feed: 'Public Feed',
+        mapBtn: 'top_buttons',
+        publicBtn: 'selected',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'Map') {
+      this.setState({
+        feed:'Map',
+        mapBtn: 'selected',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'My Posts') {
+      this.setState({
+        feed:'My Posts',
+        mapBtn: 'top_buttons',
+        publicBtn: 'top_buttons',
+        userFdBtn: 'selected'
+      })
+    }
   }
 
+
   render() {
+    var page;
+    if (this.props.currentUser.role === 'user') { page="page"}
+    if (this.props.currentUser.role === 'charity') { page="charityPage"}
+
     return (
-      <div className="page">
+      <div className={page}>
         <div className="top">
           <Stack direction="horizontal">
             <ButtonGroup className="ms-auto">
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>Map</Button>
-              <Button variant="info" size="sm" className="text-white" onClick={this.toggleFeed}>Public Feed</Button>
-              <Button variant="primary" size="sm" onClick={this.toggleFeed}>My Posts</Button>
+              <button className={this.state.mapBtn} onClick={this.toggleFeed}>Map</button>
+              <button className={this.state.publicBtn} onClick={this.toggleFeed}>Public Feed</button>
+              <button className={this.state.userFdBtn} onClick={this.toggleFeed}>My Posts</button>
             </ButtonGroup>
           </Stack>
         </div>
@@ -120,7 +152,7 @@ class Feed extends React.Component {
           (<>
             <div className="middle">
               <Container>
-                <Row xs={1} sm={2} md={3}>
+                <Row xs={1} md={2} lg={3}>
                   {this.props.posts.filter((val) => {
                     if (val.active) {
                       return val
@@ -170,9 +202,10 @@ class Feed extends React.Component {
                 </Row>
               </Container>
             </div>
+            {this.props.currentUser.role === 'user' ?
             <div className="bottom">
               <Container>
-                <Button className='button' variant="primary" size="lg" onClick={this.toggleDonate}>Donate</Button>
+                <button className='donateBtn' size="lg" onClick={this.toggleDonate}>Donate</button>
               </Container>
               {this.state.showDonate ?
                 <Donate
@@ -181,7 +214,7 @@ class Feed extends React.Component {
                   handleFileChange={this.handleFileChange}
                   makeDonation={this.makeDonation}
                 /> : null}
-            </div>
+            </div> : null}
           </>
           )}
       </div>
