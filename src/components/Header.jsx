@@ -68,6 +68,7 @@ class Header extends React.Component {
             <BsArrowLeft size={24} />
           </button> : null}
           <Col className="p-2 flex-fill">
+            <h3>mikeslist</h3>
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
@@ -85,7 +86,7 @@ class Header extends React.Component {
           >
             <Offcanvas.Header closeButton>
               {/* <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title> */}
-              <Offcanvas.Title id="offcanvasNavbarLabel">sample app</Offcanvas.Title>
+              <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
