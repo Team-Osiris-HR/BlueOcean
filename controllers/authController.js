@@ -20,7 +20,7 @@ async function sendMail(message1, message2, message3, user) {
     html: `<b>${message1}</b><br /><b>${message2}</b><br /><b>${message3}</b>`, // html body
   });
 
-  // console.log("Message sent: ", info.messageId);
+  // .log("Message sent: ", info.messageId);
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
@@ -142,7 +142,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     message: "created token",
-    token: resetToken,
+    token: resetToken
   });
 });
 

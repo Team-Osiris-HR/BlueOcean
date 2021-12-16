@@ -1,6 +1,17 @@
+const multer = require('multer');
+
 const Post = require('../models/Post.js');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User.js');
+
+// const storage = multer.diskStorage({
+//   destination: './dist/public/img/posts',
+//   filename: (req, file, cb) => {
+//     cb(null, new Date().toISOString() + '-' + file.originalname);
+//   }
+// });
+
+// const upload = multer({ storage }).single('photos'); http://127.0.0.1:3000/dist/public/img/posts/img-1639602355195download.jpeg http://127.0.0.1:3000/public/img/posts/img-download.jpeg
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
   const posts = await Post.find();
@@ -31,6 +42,9 @@ exports.createPost = catchAsync(async (req, res, next) => {
   req.body.user = req.user;
   req.body.username = req.user.name;
   req.body.email = req.user.email;
+  req.body.photos = ['public/img/posts/' + req.file.filename];
+  req.body.photos = req.body.photos.concat(req.body.photoUrls.split(','));
+
   const newPost = await Post.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -115,3 +129,6 @@ exports.answerQA = catchAsync(async (req, res, next) => {
     }
   }
 });
+
+// https://www.yesmagazine.org/wp-content/uploads/imports/0bf91a5233fc4b57a641bab18f270e02.png
+// https://www.storyofstuff.org/wp-content/uploads/2020/03/logo-color_3fc18254.png
