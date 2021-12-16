@@ -221,3 +221,20 @@
 .container-fluid {
   background-color: rgba(65, 0, 250, 0.69);
 }
+
+.accountBtn{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.headerIcon {
+  color: white;
+  font-weight: bold;
+  font-size: 22;
+}
