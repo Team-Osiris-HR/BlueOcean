@@ -61,6 +61,7 @@ class Feed extends React.Component {
     formData.append('condition', this.state.condition);
     formData.append('deliveryOptions', this.state.deliveryOptions);
     formData.append('charitiesOnly', this.state.charitiesOnly);
+    formData.append('photoUrls', photoUrls);
     axios.post('/api/posts', formData, {
       headers: {
         'Content-Type': `multipart/form-data;`

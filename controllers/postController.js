@@ -43,8 +43,8 @@ exports.createPost = catchAsync(async (req, res, next) => {
   req.body.username = req.user.name;
   req.body.email = req.user.email;
   req.body.photos = ['public/img/posts/' + req.file.filename];
+  req.body.photos = req.body.photos.concat(req.body.photoUrls.split(','));
 
-  console.log(req.body, req.file);
   const newPost = await Post.create(req.body);
   res.status(201).json({
     status: 'success',
