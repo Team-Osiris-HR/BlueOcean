@@ -18,7 +18,7 @@ class Feed extends React.Component {
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
       files: [],
-
+      posts: [],
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
@@ -99,7 +99,6 @@ class Feed extends React.Component {
   }
 
   render() {
-
     return (
       <div className="page">
         <div className="top">
@@ -127,7 +126,7 @@ class Feed extends React.Component {
                       return val
                     }
                   }).filter((val) => {
-                    if (this.props.currentUser.role === 'charity') {
+                    if (this.props.currentUser.role === 'charity' || this.props.currentUser.role === 'admin') {
                       return val
                     }
                     if (this.props.currentUser.role === 'user') {
