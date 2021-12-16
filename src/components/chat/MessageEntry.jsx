@@ -7,10 +7,9 @@ const MessageEntry = (props) => {
   return (
     <>
       {props.messages.name === props.user ?
-        <div className="userMessage"
-        >{props.user} : {props.messages.message}</div>
+        <div className="otherUserMessage" >{props.user}: {props.messages.message}</div>
         :
-        <div className="otherUserMessage" >otherUser : {props.messages.message} </div>
+        <div className="userMessage" style={{textAlign: 'right'}}>{props.messages.message}</div>
       }
     </>
   )

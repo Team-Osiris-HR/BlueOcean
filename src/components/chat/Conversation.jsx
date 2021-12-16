@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import MessageEntry from './MessageEntry.jsx'
 
 const Conversation = (props) => {
+  var messageObj = {message: props.message, time: Date.now(), chatroom: props.chat.chatroomId, name: props.user}
   return (
     <div>
       <Row>
@@ -17,12 +18,12 @@ const Conversation = (props) => {
             key={i}
             index={i}
             messages={message}
-            user={props.user} />
+            user={props.chat.name} />
         )
       })}
       <div style={{ float: 'right' }}>
         <input placeholder='type message' value={props.message} onChange={props.handleMessage} ></input>
-        <button onClick={() => { props.sendMessage(props.chat.id) }}>Send</button>
+        <button onClick={() => { props.sendMessage(props.chat.chatroomId, messageObj) }}>Send</button>
       </div>
     </div>
   )

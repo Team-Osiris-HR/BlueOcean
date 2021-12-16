@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 import { io } from 'socket.io-client';
-const socket = io();
 
 class Chat extends React.Component {
   constructor(props) {
@@ -23,7 +22,8 @@ class Chat extends React.Component {
       messages: [],
       message: '',
       firstMessageStatus: false,
-      newRoom: null
+      newRoom: null,
+      ioRoom: null,
     }
     this.leaveChat = this.leaveChat.bind(this);
     this.selectChat = this.selectChat.bind(this);
@@ -33,7 +33,17 @@ class Chat extends React.Component {
   }
 
   componentDidMount () {
-      this.checkFirstTimeMessage();
+    const socket = io();
+    this.checkFirstTimeMessage();
+    socket.on('receive', messageObj => {
+      var newArray = this.state.messages
+      newArray.push(messageObj)
+      console.log('before', this.state.messages)
+      setTimeout(() => {
+        this.setState({messages: newArray})
+        console.log('after', this.state.messages)
+      }, 100)
+    })
   }
 
   checkFirstTimeMessage () {
@@ -54,7 +64,6 @@ class Chat extends React.Component {
     var roomNumber = uuidv4();
     axios.post('/api/chatrooms/newroom', { roomHash: roomNumber, postId: postId })
       .then((result) => {
-        console.log('this is the return for room creation', result.data);
         this.setState({ newRoom: result.data._id})
       })
       .catch((error) => {
@@ -75,7 +84,7 @@ class Chat extends React.Component {
       })
   }
 
-  sendMessage = (roomId) => {
+  sendMessage = (roomId, messageObj) => {
     if (this.state.firstMessageStatus) {
       this.newChat(this.state.chatSelected.id)
       setTimeout(()=>{
@@ -89,6 +98,7 @@ class Chat extends React.Component {
         this.setState({ message: '' })
       }, 500)
     } else {
+      socket.emit('send', messageObj, roomId)
       axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
       .then((result) => {
         console.log('You sent a message')
@@ -101,6 +111,7 @@ class Chat extends React.Component {
   }
 
   selectChat = (id, chat) => {
+    socket.emit('joinRoom', id)
     this.setState({ chatSelected: chat })
     this.getOldChat(id, chat);
   }
@@ -114,10 +125,7 @@ class Chat extends React.Component {
     this.setState({ message: e.target.value })
   }
 
-
   render() {
-    console.log(this.state.chatSelected);
-    console.log(this.state.messages);
     return (
       <Container>
         <Col>
