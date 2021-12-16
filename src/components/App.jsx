@@ -205,6 +205,14 @@ class App extends React.Component {
           setRenderState={this.setRenderState}
         />
       )
+    } else if (this.state.render === 'logout') {
+      return (
+        <Container>
+          <Col className='login-container text-center'>
+            <h1>See you again!</h1>
+          </Col>
+        </Container>
+      )
     }
   }
 
