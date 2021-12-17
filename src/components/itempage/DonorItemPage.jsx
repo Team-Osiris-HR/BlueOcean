@@ -40,7 +40,7 @@ class DonorItemPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Component Did Mount');
+    // console.log('Component Did Mount');
     // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
@@ -52,6 +52,7 @@ class DonorItemPage extends React.Component {
   }
 
   getItem() {
+    console.log(this.props);
     axios.get(`/api/posts/${this.props.id}`)
       .then((res) => {
         var post = res.data.doc;

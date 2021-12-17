@@ -16,7 +16,9 @@ exports.createPost = catchAsync(async (req, res, next) => {
   req.body.email = req.user.email;
   if (req.file) {
     req.body.photos = ["public/img/posts/" + req.file.filename];
-    req.body.photos = req.body.photos.concat(req.body.photoUrls.split(","));
+    if (req.body.photoUrls) {
+      req.body.photos = req.body.photos.concat(req.body.photoUrls.split(","));
+    }
   } else if (req.body.photoUrls) {
     req.body.photos = req.body.photoUrls.split(",");
   } else {
