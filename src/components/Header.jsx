@@ -50,9 +50,11 @@ class Header extends React.Component {
   logout() {
     axios.get('/api/users/logout')
       .then((result) => {
-        alert('see you again!')
+        this.props.setRenderState('logout')
         Cookies.remove('jwt')
-        this.props.setRenderState("login")
+        setTimeout(() => {
+          this.props.setRenderState("login")
+        }, 1500)
       }).catch((err) => {
         console.log(err)
       });
@@ -118,10 +120,12 @@ class Header extends React.Component {
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >vehicles</ListGroup.Item>
                   <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >other</ListGroup.Item>
                 </ListGroup>
+                <div>
+                  <button className='button' onClick={() => { this.logout() }}>
+                    logout
+                  </button>
+                </div>
               </Nav>
-              <Button onClick={() => { this.logout() }}>
-                logout
-              </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
