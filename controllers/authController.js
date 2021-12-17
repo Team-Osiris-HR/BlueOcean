@@ -9,9 +9,8 @@ const config = require("../controller.config.js");
 
 const expirey = 24 * 60 * 60 * 1000;
 
-
 async function sendMail(message1, message2, message3, token, user) {
-  let transporter = nodemailer.createTransport(require('../email.config.js'));
+  let transporter = nodemailer.createTransport(require("../email.config.js"));
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
@@ -134,16 +133,14 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const message2 = `Here is your token: `;
   const message3 = `If you didn't forget your password, please ignore this email.`;
 
-  await sendMail(message1, message2, message3, resetToken, user).catch(console.error);
+  await sendMail(message1, message2, message3, resetToken, user).catch(
+    console.error
+  );
 
   res.status(200).json({
     status: "success",
     message: "created token",
-<<<<<<< HEAD
     token: resetToken,
-=======
-    token: resetToken
->>>>>>> dev
   });
 });
 
