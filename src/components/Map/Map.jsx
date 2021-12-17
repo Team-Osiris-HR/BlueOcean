@@ -27,7 +27,7 @@ const Map = (props) => {
   const fetchLocation = (user) => {
     return axios.get(`/api/users/${user}`)
     .then((result) => {
-      return result.data.data.location ? result.data.data.location : null;
+      return result.data.doc.location ? result.data.doc.location : null;
     })
     .catch((err) => {
       return err;
