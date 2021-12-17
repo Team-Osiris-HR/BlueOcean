@@ -44,7 +44,8 @@ const Map = (props) => {
           locatedCharities.push({
             name: charity.name,
             lat: charity.location.latitude,
-            lng: charity.location.longitude});
+            lng: charity.location.longitude,
+            additionalInfo: charity.address});
         }
       })
       setMarkers(locatedCharities);
@@ -55,7 +56,8 @@ const Map = (props) => {
           locatedItems.push({
             name: props.posts[i].title,
             lat: loc.latitude,
-            lng: loc.longitude
+            lng: loc.longitude,
+            additionalInfo: props.posts[i].description
           })
         }
       })
@@ -151,7 +153,8 @@ const Map = (props) => {
             onCloseClick={() => setSelected({})}
           >
           <>
-          <p><b>{selected.name}</b></p>
+          <h4><b>{selected.name}</b></h4>
+          <p>{selected.additionalInfo}</p>
           </>
           </InfoWindow>
           ) : null}
