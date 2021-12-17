@@ -222,6 +222,7 @@
   background-color: rgba(65, 0, 250, 0.69);
 }
 
+<<<<<<< HEAD
 .header-container H3 {
   font-family: cursive;
   text-align: center;
@@ -247,3 +248,21 @@
   position: absolute;
   right: 10px;
 }
+=======
+.accountBtn{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.headerIcon {
+  color: white;
+  font-weight: bold;
+  font-size: 22;
+}
+>>>>>>> 39e3601159cc87083b81db4eafec395d76ff203b
