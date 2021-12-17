@@ -7,10 +7,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
 import { io } from 'socket.io-client';
-const socket = io();
-
+import ChatHeader from './ChatHeader.jsx'
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +21,9 @@ class Chat extends React.Component {
       messages: [],
       message: '',
       firstMessageStatus: false,
-      newRoom: null
+      newRoom: null,
+      ioRoom: null,
+      nameSelected: ''
     }
     this.leaveChat = this.leaveChat.bind(this);
     this.selectChat = this.selectChat.bind(this);
@@ -31,37 +31,40 @@ class Chat extends React.Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
   }
-
-  componentDidMount () {
-      this.checkFirstTimeMessage();
+  componentDidMount() {
+    this.socket = io();
+    this.checkFirstTimeMessage();
+    this.socket.on('receive', messageObj => {
+      var newArray = this.state.messages.slice();
+      newArray.push(messageObj)
+      this.setState({ messages: newArray })
+    })
   }
-
-  checkFirstTimeMessage () {
+  checkFirstTimeMessage() {
     var ids = [];
-      this.state.listOfChats.map(chat => {
-        ids.push(chat.postId)
-      })
-      if(this.state.chatSelected) {
-        if (!ids.includes(this.state.chatSelected.id)){
+    this.state.listOfChats.map(chat => {
+      ids.push(chat.postId)
+    })
+    if (this.state.chatSelected) {
+      if (!ids.includes(this.state.chatSelected.id)) {
+        if (Object.keys(this.state.chatSelected).length > 0) {
           this.setState({ firstMessageStatus: true, chatSelectedStatus: true })
-        } else {
-          this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
         }
+      } else {
+        this.selectChat(this.state.chatSelected.id, this.state.chatSelected)
       }
+    }
   }
-
   newChat = (postId) => {
     var roomNumber = uuidv4();
     axios.post('/api/chatrooms/newroom', { roomHash: roomNumber, postId: postId })
       .then((result) => {
-        console.log('this is the return for room creation', result.data);
-        this.setState({ newRoom: result.data._id})
+        this.setState({ newRoom: result.data._id })
       })
       .catch((error) => {
         console.log(error);
       })
   }
-
   getOldChat = (roomNumber) => {
     axios.get(`/api/chatrooms/${roomNumber}/messages`)
       .then((result) => {
@@ -74,63 +77,81 @@ class Chat extends React.Component {
         console.log(error);
       })
   }
-
-  sendMessage = (roomId) => {
+  sendMessage = (roomId, messageObj) => {
     if (this.state.firstMessageStatus) {
       this.newChat(this.state.chatSelected.id)
-      setTimeout(()=>{
+      this.props.getAllChats();
+      setTimeout(() => {
         axios.post(`/api/chatrooms/${this.state.newRoom}/messages/create`, { message: this.state.message })
+          .then((result) => {
+            var newChat = {
+              chatroomId: this.state.newRoom,
+              donorId: null,
+              name: this.state.chatSelected.donor,
+              photos: this.state.chatSelected.photos[0],
+              postId: this.state.chatSelected.id,
+              title: this.state.chatSelected.title,
+              userPhoto: null,
+            }
+            var newArray = this.state.listOfChats.slice();
+            newArray.push(newChat);
+            this.setState({ listOfChats: newArray })
+            this.leaveChat();
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+        this.setState({ message: '' })
+      }, 200)
+    } else {
+      this.socket.emit('send', messageObj, roomId)
+      axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
         .then((result) => {
-          console.log('You sent a message')
         })
         .catch((error) => {
           console.log(error);
         })
-        this.setState({ message: '' })
-      }, 500)
-    } else {
-      axios.post(`/api/chatrooms/${roomId}/messages/create`, { message: this.state.message })
-      .then((result) => {
-        console.log('You sent a message')
-      })
-      .catch((error) => {
-        console.log(error);
-      })
       this.setState({ message: '' })
     }
   }
-
   selectChat = (id, chat) => {
-    this.setState({ chatSelected: chat })
+    this.socket.emit('joinRoom', id)
+    this.setState({ chatSelected: chat, nameSelected: chat.name })
     this.getOldChat(id, chat);
   }
-
   leaveChat = () => {
     this.props.clearMessageStatus();
+    this.props.getAllChats();
     this.setState({ chatSelected: null, chatSelectedStatus: false, firstMessageStatus: false });
   }
-
   handleMessage = (e) => {
     this.setState({ message: e.target.value })
   }
-
-
   render() {
-    console.log(this.state.chatSelected);
-    console.log(this.state.messages);
     return (
-      <Container>
-        <Col>
+          <>
           {!this.state.chatSelectedStatus ?
-            <>
-              <Button type="button" onClick={() => { this.props.setRenderState('feed') }}>Back</Button>
+          <>
+            <ChatHeader
+              nameSelected={this.state.nameSelected}
+              setRenderState={this.props.setRenderState}
+              chatSelectedStatus={this.state.chatSelectedStatus} />
+            <Container>
+              <Col>
               <ListOfConversations
                 chats={this.state.listOfChats}
                 selectChat={this.selectChat} />
+              </Col>
+            </Container>
             </>
             :
             <>
-              <Button onClick={() => { this.leaveChat() }} > Back </Button>
+            <ChatHeader
+              nameSelected={this.state.nameSelected}
+              chatSelectedStatus={this.state.chatSelectedStatus}
+              leaveChat={this.leaveChat} />
+            <Container>
+              <Col>
               <Conversation
                 user={this.props.user.name}
                 message={this.state.message}
@@ -138,13 +159,13 @@ class Chat extends React.Component {
                 messages={this.state.messages}
                 sendMessage={this.sendMessage}
                 handleMessage={this.handleMessage}
-              />
+                />
+              </Col>
+            </Container>
             </>
-          }
-        </Col>
-      </Container>
+              }
+          </>
     );
   }
 }
-
 export default Chat;
