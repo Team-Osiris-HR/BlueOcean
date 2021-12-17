@@ -106,6 +106,7 @@ class Header extends React.Component {
       })
     }
     if (selection === 'distance') {
+
       this.chooseSort(selection)
       this.setState({
         dateBtn: 'top_buttons',
