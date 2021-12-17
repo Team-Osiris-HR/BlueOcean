@@ -60,10 +60,6 @@ class App extends React.Component {
     this.getAllChats()
   }
 
-  getCurrentLocation() {
-    axios.get()
-  }
-
   // asnyc nightmare to get locations of items
   getUserLocations () {
     var users = [];
@@ -75,9 +71,9 @@ class App extends React.Component {
     Promise.all(
       users.map(async (user) => {
         const userLocation = await axios.get(`/api/users/${user}`)
-        console.log(userLocation.data.doc);
+        //console.log(userLocation.data.doc);
         var loc = userLocation.data.doc.location;
-        console.log(loc)
+        //console.log(loc)
         if (loc) {
           locs.push(loc);
         } else {
@@ -117,11 +113,11 @@ class App extends React.Component {
   }
 
   // sort posts by distance, not sure where to put this yet
-  sortByDistance() {
+  /* sortByDistance() {
     var locs = this.state.userLocations;
     locs.map(loc => console.log(loc))
 
-  }
+  } */
 
   // * Grabs all the post, unfiltered
   getPosts() {
