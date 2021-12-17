@@ -60,7 +60,7 @@ const Map = (props) => {
     axios.get('/api/users/')
       .then ((results) => {
         if (isSubscribed) {
-          var charities = results.data.data.filter(user => user.role==="charity")
+          var charities = results.data.doc.filter(user => user.role==="charity")
           setCharities(charities);
         }
       })
