@@ -8,10 +8,12 @@ import Tab from 'react-bootstrap/Tab'
 import Col from 'react-bootstrap/Col'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import SearchBar from './Map/SearchBar.jsx';
 
 class Account extends React.Component {
   constructor(props) {
     super(props)
+    this.searchBox = null;
     this.state = {
       currentUser: this.props.currentUser,
       id: this.props.currentUser._id,
@@ -25,6 +27,8 @@ class Account extends React.Component {
     this.changeType = this.changeType.bind(this)
     this.disableSubmit = this.disableSubmit.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
+    this.onPlacesChanged = this.onPlacesChanged.bind(this)
+    this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
   }
 
   handleChange(e) {
@@ -86,6 +90,18 @@ class Account extends React.Component {
     }
   }
 
+  onSearchBoxMounted (ref) {
+    this.searchBox = ref;
+  }
+
+  onPlacesChanged() {
+    const places = this.searchBox.getPlaces();
+    this.setState({
+      address: places[0].formatted_address,
+      lat: places[0].geometry.location.lat(),
+      lng: places[0].geometry.location.lng()})
+  }
+
   render() {
     return (
       <Tabs defaultActiveKey="account" className="mb-3 justify-content-center">
@@ -112,12 +128,9 @@ class Account extends React.Component {
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGridAddress" >
-                  <FloatingLabel
-                    label='address'
-                    className='mb-3'
-                  >
-                    <Form.Control defaultValue={this.state.currentUser.address} placeholder="Address" name='address' onChange={(e) => this.handleChange(e)} />
-                  </FloatingLabel>
+                    <SearchBar onChange={(e) => this.handleChange(e)}
+                    onPlacesChanged={this.onPlacesChanged}
+                    onSearchBoxMounted={this.onSearchBoxMounted}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGridPhone" >
                   <FloatingLabel
