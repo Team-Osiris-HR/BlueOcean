@@ -44,9 +44,8 @@ class ItemPage extends React.Component {
   getItem() {
     axios.get(`/api/posts/${this.props.currentPost}`)
       .then((res) => {
-        console.log('result > ', res)
         var post = res.data.doc;
-        console.log(post.username)
+        // console.log(post.username)
         // console.log(post);
         var newPost = { id: post._id, title: post.title, donor: post.username, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
