@@ -15,6 +15,10 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Cookies from 'js-cookie'
 import { BsChatLeftText } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
+import { ImMenu } from "react-icons/im"
+
+import ToggleButton from 'react-bootstrap/ToggleButton'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import axios from 'axios'
 
@@ -23,12 +27,19 @@ class Header extends React.Component {
     super(props)
     this.state = {
       toggleSearch: 'hide-search',
-      chosenCategory: 'all'
+      chosenCategory: 'all',
+      pickupBtn: 'top_buttons',
+      negoBtn: 'selected',
+      deliveryBtn: 'top_buttons',
+      dateBtn: 'selected',
+      distanceBtn: 'top_buttons'
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.choosePickup = this.choosePickup.bind(this)
     this.chooseSort = this.chooseSort.bind(this)
     this.logout = this.logout.bind(this)
+    this.toggleFeed = this.toggleFeed.bind(this);
+    this.toggleSort = this.toggleSort.bind(this);
   }
 
   chooseCategory(e) {
@@ -36,45 +47,95 @@ class Header extends React.Component {
     this.setState({ chosenCategory: e.target.outerText })
   }
 
-  choosePickup(e) {
-    this.props.setPickup(e.target.outerText)
-    this.setState({ chosenPickup: e.target.outerText })
+  choosePickup(input) {
+    this.props.setPickup(input)
   }
 
-  chooseSort(e) {
-    this.props.setSort(e.target.outerText)
-    this.setState({ chosenSort: e.target.outerText })
+  chooseSort(input) {
+    this.props.setSort(input)
   }
 
   logout() {
     axios.get('/api/users/logout')
       .then((result) => {
-        alert('see you again!')
+        this.props.setRenderState('logout')
         Cookies.remove('jwt')
-        this.props.setRenderState("login")
+        setTimeout(() => {
+          this.props.setRenderState("login")
+        }, 1000)
       }).catch((err) => {
         console.log(err)
       });
+  }
+
+  toggleFeed(e) {
+    var selection = e.target.outerText
+    if (selection === 'pickup') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'selected',
+        negoBtn: 'top_buttons',
+        deliveryBtn: 'top_buttons'
+      })
+    }
+    if (selection === 'delivery') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'top_buttons',
+        negoBtn: 'top_buttons',
+        deliveryBtn: 'selected'
+      })
+    }
+    if (selection === 'negotiable') {
+      this.choosePickup(selection)
+      this.setState({
+        pickupBtn: 'top_buttons',
+        negoBtn: 'selected',
+        deliveryBtn: 'top_buttons'
+      })
+    }
+  }
+
+  toggleSort(e) {
+    var selection = e.target.outerText
+    if (selection === 'date') {
+      this.chooseSort(selection)
+      this.setState({
+        dateBtn: 'selected',
+        distanceBtn: 'top_buttons',
+      })
+    }
+    if (selection === 'distance') {
+
+      this.chooseSort(selection)
+      this.setState({
+        dateBtn: 'top_buttons',
+        distanceBtn: 'selected',
+      })
+    }
   }
 
   render() {
     return (
       <Navbar className='header-container' bg="light" expand={false}>
         <Container fluid>
-          <Col className="p-2 flex-shrink-1">
-            <Navbar.Toggle bg="white" aria-controls="offcanvasNavbar" />
+          <Col className="p-2 flex-shrink            -1">
+            <Navbar.Toggle bg="white" aria-controls="offcanvasNavbar">
+              <ImMenu className="headerIcon" />
+            </Navbar.Toggle>
           </Col>
           {this.props.render === 'itempage' || this.props.render === 'donoritempage' || this.props.render === 'chat' || this.props.render === 'account' ? <button className='search-button' type="button" variant='warning' onClick={() => { this.props.setRenderState('feed') }}>
-            <BsArrowLeft size={24} />
+            <BsArrowLeft className="headerIcon" size={24} />
           </button> : null}
           <Col className="p-2 flex-fill">
+            <h3>mikeslist</h3>
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
-            {this.props.render === 'feed' ?
+            {this.props.render === 'feed' || this.props.render === 'itempage' || this.props.render === 'donoritempage' ?
               <button
                 className='search-button' alt-text="messages" onClick={() => { this.props.setRenderState('chat') }}>
-                <BsChatLeftText size={24} />
+                <BsChatLeftText className="headerIcon" size={24} />
               </button>
               : null}
           </Col>
@@ -85,39 +146,41 @@ class Header extends React.Component {
           >
             <Offcanvas.Header closeButton>
               {/* <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title> */}
-              <Offcanvas.Title id="offcanvasNavbarLabel">sample app</Offcanvas.Title>
+              <Offcanvas.Title id="offcanvasNavbarLabel">mikeslist</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
-                <h6>pickup: {this.state.chosenPickup}</h6>
-                <ButtonGroup className="mb-3" aria-label="pickupOption">
-                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>pickup</Button>
-                  <Button variant="secondary" onClick={(e) => this.choosePickup(e)}>delivery</Button>
-                  <Button variant="primary" onClick={(e) => this.choosePickup(e)}>negotiable</Button>
+                <button className='top_buttons' onClick={() => this.props.setRenderState('account')}>my account</button>
+                <h6>pickup</h6>
+                <ButtonGroup className="">
+                  <button className={this.state.deliveryBtn} onClick={this.toggleFeed}>delivery</button>
+                  <button className={this.state.pickupBtn} onClick={this.toggleFeed}>pickup</button>
+                  <button className={this.state.negoBtn} onClick={this.toggleFeed}>negotiable</button>
                 </ButtonGroup>
-                <h6>sort: {this.state.chosenSort}</h6>
-                <ButtonGroup className="mb-3" aria-label="sort">
-                  <Button variant="primary" onClick={(e) => this.chooseSort(e)}>date</Button>
-                  <Button variant="secondary" onClick={(e) => this.chooseSort(e)}>distance</Button>
+                <h6>sort</h6>
+                <ButtonGroup className="">
+                  <button className={this.state.dateBtn} onClick={this.toggleSort}>date</button>
+                  <button className={this.state.distanceBtn} onClick={this.toggleSort}>distance</button>
                 </ButtonGroup>
                 <h6>category: {this.state.chosenCategory}</h6>
                 <ListGroup as="ul" className='mb-5'>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>all</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>appliances</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>clothes</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>electronics</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>food</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>furniture</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>pets</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>toys</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>vehicles</ListGroup.Item>
-                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action>other</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >all</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >appliances</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >clothes</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >electronics</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >food</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >furniture</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >pets</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >toys</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >vehicles</ListGroup.Item>
+                  <ListGroup.Item as="li" onClick={(e) => this.chooseCategory(e)} action >other</ListGroup.Item>
                 </ListGroup>
+                <div>
+                  <button className='button' onClick={() => { this.logout() }}>
+                    logout
+                  </button>
+                </div>
               </Nav>
-              <Button onClick={() => { this.logout() }}>
-                logout
-              </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

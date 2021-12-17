@@ -27,13 +27,15 @@ class Signup extends React.Component {
       role: 'user',
       organizationAddress: '',
       organizationPhone: '',
-      organizationURL: ''
+      organizationURL: '',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
     this.changeRole = this.changeRole.bind(this)
     this.onPlacesChanged = this.onPlacesChanged.bind(this)
     this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this)
+    this.errorMessage = this.errorMessage.bind(this)
   }
 
 
@@ -41,7 +43,7 @@ class Signup extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  onSearchBoxMounted (ref) {
+  onSearchBoxMounted(ref) {
     this.searchBox = ref;
   }
 
@@ -50,7 +52,8 @@ class Signup extends React.Component {
     this.setState({
       address: places[0].formatted_address,
       lat: places[0].geometry.location.lat(),
-      lng: places[0].geometry.location.lng()})
+      lng: places[0].geometry.location.lng()
+    })
   }
 
 
@@ -65,8 +68,10 @@ class Signup extends React.Component {
       passwordConfirm: this.state.passwordConfirm,
       phone: this.state.phone,
       address: this.state.address,
-      location: {latitude: this.state.lat,
-      longitude: this.state.lng},
+      location: {
+        latitude: this.state.lat,
+        longitude: this.state.lng
+      },
       loggedIn: false,
       orgnization: {
         phone: this.state.organizationPhone,
@@ -79,7 +84,8 @@ class Signup extends React.Component {
         this.props.setRenderState('login')
       }).catch((err) => {
         console.log(err)
-        alert('check all fields')
+        this.setState({ error: true })
+        setTimeout(() => { this.setState({ error: false }) }, 1500)
       });
   }
 
@@ -89,6 +95,10 @@ class Signup extends React.Component {
     } else {
       this.setState({ role: 'user' })
     }
+  }
+
+  errorMessage(error) {
+    return <span style={{ fontSize: '12px', color: 'red' }}>please check all fields and try again</span>
   }
 
   render() {
@@ -133,8 +143,8 @@ class Signup extends React.Component {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGridAddress" >
             <SearchBar onChange={(e) => this.handleChange(e)}
-            onPlacesChanged={this.onPlacesChanged}
-            onSearchBoxMounted={this.onSearchBoxMounted}/>
+              onPlacesChanged={this.onPlacesChanged}
+              onSearchBoxMounted={this.onSearchBoxMounted} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridPhone" >
@@ -180,10 +190,13 @@ class Signup extends React.Component {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+          <div>
+            {this.state.error ? this.errorMessage() : null}
+          </div>
           <div className='text-center'>
-            <Button className='button' size="lg" variant="primary" type="submit">
+            <button className='button' size="lg" type="submit">
               Submit
-            </Button>
+            </button>
           </div>
           <div>
             <button className='create-acc-back-btn' type="button" onClick={() => this.props.setRenderState('login')}>already have an account? log in here.</button>

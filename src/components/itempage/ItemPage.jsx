@@ -44,9 +44,11 @@ class ItemPage extends React.Component {
   getItem() {
     axios.get(`/api/posts/${this.props.currentPost}`)
       .then((res) => {
-        var post = res.data.post;
+        console.log('result > ', res)
+        var post = res.data.doc;
+        console.log(post.username)
         // console.log(post);
-        var newPost = { id: post._id, title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
+        var newPost = { id: post._id, title: post.title, donor: post.username, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
       })
       .catch((err) => {
@@ -147,14 +149,14 @@ class ItemPage extends React.Component {
 
 
   render() {
-    // console.log(this.state.postData)
     return (
       <Container className="itemContainer" >
         <Col>
           <Photos images={this.state.postData.photos} />
           <div className="nameBox">
             <h2>{this.state.postData.title}</h2>
-            <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '}
+            {/* <Button variant="primary" onClick={() => { this.props.messagePoster(this.state.postData) }}>Message Poster</Button>{' '} */}
+            <button type="button" className="messageposterbutton" onClick={() => { this.props.messagePoster(this.state.postData) }} >Message Poster</button>
           </div>
           <p>{this.state.postData.donor}</p>
           <p className="description">{this.state.postData.description}</p>
@@ -162,20 +164,31 @@ class ItemPage extends React.Component {
             <p>Delivery Options: {this.state.postData.deliveryOptions}</p>
             <p>Condition: {this.state.postData.condition}</p>
           </div>
-          <Qa QAs={this.state.postData.qas} />
+          <br/>
           <div>
-            <ItemMap donor={this.state.postData.donor}/>
+            <h4>Location</h4>
+            <br/>
           </div>
+          <div className="itemMap">
+            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
+          </div>
+
+
+          <Qa QAs={this.state.postData.qas} />
+
+
 
           <div className="bottombuttonscontainer">
 
             <div className="askmodal">
-              <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button>
+              {/* <Button style={{ "marginTop": "2%" }} variant="info" onClick={this.toggleModel} >Ask Question </Button> */}
+              <button type="button" className="askbutton" style={{ "marginTop": "2%" }} onClick={this.toggleModel} >Ask Question</button>
               {this.state.showAsk ? this.askModal() : null}
             </div>
 
             <div className="reportmodal">
-              <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button>
+              {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleReport} >Report Posting</Button> */}
+              <button type="button" className="reportbutton" style={{ "marginTop": "2%" }} onClick={this.toggleReport}>Report Posting</button>
               {this.state.showReport ? this.reportModal() : null}
             </div>
 

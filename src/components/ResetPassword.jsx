@@ -118,9 +118,9 @@ class ResetPassword extends React.Component {
                 </button>
               </Form.Group>
               <div className='text-center'>
-                <Button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
+                <button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
                   Reset password
-                </Button>
+                </button>
               </div>
             </Form >
           </Col>

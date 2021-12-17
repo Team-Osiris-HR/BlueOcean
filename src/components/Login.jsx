@@ -43,8 +43,8 @@ class Login extends React.Component {
         this.props.setCurrentUser(result.data.data.user)
         this.props.setRenderState("feed",)
       }).catch((err) => {
-        console.log("🚀 ~ file: Login.jsx ~ line 38 ~ Login ~ .then ~ err", err)
         this.setState({ error: true })
+        setTimeout(() => { this.setState({ error: false }) }, 1500)
       });
   }
 

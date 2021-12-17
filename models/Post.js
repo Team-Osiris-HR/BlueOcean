@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
   },
   photos: {
     type: [String],
-    required: [false, "A photo is required"], // MODIFY THIS SETTING TO REQUIRE PHOTOS
+    required: [false, "A photo is required"], 
   },
   condition: {
     type: String,
@@ -28,7 +28,6 @@ const postSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    // enum: ['electronics', 'clothing', 'books', 'furniture', 'other'], DO SOMETHING WITH ME LATER PLEASE
   },
   charitiesOnly: {
     type: Boolean,
