@@ -166,15 +166,11 @@ class ItemPage extends React.Component {
           </div>
           <br />
           <div>
-<<<<<<< HEAD
-    { this.state.postData.donor ? <ItemMap donor={this.state.postData.donor} /> : null }
-=======
             <h4>Location</h4>
-            <br/>
+            <br />
           </div>
           <div className="itemMap">
-            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
->>>>>>> 940dbd3aa868718198082d104c67f6000ef2d823
+            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor} /> : null}
           </div >
 
 
