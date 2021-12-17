@@ -164,11 +164,19 @@ class ItemPage extends React.Component {
             <p>Delivery Options: {this.state.postData.deliveryOptions}</p>
             <p>Condition: {this.state.postData.condition}</p>
           </div>
-          <Qa QAs={this.state.postData.qas} />
-
+          <br/>
           <div>
+            <h4>Location</h4>
+            <br/>
+          </div>
+          <div className="itemMap">
             {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
           </div>
+
+
+          <Qa QAs={this.state.postData.qas} />
+
+
 
           <div className="bottombuttonscontainer">
 
