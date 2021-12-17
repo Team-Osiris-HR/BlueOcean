@@ -23,17 +23,17 @@ const ItemMap = (props) => {
 
   async function getUser () {
     const result = await axios.get('/api/users/');
-    return result.data.data.filter(user => user.name===props.donor)[0]._id;
+    return result.data.doc.filter(user => user.name===props.donor)[0]._id;
     // returns user id
   }
 
   async function getLocation () {
     const id = await getUser();
     const result = await axios.get(`/api/users/${id}`);
-    if (result.data.data.location) {
+    if (result.data.doc.location) {
       var loc = {
-        lat: result.data.data.location.latitude,
-        lng: result.data.data.location.longitude
+        lat: result.data.doc.location.latitude,
+        lng: result.data.doc.location.longitude
       }
       console.log(loc);
       setUserLocation(loc);
