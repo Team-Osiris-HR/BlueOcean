@@ -222,7 +222,6 @@
   background-color: rgba(65, 0, 250, 0.69);
 }
 
-<<<<<<< HEAD
 .header-container H3 {
   font-family: cursive;
   text-align: center;
@@ -248,7 +247,6 @@
   position: absolute;
   right: 10px;
 }
-=======
 .accountBtn{
   padding-left: 15px;
   padding-right: 15px;
@@ -265,4 +263,3 @@
   font-weight: bold;
   font-size: 22;
 }
->>>>>>> 39e3601159cc87083b81db4eafec395d76ff203b
