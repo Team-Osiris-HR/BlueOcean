@@ -82,6 +82,7 @@ class Feed extends React.Component {
       .catch((err) => {
         console.log("🚀 ~ file: Feed.jsx ~ line 68 ~ Feed ~ makeDonation ~ err", err)
       })
+      this.toggleDonate(e);
   }
 
   handleFileChange(e) {

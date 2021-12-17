@@ -102,11 +102,11 @@ class App extends React.Component {
       console.log('user >', user);
       return axios.get(`/api/users/${user}`)
         .then((result) => {
-          console.log('GOT')
+          // console.log('GOT')
           return result.data.doc.location ? result.data.doc.location : null;
         })
         .catch((err) => {
-          console.log('COULD NOT GET')
+          // console.log('COULD NOT GET')
           return err;
         })
     }

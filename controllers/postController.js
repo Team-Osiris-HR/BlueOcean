@@ -19,6 +19,8 @@ exports.createPost = catchAsync(async (req, res, next) => {
     req.body.photos = req.body.photos.concat(req.body.photoUrls.split(","));
   } else if (req.body.photoUrls) {
     req.body.photos = req.body.photoUrls.split(",");
+  } else {
+    req.body.photos = ['https://www.indexdirect.ie/images/ownproducts/Credit57x40x127.jpg'];
   }
   const newPost = await Post.create(req.body);
   res.status(201).json({
