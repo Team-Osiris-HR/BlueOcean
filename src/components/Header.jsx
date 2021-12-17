@@ -106,6 +106,7 @@ class Header extends React.Component {
       })
     }
     if (selection === 'distance') {
+
       this.chooseSort(selection)
       this.setState({
         dateBtn: 'top_buttons',
@@ -149,7 +150,7 @@ class Header extends React.Component {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Button variant="primary" className='mb-3' onClick={() => this.props.setRenderState('account')}>my account</Button>
+                <button className='top_buttons' onClick={() => this.props.setRenderState('account')}>my account</button>
                 <h6>pickup</h6>
                 <ButtonGroup className="">
                   <button className={this.state.deliveryBtn} onClick={this.toggleFeed}>delivery</button>

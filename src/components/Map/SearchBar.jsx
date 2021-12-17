@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, StandaloneSearchBox, LoadScript } from '@react-google-maps/api';
-import { API_Key } from '../../../config.js';
+import { API_KEY } from '../../../config.js';
 import { Form, FloatingLabel } from 'react-bootstrap';
 
 const libraries = ["places"];
@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
   render () {
     return (
     <LoadScript
-       googleMapsApiKey={API_Key}
+       googleMapsApiKey={API_KEY}
        libraries={libraries}>
        <StandaloneSearchBox
        onLoad={this.props.onSearchBoxMounted}
