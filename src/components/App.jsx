@@ -61,7 +61,7 @@ class App extends React.Component {
   }
 
   // asnyc nightmare to get locations of items
-  getUserLocations () {
+  getUserLocations() {
     var users = [];
     var locs = [];
     this.state.posts.map((post) => {
@@ -102,11 +102,11 @@ class App extends React.Component {
       console.log('user >', user);
       return axios.get(`/api/users/${user}`)
         .then((result) => {
-          console.log('GOT')
+          // console.log('GOT')
           return result.data.doc.location ? result.data.doc.location : null;
         })
         .catch((err) => {
-          console.log('COULD NOT GET')
+          // console.log('COULD NOT GET')
           return err;
         })
     }
@@ -191,7 +191,7 @@ class App extends React.Component {
     // database query that returns all active chats. look at object above
     axios.get('/api/chatrooms/mychats')
       .then((result) => {
-        console.log('got here')
+        // console.log('got here')
         this.setState({ listOfChats: result.data })
       })
       .catch((error) => {

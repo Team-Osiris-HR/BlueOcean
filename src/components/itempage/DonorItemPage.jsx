@@ -54,7 +54,7 @@ class DonorItemPage extends React.Component {
   getItem() {
     axios.get(`/api/posts/${this.props.id}`)
       .then((res) => {
-        var post = res.data.post;
+        var post = res.data.doc;
         // console.log(post);
         var newPost = { id: post._id, title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });

@@ -23,6 +23,7 @@ class Feed extends React.Component {
       mapBtn: 'top_buttons',
       publicBtn: 'selected',
       userFdBtn: 'top_buttons',
+      condition: 'new',
 
     };
     this.toggleDonate = this.toggleDonate.bind(this);
@@ -83,6 +84,7 @@ class Feed extends React.Component {
       .catch((err) => {
         console.log("🚀 ~ file: Feed.jsx ~ line 68 ~ Feed ~ makeDonation ~ err", err)
       })
+      this.toggleDonate(e);
   }
 
   handleFileChange(e) {

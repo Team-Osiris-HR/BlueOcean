@@ -31,7 +31,7 @@ class ItemPage extends React.Component {
 
   componentDidMount() {
     // console.log('Component Did Mount');
-    // axios.post('http://localhost:3000/api/users/login', { "name": "manny", "password": "123456" })
+    // axios.post('/api/users/login', { "name": "manny", "password": "123456" })
     //   .then((res) => {
     //     console.log("Recieved new Cookie");
     //   })
@@ -44,9 +44,9 @@ class ItemPage extends React.Component {
   getItem() {
     axios.get(`/api/posts/${this.props.currentPost}`)
       .then((res) => {
-        console.log('result > ', res)
+        // console.log('result > ', res);
         var post = res.data.doc;
-        console.log(post.username)
+        // console.log(post.username);
         // console.log(post);
         var newPost = { id: post._id, title: post.title, donor: post.username, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
@@ -164,14 +164,14 @@ class ItemPage extends React.Component {
             <p>Delivery Options: {this.state.postData.deliveryOptions}</p>
             <p>Condition: {this.state.postData.condition}</p>
           </div>
-          <br/>
+          <br />
           <div>
             <h4>Location</h4>
-            <br/>
+            <br />
           </div>
           <div className="itemMap">
-            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
-          </div>
+            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor} /> : null}
+          </div >
 
 
           <Qa QAs={this.state.postData.qas} />
@@ -193,7 +193,7 @@ class ItemPage extends React.Component {
             </div>
 
           </div>
-        </Col>
+        </Col >
       </Container >
     );
   }
