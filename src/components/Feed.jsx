@@ -103,6 +103,7 @@ class Feed extends React.Component {
   }
 
   toggleFeed(e) {
+    console.log(this.props.userLocations);
     var selection = e.target.outerText
     if (selection === 'Public Feed') {
       this.setState({

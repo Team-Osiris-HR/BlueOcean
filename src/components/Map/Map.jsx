@@ -144,7 +144,7 @@ const Map = (props) => {
               )
             })
           ) : null}
-          {selected.lat ? (
+          {selected.lat && (
             <InfoWindow
             position={{
               lat: selected.lat,
@@ -157,7 +157,7 @@ const Map = (props) => {
           <p>{selected.additionalInfo}</p>
           </>
           </InfoWindow>
-          ) : null}
+          )}
      </GoogleMap>
      </LoadScript>
      </>
@@ -168,7 +168,7 @@ const Map = (props) => {
 
 export default Map;
 
-/* MOVED FROM 117
+/* OLD CODE - BREAK WINDOW IN CASE OF EMERGENCY
 {view === 'charities' ? (
   charities.length > 0 &&
    charities.map(charity => {

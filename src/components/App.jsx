@@ -31,7 +31,8 @@ class App extends React.Component {
       listOfChats: [],
       pickup: 'negotiable',
       category: 'none',
-      sort: 'date'
+      sort: 'date',
+      userLocations: []
 
     }
     this.renderView = this.renderView.bind(this)
@@ -47,12 +48,44 @@ class App extends React.Component {
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
     this.setSort = this.setSort.bind(this);
+    this.getUserLocations = this.getUserLocations.bind(this);
   }
 
   componentDidMount() {
+    console.log('component did')
     this.getPosts()
     this.getCookies()
     this.getAllChats()
+    this.getUserLocations()
+  }
+
+  getUserLocations () {
+    //var userLocations = [];
+    console.log('getUser ran')
+    var users = [];
+    var locs = [];
+    this.state.posts.map((post) => {
+      users.push(post.user);
+      console.log(users)
+    })
+
+    Promise.all(
+      users.map(async (user) => {
+        const userLocation = await fetchLocation(user);
+        console.log('userLocation > ', userLocation)
+        userLocation ? locs.push(userLocation) : locs.push(null);
+      })
+    )
+    const fetchLocation = (user) => {
+      return axios.get(`/api/users/${user}`)
+        .then((result) => {
+          return result.data.doc.location ? result.data.doc.location : null;
+        })
+        .catch((err) => {
+          return err;
+        })
+    }
+    this.setState({userLocations: locs});
   }
 
   // * Grabs all the post, unfiltered
@@ -187,6 +220,7 @@ class App extends React.Component {
           category={this.state.category}
           pickup={this.state.pickup}
           sort={this.state.sort}
+          userLocations={this.state.userLocations}
         />
       )
     } else if (this.state.render === 'itempage') {
