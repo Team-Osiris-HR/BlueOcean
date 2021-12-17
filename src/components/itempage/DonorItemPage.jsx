@@ -52,7 +52,7 @@ class DonorItemPage extends React.Component {
   }
 
   getItem() {
-    axios.get(`http://localhost:3000/api/posts/${this.props.id}`)
+    axios.get(`/api/posts/${this.props.id}`)
       .then((res) => {
         var post = res.data.post;
         // console.log(post);
@@ -75,7 +75,7 @@ class DonorItemPage extends React.Component {
       address = post.photos.concat(address);
     }
     // console.log(address);
-    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}`, { "title": post.title, "description": post.description, photos: address ? address : post.photos, category: this.state.category, condition: this.state.condition, deliveryOptions: this.state.deliveryOptions })
+    axios.patch(`/api/posts/${this.state.postData.id}`, { "title": post.title, "description": post.description, photos: address ? address : post.photos, category: this.state.category, condition: this.state.condition, deliveryOptions: this.state.deliveryOptions })
       .then((res) => {
         // console.log(res.data);
         this.getItem();
@@ -88,7 +88,7 @@ class DonorItemPage extends React.Component {
 
   deleteClicked(event) {
     event.preventDefault();
-    axios.patch(`http://localhost:3000/api/posts/${this.state.postData.id}/toggle`)
+    axios.patch(`/api/posts/${this.state.postData.id}/toggle`)
       .then((res) => {
         console.log(res);
         this.props.setRenderState('feed');
