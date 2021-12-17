@@ -11,7 +11,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       feed: 'Public Feed',
-      showDonate: false,
+      showDonate: true,
       title: '',
       description: '',
       category: 'appliances',
@@ -100,7 +100,6 @@ class Feed extends React.Component {
   }
 
   toggleFeed(e) {
-    console.log(this.props.userLocations);
     var selection = e.target.outerText
     if (selection === 'Public Feed') {
       this.setState({
@@ -205,7 +204,7 @@ class Feed extends React.Component {
                 </Row>
               </Container>
             </div>
-            {this.props.currentUser.role === 'user' ?
+            {this.props.currentUser.role === 'user' || this.props.currentUser.role === 'admin' ?
             <div className="bottom">
               <Container>
                 <button className='donateBtn' size="lg" onClick={this.toggleDonate}>Donate</button>
