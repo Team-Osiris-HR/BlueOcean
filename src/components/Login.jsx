@@ -15,11 +15,17 @@ class Login extends React.Component {
     this.state = {
       name: '',
       password: '',
-      render: 'login'
+      render: 'login',
+      token: '',
+      passwordPage: 'forgot',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderForgotPassword = this.renderForgotPassword.bind(this)
+    this.setToken = this.setToken.bind(this)
+    this.setPasswordPage = this.setPasswordPage.bind(this)
+    this.errorMessage = this.errorMessage.bind(this)
   }
 
 
@@ -37,7 +43,8 @@ class Login extends React.Component {
         this.props.setCurrentUser(result.data.data.user)
         this.props.setRenderState("feed",)
       }).catch((err) => {
-        console.log("🚀 ~ file: Login.jsx ~ line 38 ~ Login ~ .then ~ err", err)
+        this.setState({ error: true })
+        setTimeout(() => { this.setState({ error: false }) }, 1500)
       });
   }
 
@@ -47,6 +54,20 @@ class Login extends React.Component {
     } else {
       this.setState({ render: 'login' })
     }
+  }
+
+  setToken(newToken) {
+    this.setState({
+      token: newToken,
+    })
+  }
+
+  setPasswordPage(input) {
+    this.setState({ passwordPage: input })
+  }
+
+  errorMessage(error) {
+    return <span style={{ fontSize: '12px', color: 'red' }}>wrong username/password. please try again</span>
   }
 
   render() {
@@ -72,11 +93,12 @@ class Login extends React.Component {
             >
               <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => this.handleChange(e)} />
             </FloatingLabel>
+            {this.state.error ? this.errorMessage() : null}
           </Form.Group>
           <div className='text-center'>
-            <Button className='button' size="lg" type="submit">
+            <button className='button' size="lg" type="submit">
               Submit
-            </Button>
+            </button>
           </div>
           <div>
             <button className='forgot-password' type="button" onClick={() => this.renderForgotPassword()}>forgot password?</button>
@@ -87,16 +109,25 @@ class Login extends React.Component {
         </Form >
       )
     } else {
-      return (
-        <Container>
-          <ForgotPassword backToLogin={this.renderForgotPassword} />
-        </Container>
-      )
-      // return (
-      //   <Container>
-      //     <ResetPassword backToLogin={this.renderForgotPassword} />
-      //   </Container>
-      // )
+      if (this.state.passwordPage === 'forgot') {
+        return (
+          <Container>
+            <ForgotPassword
+              backToLogin={this.renderForgotPassword}
+              setRenderState={this.props.setRenderState}
+              setToken={this.setToken}
+              setPasswordPage={this.setPasswordPage}
+            />
+          </Container>
+        )
+      } else {
+        return (
+          <Container>
+            <ResetPassword backToLogin={this.renderForgotPassword} />
+          </Container>
+        )
+      }
+
     }
   }
 }

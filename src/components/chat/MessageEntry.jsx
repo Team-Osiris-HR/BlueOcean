@@ -4,16 +4,14 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
 const MessageEntry = (props) => {
-  console.log('props', props);
   return (
-    <>
+    <div className='message'>
       {props.messages.name === props.user ?
-        <div className="userMessage"
-        >{props.user} : {props.messages.message}</div>
-        :
-        <div className="otherUserMessage" >otherUser : {props.messages.message} </div>
+      <div className="otherUserMessage" >{props.messages.message}</div>
+      :
+      <div className="userMessage">{props.messages.message}</div>
       }
-    </>
+    </div>
   )
 }
 
