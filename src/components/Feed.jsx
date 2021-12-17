@@ -22,6 +22,7 @@ class Feed extends React.Component {
       mapBtn: 'top_buttons',
       publicBtn: 'selected',
       userFdBtn: 'top_buttons',
+      condition: 'new',
 
     };
     this.toggleDonate = this.toggleDonate.bind(this);
