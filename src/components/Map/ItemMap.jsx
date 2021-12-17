@@ -17,8 +17,10 @@ const ItemMap = (props) => {
   const [ isBusy, setIsBusy ] = useState(true);
 
   const mapStyles = {
-    height: "40vh",
-    width: "80%",
+    height: "50vh",
+    width: "75%",
+    margin: "auto",
+    position: "flexible"
   };
 
   async function getUser () {
