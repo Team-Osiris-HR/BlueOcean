@@ -191,6 +191,7 @@ class App extends React.Component {
     // database query that returns all active chats. look at object above
     axios.get('/api/chatrooms/mychats')
       .then((result) => {
+        console.log(result.data)
         console.log('got here')
         this.setState({ listOfChats: result.data })
       })

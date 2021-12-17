@@ -43,6 +43,7 @@ class Feed extends React.Component {
 
   makeDonation(e) {
     e.preventDefault()
+    this.toggleDonate(e)
     let photoUrls = []
     if (this.state.photo1) { photoUrls.push(this.state.photo1) }
     if (this.state.photo2) { photoUrls.push(this.state.photo2) }
