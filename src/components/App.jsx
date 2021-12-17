@@ -14,6 +14,8 @@ import Cookies from 'js-cookie'
 import ItemPage from './itempage/ItemPage.jsx';
 import DonorItemPage from './itempage/DonorItemPage.jsx';
 import Account from './Account.jsx'
+const calcDistance = require('./Map/DistanceCalculator.js');
+require("babel-polyfill");
 
 
 class App extends React.Component {
@@ -31,7 +33,9 @@ class App extends React.Component {
       listOfChats: [],
       pickup: 'negotiable',
       category: 'none',
-      sort: 'date'
+      sort: 'date',
+      userLocations: [],
+      currentLocation: ''
 
     }
     this.renderView = this.renderView.bind(this)
@@ -47,6 +51,7 @@ class App extends React.Component {
     this.setCategory = this.setCategory.bind(this);
     this.setPickup = this.setPickup.bind(this);
     this.setSort = this.setSort.bind(this);
+    this.getUserLocations = this.getUserLocations.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +59,65 @@ class App extends React.Component {
     this.getCookies()
     this.getAllChats()
   }
+
+  // asnyc nightmare to get locations of items
+  getUserLocations () {
+    var users = [];
+    var locs = [];
+    this.state.posts.map((post) => {
+      users.push(post.user);
+    });
+
+    Promise.all(
+      users.map(async (user) => {
+        const userLocation = await axios.get(`/api/users/${user}`)
+        //console.log(userLocation.data.doc);
+        var loc = userLocation.data.doc.location;
+        //console.log(loc)
+        if (loc) {
+          locs.push(loc);
+        } else {
+          locs.push(null);
+        }
+        //loc ? locs.push(loc) : locs.push(null);
+        /*
+        .then((result) => {
+          result.data.doc.location ?
+          locs.push(calcDistance(this.state.currentUser.location.latitude, this.state.currentUser.location.longitude, result.data.doc.location.latitude, result.data.doc.longitude))
+          : locs.push(null);
+        })
+        .then(() => {
+          //console.log(this.state.currentUser.location.latitude)
+          this.setState({userLocations: locs})
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        */
+
+      })
+    )
+
+    const fetchLocation = (user) => {
+      console.log('user >', user);
+      return axios.get(`/api/users/${user}`)
+        .then((result) => {
+          console.log('GOT')
+          return result.data.doc.location ? result.data.doc.location : null;
+        })
+        .catch((err) => {
+          console.log('COULD NOT GET')
+          return err;
+        })
+    }
+  }
+
+  // sort posts by distance, not sure where to put this yet
+  /* sortByDistance() {
+    var locs = this.state.userLocations;
+    locs.map(loc => console.log(loc))
+
+  } */
 
   // * Grabs all the post, unfiltered
   getPosts() {
@@ -64,6 +128,8 @@ class App extends React.Component {
           posts: posts
         })
       })
+      // CHANGE THIS LATER
+      .then(() => this.getUserLocations())
       .catch((err) => {
         console.log("🚀 ~ file: App.jsx ~ line 47 ~ App ~ getPosts ~ err", err)
       })
@@ -187,6 +253,7 @@ class App extends React.Component {
           category={this.state.category}
           pickup={this.state.pickup}
           sort={this.state.sort}
+          userLocations={this.state.userLocations}
         />
       )
     } else if (this.state.render === 'itempage') {

@@ -10,15 +10,16 @@ const Map = (props) => {
   const [ selected, setSelected ] = useState({});
   const [ view, setView] = useState({value: 'charities'});
   const [ markerList, setList ] = useState({});
-  const [ charities, setCharities ] = useState({});
+  const [ charities, setCharities ] = useState([]);
   const [ items, setItems ] = useState({});
   const [ isBusy, setIsBusy ] = useState(true);
   const [ allLocations, setAllLocations ] = useState([]);
   const [ index, setIndex ] = useState(0);
+  const [ markers, setMarkers ] = useState({});
 
-  const users = [];
+  var users = [];
   props.posts.map((post) => {
-    users.push(post.user)
+      users.push(post.user)
   });
 
   const getAllLocations = (users) => {
@@ -27,7 +28,7 @@ const Map = (props) => {
   const fetchLocation = (user) => {
     return axios.get(`/api/users/${user}`)
     .then((result) => {
-      return result.data.data.location ? result.data.data.location : null;
+      return result.data.doc.location ? result.data.doc.location : null;
     })
     .catch((err) => {
       return err;
@@ -35,20 +36,58 @@ const Map = (props) => {
   }
 
   const onToggle = (e) => {
-    setView(e.target.innerHTML);
+    //setMarkers({})
+    if (e.target.innerHTML === "charities") {
+      var locatedCharities = [];
+      charities.map((charity) => {
+        if (charity.location) {
+          locatedCharities.push({
+            name: charity.name,
+            lat: charity.location.latitude,
+            lng: charity.location.longitude,
+            additionalInfo: charity.address});
+        }
+      })
+      setMarkers(locatedCharities);
+    } else if (e.target.innerHTML === "items") {
+      var locatedItems = [];
+      allLocations.map((loc, i) => {
+        if (loc) {
+          locatedItems.push({
+            name: props.posts[i].title,
+            lat: loc.latitude,
+            lng: loc.longitude,
+            additionalInfo: props.posts[i].description
+          })
+        }
+      })
+      console.log('locatedItems > ', locatedItems)
+      setMarkers(locatedItems);
+    }
   }
 
   const onSelect = (item, i) => {
-    //console.log(item);
-    //console.log(i);
+    console.log(item);
     setSelected(item);
     setIndex(i);
   }
 
   const mapStyles = {
-    height: "80vh",
+    height: "70vh",
     width: "80%",
+    margin: "auto",
+
   };
+
+  const charityButtonStyle = {
+    position: "relative",
+    left: "10%",
+
+  }
+  const itemButtonStyle = {
+    position: "relative",
+    left: "11%",
+  }
 
   const defaultCenter = {
     lat: 40.75127626575399, lng: -73.98404960675472
@@ -56,7 +95,9 @@ const Map = (props) => {
 
   useEffect(() => {
     // clean-up control
+
     var isSubscribed = true;
+
     axios.get('/api/users/')
       .then ((results) => {
         if (isSubscribed) {
@@ -91,8 +132,11 @@ const Map = (props) => {
       </>
     ) : (
     <>
-    <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
-    <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
+    <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="m" style={charityButtonStyle} onClick={(e) => onToggle(e)}>charities</Button>
+    <Button className="rounded-pill ms-auto" variant="outline-primary" size="m" style={itemButtonStyle} onClick={(e) => onToggle(e)}>items</Button>
+    <br/>
+    <br/>
+
      <LoadScript
        googleMapsApiKey={API_KEY}>
         <GoogleMap
@@ -101,64 +145,111 @@ const Map = (props) => {
             styles: require('./map.json')
           }}
           mapTypeId='terrain'
-          zoom={12}
+          zoom={13}
           center={defaultCenter}>
-         {view === 'charities' ? (
-           charities.length > 0 &&
-            charities.map(charity => {
+          {markers.length > 0 ? (
+            markers.map((marker, i) => {
               return (
-                charity.location &&
-              <Marker key={charity.name}
+                <Marker key={i}
                 position={{
-                  lat: charity.location.latitude,
-                  lng: charity.location.longitude
+                  lat: marker.lat,
+                  lng: marker.lng
                 }}
-                onClick={() => onSelect(charity, 0)}
-              />
+                onClick={() => onSelect(marker)} />
               )
             })
-         ) : null }
-         {view === 'items' ? (
-           allLocations.length > 0 &&
-           allLocations.map((loc, i) => {
-             //console.log(loc);
-             return (
-               loc &&
-             <Marker key={props.posts[i]}
-               position={{
-                 lat: loc.latitude,
-                 lng: loc.longitude
-               }}
-               onClick={() => onSelect(props.posts[i], i)}
-             />
-             )
-           })
-
-         ) : null}
-
-        {
-            allLocations[index] &&
-            (
-              <InfoWindow
-              position={{
-                lat: allLocations[index].latitude,
-                lng: allLocations[index].longitude
-              }}
-              clickable={true}
-              onCloseClick={() => setSelected({})}
-            >
-              <>
-              <p>{selected.title}</p>
-              </>
-            </InfoWindow>
-            )
-         }
+          ) : null}
+          {selected.lat && (
+            <InfoWindow
+            position={{
+              lat: selected.lat,
+              lng: selected.lng
+            }}
+            onCloseClick={() => setSelected({})}
+          >
+          <>
+          <h4><b>{selected.name}</b></h4>
+          <p>{selected.additionalInfo}</p>
+          </>
+          </InfoWindow>
+          )}
      </GoogleMap>
      </LoadScript>
      </>
     )
   )
-
 }
 
+
 export default Map;
+
+/* OLD CODE - BREAK IN CASE OF EMERGENCY
+{view === 'charities' ? (
+  charities.length > 0 &&
+   charities.map(charity => {
+      return (
+       charity.location ? (
+       <>
+     <Marker key={charity.name}
+       position={{
+         lat: charity.location.latitude,
+         lng: charity.location.longitude
+       }}
+       onClick={() => onSelect(charity, 0)}
+     />
+   </>
+     ) : null)
+   })
+) : null}
+
+
+{view === 'charities' && (
+  selected.location && (
+ <InfoWindow
+   position={{
+     lat: selected.location.latitude,
+     lng: selected.location.longitude
+   }}
+   onCloseClick={() => setSelected({})}
+ >
+   <>
+   <p><b>{selected.name}</b></p>
+   <p>{selected.address}</p>
+   </>
+ </InfoWindow>
+   ))}
+
+{view === 'items' ? (
+  allLocations.length > 0 &&
+  allLocations.map((loc, i) => {
+    console.log(props.posts[i]);
+    return (
+      loc ? (
+    <Marker key={props.posts[i]}
+      position={{
+        lat: loc.latitude,
+        lng: loc.longitude
+      }}
+      onClick={() => onSelect(props.posts[i], i)}
+    />
+    ) : null)
+   })
+) : null}
+
+{view === "items" ? (
+   allLocations[index] && (
+     <InfoWindow
+     position={{
+       lat: allLocations[index].latitude,
+       lng: allLocations[index].longitude
+     }}
+     onCloseClick={() => setSelected({})}
+     >
+   <>
+   <p><b>{selected.title}</b></p>
+
+   </>
+ </InfoWindow>
+    )
+) : null}
+*/
