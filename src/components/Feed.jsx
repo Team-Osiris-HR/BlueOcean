@@ -17,6 +17,7 @@ class Feed extends React.Component {
       category: 'appliances',
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
+      condition: 'new',
       files: [],
       posts: [],
       mapBtn: 'top_buttons',
@@ -44,6 +45,7 @@ class Feed extends React.Component {
 
   makeDonation(e) {
     e.preventDefault()
+    this.toggleDonate(e)
     let photoUrls = []
     if (this.state.photo1) { photoUrls.push(this.state.photo1) }
     if (this.state.photo2) { photoUrls.push(this.state.photo2) }
