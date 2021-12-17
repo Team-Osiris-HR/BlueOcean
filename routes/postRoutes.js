@@ -13,7 +13,6 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const fileName = Date.now() + file.originalname.toLowerCase().split(" ").join("-");
     cb(null, "img-" + fileName);
-    //img-112312q4256353152142142214dowmload.jepg
   },
 });
 

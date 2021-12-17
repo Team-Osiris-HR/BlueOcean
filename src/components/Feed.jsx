@@ -159,7 +159,7 @@ class Feed extends React.Component {
               <Container>
                 <Row xs={1} md={2} lg={3}>
                   {this.props.posts.filter((val) => {
-                    if(val.active) {
+                    if (val.active) {
                       return val
                     }
                   }).filter((val) => {

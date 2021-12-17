@@ -11,8 +11,4 @@ router.get('/allmessages', authController.restrictTo('admin') ,messageController
 
 router.post('/create', messageController.postMessage);
 
-router.patch('/edit', messageController.editMessage);
-
-router.delete('/delete', messageController.deleteMessage);
-
 module.exports = router;
