@@ -44,7 +44,7 @@ class ItemPage extends React.Component {
   getItem() {
     axios.get(`/api/posts/${this.props.currentPost}`)
       .then((res) => {
-        var post = res.data.post;
+        var post = res.data.doc;
         // console.log(post);
         var newPost = { id: post._id, title: post.title, donor: post.user.name, photos: post.photos, description: post.description, condition: post.condition, deliveryOptions: post.deliveryOptions, qas: post.QAs };
         this.setState({ postData: newPost });
@@ -164,7 +164,7 @@ class ItemPage extends React.Component {
           </div>
           <Qa QAs={this.state.postData.qas} />
           <div>
-            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
+            {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor} /> : null}
           </div>
 
           <div className="bottombuttonscontainer">
