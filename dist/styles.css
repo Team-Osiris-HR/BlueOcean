@@ -4,7 +4,7 @@
   position: fixed;
   padding-top: 7px;
   display: grid;
-  grid-template-rows: 7% 67% 26%;
+  grid-template-rows: 7% 62% 31%;
 }
 .charityPage {
   height: 100%;
@@ -55,7 +55,7 @@
 
 .top_buttons:active {
   position:relative;
-	top:1px;
+	top:2px;
 }
 
 
@@ -124,7 +124,7 @@
 
 .donateBtn:active {
   position:relative;
-	top:1px;
+	top:2px;
 }
 
 .login-hello,

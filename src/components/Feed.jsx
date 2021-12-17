@@ -17,6 +17,7 @@ class Feed extends React.Component {
       category: 'appliances',
       deliveryOptions: 'negotiable',
       charitiesOnly: true,
+      condition: 'new',
       files: [],
       posts: [],
       mapBtn: 'top_buttons',
