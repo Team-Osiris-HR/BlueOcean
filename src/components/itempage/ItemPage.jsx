@@ -163,6 +163,7 @@ class ItemPage extends React.Component {
             <p>Condition: {this.state.postData.condition}</p>
           </div>
           <Qa QAs={this.state.postData.qas} />
+
           <div>
             {this.state.postData.donor ? <ItemMap donor={this.state.postData.donor}/> : null}
           </div>
