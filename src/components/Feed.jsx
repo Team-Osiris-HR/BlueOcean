@@ -11,7 +11,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       feed: 'Public Feed',
-      showDonate: true,
+      showDonate: false,
       title: '',
       description: '',
       category: 'appliances',
