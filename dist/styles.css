@@ -148,7 +148,7 @@
   display: flex;
   justify-content: center;
   -webkit-box-pack: center;
-  max-width: 600px;
+  width: 600px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -189,6 +189,31 @@
   min-height: 60px;
 }
 
+.header-container H3 {
+  font-family: cursive;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.offcanvas-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: cursive;
+  text-align: center;
+  /* margin-left: 135px; */
+}
+
+.offcanvas-header {
+  position: relative;
+  margin-top: 5px;
+}
+
+.btn-close {
+  position: absolute;
+  right: 10px;
+}
 .accountBtn{
   padding-left: 15px;
   padding-right: 15px;

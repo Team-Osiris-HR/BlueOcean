@@ -5,6 +5,7 @@ import { Button, Container, Row, Col, ButtonGroup, Stack } from 'react-bootstrap
 import FeedTile from './FeedTile.jsx'
 import Donate from './Donate.jsx'
 import Map from './Map/Map.jsx'
+const calcDistance = require('./Map/DistanceCalculator.js');
 
 class Feed extends React.Component {
   constructor(props) {
@@ -21,13 +22,15 @@ class Feed extends React.Component {
       posts: [],
       mapBtn: 'top_buttons',
       publicBtn: 'selected',
-      userFdBtn: 'top_buttons'
+      userFdBtn: 'top_buttons',
+      userLocations: []
     };
     this.toggleDonate = this.toggleDonate.bind(this);
     this.makeDonation = this.makeDonation.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this.toggleFeed = this.toggleFeed.bind(this);
+
   }
 
   toggleDonate(e) {
@@ -38,6 +41,8 @@ class Feed extends React.Component {
       this.setState({ showDonate: true });
     }
   }
+
+
 
   makeDonation(e) {
     e.preventDefault()
@@ -154,7 +159,7 @@ class Feed extends React.Component {
               <Container>
                 <Row xs={1} md={2} lg={3}>
                   {this.props.posts.filter((val) => {
-                    if(val.active) {
+                    if (val.active) {
                       return val
                     }
                   }).filter((val) => {

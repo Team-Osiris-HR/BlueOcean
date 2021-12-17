@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Circle, StandaloneSearchBox, Loader } from '@react-google-maps/api';
-import { API_Key } from '../../../config.js';
-import { Button } from 'react-bootstrap';
+import { API_KEY } from '../../../config.js';
+import { Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -13,50 +13,36 @@ const Map = (props) => {
   const [ charities, setCharities ] = useState({});
   const [ items, setItems ] = useState({});
   const [ isBusy, setIsBusy ] = useState(true);
+  const [ allLocations, setAllLocations ] = useState([]);
+  const [ index, setIndex ] = useState(0);
 
-  useEffect(() => {
-    // clean-up control
-    var isSubscribed = true;
+  const users = [];
+  props.posts.map((post) => {
+    users.push(post.user)
+  });
 
-    axios.get('/api/users/')
-      .then ((results) => {
-        if (isSubscribed) {
-          var charities = results.data.data.filter(user => user.role==="charity")
-          setCharities(charities);
-          setIsBusy(false);
-        }
-      })
-      .catch((err) => {
-        if (isSubscribed) {
-          console.log(err);
-        };
-      })
-
-    axios.get('/api/posts/')
-      .then((results) => {
-        if (isSubscribed) {
-          var items = results.data.posts;
-          console.log(items);
-          setItems(items);
-          setIsBusy(false);
-        }
-      })
-      .catch((err) => {
-        if (isSubscribed) {
-          console.log(err);
-        }
-      })
-
-    // unsubscribe
-    return () => (isSubscribed=false);
-  }, []);
-
-  const onToggle = (ref) => {
-    setView(ref.target.innerHTML);
+  const getAllLocations = (users) => {
+    return Promise.all(users.map(fetchLocation));
+  }
+  const fetchLocation = (user) => {
+    return axios.get(`/api/users/${user}`)
+    .then((result) => {
+      return result.data.data.location ? result.data.data.location : null;
+    })
+    .catch((err) => {
+      return err;
+    })
   }
 
-  const onSelect = item => {
+  const onToggle = (e) => {
+    setView(e.target.innerHTML);
+  }
+
+  const onSelect = (item, i) => {
+    //console.log(item);
+    //console.log(i);
     setSelected(item);
+    setIndex(i);
   }
 
   const mapStyles = {
@@ -67,95 +53,102 @@ const Map = (props) => {
   const defaultCenter = {
     lat: 40.75127626575399, lng: -73.98404960675472
   }
-  // Will be passed as props
-  const locations = [
-    {
-      name: "Goodwill (Midtown)",
-      location: {
-        lat: 40.76057336363583,
-        lng: -73.98096009546289
-      },
-      address: "123 Charity Lane",
-      img: "https://images.crowdspring.com/blog/wp-content/uploads/2010/08/27132550/goodwill-logo.jpg"
-    },
-    {
-      name: "Charity 2",
-      location: {
-        lat: 40.74158715401439,
-        lng: -74.005850993123
-      },
-    },
-    {
-      name: "Charity 3",
-      location: {
-        lat: 40.7255877152931,
-        lng: -73.98902817953203
-      },
-    },
-    {
-      name: "Location 4",
-      location: {
-        lat: 41.3797,
-        lng: 2.1682
-      },
-    },
-    {
-      name: "Location 5",
-      location: {
-        lat: 41.4055,
-        lng: 2.1915
-      },
-    }
-  ];
+
+  useEffect(() => {
+    // clean-up control
+    var isSubscribed = true;
+    axios.get('/api/users/')
+      .then ((results) => {
+        if (isSubscribed) {
+          var charities = results.data.data.filter(user => user.role==="charity")
+          setCharities(charities);
+        }
+      })
+      .catch((err) => {
+        if (isSubscribed) {
+          console.log(err);
+        };
+      })
+      if (isSubscribed) {
+        getAllLocations(users)
+        .then(result => {
+          setAllLocations(result);
+          setIsBusy(false);
+        });
+      }
+
+    // unsubscribe
+    return () => (isSubscribed=false);
+  }, []);
+
 
   return (
     isBusy ? (
       <>
-      <p>loading...</p>
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
       </>
     ) : (
-      <>
+    <>
     <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
     <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
      <LoadScript
-       googleMapsApiKey={API_Key}>
+       googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           options={{
             styles: require('./map.json')
           }}
           mapTypeId='terrain'
-          zoom={15}
+          zoom={12}
           center={defaultCenter}>
-         {
+         {view === 'charities' ? (
            charities.length > 0 &&
             charities.map(charity => {
-              return view === 'charities' ?
-              (
+              return (
                 charity.location &&
               <Marker key={charity.name}
                 position={{
                   lat: charity.location.latitude,
                   lng: charity.location.longitude
                 }}
-                onClick={() => onSelect(charity)}
+                onClick={() => onSelect(charity, 0)}
               />
-              ) : null})
-          }
+              )
+            })
+         ) : null }
+         {view === 'items' ? (
+           allLocations.length > 0 &&
+           allLocations.map((loc, i) => {
+             //console.log(loc);
+             return (
+               loc &&
+             <Marker key={props.posts[i]}
+               position={{
+                 lat: loc.latitude,
+                 lng: loc.longitude
+               }}
+               onClick={() => onSelect(props.posts[i], i)}
+             />
+             )
+           })
+
+         ) : null}
+
         {
-            selected.location &&
+            allLocations[index] &&
             (
               <InfoWindow
               position={{
-                lat: selected.location.latitude,
-                lng: selected.location.longitude
+                lat: allLocations[index].latitude,
+                lng: allLocations[index].longitude
               }}
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
               <>
-              <p>{selected.name}</p>
-              <p>{selected.address}</p>
+              <p>{selected.title}</p>
               </>
             </InfoWindow>
             )
