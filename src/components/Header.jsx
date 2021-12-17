@@ -73,6 +73,7 @@ class Header extends React.Component {
             <BsArrowLeft className="headerIcon" size={24} />
           </button> : null}
           <Col className="p-2 flex-fill">
+            <h3>mikeslist</h3>
             <Search setSearch={this.props.setSearch} />
           </Col>
           <Col className="d-flex justify-content-end" xs>
