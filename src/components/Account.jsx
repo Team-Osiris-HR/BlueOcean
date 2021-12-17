@@ -104,10 +104,10 @@ class Account extends React.Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey="account" className="mb-3">
+      <Tabs defaultActiveKey="account" className="mb-3 justify-content-center">
         <Tab eventKey="account" title="account">
-          <Container>
-            <Col className='account-container' >
+          <Container as='div' className='w-25'>
+            <Col>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formGridName"
                   className="mb-3">
@@ -171,16 +171,16 @@ class Account extends React.Component {
                   </>
                   : null}
 
-                <Button className='text-center' size="lg" variant="primary" type="submit">
+                <button className='button' size="lg" type="submit">
                   Submit
-                </Button>
+                </button>
               </Form >
             </Col>
           </Container>
         </Tab>
         <Tab eventKey="password" title="password">
-          <Container>
-            <Col className='account-container' >
+          <Container as='div' className='w-25'>
+            <Col >
               <Form onSubmit={this.handleChangePassword}>
 
                 <Form.Group controlId="formGridCurrentPassword"
@@ -207,13 +207,13 @@ class Account extends React.Component {
                     className='mb-3'>
                     <Form.Control type={this.state.type} name='passwordConfirm' placeholder="confirm password" onChange={(e) => this.handleChange(e)} />
                   </FloatingLabel>
-                  <button type='button' className='see-password' onClick={() => this.changeType()}>
+                  <button type='button' className='forgot-password' onClick={() => this.changeType()}>
                     <span>see password</span>
                   </button>
                 </Form.Group>
-                <Button className='text-center' size="lg" variant="primary" type="submit" disabled={this.disableSubmit()}>
+                <button className='button' size="lg" type="submit" disabled={this.disableSubmit()}>
                   Update
-                </Button>
+                </button>
               </Form >
             </Col>
           </Container>
@@ -225,8 +225,3 @@ class Account extends React.Component {
 
 export default Account
 
-
-/*
-
-
-*/

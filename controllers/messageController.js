@@ -30,24 +30,3 @@ exports.postMessage = catchAsync(async (req, res) => {
   }
   res.status(200).json(message);
 });
-
-exports.editMessage = catchAsync(async (req, res) => {
-  const message = await Messages.findByIdAndUpdate(req.params.messageId, req.body, {
-    // return new document
-    new: true,
-  });
-
-  if (!message) {
-    return res.sendStatus(404);
-  }
-  res.status(200).json(message);
-});
-
-exports.deleteMessage = catchAsync(async (req, res) => {
-  const message = await Messages.findByIdAndDelete(req.params.messageId);
-
-  if (!message) {
-    return res.sendStatus(400);
-  }
-  res.sendStatus(204);
-});

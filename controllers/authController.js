@@ -9,7 +9,7 @@ const config = require("../controller.config.js");
 
 const expirey = 24 * 60 * 60 * 1000;
 
-async function sendMail(message1, message2, message3, user) {
+async function sendMail(message1, message2, message3, token, user) {
   let transporter = nodemailer.createTransport(require("../email.config.js"));
 
   // send mail with defined transport object
@@ -17,10 +17,8 @@ async function sendMail(message1, message2, message3, user) {
     from: '"Mike" <osiris@aledoux.net>', // sender address
     to: `${user.email}`, // list of receivers
     subject: "Your password reset token (valid for 10 minutes)", // Subject line
-    html: `<b>${message1}</b><br /><b>${message2}</b><br /><b>${message3}</b>`, // html body
+    html: `<b>${message1}</b><br /><b>${message2}</b> <p>${token}</p><br /><b>${message3}</b>`, // html body
   });
-
-  // .log("Message sent: ", info.messageId);
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
@@ -47,7 +45,6 @@ exports.sendToken = (user, statusCode, req, res) => {
   user.password = undefined;
   res.status(statusCode).json({
     status: "success",
-    // token,
     data: {
       user,
     },
@@ -89,7 +86,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   const decoded = await promisify(jwt.verify)(token, config.JWT_SECRET);
-  // decoded = { id: 324, iat: 1598430824, expiresIn: 86400 }
   const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
@@ -134,15 +130,17 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   const message1 = `Forgot your password?`;
-  const message2 = `Here is your token: ${resetToken}.`;
+  const message2 = `Here is your token: `;
   const message3 = `If you didn't forget your password, please ignore this email.`;
 
-  await sendMail(message1, message2, message3, user).catch(console.error);
+  await sendMail(message1, message2, message3, resetToken, user).catch(
+    console.error
+  );
 
   res.status(200).json({
     status: "success",
     message: "created token",
-    token: resetToken
+    token: resetToken,
   });
 });
 
@@ -167,8 +165,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpires = undefined;
 
   await user.save();
-
-  // const token = signToken(user._id);
 
   res.cookie("jwt", this.signToken(user._id), {
     expires: new Date(Date.now() + expirey),
