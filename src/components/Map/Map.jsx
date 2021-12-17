@@ -17,9 +17,9 @@ const Map = (props) => {
   const [ index, setIndex ] = useState(0);
   const [ markers, setMarkers ] = useState({});
 
-  const users = [];
+  var users = [];
   props.posts.map((post) => {
-    users.push(post.user)
+      users.push(post.user)
   });
 
   const getAllLocations = (users) => {
@@ -61,6 +61,7 @@ const Map = (props) => {
           })
         }
       })
+      console.log('locatedItems > ', locatedItems)
       setMarkers(locatedItems);
     }
   }
@@ -72,9 +73,21 @@ const Map = (props) => {
   }
 
   const mapStyles = {
-    height: "80vh",
+    height: "70vh",
     width: "80%",
+    margin: "auto",
+
   };
+
+  const charityButtonStyle = {
+    position: "relative",
+    left: "10%",
+
+  }
+  const itemButtonStyle = {
+    position: "relative",
+    left: "11%",
+  }
 
   const defaultCenter = {
     lat: 40.75127626575399, lng: -73.98404960675472
@@ -82,7 +95,9 @@ const Map = (props) => {
 
   useEffect(() => {
     // clean-up control
+
     var isSubscribed = true;
+
     axios.get('/api/users/')
       .then ((results) => {
         if (isSubscribed) {
@@ -118,8 +133,9 @@ const Map = (props) => {
       </>
     ) : (
     <>
-    <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>charities</Button>
-    <Button className="rounded-pill ms-auto" variant="outline-primary" size="sm" onClick={(e) => onToggle(e)}>items</Button>
+    <Button className="rounded-pill ms-auto" id="charities" variant="outline-primary" size="m" style={charityButtonStyle} onClick={(e) => onToggle(e)}>charities</Button>
+    <Button className="rounded-pill ms-auto" variant="outline-primary" size="m" style={itemButtonStyle} onClick={(e) => onToggle(e)}>items</Button>
+    <br/>
     <br/>
 
      <LoadScript
@@ -130,7 +146,7 @@ const Map = (props) => {
             styles: require('./map.json')
           }}
           mapTypeId='terrain'
-          zoom={12}
+          zoom={13}
           center={defaultCenter}>
           {markers.length > 0 ? (
             markers.map((marker, i) => {
@@ -144,7 +160,7 @@ const Map = (props) => {
               )
             })
           ) : null}
-          {selected.lat ? (
+          {selected.lat && (
             <InfoWindow
             position={{
               lat: selected.lat,
@@ -157,7 +173,7 @@ const Map = (props) => {
           <p>{selected.additionalInfo}</p>
           </>
           </InfoWindow>
-          ) : null}
+          )}
      </GoogleMap>
      </LoadScript>
      </>
@@ -168,7 +184,7 @@ const Map = (props) => {
 
 export default Map;
 
-/* MOVED FROM 117
+/* OLD CODE - BREAK IN CASE OF EMERGENCY
 {view === 'charities' ? (
   charities.length > 0 &&
    charities.map(charity => {

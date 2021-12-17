@@ -37,7 +37,6 @@ const ItemMap = (props) => {
         lat: result.data.doc.location.latitude,
         lng: result.data.doc.location.longitude
       }
-      console.log(loc);
       setUserLocation(loc);
     }
   }
