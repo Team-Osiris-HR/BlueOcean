@@ -39,8 +39,8 @@ const Map = (props) => {
   }
 
   const onSelect = (item, i) => {
-    console.log(item);
-    console.log(i);
+    //console.log(item);
+    //console.log(i);
     setSelected(item);
     setIndex(i);
   }

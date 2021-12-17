@@ -102,7 +102,7 @@
 
 .cardTextBox {
   height: 23%;
-  background-color: #7D4EFC;
+  background-color: #7d4efc;
 }
 
 .donateBtn {
@@ -170,40 +170,6 @@
   background-color: transparent;
 }
 
-.messageContainerBox {
-  display: flex;
-  flex-direction: column;
-}
-
-.conversationEntry {
-  display: flex;
-  margin: 15px;
-  border: 2px gray solid;
-  border-radius: 10px;
-}
-
-.userMessage {
-  align-self: flex-end;
-  float: right;
-  padding: 0 1%;
-  margin-top: 3px;
-  border: 2px solid red;
-  border-radius: 10px;
-  height: auto;
-  width: 300px;
-  word-break: break-all;
-}
-
-.otherUserMessage {
-  padding: 0 1%;
-  margin-top: 3px;
-  border: 2px solid gray;
-  border-radius: 10px;
-  height: auto;
-  width: 300px;
-  word-break: break-all;
-}
-
 .button {
   position: relative;
   width: 282px;
@@ -220,4 +186,22 @@
 
 .container-fluid {
   background-color: rgba(65, 0, 250, 0.69);
+  min-height: 60px;
+}
+
+.accountBtn{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: #7D4EFC;
+  color: white;
+}
+
+.headerIcon {
+  color: white;
+  font-weight: bold;
+  font-size: 22;
 }

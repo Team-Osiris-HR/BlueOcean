@@ -1,10 +1,10 @@
 import React from 'react'
 import ConversationEntry from './ConversationEntry.jsx';
 
+
 const ListOfConversations = (props) => {
   return (
-    <>
-      <div>INBOX</div>
+    <div className='conversations-container'>
       {props.chats.map((chat, i) => {
         return (
           <ConversationEntry
@@ -14,7 +14,7 @@ const ListOfConversations = (props) => {
             selectChat={props.selectChat} />
         )
       })}
-    </>
+    </div>
   )
 }
 
