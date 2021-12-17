@@ -299,9 +299,6 @@ class DonorItemPage extends React.Component {
             <p>Condition: {this.state.postData.condition}</p>
           </div>
           <Qa QAs={this.state.postData.qas} donor={true} answer={this.state.answer} answerChange={this.answerChange} submitAnswer={this.submitAnswer} />
-          <div>
-            <p>Map Place Holder</p>
-          </div>
           <div className="deletemodal">
             {/* <Button style={{ "marginTop": "2%" }} variant="danger" onClick={this.toggleDelete} >Delete Posting</Button> */}
             <button type="button" className="deletebutton" style={{ "marginTop": "2%" }} onClick={this.toggleDelete} >Delete Posting</button>
