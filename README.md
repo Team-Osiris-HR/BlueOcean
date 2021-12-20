@@ -62,7 +62,7 @@ Set up a github.config.js with the following:
 ### 🤝 Contributors
 
 - [Manny Ledoux]()
-- [Cameron Mrcurdy]()
+- [Cameron Mrcurdy](https://www.linkedin.com/in/cmccurd/)
 - [Matthew Seagren](https://www.linkedin.com/in/matthew-seagren/)
 - [Kim Honrada](https://www.linkedin.com/in/kimhonrada21/)
 - [Phil Huynh]()
