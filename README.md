@@ -6,7 +6,8 @@
 2. [Demo](#⚜️-Demo)
 3. [Technologies](#🧪-Technologies)
 4. [Installation](#🚀-Installation)
-5. [Contributors](#🤝-Contributors)
+5. [System Architecture](#file_folder-system-architecture)
+6. [Contributors](#🤝-Contributors)
 
 ### General Info
 
@@ -58,6 +59,8 @@ $ npm start
 Set up a github.config.js with the following:
 
 - TOKEN (from GitHub):
+
+### 📁 System Architecture
 
 ### 🤝 Contributors
 
