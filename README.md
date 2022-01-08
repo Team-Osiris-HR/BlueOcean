@@ -7,7 +7,7 @@
 3. [Technologies](#🧪-Technologies)
 4. [Installation](#🚀-Installation)
 5. [System Architecture](#-system-architecture)
-6. [Contributors](#🤝-Contributors)
+6. [Contributors](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#-contributors)
 
 ### General Info
 
