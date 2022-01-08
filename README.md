@@ -37,7 +37,6 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) ![](https://media.giphy.com/media/5Diu7UQyjYdrgMCN6X/giphy.gif) 
 <img src="https://media.giphy.com/media/0Mm6noiioGANaMbS8n/giphy.gif" width=700/>
 
-
 ####
 
 ![](https://media.giphy.com/media/2yPiSAunimoAPlP7Ta/giphy.gif) 
