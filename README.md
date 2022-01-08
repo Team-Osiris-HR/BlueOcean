@@ -1,6 +1,6 @@
 # Mikes List - Team Osiris
 
-### Table of Content
+## Table of Content
 
 1. [General Info](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#general-info)
 2. [Demo](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#%EF%B8%8F-demo)
@@ -9,11 +9,11 @@
 5. [System Architecture](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#-system-architecture)
 6. [Contributors](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#-contributors)
 
-### General Info
+## General Info
 
 MikesList is a non-profit website that allows users to donate tangible items to charities or other users.
 
-### ⚜️ Demo
+## ⚜️ Demo
 
 #### Login Page
 
@@ -32,7 +32,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ![](https://media.giphy.com/media/c8qLLR7SJTNCf4J16u/giphy.gif) 
 ![](https://media.giphy.com/media/trBUsl8zKz0EZ9ZNC5/giphy.gif)
 
-### 🧪 Technologies
+## 🧪 Technologies
 
 - Google Maps : 1.1.16
 - Axios : 0.24.0
@@ -59,7 +59,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 - uuid : 8.3.2
 - Validator : 13.7.0
 
-### 🚀 Installation and Setup
+## 🚀 Installation and Setup
 
 ```
 $ git clone https://github.com/Team-Osiris-HR/BlueOcean.git
@@ -75,9 +75,9 @@ Set up a github.config.js with the following:
 
 - TOKEN (from GitHub):
 
-### 📁 System Architecture
+## 📁 System Architecture
 
-### 🤝 Contributors
+## 🤝 Contributors
 
 - [Manny Ledoux]()
 - [Cameron Mrcurdy](https://www.linkedin.com/in/cmccurd/)
