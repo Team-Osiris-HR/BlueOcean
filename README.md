@@ -29,7 +29,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ---
 ### Feed
 
-#### The feed will render differently for various screen sizes. The following examples show the application as rendered on a Samsung phone, an iPad, and a laptop respectively.
+#### The feed will render differently for various screen sizes. The following examples show the application as rendered on a Samsung phone, an iPad, and a laptop.
 
 ![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) ![](https://media.giphy.com/media/5Diu7UQyjYdrgMCN6X/giphy.gif) 
 <img src="https://media.giphy.com/media/0Mm6noiioGANaMbS8n/giphy.gif" width=700/>
