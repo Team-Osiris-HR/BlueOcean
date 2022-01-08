@@ -63,7 +63,9 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 
 ```
 $ git clone https://github.com/Team-Osiris-HR/BlueOcean.git
-$ cd ../BlueOcean.git
+```
+From the root directory, run
+```
 $ npm install
 $ npm run react-dev
 $ npm start
