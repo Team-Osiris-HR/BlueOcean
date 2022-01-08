@@ -2,7 +2,7 @@
 
 ### Table of Content
 
-1. [General Info](#🌴-General-Info)
+1. [General Info](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#general-info)
 2. [Demo](#⚜️-Demo)
 3. [Technologies](#🧪-Technologies)
 4. [Installation](#🚀-Installation)
