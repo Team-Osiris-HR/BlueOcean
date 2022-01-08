@@ -22,7 +22,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 
 #### If a user doesn't have an account, they can register as a donor or a charity. If the user forgets their password, they can click the link to reset it. Users without a correct login/password cannot enter the site. Proper login will direct the user to the public feed. 
 
-![](https://media.giphy.com/media/HPt5OekCz5XZR5GLpN/giphy.gif)
+<img src="https://media.giphy.com/media/HPt5OekCz5XZR5GLpN/giphy.gif" width=200 />
 ![](https://media.giphy.com/media/35TeChHRBB1Zc7e3ew/giphy.gif)
 ![](https://media.giphy.com/media/fIuud07btnCNoKRVmb/giphy.gif)
 ![](https://media.giphy.com/media/H47rgIuBFw7g0iIG1V/giphy.gif)
