@@ -22,7 +22,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ![](https://media.giphy.com/media/35TeChHRBB1Zc7e3ew/giphy.gif)
 ![](https://media.giphy.com/media/fIuud07btnCNoKRVmb/giphy.gif)
 ![](https://media.giphy.com/media/H47rgIuBFw7g0iIG1V/giphy.gif)
-
+---
 ### Feed
 
 ![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) 
@@ -32,7 +32,9 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ![](https://media.giphy.com/media/80BvP34vS4esPPCqWI/giphy.gif)
 ![](https://media.giphy.com/media/c8qLLR7SJTNCf4J16u/giphy.gif) 
 ![](https://media.giphy.com/media/trBUsl8zKz0EZ9ZNC5/giphy.gif)
-
+---
+### Item Page
+---
 ## 🧪 Technologies
 
 - Google Maps : 1.1.16
