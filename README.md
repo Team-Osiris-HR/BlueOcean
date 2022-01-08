@@ -5,7 +5,7 @@
 1. [General Info](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#general-info)
 2. [Demo](#⚜️-Demo)
 3. [Technologies](#🧪-Technologies)
-4. [Installation](#🚀-Installation)
+4. [Installation](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#-installation-and-setup)
 5. [System Architecture](#-system-architecture)
 6. [Contributors](https://github.com/Team-Osiris-HR/BlueOcean/blob/dev/README.md#-contributors)
 
