@@ -103,6 +103,6 @@ Set up a github.config.js with the following:
 - [Cameron Mrcurdy](https://www.linkedin.com/in/cmccurd/)
 - [Matthew Seagren](https://www.linkedin.com/in/matthew-seagren/)
 - [Kim Honrada](https://www.linkedin.com/in/kimhonrada21/)
-- [Phil Huynh]()
+- [Phil Huynh](https://www.github.com/phil-huynh/)
 - [Mitch Dupuie]()
 - [Alex Carlman]()
