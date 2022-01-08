@@ -51,7 +51,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ---
 ### Item Page
 
-#### The item page displays a carousel of the item photos. The user can choose a photo or let the carousel cycle through them automatically. Users can also post a question about an item that the poster can answer. The donation location is displayed on a map on each item page.
+#### The item page displays a carousel of the item photos. The user can choose a photo or let the carousel cycle through them automatically. Users can also post a question about an item that the poster can answer or they can report any posts that cause concern. The donation location is displayed on a map on each item page.
 
 ![](https://media.giphy.com/media/4TdHq5DtIF06IiQmMX/giphy.gif)
 ---
