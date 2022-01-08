@@ -37,7 +37,7 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 ![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) ![](https://media.giphy.com/media/5Diu7UQyjYdrgMCN6X/giphy.gif) 
 <img src="https://media.giphy.com/media/0Mm6noiioGANaMbS8n/giphy.gif" width=700/>
 
-#### Items can be filtered by search, pickup/delivery options, categories, or location on the map. Items can also be sorted by date or distance.
+#### Items can be searched or they can be filtered by pickup/delivery options, categories, or location on the map. Items can also be sorted by date or distance.
 
 ![](https://media.giphy.com/media/c8qLLR7SJTNCf4J16u/giphy.gif) 
 ![](https://media.giphy.com/media/mFelNZeuET2CKmok0A/giphy.gif) 
