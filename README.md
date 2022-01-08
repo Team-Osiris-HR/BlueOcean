@@ -15,14 +15,15 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 
 ## ⚜️ Demo
 
-#### Login Page
+### Login Page
+####
 
 ![](https://media.giphy.com/media/HPt5OekCz5XZR5GLpN/giphy.gif)
 ![](https://media.giphy.com/media/35TeChHRBB1Zc7e3ew/giphy.gif)
 ![](https://media.giphy.com/media/fIuud07btnCNoKRVmb/giphy.gif)
 ![](https://media.giphy.com/media/H47rgIuBFw7g0iIG1V/giphy.gif)
 
-#### Feed
+### Feed
 
 ![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) 
 ![](https://media.giphy.com/media/2yPiSAunimoAPlP7Ta/giphy.gif) 
