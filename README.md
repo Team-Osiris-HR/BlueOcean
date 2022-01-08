@@ -23,39 +23,40 @@ MikesList is a non-profit website that allows users to donate tangible items to 
 #### If a user doesn't have an account, they can register as a donor or a charity. If the user forgets their password, they can click the link to reset it. Users without a correct login/password cannot enter the site. Proper login will direct the user to the public feed. 
 
 <img src="https://media.giphy.com/media/HPt5OekCz5XZR5GLpN/giphy.gif" width=200 />
-![](https://media.giphy.com/media/35TeChHRBB1Zc7e3ew/giphy.gif)
-![](https://media.giphy.com/media/fIuud07btnCNoKRVmb/giphy.gif)
-![](https://media.giphy.com/media/H47rgIuBFw7g0iIG1V/giphy.gif)
+<img src="https://media.giphy.com/media/35TeChHRBB1Zc7e3ew/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/fIuud07btnCNoKRVmb/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/H47rgIuBFw7g0iIG1V/giphy.gif" width=200 />
 ---
 ### Feed
 
 #### The feed will render differently for various screen sizes. The following examples show the application as rendered on a Samsung phone, an iPad, and a laptop.
 
-![](https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif) ![](https://media.giphy.com/media/5Diu7UQyjYdrgMCN6X/giphy.gif) 
-<img src="https://media.giphy.com/media/0Mm6noiioGANaMbS8n/giphy.gif" width=700/>
+<img src="https://media.giphy.com/media/9BtupnUJlFLHMYUqKP/giphy.gif" width=200 /> 
+<img src="https://media.giphy.com/media/5Diu7UQyjYdrgMCN6X/giphy.gif" width=400 /> 
+<img src="https://media.giphy.com/media/0Mm6noiioGANaMbS8n/giphy.gif" width=700 />
 
 #### Items can be searched or they can be filtered by pickup/delivery options, categories, or location on the map. Items can also be sorted by date or distance.
 
-![](https://media.giphy.com/media/c8qLLR7SJTNCf4J16u/giphy.gif) 
-![](https://media.giphy.com/media/mFelNZeuET2CKmok0A/giphy.gif) 
-![](https://media.giphy.com/media/zhBSjaqLXsviVvOkCQ/giphy.gif) 
-![](https://media.giphy.com/media/80BvP34vS4esPPCqWI/giphy.gif)
+<img src="https://media.giphy.com/media/c8qLLR7SJTNCf4J16u/giphy.gif" width=200 /> 
+<img src="https://media.giphy.com/media/mFelNZeuET2CKmok0A/giphy.gif" width=200 /> 
+<img src="https://media.giphy.com/media/zhBSjaqLXsviVvOkCQ/giphy.gif" width=200 /> 
+<img src="https://media.giphy.com/media/80BvP34vS4esPPCqWI/giphy.gif" width=200 />
 
 #### Users scan switch between the public feed or their own posts. If a user is registered as a donor, they can add a donation. 
 
-![](https://media.giphy.com/media/2yPiSAunimoAPlP7Ta/giphy.gif) 
-![](https://media.giphy.com/media/zsPCksYyhZXivc1oMt/giphy.gif)
+<img src="https://media.giphy.com/media/2yPiSAunimoAPlP7Ta/giphy.gif" width=200 /> 
+<img src="https://media.giphy.com/media/zsPCksYyhZXivc1oMt/giphy.gif" width=200 />
 
 ---
 ### Item Page
 
 #### The item page displays a carousel of the item photos. The user can choose a photo or let the carousel cycle through them automatically. Users can also post a question about an item that the poster can answer or they can report any posts that cause concern. Users can also contact the poster via direct message in a live chat. The donation location is displayed on a map on each item page. A post can be edited or deleted by the user who created it. 
 
-![](https://media.giphy.com/media/f1q8F3J0CsHmyQqgsF/giphy.gif)
-![](https://media.giphy.com/media/4TdHq5DtIF06IiQmMX/giphy.gif)
-![](https://media.giphy.com/media/lNp0gwsXUP6gdUqqsm/giphy.gif)
-![](https://media.giphy.com/media/zsPCksYyhZXivc1oMt/giphy.gif)
-![](https://media.giphy.com/media/Tu0zkb61zEYkJN4VE6/giphy.gif)
+<img src="https://media.giphy.com/media/f1q8F3J0CsHmyQqgsF/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/4TdHq5DtIF06IiQmMX/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/lNp0gwsXUP6gdUqqsm/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/zsPCksYyhZXivc1oMt/giphy.gif" width=200 />
+<img src="https://media.giphy.com/media/Tu0zkb61zEYkJN4VE6/giphy.gif" width=700 />
 
 
 ---
