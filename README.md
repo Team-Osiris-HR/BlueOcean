@@ -1,4 +1,4 @@
-# Mikes List - Team Osiris
+# mikeslist - Team Osiris
 
 ## Table of Content
 
